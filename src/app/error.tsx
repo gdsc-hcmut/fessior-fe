@@ -1,5 +1,6 @@
 'use client'; // Error components must be Client Components
 
+import { clsx } from 'clsx';
 import { useEffect } from 'react';
 
 type ErrorProps = {
@@ -15,6 +16,8 @@ export default function Error(props: ErrorProps) {
     console.error(error);
   }, [error]);
 
+  const cls = clsx('bg-blue-500 p-[10px]');
+
   return (
     <div>
       <h2>Something went wrong!</h2>
@@ -23,7 +26,7 @@ export default function Error(props: ErrorProps) {
           // Attempt to recover by trying to re-render the segment
           () => reset()
         }
-        className='bg-blue-500 p-[10px]'
+        className={cls}
       >
         Try again
       </button>
