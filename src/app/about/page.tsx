@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 type AboutPageProps = {};
 
 function AboutPage(props: AboutPageProps) {
-  return <div>AboutPage</div>;
+  return <div data-testid='about-page'>AboutPage</div>;
 }
 
 export default AboutPage;
