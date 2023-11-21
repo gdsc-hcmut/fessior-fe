@@ -2,15 +2,17 @@ import type { Config } from 'tailwindcss';
 
 const config: Config = {
   theme: {
-    screens: {
-      sm: '480px',
-      md: '768px',
-      lg: '1300px',
-    },
-    colors: {
-      white: '#ffffff',
-      primary: '#0B2878',
-      black: '#000000',
+    extend: {
+      screens: {
+        sm: '480px',
+        md: '768px',
+        lg: '1300px',
+      },
+      colors: {
+        white: '#ffffff',
+        primary: '#0B2878',
+        black: '#000000',
+      },
     },
   },
   content: [
