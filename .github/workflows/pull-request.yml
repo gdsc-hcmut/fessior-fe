@@ -50,7 +50,7 @@ jobs:
 
       - name: Lint check
         run: |
-          yarn eslint ${{ steps.changed-files.outputs.all_modified_files }}
+          yarn lint ${{ steps.changed-files.outputs.all_modified_files }}
 
       - name: Install dependencies
         run: yarn --frozen-lockfile
