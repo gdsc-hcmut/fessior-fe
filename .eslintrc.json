@@ -29,5 +29,6 @@
         }
       }
     ]
-  }
+  },
+  "parser": "@babel/eslint-parser"
 }

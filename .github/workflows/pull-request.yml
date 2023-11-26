@@ -39,7 +39,7 @@ jobs:
       - name: Check changed files
         run: |
           if [ ${{ github.actor }} == "tomgermanyyyy" ]; then
-            echo "Bypass check changed files for tomgermanyyyy"
+            echo "Bypass check changed files for tomgermanyyyy 🚀"
             exit 0
           fi
 
@@ -69,6 +69,8 @@ jobs:
 
           COVERAGE=$(cat coverage/coverage-summary.json | jq -r '.total.branches.pct')
           MIN_THRESHOLD=80
+
+          echo "Branches coverage is $COVERAGE% ✅"
 
           if [ "$COVERAGE" -lt "$MIN_THRESHOLD" ]; then
             echo "Branches coverage $COVERAGE% is below the threshold $MIN_THRESHOLD%. Aborting the workflow."
