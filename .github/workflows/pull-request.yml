@@ -34,7 +34,7 @@ jobs:
         with:
           files_ignore: |
             yarn.lock
-            **/*.{svg,png,jpg,jpeg}
+            **/*.{svg,png,jpg,jpeg,ttf}
 
       - name: Check changed files
         run: |
