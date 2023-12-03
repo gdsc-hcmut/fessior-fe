@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useEffect, ChangeEvent, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 
 import Modal from '@/components/modal-shorten';
 import SelectInput from '@/components/select-input';
