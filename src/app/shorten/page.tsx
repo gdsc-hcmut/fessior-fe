@@ -184,13 +184,13 @@ function Shorten() {
                   Chosen categories
                 </p>
                 <div className='inline'>
-                  <p className='mx-[2px] inline rounded-[20px] bg-[#6d7eae] px-[8px] py-[2px] align-middle text-[12px] text-white'>
+                  <p className='mx-[2px] inline rounded-[20px] bg-primary px-[8px] py-[2px] align-middle text-[12px] text-white'>
                     Events{' '}
                     <span className='align-middle text-[8px] hover:cursor-pointer hover:text-[#cccccc]'>
                       &#10005;
                     </span>
                   </p>
-                  <p className='mx-[2px] inline rounded-[20px] bg-[#6d7eae] px-[8px] py-[2px] text-[12px] text-white'>
+                  <p className='mx-[2px] inline rounded-[20px] bg-primary px-[8px] py-[2px] text-[12px] text-white'>
                     Favorite{' '}
                     <span className='align-middle text-[8px] hover:cursor-pointer hover:text-[#cccccc]'>
                       &#10005;
@@ -208,8 +208,8 @@ function Shorten() {
             >
               Shorten
             </button>
-            <div className='absolute left-[-15px] top-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-[#6d7eae]'></div>
-            <div className='absolute bottom-[-15px] right-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-[#6d7eae]'></div>
+            <div className='absolute left-[-15px] top-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-primary'></div>
+            <div className='absolute bottom-[-15px] right-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-primary'></div>
           </div>
           <div className='mx-[20px] text-center md:flex md:flex-col md:items-center'>
             <h2 className='text-[36px] font-[700] leading-[65px]'>
@@ -337,11 +337,11 @@ function Shorten() {
             </div>
           </div>
         </div>
-        <div className='absolute right-[-10px] top-[46px] h-[40px] w-[40px] rounded-full bg-[#6d7eae]'></div>
-        <div className='absolute left-[40px] top-[145px] h-[12px] w-[12px] rounded-full bg-[#6d7eae] md:left-[30px] md:h-[28px] md:w-[28px] lg:left-[100px] lg:h-[40px] lg:w-[40px]'></div>
-        <div className='absolute left-[-70px] top-[679px] h-[120px] w-[120px] rounded-full bg-[#6d7eae]'></div>
-        <div className='absolute bottom-[9px] right-[-30px] h-[80px] w-[80px] rounded-full bg-[#6d7eae] md:hidden'></div>
-        <div className='absolute bottom-[0px] right-[60px] h-[20px] w-[20px] rounded-full bg-[#6d7eae] md:hidden'></div>
+        <div className='absolute right-[-10px] top-[46px] h-[40px] w-[40px] rounded-full bg-primary'></div>
+        <div className='absolute left-[40px] top-[145px] h-[12px] w-[12px] rounded-full bg-primary md:left-[30px] md:h-[28px] md:w-[28px] lg:left-[100px] lg:h-[40px] lg:w-[40px]'></div>
+        <div className='absolute left-[-70px] top-[679px] h-[120px] w-[120px] rounded-full bg-primary'></div>
+        <div className='absolute bottom-[9px] right-[-30px] h-[80px] w-[80px] rounded-full bg-primary md:hidden'></div>
+        <div className='absolute bottom-[0px] right-[60px] h-[20px] w-[20px] rounded-full bg-primary md:hidden'></div>
       </div>
       {/* MODAL */}
       {shortenedUrl && (
