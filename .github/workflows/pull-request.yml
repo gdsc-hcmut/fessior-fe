@@ -20,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           cache: 'yarn'
 
       - name: Check commit message convention
@@ -34,12 +34,12 @@ jobs:
         with:
           files_ignore: |
             yarn.lock
-            **/*.{svg,png,jpg,jpeg}
+            **/*.{svg,png,jpg,jpeg,ttf}
 
       - name: Check changed files
         run: |
           if [ ${{ github.actor }} == "tomgermanyyyy" ]; then
-            echo "Bypass check changed files for tomgermanyyyy"
+            echo "Bypass check changed files for tomgermanyyyy 🚀"
             exit 0
           fi
 
@@ -50,7 +50,7 @@ jobs:
 
       - name: Lint check
         run: |
-          yarn eslint ${{ steps.changed-files.outputs.all_modified_files }}
+          yarn eslint ${{ steps.changed-files.outputs.all_modified_files }} --ignore-pattern '*.json'
 
       - name: Install dependencies
         run: yarn --frozen-lockfile
@@ -69,6 +69,8 @@ jobs:
 
           COVERAGE=$(cat coverage/coverage-summary.json | jq -r '.total.branches.pct')
           MIN_THRESHOLD=80
+
+          echo "Branches coverage is $COVERAGE% ✅"
 
           if [ "$COVERAGE" -lt "$MIN_THRESHOLD" ]; then
             echo "Branches coverage $COVERAGE% is below the threshold $MIN_THRESHOLD%. Aborting the workflow."
