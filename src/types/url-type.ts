@@ -1,9 +1,9 @@
-interface IUrl {
+type Url = {
   _id: string;
   originalUrl: string;
   slug: string;
   domain: string;
   totalClicks: number;
-}
+};
 
-export default IUrl;
+export default Url;

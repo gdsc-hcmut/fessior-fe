@@ -1,23 +1,16 @@
 import Image from 'next/image';
-import { FC } from 'react';
 
-interface ITextInputProps {
+type TextInputProps = {
   iconSrc?: string;
   iconAlt?: string;
   placeholder: string;
   value: string;
   onInput: (value: string) => void;
   onEnter?: () => void;
-}
+};
 
-const TextInput: FC<ITextInputProps> = ({
-  iconSrc,
-  iconAlt,
-  placeholder,
-  value,
-  onInput,
-  onEnter,
-}) => {
+export default function TextInput(props: TextInputProps) {
+  const { iconSrc, iconAlt, placeholder, value, onInput, onEnter } = props;
   return (
     <div className='flex h-[40px] items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] focus-within:border-[1px] focus-within:border-primary'>
       {iconSrc && (
@@ -46,6 +39,4 @@ const TextInput: FC<ITextInputProps> = ({
       />
     </div>
   );
-};
-
-export default TextInput;
+}

@@ -1,17 +1,18 @@
 import Image from 'next/image';
-import { FC } from 'react';
 
-import IUrl from '@/types/url-type';
+import Url from '@/types/url-type';
 
-interface IModalProps {
-  closeModal: () => void;
-  shortenedUrl: IUrl;
-}
+type ModalProps = {
+  onClickOutside: () => void;
+  shortenedUrl: Url;
+};
 
-const ModalShorten: FC<IModalProps> = ({ shortenedUrl, closeModal }) => {
+export default function ModalShorten(props: ModalProps) {
+  const { shortenedUrl, onClickOutside } = props;
+  const urlShown = `https://${shortenedUrl.domain}/${shortenedUrl.slug}`;
   return (
     <div
-      onClick={closeModal}
+      onClick={onClickOutside}
       className='fixed bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black bg-opacity-30'
     >
       <div
@@ -24,7 +25,7 @@ const ModalShorten: FC<IModalProps> = ({ shortenedUrl, closeModal }) => {
           </h6>
           <div className='relative mb-[42px] h-[140px] w-[140px] rounded-[8px] p-[10px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)]'>
             <Image
-              src='/sample_qr.svg'
+              src='images/sample_qr.svg'
               alt='qr'
               width={0}
               height={0}
@@ -42,13 +43,11 @@ const ModalShorten: FC<IModalProps> = ({ shortenedUrl, closeModal }) => {
           </div>
           <div className='flex h-[40px] w-[100%] content-between'>
             <div className='me-[4px] flex flex-grow items-center overflow-hidden overflow-x-auto rounded-l-[8px] border-[0.5px] border-solid border-primary p-[8px]'>
-              <p>{`https://${shortenedUrl.domain}/${shortenedUrl.slug}`}</p>
+              <p>{urlShown}</p>
             </div>
             <button
               onClick={() => {
-                navigator.clipboard.writeText(
-                  `https://${shortenedUrl.domain}/${shortenedUrl.slug}`,
-                );
+                navigator.clipboard.writeText(urlShown);
               }}
               className='rounded-r-[8px] border-[0.5px] border-solid border-primary p-[8px] hover:bg-[#ddd] active:bg-[#ccc] active:text-white'
             >
@@ -62,14 +61,14 @@ const ModalShorten: FC<IModalProps> = ({ shortenedUrl, closeModal }) => {
             </button>
           </div>
           <Image
-            src='/qr_decor.svg'
+            src='images/qr_decor.svg'
             alt='qr-decor'
             width={0}
             height={0}
             className='absolute left-[-20px] top-[40px] h-[60px] w-[60px]'
           />
           <Image
-            src='/qr_decor.svg'
+            src='images/qr_decor.svg'
             alt='qr-decor'
             width={0}
             height={0}
@@ -78,7 +77,7 @@ const ModalShorten: FC<IModalProps> = ({ shortenedUrl, closeModal }) => {
         </div>
         <div className='absolute left-[12px] top-[-20px] flex h-[40px] w-[40px] items-center rounded-full bg-primary p-[4px]'>
           <Image
-            src='/gdsc_white.svg'
+            src='images/gdsc_white.svg'
             alt='GDSC Logo'
             width={0}
             height={0}
@@ -88,6 +87,4 @@ const ModalShorten: FC<IModalProps> = ({ shortenedUrl, closeModal }) => {
       </div>
     </div>
   );
-};
-
-export default ModalShorten;
+}

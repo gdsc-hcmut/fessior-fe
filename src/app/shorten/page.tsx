@@ -3,25 +3,28 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
+import CategoryItem from '@/components/category-item';
 import Modal from '@/components/modal-shorten';
 import SelectInput from '@/components/select-input';
 import TextInput from '@/components/text-input';
+import ToolItem from '@/components/tool-item';
 import meService from '@/services/me.service';
+import { tools } from '@/services/tool.service';
 import urlService from '@/services/url.service';
-import IOrganization from '@/types/organization-type';
-import IUrl from '@/types/url-type';
+import Organization from '@/types/organization-type';
+import Url from '@/types/url-type';
 
-function Shorten() {
+export default function Shorten() {
   const [organizationOptions, setOrganizationOptions] = useState<
-    null | IOrganization[]
+    null | Organization[]
   >(null);
   const [organizationValue, setOrganizationValue] =
-    useState<null | IOrganization>(null);
+    useState<null | Organization>(null);
   const [domainValue, setDomainValue] = useState('');
   const [domainOptions, setDomainOptions] = useState<null | string[]>(null);
   const [longUrl, setLongUrl] = useState('');
   const [slug, setSlug] = useState('');
-  const [shortenedUrl, setShortenedUrl] = useState<null | IUrl>(null);
+  const [shortenedUrl, setShortenedUrl] = useState<null | Url>(null);
   const [allowSubmit, setAllowSubmit] = useState(false);
 
   useEffect(() => {
@@ -60,7 +63,7 @@ function Shorten() {
   const handleChange = (mode: string) => {
     switch (mode) {
       case 'organization':
-        return (value: IOrganization) => {
+        return (value: Organization) => {
           setOrganizationValue(value);
         };
       case 'domain':
@@ -79,7 +82,7 @@ function Shorten() {
           originalUrl: longUrl,
           slug: slug.length ? slug : null,
           domain: domainValue,
-        } as IUrl),
+        } as Url),
       );
   };
 
@@ -127,7 +130,7 @@ function Shorten() {
                       options={organizationOptions}
                       onChange={
                         handleChange('organization') as (
-                          value: string | IOrganization,
+                          value: string | Organization,
                         ) => void
                       }
                       className='ms-[4px] w-[160px] md:ms-[8px]'
@@ -142,7 +145,7 @@ function Shorten() {
                       options={domainOptions}
                       onChange={
                         handleChange('domain') as (
-                          value: string | IOrganization,
+                          value: string | Organization,
                         ) => void
                       }
                       className='ms-[4px] w-[160px] md:ms-[8px]'
@@ -184,18 +187,8 @@ function Shorten() {
                   Chosen categories
                 </p>
                 <div className='inline'>
-                  <p className='mx-[2px] inline rounded-[20px] bg-primary px-[8px] py-[2px] align-middle text-[12px] text-white'>
-                    Events{' '}
-                    <span className='align-middle text-[8px] hover:cursor-pointer hover:text-[#cccccc]'>
-                      &#10005;
-                    </span>
-                  </p>
-                  <p className='mx-[2px] inline rounded-[20px] bg-primary px-[8px] py-[2px] text-[12px] text-white'>
-                    Favorite{' '}
-                    <span className='align-middle text-[8px] hover:cursor-pointer hover:text-[#cccccc]'>
-                      &#10005;
-                    </span>
-                  </p>
+                  <CategoryItem text='Event' />
+                  <CategoryItem text='Favorite' />
                 </div>
               </div>
             </div>
@@ -221,119 +214,9 @@ function Shorten() {
             </p>
 
             <div className='md:flex md:flex-wrap md:justify-around'>
-              <div className='my-[80px] flex flex-col content-end items-center'>
-                <div className='flex items-center'>
-                  <Image
-                    src='/shortener.svg'
-                    alt='shortener'
-                    width={0}
-                    height={0}
-                    className='h-auto min-h-[60px] w-auto'
-                  />
-                </div>
-                <h4 className='mb-[8px] mt-[20px] text-[24px] font-[700] leading-[40px]'>
-                  URL Shortener
-                </h4>
-                <p className='max-w-[300px] text-center leading-[24px] text-black'>
-                  Link shortening service with free-of-charge advanced
-                  management features
-                </p>
-              </div>
-
-              <div className='my-[80px] flex flex-col content-end items-center'>
-                <div className='flex items-center'>
-                  <Image
-                    src='/qr.svg'
-                    alt='qr'
-                    width={0}
-                    height={0}
-                    className='h-auto min-h-[60px] w-auto'
-                  />
-                </div>
-                <h4 className='mb-[8px] mt-[20px] text-[24px] font-[700] leading-[40px]'>
-                  QR Generator
-                </h4>
-                <p className='max-w-[300px] text-center leading-[24px] text-black'>
-                  Customize, brand, and share information. Craft QR codes for
-                  your unique needs.
-                </p>
-              </div>
-
-              <div className='my-[80px] flex flex-col content-end items-center'>
-                <div className='flex items-center'>
-                  <Image
-                    src='/cert.svg'
-                    alt='cert'
-                    width={0}
-                    height={0}
-                    className='h-auto min-h-[60px] w-auto'
-                  />
-                </div>
-                <h4 className='mb-[8px] mt-[20px] text-[24px] font-[700] leading-[40px]'>
-                  GDSC Certificate
-                </h4>
-                <p className='max-w-[300px] text-center leading-[24px] text-black'>
-                  Easily create, edit, export, and share certificates on our
-                  user-friendly platform.
-                </p>
-              </div>
-
-              <div className='my-[80px] flex flex-col content-end items-center'>
-                <div className='flex items-center'>
-                  <Image
-                    src='/calendar.svg'
-                    alt='calendar'
-                    width={0}
-                    height={0}
-                    className='h-auto min-h-[60px] w-auto'
-                  />
-                </div>
-                <h4 className='mb-[8px] mt-[20px] text-[24px] font-[700] leading-[40px]'>
-                  GDSC Calendar
-                </h4>
-                <p className='max-w-[300px] text-center leading-[24px] text-black'>
-                  Effortlessly manage your calendar, create schedules, and
-                  oversee daily events.
-                </p>
-              </div>
-
-              <div className='my-[80px] flex flex-col content-end items-center'>
-                <div className='flex items-center'>
-                  <Image
-                    src='/codewme.svg'
-                    alt='codewme'
-                    width={0}
-                    height={0}
-                    className='h-auto min-h-[60px] w-auto'
-                  />
-                </div>
-                <h4 className='mb-[8px] mt-[20px] text-[24px] font-[700] leading-[40px]'>
-                  Code with Me
-                </h4>
-                <p className='max-w-[300px] text-center leading-[24px] text-black'>
-                  Code together in real-time on our collaborative code-sharing
-                  website.
-                </p>
-              </div>
-
-              <div className='my-[80px] flex flex-col content-end items-center'>
-                <div className='flex items-center'>
-                  <Image
-                    src='/qna.svg'
-                    alt='qna'
-                    width={0}
-                    height={0}
-                    className='h-auto min-h-[60px] w-auto'
-                  />
-                </div>
-                <h4 className='mb-[8px] mt-[20px] text-[24px] font-[700] leading-[40px]'>
-                  GDSC Q&A
-                </h4>
-                <p className='max-w-[300px] text-center leading-[24px] text-black'>
-                  Get answers and career advice from tech-savvy consultants or
-                  school experts.
-                </p>
-              </div>
+              {tools.map((tool) => (
+                <ToolItem key={tool.name} {...tool} />
+              ))}
             </div>
           </div>
         </div>
@@ -347,7 +230,7 @@ function Shorten() {
       {shortenedUrl && (
         <Modal
           shortenedUrl={shortenedUrl}
-          closeModal={() => {
+          onClickOutside={() => {
             setShortenedUrl(null);
             clearForm();
           }}
@@ -356,5 +239,3 @@ function Shorten() {
     </>
   );
 }
-
-export default Shorten;
