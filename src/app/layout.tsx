@@ -1,5 +1,4 @@
 import { QueryClientProvider } from '@tanstack/react-query';
-// import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 
 import queryClient from '@/querier/client';
