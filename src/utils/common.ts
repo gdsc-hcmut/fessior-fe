@@ -18,3 +18,6 @@ export const detectOS = (): string => {
   }
   return osDetected;
 };
+export const getCurrentYear = () => {
+  return new Date().getFullYear();
+};
