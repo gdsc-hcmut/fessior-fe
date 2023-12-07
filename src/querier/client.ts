@@ -1,4 +1,3 @@
-// Create a client
 'use client';
 
 import { QueryClient } from '@tanstack/react-query';

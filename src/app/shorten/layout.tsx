@@ -3,21 +3,18 @@ import React from 'react';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 
-type URLsLayoutProps = {
+type ShortenLayoutProps = {
   children: React.ReactNode;
 };
 
-function URLsLayout(props: URLsLayoutProps) {
+export default function ShortenLayout(props: ShortenLayoutProps) {
   const { children } = props;
 
   return (
     <section>
-      Layout for (url-shortener) group
       <Header />
       {children}
       <Footer />
     </section>
   );
 }
-
-export default URLsLayout;

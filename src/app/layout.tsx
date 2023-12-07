@@ -1,5 +1,7 @@
+import { QueryClientProvider } from '@tanstack/react-query';
 import { Baloo_Chettan_2 } from 'next/font/google';
-import localFont from 'next/font/local';
+
+import queryClient from '@/querier/client';
 
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
