@@ -1,13 +1,10 @@
-import { QueryClientProvider } from '@tanstack/react-query';
-import { Inter } from 'next/font/google';
-
-import queryClient from '@/querier/client';
+import { Baloo_Chettan_2 } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import type { Metadata } from 'next';
-
 import '@/styles/globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const balooChettan2 = Baloo_Chettan_2({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Fessior Tools',
@@ -22,10 +19,8 @@ export default function RootLayout(props: RootLayoutProps) {
   const { children } = props;
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <html lang='en'>
-        <body className={inter.className}>{children}</body>
-      </html>
-    </QueryClientProvider>
+    <html lang='en'>
+      <body className={balooChettan2.className}>{children}</body>
+    </html>
   );
 }
