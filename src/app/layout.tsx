@@ -1,47 +1,12 @@
 import { QueryClientProvider } from '@tanstack/react-query';
-import localFont from 'next/font/local';
+import { Baloo_Chettan_2 } from 'next/font/google';
 
 import queryClient from '@/querier/client';
 
 import type { Metadata } from 'next';
-
 import '@/styles/globals.css';
 
-// const inter = Inter({ subsets: ['latin'] });
-const googleSans = localFont({
-  src: [
-    {
-      path: '../../public/fonts/GoogleSans-Thin.ttf',
-      weight: '100',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/GoogleSans-Light.ttf',
-      weight: '200',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/GoogleSans-Regular.ttf',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/GoogleSans-Medium.ttf',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/GoogleSans-Bold.ttf',
-      weight: '700',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/GoogleSans-Black.ttf',
-      weight: '900',
-      style: 'normal',
-    },
-  ],
-});
+const balooChettan2 = Baloo_Chettan_2({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Fessior Tools',
@@ -56,10 +21,8 @@ export default function RootLayout(props: RootLayoutProps) {
   const { children } = props;
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <html lang='en'>
-        <body className={googleSans.className}>{children}</body>
-      </html>
-    </QueryClientProvider>
+    <html lang='en'>
+      <body className={balooChettan2.className}>{children}</body>
+    </html>
   );
 }

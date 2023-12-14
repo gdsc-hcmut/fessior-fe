@@ -215,7 +215,10 @@ export default function Shorten() {
 
             <div className='md:flex md:flex-wrap md:justify-around'>
               {tools.map((tool) => (
-                <ToolItem key={tool.name} {...tool} />
+                <ToolItem
+                  key={tool.name}
+                  {...{ ...tool, imgSrc: tool.imgSrc[0] }}
+                />
               ))}
             </div>
           </div>
