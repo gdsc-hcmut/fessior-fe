@@ -8,31 +8,17 @@ import HomeAvailableToolIndicator from '@/components/home-available-tool-indicat
 import HomeAvailableToolItem from '@/components/home-available-tool-item';
 import HomeProjects from '@/components/home-project';
 import HomeToolItem from '@/components/home-tool-item';
-import useEventListener from '@/hooks/useEventListener';
+import useScreenSize from '@/hooks/useScreenSize';
 import { projects } from '@/services/project.service';
 import { tools } from '@/services/tool.service';
 
 export default function HomePage() {
   const [availableToolSelecting, setAvailableToolSelecting] = useState(0);
-  const [screenSize, setScreenSize] = useState<'sm' | 'md' | 'lg' | null>(null);
-
-  const setSize = () => {
-    if (window.innerWidth <= 768) {
-      setScreenSize('sm');
-    } else if (window.innerWidth <= 1300) {
-      setScreenSize('md');
-    } else {
-      setScreenSize('lg');
-    }
-  };
+  const screenSize = useScreenSize();
 
   const handleAvailableToolChange = (index: number) => {
     setAvailableToolSelecting(index);
   };
-
-  useEventListener('resize', setSize);
-
-  useEffect(setSize, []);
 
   return (
     <div>
