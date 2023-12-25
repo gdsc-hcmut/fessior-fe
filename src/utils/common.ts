@@ -21,3 +21,8 @@ export const detectOS = (): string => {
 export const getCurrentYear = () => {
   return new Date().getFullYear();
 };
+export const getActiveIcon = (src: string) => {
+  const srcArr = src.split('/');
+  srcArr.splice(-1, 0, 'active');
+  return srcArr.join('/');
+};
