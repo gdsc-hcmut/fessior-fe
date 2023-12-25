@@ -5,10 +5,10 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
+import Brand from '@/components/brand';
 import Nav from '@/components/nav';
 import useEventListener from '@/hooks/useEventListener';
 import useScreenSize from '@/hooks/useScreenSize';
-
 
 const TRANS_HEADER_PAGES = ['/'];
 const LG_FILL_HEADER_BOUND = 150;
@@ -44,27 +44,7 @@ export default function Header() {
           'bg-white shadow-[0px_6px_15px_rgba(64,79,104,0.05)]',
       )}
     >
-      <div className='flex h-[100%] items-center'>
-        <Image
-          src={
-            isHome
-              ? '/logo_transparent_white.svg'
-              : '/logo_transparent_navy.svg'
-          }
-          alt=''
-          width={0}
-          height={0}
-          className='me-[4px] h-[100%] w-auto'
-        />
-        <h4
-          className={clsx(
-            'text-[20px] font-[700] leading-[1px] md:text-[24px] lg:text-[28px]',
-            isHome ? 'text-white' : 'text-primary',
-          )}
-        >
-          Fessior Tools
-        </h4>
-      </div>
+      <Brand theme={isHome ? 'white' : 'primary'} />
       <Nav
         isHome={isHome}
         isCollapsed={isCollapsed}
