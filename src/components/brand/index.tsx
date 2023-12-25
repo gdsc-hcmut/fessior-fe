@@ -5,9 +5,9 @@ export type BrandProps = {
   theme: 'white' | 'primary';
 };
 
-export default function Brand({ theme }: BrandProps) {
+export default function Brand({ theme = 'primary' }: BrandProps) {
   return (
-    <div className='flex h-[100%] items-center'>
+    <div className='flex h-[40px] items-center md:h-[44px] lg:h-[50px]'>
       <Image
         src={
           theme === 'white'
@@ -30,6 +30,3 @@ export default function Brand({ theme }: BrandProps) {
     </div>
   );
 }
-Brand.defaultProps = {
-  theme: 'primary',
-};
