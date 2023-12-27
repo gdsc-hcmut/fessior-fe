@@ -12,6 +12,7 @@ const config: Config = {
         white: '#ffffff',
         primary: '#0B2878',
         black: '#000000',
+        disabled: '#6d7eae',
       },
     },
   },

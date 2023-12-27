@@ -1,6 +1,8 @@
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { QueryClientProvider } from '@tanstack/react-query';
 import localFont from 'next/font/local';
 
+import { AuthContextProvider } from '@/contexts/authContext';
 import queryClient from '@/querier/client';
 
 import type { Metadata } from 'next';
@@ -56,10 +58,14 @@ export default function RootLayout(props: RootLayoutProps) {
   const { children } = props;
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <html lang='en'>
-        <body className={googleSans.className}>{children}</body>
-      </html>
-    </QueryClientProvider>
+    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_CLIENT_ID!}>
+      <AuthContextProvider>
+        <QueryClientProvider client={queryClient}>
+          <html lang='en'>
+            <body className={googleSans.className}>{children}</body>
+          </html>
+        </QueryClientProvider>
+      </AuthContextProvider>
+    </GoogleOAuthProvider>
   );
 }
