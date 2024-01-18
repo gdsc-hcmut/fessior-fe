@@ -1,0 +1,8 @@
+{
+    "prettier.configPath": ".prettierrc.json",
+    "cSpell.words": [
+        "clsx",
+        "sublink"
+    ],
+    "editor.tabSize": 2
+}
