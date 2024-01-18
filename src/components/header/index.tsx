@@ -1,7 +1,6 @@
 'use client';
 
 import { clsx } from 'clsx';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
@@ -9,6 +8,7 @@ import Brand from '@/components/brand';
 import Nav from '@/components/nav';
 import useEventListener from '@/hooks/useEventListener';
 import useScreenSize from '@/hooks/useScreenSize';
+import ScreenSize from '@/types/screen-size-enum';
 
 const TRANS_HEADER_PAGES = ['/'];
 const LG_FILL_HEADER_BOUND = 150;
@@ -27,7 +27,9 @@ export default function Header() {
 
   useEffect(() => {
     const fillHeaderFrom =
-      screenSize === 'lg' ? LG_FILL_HEADER_BOUND : MB_FILL_HEADER_BOUND;
+      screenSize === ScreenSize.LG
+        ? LG_FILL_HEADER_BOUND
+        : MB_FILL_HEADER_BOUND;
     setIsHome(
       !!TRANS_HEADER_PAGES.includes(pathname) &&
         typeof window !== 'undefined' &&
@@ -36,21 +38,20 @@ export default function Header() {
     );
   }, [scrollY, isCollapsed, pathname, screenSize]);
 
+  const headerClass = clsx(
+    'fixed z-[10] flex w-[100%] items-center justify-between py-[22px] px-[20px] md:p-[20px] lg:p-[28px]',
+    !(isHome && isCollapsed) &&
+      'bg-white shadow-[0px_6px_15px_rgba(64,79,104,0.05)]',
+  );
+
   return (
-    <div
-      className={clsx(
-        'fixed z-[10] flex h-[80px] w-[100%] items-center justify-between p-[22px] md:h-[90px] lg:h-[108px] lg:p-[32px]',
-        !(isHome && isCollapsed) &&
-          'bg-white shadow-[0px_6px_15px_rgba(64,79,104,0.05)]',
-      )}
-    >
+    <div className={headerClass}>
       <Brand theme={isHome ? 'white' : 'primary'} />
       <Nav
         isHome={isHome}
         isCollapsed={isCollapsed}
         setIsCollapsed={setIsCollapsed}
       />
-      {/* TODO: Apply authentication */}
     </div>
   );
 }

@@ -4,9 +4,9 @@ export type NavItem = {
   text: string;
   imgSrc: string;
   imgAlt: string;
-  href: string;
+  path: string;
   logout?: boolean;
   children?: NonEmptyArray<
-    Pick<NavItem, 'text' | 'imgSrc' | 'imgAlt' | 'href'>
+    Pick<NavItem, 'text' | 'imgSrc' | 'imgAlt' | 'path'>
   >;
 };

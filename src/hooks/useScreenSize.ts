@@ -1,18 +1,19 @@
 import { useState, useEffect } from 'react';
 
-import useEventListener from './useEventListener';
+import useEventListener from '@/hooks/useEventListener';
+import ScreenSize from '@/types/screen-size-enum';
 
 export default function useScreenSize() {
-  const [screenSize, setScreenSize] = useState<'sm' | 'md' | 'lg' | null>(null);
+  const [screenSize, setScreenSize] = useState<ScreenSize | null>(null);
   const [loaded, setLoaded] = useState(false);
 
   const setSize = () => {
     if (window.innerWidth <= 768) {
-      setScreenSize('sm');
+      setScreenSize(ScreenSize.SM);
     } else if (window.innerWidth <= 1300) {
-      setScreenSize('md');
+      setScreenSize(ScreenSize.MD);
     } else {
-      setScreenSize('lg');
+      setScreenSize(ScreenSize.LG);
     }
     setLoaded(true);
   };
