@@ -6,29 +6,17 @@ export default function useQueryParams() {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const items = [...searchParams.entries()];
 
-  const paramsToUrl = (items: [string, string][]) => {
-    return items.map((item) => item.join('=')).join('&');
-  };
+  const params = new URLSearchParams(searchParams.toString());
 
   const setItem = (newItems: { [key: string]: string }) => {
-    router.replace(
-      pathname +
-        '?' +
-        paramsToUrl(
-          items.filter((item) => !Object.keys(newItems).includes(item[0])),
-        ) +
-        paramsToUrl(Object.keys(newItems).map((key) => [key, newItems[key]])),
-    );
+    Object.keys(newItems).forEach((key) => params.set(key, newItems[key]));
+    router.push(pathname + '?' + params.toString());
   };
 
   const removeItem = (...args: string[]) => {
-    router.replace(
-      pathname +
-        '?' +
-        paramsToUrl(items.filter((item) => !args.includes(item[0]))),
-    );
+    args.forEach((key) => params.delete(key));
+    router.push(pathname + '?' + params.toString());
   };
 
   return { setItem, removeItem };
