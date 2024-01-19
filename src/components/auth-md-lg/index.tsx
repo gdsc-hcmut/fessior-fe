@@ -3,7 +3,7 @@
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import LoadingPage from '@/app/loading';
 import {
@@ -18,6 +18,7 @@ import {
 import useAuthRouter from '@/hooks/useAuthRouter';
 import authHeaderContent from '@/libs/auth-header-content';
 import storage from '@/libs/local-storage';
+import AuthType from '@/types/auth-type-enum';
 import { detectOS } from '@/utils/common';
 
 type AuthModalHeadingProps = {
@@ -56,15 +57,16 @@ export function AuthModalHeading(props: AuthModalHeadingProps) {
 }
 
 function AuthModalContent({ authType }: { authType: string }) {
-  if (authType === 'login') return <LoginModalContent />;
-  if (authType === 'sign-up') return <SignUpModalContent />;
-  if (authType === 'forgot-password') return <ForgotPasswordModalContent />;
+  if (authType === AuthType.LOGIN) return <LoginModalContent />;
+  if (authType === AuthType.SIGN_UP) return <SignUpModalContent />;
+  if (authType === AuthType.FORGOT_PASSWORD)
+    return <ForgotPasswordModalContent />;
 }
 
 function LoginModalContent() {
   return (
     <>
-      <AuthModalHeading {...authHeaderContent['login'][0]} />
+      <AuthModalHeading {...authHeaderContent[AuthType.LOGIN][0]} />
       <LoginCommon />
     </>
   );
@@ -74,7 +76,7 @@ function SignUpModalContent() {
   const [step, setStep] = useState(0);
   return (
     <>
-      <AuthModalHeading {...authHeaderContent['sign-up'][step]} />
+      <AuthModalHeading {...authHeaderContent[AuthType.SIGN_UP][step]} />
       {step === 0 && <SignUpCommon0 nextStep={() => setStep(step + 1)} />}
       {step === 1 && <SignUpCommon1 />}
     </>
@@ -89,13 +91,15 @@ function ForgotPasswordModalContent() {
         <div className='flex items-center md:mb-[24px] lg:mb-[28px]'>
           <CheckEmailIcon />
           <AuthModalHeading
-            {...authHeaderContent['forgot-password'][2]}
+            {...authHeaderContent[AuthType.FORGOT_PASSWORD][2]}
             subtitle=''
             className='ms-[8px] inline-flex flex-col justify-center'
           />
         </div>
       ) : (
-        <AuthModalHeading {...authHeaderContent['forgot-password'][step]} />
+        <AuthModalHeading
+          {...authHeaderContent[AuthType.FORGOT_PASSWORD][step]}
+        />
       )}
       {step === 0 && (
         <ForgotPasswordCommon0 nextStep={() => setStep(step + 1)} />
@@ -108,7 +112,7 @@ function ForgotPasswordModalContent() {
   );
 }
 
-export default function AuthModalTemplate() {
+export default function AuthModal() {
   const authType = useSearchParams().get('auth');
   const authRouter = useAuthRouter();
   const [allowAuth, setAllowAuth] = useState<boolean | null>(null);
@@ -123,22 +127,20 @@ export default function AuthModalTemplate() {
     } else {
       setAllowAuth(true);
     }
-  }, []);
+  }, [authRouter]);
   if (!authType) return null;
   if (allowAuth == null) return <LoadingPage />;
 
   return (
     <div className='fixed bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black/[0.3]'>
       <div className='relative flex w-[560px] items-stretch overflow-hidden rounded-[8px] bg-white lg:w-[680px]'>
-        <div className='flex w-[65%] flex-col px-[40px] py-[60px] lg:px-[60px]'>
+        <div className='flex w-[65%] flex-col px-[40px] py-[60px] lg:px-[54px]'>
           <AuthModalContent authType={authType} />
         </div>
         <div
           style={{
             backgroundImage: `url("${
-              authHeaderContent[
-                authType as 'login' | 'sign-up' | 'forgot-password'
-              ][0].background
+              authHeaderContent[authType as AuthType][0].background
             }")`,
           }}
           className='flex-grow bg-cover bg-center'

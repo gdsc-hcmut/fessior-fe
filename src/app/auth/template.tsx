@@ -11,9 +11,9 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (storage.getItem('loggedIn')) {
-      // authRouter();
+      authRouter();
     } else setAllowAuth(true);
-  }, []);
+  }, [authRouter]);
 
   if (!allowAuth) return null;
 

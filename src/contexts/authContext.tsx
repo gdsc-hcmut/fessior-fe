@@ -7,86 +7,85 @@ import {
   useMemo,
   useCallback,
   useEffect,
-  use,
 } from 'react';
 
-import authService from '@/libs/api/auth';
+import {
+  login as serviceLogin,
+  logout as serviceLogout,
+} from '@/libs/api/auth';
+import meService from '@/libs/api/me';
 import storage from '@/libs/local-storage';
-import meService from '@/services/me.service';
 import User from '@/types/user-type';
 
 type AuthContextProps = {
-  isAuthorized: boolean;
-  getMeProfile: () => void;
   meProfile: User | null;
-  login: (token: string) => void;
-  logout: (token: string) => void;
+  login: (
+    payload: { token: string } | { username: string; password: string },
+  ) => Promise<any>;
+  logout: () => Promise<void>;
 };
 
 const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthContextProvider({ children }: { children: ReactNode }) {
-  const [isAuthorized, setIsAuthorized] = useState(false);
   const [meProfile, setMeProfile] = useState<User | null>(null);
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const getMeProfile = useCallback(async () => {
-    const profile = await meService.getMe();
+    try {
+      const profile = await meService.getMe();
 
-    if (profile) {
-      setMeProfile(profile);
-      setIsAuthorized(true);
-    } else {
-      setMeProfile(null);
-      setIsAuthorized(false);
-      storage.removeItem('token');
+      if (profile) {
+        setMeProfile(profile);
+        storage.setItem('loggedIn', true);
+      } else {
+        setMeProfile(null);
+        storage.removeItem('token');
+        storage.removeItem('loggedIn');
+      }
+    } catch (e: any) {
+      console.log(e.message);
     }
   }, []);
 
   useEffect(() => {
-    getMeProfile();
-  }, []);
+    if (storage.getItem('loggedIn')) getMeProfile();
+  }, [getMeProfile]);
 
-  const login = useCallback(async (token: string) => {
-    const response = await authService.login({ token });
+  const login = useCallback(
+    async (
+      payload: { token: string } | { username: string; password: string },
+    ) => {
+      const response = await serviceLogin(payload);
 
-    if (response) {
-      storage.setItem('token', response);
-      await getMeProfile();
-    }
-  }, []);
+      if (response.token) storage.setItem('token', response.token);
 
-  const logout = useCallback(async (token: string) => {
-    await authService.logout({ token });
+      if (response.hasPassword) {
+        getMeProfile();
+      }
+      return response;
+    },
+    [getMeProfile],
+  );
+
+  const logout = useCallback(async () => {
+    const token = storage.getItem('token') as string;
+
+    if (!token) return;
+
+    await serviceLogout({ token });
 
     setMeProfile(null);
-    setIsAuthorized(false);
     storage.removeItem('token');
-  }, []);
-
-  const onLoggingIn = useCallback(() => {
-    if (!isAuthorized) setIsLoggingIn(true);
+    storage.removeItem('loggedIn');
   }, []);
 
   const value = useMemo(() => {
     return {
-      isAuthorized,
-      getMeProfile,
       meProfile,
       login,
       logout,
-      isLoggingIn,
-      onLoggingIn,
     };
-  }, [
-    isAuthorized,
-    getMeProfile,
-    login,
-    logout,
-    meProfile,
-    isLoggingIn,
-    onLoggingIn,
-  ]);
+  }, [login, logout, meProfile]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

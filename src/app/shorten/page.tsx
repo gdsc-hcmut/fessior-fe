@@ -9,7 +9,7 @@ import SelectInput from '@/components/select-input';
 import TextInput from '@/components/text-input';
 import ToolItem from '@/components/tool-item';
 import AuthContext from '@/contexts/authContext';
-import meService from '@/services/me.service';
+import meService from '@/libs/api/me';
 import { tools } from '@/services/tool.service';
 import urlService from '@/services/url.service';
 import Organization from '@/types/organization-type';
@@ -28,28 +28,30 @@ export default function Shorten() {
   const [shortenedUrl, setShortenedUrl] = useState<null | Url>(null);
   const [allowSubmit, setAllowSubmit] = useState(false);
 
-  const { isAuthorized } = useContext(AuthContext);
+  const { meProfile } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!isAuthorized) return;
+    if (!meProfile) return;
 
     (async () => {
-      const organizationOptionsInitial = await meService.getOrganization();
-      setOrganizationOptions(organizationOptionsInitial);
-      setDomainOptions(organizationOptionsInitial[0].domains);
-      setOrganizationValue(organizationOptionsInitial[0]);
-      setDomainValue(organizationOptionsInitial[0].domains[0]);
+      try {
+        const organizationOptionsInitial = await meService.getOrganization();
+        setOrganizationOptions(organizationOptionsInitial);
+        setDomainOptions(organizationOptionsInitial[0].domains);
+        setOrganizationValue(organizationOptionsInitial[0]);
+        setDomainValue(organizationOptionsInitial[0].domains[0]);
+      } catch (e: any) {
+        console.log(e.message);
+      }
     })();
-  }, [isAuthorized]);
+  }, [meProfile]);
 
   useEffect(() => {
-    if (!isAuthorized) return;
-
     if (organizationValue) {
       setDomainOptions(organizationValue.domains);
       setDomainValue(organizationValue.domains[0]);
     }
-  }, [organizationValue, isAuthorized]);
+  }, [organizationValue]);
 
   useEffect(() => {
     if (longUrl.length > 0) {
@@ -121,7 +123,7 @@ export default function Shorten() {
                     divider
                   />
                 </div>
-                {isAuthorized &&
+                {meProfile &&
                   organizationValue &&
                   organizationOptions &&
                   domainOptions && (
@@ -159,7 +161,7 @@ export default function Shorten() {
                     </div>
                   )}
               </div>
-              {isAuthorized && (
+              {meProfile && (
                 <div className='mt-[8px] md:mt-[16px]'>
                   <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
                     <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[100px] md:text-[20px]'>
@@ -206,7 +208,11 @@ export default function Shorten() {
                 </div>
               )}
             </div>
-            <Button disabled={!allowSubmit} onClick={handleSubmit}>
+            <Button
+              className='mt-[12px] md:ms-[12px] md:mt-[34px]'
+              disabled={!allowSubmit}
+              onClick={handleSubmit}
+            >
               Shorten
             </Button>
             <div className='absolute left-[-15px] top-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-primary'></div>

@@ -13,7 +13,7 @@ export function TextInputIcon(props: TextInputIconProps) {
   const { iconSrc, iconAlt, divider, onIconClick, position } = props;
 
   return (
-    <div onClick={onIconClick} className='relative flex items-center'>
+    <div onClick={onIconClick} className='items-centers relative flex'>
       <Image
         src={iconSrc}
         alt={iconAlt ? iconAlt : ''}
@@ -23,7 +23,7 @@ export function TextInputIcon(props: TextInputIconProps) {
           'mx-[4px] h-auto w-auto',
           !divider && (position === 'left' ? 'ms-[12px]' : 'me-[12px]'),
           onIconClick &&
-            'rounded-full p-[4px] hover:cursor-pointer hover:bg-[#ccc]',
+            'rounded-full p-[4px] hover:cursor-pointer hover:bg-[#ccc] active:bg-[#ccc]',
         )}
       />
       {divider && (
@@ -52,6 +52,7 @@ type TextInputProps = {
   onIconClick?: () => void;
   fontSize?: number;
   disabled?: boolean;
+  className?: string;
 };
 
 export default function TextInput(props: TextInputProps) {
@@ -68,12 +69,14 @@ export default function TextInput(props: TextInputProps) {
     onIconClick,
     fontSize = 16,
     disabled,
+    className,
   } = props;
   return (
     <div
       className={clsx(
-        'flex h-[40px] items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border-[1px] focus-within:border-primary',
+        'flex h-[40px] w-[100%] items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border-[1px] focus-within:border-primary',
         disabled && 'bg-primary/[.2] text-primary',
+        className,
       )}
     >
       {iconSrc && iconPosition === 'left' && (
@@ -93,11 +96,12 @@ export default function TextInput(props: TextInputProps) {
         onInput={(e) => {
           onInput(e.currentTarget.value);
         }}
-        className='mx-[4px] h-[100%] flex-grow px-[4px] outline-none placeholder:text-[#696969]'
+        className='mx-[4px] h-[100%] flex-grow px-[4px] outline-none placeholder:text-default-text'
         style={{ fontSize: `${fontSize}px` }}
         placeholder={placeholder}
         type={type ? type : 'text'}
         disabled={disabled}
+        size={1}
       />
       {iconSrc && iconPosition === 'right' && (
         <TextInputIcon

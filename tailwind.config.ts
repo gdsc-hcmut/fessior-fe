@@ -11,8 +11,10 @@ const config: Config = {
       colors: {
         white: '#ffffff',
         primary: '#0B2878',
-        black: '#000000',
+        'default-text': '#252641',
         disabled: '#6d7eae',
+        red: '#db4437',
+        green: '#0f9d58',
       },
     },
   },

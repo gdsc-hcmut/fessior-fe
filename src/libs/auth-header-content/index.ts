@@ -1,10 +1,12 @@
+import AuthType from '@/types/auth-type-enum';
+
 const authHeaderContent = {
   login: [
     {
       title: 'Log In',
-      subtitle: 'Don\'t have an account?',
+      subtitle: 'Do not have an account?',
       background: '/images/auth/background_1.svg',
-      sublinkAuthType: 'sign-up',
+      sublinkAuthType: AuthType.SIGN_UP,
       sublinkText: 'Sign up',
     },
   ],
@@ -12,14 +14,14 @@ const authHeaderContent = {
     {
       title: 'Create your account',
       subtitle: 'Already have an account?',
-      sublinkAuthType: 'login',
+      sublinkAuthType: AuthType.LOGIN,
       background: '/images/auth/background_2.svg',
       sublinkText: 'Log in',
     },
     {
       title: 'Create your account',
       subtitle: 'Already have an account?',
-      sublinkAuthType: 'login',
+      sublinkAuthType: AuthType.LOGIN,
       background: '/images/auth/background_2.svg',
       sublinkText: 'Log in',
     },
@@ -27,7 +29,7 @@ const authHeaderContent = {
   'forgot-password': [
     {
       title: 'Forgot Password?',
-      sublinkAuthType: 'login',
+      sublinkAuthType: AuthType.LOGIN,
       sublinkText: 'Return to Log in',
       background: '/images/auth/background_3.svg',
     },

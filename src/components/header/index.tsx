@@ -1,40 +1,31 @@
 'use client';
 
-import { GoogleLogin } from '@react-oauth/google';
 import React, { useContext } from 'react';
 
 import AuthContext from '@/contexts/authContext';
-import storage from '@/libs/local-storage';
+import useAuthRouter from '@/hooks/useAuthRouter';
+import AuthType from '@/types/auth-type-enum';
 
 function Header() {
-  const { isAuthorized, login, logout, meProfile } = useContext(AuthContext);
-
-  const handleLogin = () => {};
+  const { meProfile, logout } = useContext(AuthContext);
+  const authRouter = useAuthRouter();
 
   return (
     <div>
-      THIS IS HEADER:{' '}
-      {isAuthorized ? (
-        <div>
-          Hello, {meProfile?.firstName}{' '}
+      THIS IS HEADER: {meProfile?.email}
+      <div>
+        {!meProfile ? (
           <button
             onClick={() => {
-              logout(storage.getItem('token')!);
+              authRouter(AuthType.LOGIN);
             }}
-            className='bg-red-300'
           >
-            Log out
+            LOGIN
           </button>
-        </div>
-      ) : (
-        <GoogleLogin
-          onSuccess={(credentialResponse) =>
-            console.log(credentialResponse.credential)
-          }
-          onError={() => console.log('ERROR')}
-          shape='pill'
-        />
-      )}
+        ) : (
+          <button onClick={() => logout()}>LOGOUT</button>
+        )}
+      </div>
     </div>
   );
 }
