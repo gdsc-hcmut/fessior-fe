@@ -68,7 +68,7 @@ export default function Nav(props: NavProps) {
   const isAuth = true;
 
   const { isHome, isCollapsed, setIsCollapsed } = props;
-  const { screenSize } = useScreenSize();
+  const { screenSize, loaded } = useScreenSize();
 
   const closeButtonClass = clsx(
     isHome ? 'border-white' : 'border-primary',
@@ -131,6 +131,8 @@ export default function Nav(props: NavProps) {
     );
   }
 
+  if (!loaded) return;
+
   if (screenSize === ScreenSize.SM) {
     return (
       <>
@@ -181,14 +183,14 @@ export default function Nav(props: NavProps) {
       <div>
         <div className='flex h-[100%] items-center justify-between'>
           <User className='me-[28px]' border whiteTheme={isHome} />
-          <div className='w-[32px]'>{collapseButton}</div>
+          <div className='flex w-[32px] items-center'>{collapseButton}</div>
         </div>
         <div
           className={clsx(
             isCollapsed
               ? 'h-0 py-0'
               : 'h-[300px] py-[32px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]',
-            'absolute left-0 right-0 top-[90px] overflow-hidden border-t-[1px] bg-white px-[20px] transition-all duration-500',
+            'absolute left-0 right-0 top-[72px] overflow-hidden border-t-[1px] bg-white px-[20px] transition-all duration-500',
           )}
         >
           <div className='h-[236px]'>
@@ -259,7 +261,7 @@ export function NavItem(props: NavItem) {
   };
 
   const lgItemTitleClass = clsx(
-    'mx-[20px] bg-white text-[20px] tracking-[0.4px] hover:cursor-pointer hover:underline',
+    'mx-[20px] bg-white text-[18px] tracking-[0.4px] hover:cursor-pointer hover:underline',
     (active || childrenActive) && 'text-primary underline',
   );
 
@@ -270,13 +272,13 @@ export function NavItem(props: NavItem) {
 
   const smItemTitleClass = clsx(
     'flex items-center justify-between rounded-[8px] bg-white px-[20px] py-[16px] transition-all hover:cursor-pointer',
-    active && (logout ? 'bg-red-500/[.1]' : 'bg-primary/[.1]'),
-    logout ? 'hover:bg-red-500/[.1]' : 'hover:bg-primary/[.1]',
+    active && (logout ? 'bg-red/[.1]' : 'bg-royal-300/[.1]'),
+    logout ? 'hover:bg-red/[.1]' : ' hover:bg-royal-300/[.1]',
   );
 
   const itemTitleClass = clsx(
     'ms-[16px] font-[500]',
-    logout ? 'text-red-500' : active ? 'text-primary' : 'text-[#696969]',
+    logout ? 'text-red' : active ? 'text-primary' : 'text-[#696969]',
   );
 
   const childrenContainerClass = clsx(
@@ -297,13 +299,18 @@ export function NavItem(props: NavItem) {
           <li onClick={handleClick} className={lgItemTitleClass}>
             {text}
           </li>
-          {children && showingChildren && (
-            <ul className='absolute left-0 mt-[8px] overflow-hidden whitespace-nowrap rounded-[8px] border-[1px] bg-white'>
+          {children && (
+            <ul
+              className={clsx(
+                'absolute left-0 mt-[8px] overflow-hidden whitespace-nowrap rounded-[8px] bg-white transition-all duration-500',
+                showingChildren ? 'h-[80px] border-[1px]' : 'h-0 border-white',
+              )}
+            >
               {children?.map((item) => (
                 <li
                   key={item.text}
                   onClick={() => router.push(item.path)}
-                  className='flex h-[40px] cursor-pointer items-center px-[12px] hover:bg-primary/[.1] focus:bg-primary/[.1]'
+                  className='flex h-[40px] cursor-pointer items-center px-[12px] hover:bg-royal-300/[.1] focus:bg-royal-300/[.1]'
                 >
                   {item.text}
                 </li>
@@ -374,7 +381,7 @@ export function User(props: UserProps) {
 
   const usernameClass = clsx(
     whiteTheme && 'text-white',
-    'my-[2px] md:me-[24px] lg:me-[20px] ms-[12px] flex flex-col justify-between',
+    'my-[2px] md:me-[20px] lg:me-[16px] ms-[12px] md:ms-[8px] flex flex-col justify-between',
   );
 
   const optionClass = clsx(
@@ -397,11 +404,11 @@ export function User(props: UserProps) {
         alt=''
         width={0}
         height={0}
-        className='aspect-square h-[52px] w-auto rounded-full md:h-[48px] lg:h-[52px]'
+        className='aspect-square h-[52px] w-auto rounded-full md:h-[42px] lg:h-[48px]'
       />
       <div className={usernameClass}>
         <p className='mb-[-4px] text-[12px] tracking-[0.24px]'>Welcome</p>
-        <h6 className='text-[20px] font-[500] tracking-[0.4px] md:text-[16px] md:tracking-[0.32px] lg:text-[20px]'>
+        <h6 className='text-[20px] font-[500] tracking-[0.4px] md:text-[16px] md:tracking-[0.32px] lg:text-[16px]'>
           Username
         </h6>
       </div>
@@ -420,7 +427,7 @@ export function User(props: UserProps) {
               onClick={() => {
                 console.log('clicked');
               }}
-              className='flex h-[44px] cursor-pointer items-center px-[12px] hover:bg-primary/[.1] hover:text-primary focus:bg-primary'
+              className='flex h-[44px] cursor-pointer items-center px-[12px] transition-all hover:bg-royal-300/[.1] hover:text-primary focus:bg-primary'
             >
               <Image
                 src='/icons/user_profile.svg'
@@ -435,7 +442,7 @@ export function User(props: UserProps) {
               onClick={() => {
                 console.log('clicked');
               }}
-              className='flex h-[44px] cursor-pointer items-center px-[12px] text-red-500 hover:bg-red-500/[.1] focus:bg-primary'
+              className='flex h-[44px] cursor-pointer items-center px-[12px] text-red transition-all hover:bg-red/[.1] focus:bg-primary'
             >
               <Image
                 src='/icons/logout.svg'

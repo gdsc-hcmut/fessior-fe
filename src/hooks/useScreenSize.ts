@@ -8,9 +8,9 @@ export default function useScreenSize() {
   const [loaded, setLoaded] = useState(false);
 
   const setSize = () => {
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth < 768) {
       setScreenSize(ScreenSize.SM);
-    } else if (window.innerWidth <= 1300) {
+    } else if (window.innerWidth < 1200) {
       setScreenSize(ScreenSize.MD);
     } else {
       setScreenSize(ScreenSize.LG);

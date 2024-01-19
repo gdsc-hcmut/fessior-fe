@@ -1,4 +1,5 @@
 import { QueryClientProvider } from '@tanstack/react-query';
+import { clsx } from 'clsx';
 import { Baloo_Chettan_2 } from 'next/font/google';
 
 import queryClient from '@/querier/client';
@@ -24,7 +25,9 @@ export default function RootLayout(props: RootLayoutProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <html lang='en'>
-        <body className={balooChettan2.className}>{children}</body>
+        <body className={clsx(balooChettan2.className, 'text-default-text')}>
+          {children}
+        </body>
       </html>
     </QueryClientProvider>
   );

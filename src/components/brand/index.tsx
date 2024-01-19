@@ -1,5 +1,6 @@
 import { clsx } from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export type BrandProps = {
   theme: 'white' | 'primary';
@@ -19,15 +20,15 @@ export default function Brand(props: BrandProps) {
       : '/logo_transparent_navy.svg';
 
   return (
-    <div className='flex items-center'>
+    <Link href='/' className='flex items-center'>
       <Image
         src={logoSrc}
         alt=''
         width={0}
         height={0}
-        className='me-[4px] h-[36px] w-auto md:me-[8px] md:h-[40px] lg:h-[48px]'
+        className='me-[4px] h-[36px] w-auto md:me-[8px] md:h-[36px] lg:h-[40px]'
       />
       <h4 className={titleClass}>Fessior Tools</h4>
-    </div>
+    </Link>
   );
 }

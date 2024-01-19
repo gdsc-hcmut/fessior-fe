@@ -39,7 +39,7 @@ export default function Header() {
   }, [scrollY, isCollapsed, pathname, screenSize]);
 
   const headerClass = clsx(
-    'fixed z-[10] flex w-[100%] items-center justify-between py-[22px] px-[20px] md:p-[20px] lg:p-[28px]',
+    'fixed z-[10] flex w-[100%] items-center justify-between py-[22px] px-[20px] md:py-[14px] lg:px-[28px] lg:py-[18px]',
     !(isHome && isCollapsed) &&
       'bg-white shadow-[0px_6px_15px_rgba(64,79,104,0.05)]',
   );
