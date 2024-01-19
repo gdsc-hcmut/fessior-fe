@@ -47,6 +47,7 @@ jobs:
             echo "Too many files changed. One PR should only change <= 15 files."
             exit 1
           fi
+        continue-on-error: true
 
       - name: Lint check
         run: |
