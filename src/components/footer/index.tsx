@@ -110,7 +110,7 @@ export default function Footer() {
           <Image
             className=''
             src='/images/logo_transparent_navy.svg'
-            alt=''
+            alt='logo'
             fill
           />
         </div>

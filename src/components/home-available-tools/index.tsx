@@ -80,7 +80,7 @@ export function HomeAvailableToolItem(props: HomeAvailableToolItemProps) {
               iconFilenames,
               active ? Icon.ACTIVE : Icon.INACTIVE,
             )}
-            alt=''
+            alt='tool icon'
             width={0}
             height={0}
             className='h-[28px] w-[54px]'
@@ -165,7 +165,7 @@ export function ComingSoonInfo() {
         <div className='flex flex-col items-center'>
           <Image
             src='/images/home/coming_soon.svg'
-            alt=''
+            alt='coming soon'
             width={0}
             height={0}
             className='mb-[48px] h-auto w-[50%]'
