@@ -1,15 +1,13 @@
 'use client';
 
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 import CategoryItem from '@/components/category-item';
 import Modal from '@/components/modal-shorten';
 import SelectInput from '@/components/select-input';
+import ShortenTools from '@/components/shorten-tools';
 import TextInput from '@/components/text-input';
-import ToolItem from '@/components/tool-item';
 import meService from '@/services/me.service';
-import { tools } from '@/services/tool.service';
 import urlService from '@/services/url.service';
 import Organization from '@/types/organization-type';
 import Url from '@/types/url-type';
@@ -213,14 +211,7 @@ export default function Shorten() {
               world of community-driven tools that simplify your daily tasks.
             </p>
 
-            <div className='md:flex md:flex-wrap md:justify-around'>
-              {tools.map((tool) => (
-                <ToolItem
-                  key={tool.name}
-                  {...{ ...tool, imgSrc: tool.imgSrc[0] }}
-                />
-              ))}
-            </div>
+            <ShortenTools />
           </div>
         </div>
         <div className='absolute right-[-10px] top-[46px] h-[40px] w-[40px] rounded-full bg-primary'></div>

@@ -5,14 +5,18 @@ const config: Config = {
     extend: {
       screens: {
         sm: '480px',
-        md: '768px',
-        lg: '1300px',
+        md: '760px',
+        lg: '960px',
+        xl: '1300px',
       },
       colors: {
         white: '#ffffff',
         primary: '#0B2878',
-        disable: '#6D7EAE',
-        black: '#000000',
+        'default-text': '#252641',
+        disabled: '#6d7eae',
+        red: '#db4437',
+        green: '#0f9d58',
+        'royal-300': '#6D7EAE',
       },
     },
   },

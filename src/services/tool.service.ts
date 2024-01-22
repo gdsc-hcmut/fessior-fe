@@ -1,8 +1,12 @@
+import Icon from '@/types/icon-enum';
+
 export type Tool = {
   name: string;
-  desc: string;
-  imgSrc: string[];
-  secondaryImgPos: string;
+  description: string;
+  iconFilenames: string[];
+  secondaryIconClass: string;
+  primaryIconClass?: string;
+  iconType: Icon;
   imgAlt: string;
   active: boolean;
   url: string;
@@ -11,56 +15,67 @@ export type Tool = {
 export const tools: Tool[] = [
   {
     name: 'URL Shortener',
-    desc: 'Link shortening service with free-of-charge advanced management features',
-    imgSrc: ['images/home/shortener.svg', 'images/home/shortener_1.svg'],
-    secondaryImgPos: 'top-[-4px] right-[-8px] lg:right-0',
+    description:
+      'Link shortening service with free-of-charge advanced management features',
+    iconFilenames: ['shortener.svg', 'shortener_1.svg'],
+    secondaryIconClass: 'right-[-8%] top-[20%] w-[50%]',
+    iconType: Icon.ACTIVE,
     imgAlt: 'shortener',
     active: true,
     url: '/shorten',
   },
   {
     name: 'QR Generator',
-    desc: 'Customize, brand, and share information.\nCraft QR codes for your unique needs.',
-    imgSrc: ['images/home/qr.svg', 'images/home/qr_1.svg'],
-    secondaryImgPos: 'top-[-4px] right-[36px] md:right-[-4px] lg:right-[16px]',
+    description:
+      'Customize, brand, and share information.\nCraft QR codes for your unique needs.',
+    iconFilenames: ['qr.svg', 'qr_1.svg'],
+    secondaryIconClass: 'right-[4px] top-0 w-[32%]',
+    iconType: Icon.INACTIVE,
+    primaryIconClass: 'relative z-[1] h-auto w-[84%] text-red-500',
     imgAlt: 'qr',
     active: false,
     url: '',
   },
   {
     name: 'GDSC Certificate',
-    desc: 'Easily create, edit, export, and share certificates on our user-friendly platform.',
-    imgSrc: ['images/home/cert.svg', 'images/home/cert_1.svg'],
-    secondaryImgPos:
-      'top-[-8px] right-[8px] md:right-[-8px] lg:top-[-6px] lg:right-[0px]',
+    description:
+      'Easily create, edit, export, and share certificates on our user-friendly platform.',
+    iconFilenames: ['cert.svg', 'cert_1.svg'],
+    secondaryIconClass: 'top-[8px] right-[-8px] w-[32%]',
+    iconType: Icon.INACTIVE,
     imgAlt: 'cert',
     active: false,
     url: '',
   },
   {
     name: 'GDSC Calendar',
-    desc: 'Effortlessly manage your calendar, create schedules, and oversee daily events.',
-    imgSrc: ['images/home/calendar.svg', 'images/home/calendar_1.svg'],
-    secondaryImgPos:
-      'top-[-4px] right-[24px] md:right-[-8px] lg:right-0 lg:top-0',
+    description:
+      'Effortlessly manage your calendar, create schedules, and oversee daily events.',
+    iconFilenames: ['calendar.svg', 'calendar_1.svg'],
+    secondaryIconClass: 'top-[4px] right-[-8px] w-[52%]',
+    iconType: Icon.INACTIVE,
     imgAlt: 'calendar',
     active: false,
     url: '',
   },
   {
     name: 'Code with Me',
-    desc: 'Code together in real-time on our collaborative code-sharing website.',
-    imgSrc: ['images/home/codewme.svg', 'images/home/codewme_1.svg'],
-    secondaryImgPos: 'top-[-8px] right-[12px] md:right-[-8px] lg:right-0',
+    description:
+      'Code together in real-time on our collaborative code-sharing website.',
+    iconFilenames: ['codewme.svg', 'codewme_1.svg'],
+    secondaryIconClass: 'w-[28%] top-[4px] right-[-6px]',
+    iconType: Icon.INACTIVE,
     imgAlt: 'codewme',
     active: false,
     url: '',
   },
   {
     name: 'GDSC Q&A',
-    desc: 'Get answers and career advice from tech-savvy consultants or school experts.',
-    imgSrc: ['images/home/qna.svg', 'images/home/qna_1.svg'],
-    secondaryImgPos: 'top-[-8px] right-[8px] md:right-[-12px] lg:right-0',
+    description:
+      'Get answers and career advice from tech-savvy consultants or school experts.',
+    iconFilenames: ['qna.svg', 'qna_1.svg'],
+    secondaryIconClass: 'top-[8px] right-[-4px] w-[32%]',
+    iconType: Icon.INACTIVE,
     imgAlt: 'qna',
     active: false,
     url: '',
