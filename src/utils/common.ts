@@ -23,14 +23,18 @@ export const detectOS = (): string => {
 export const getCurrentYear = () => {
   return new Date().getFullYear();
 };
-export const getIcon = (iconLocation: string, filename: string, mode: Icon) => {
+export const getIcon = (
+  iconLocation: string,
+  filename: string,
+  mode: Icon | null,
+) => {
   let iconPath = '';
 
   iconPath +=
     iconLocation[iconLocation.length - 1] === '/'
       ? iconLocation
       : iconLocation + '/';
-  iconPath += mode + '/';
+  iconPath += mode === null ? '' : mode + '/';
   iconPath += filename;
 
   return iconPath;

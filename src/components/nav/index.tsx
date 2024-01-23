@@ -10,8 +10,9 @@ import useScreenSize from '@/hooks/useScreenSize';
 import { navItems } from '@/libs/api/nav-items';
 import { NavItem } from '@/libs/api/types/nav-item';
 import AuthType from '@/types/auth-type-enum';
+import Icon from '@/types/icon-enum';
 import ScreenSize from '@/types/screen-size-enum';
-import { getActiveIcon } from '@/utils/common';
+import { getIcon } from '@/utils/common';
 
 type NavProps = {
   isHome?: boolean;
@@ -76,12 +77,12 @@ export default function Nav(props: NavProps) {
   );
 
   const collapseIcon = isHome
-    ? '/icons/collapse_nav_white.svg'
-    : '/icons/collapse_nav_loyal.svg';
+    ? '/icons/header/collapse_nav_white.svg'
+    : '/icons/header/collapse_nav_royal.svg';
 
   const closeIcon = isHome
-    ? '/icons/close_white.svg'
-    : '/icons/close_loyal.svg';
+    ? '/icons/header/close_white.svg'
+    : '/icons/header/close_royal.svg';
 
   const collapseButton = isCollapsed ? (
     <button
@@ -188,9 +189,9 @@ export default function Nav(props: NavProps) {
         <div
           className={clsx(
             isCollapsed
-              ? 'h-0 py-0'
-              : 'h-[300px] py-[32px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]',
-            'absolute left-0 right-0 top-[72px] overflow-hidden border-t-[1px] bg-white px-[20px] transition-all duration-500',
+              ? 'h-0 border-none py-0'
+              : 'h-[300px] border-t-[1px] bg-white py-[32px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]',
+            'absolute left-0 right-0 top-[72px] overflow-hidden px-[20px] transition-all duration-500',
           )}
         >
           <div className='h-[236px]'>
@@ -201,14 +202,14 @@ export default function Nav(props: NavProps) {
     );
   }
   return (
-    <div className='flex items-center justify-between'>
+    <div className='flex max-w-[800px] flex-grow items-center justify-end'>
       {!isHome && (
-        <div className='flex items-center'>
+        <div className='flex flex-grow items-center'>
           <NavList items={navItems} />
         </div>
       )}
       <User
-        className='me-[12px] ms-[60px]'
+        className='me-[12px] ms-[20px]'
         optionDropdown
         border
         whiteTheme={isHome}
@@ -221,7 +222,7 @@ export function NavList(props: NavListProps) {
   const { items } = props;
 
   return (
-    <ul className='md:flex md:h-[100%] md:w-[100%] md:flex-col md:flex-wrap md:content-start md:justify-between lg:flex-row'>
+    <ul className='md:flex md:h-[100%] md:w-[100%] md:flex-col md:flex-wrap md:content-start md:justify-between lg:flex-row lg:justify-around'>
       {items.map((item) => (
         <NavItem key={item.text} {...item} />
       ))}
@@ -230,7 +231,7 @@ export function NavList(props: NavListProps) {
 }
 
 export function NavItem(props: NavItem) {
-  const { text, imgSrc, imgAlt, logout, path, children } = props;
+  const { text, iconFilename, imgAlt, logout, path, children } = props;
 
   const [showingChildren, setShowingChildren] = useState(false);
   const { screenSize, loaded } = useScreenSize();
@@ -261,17 +262,17 @@ export function NavItem(props: NavItem) {
   };
 
   const lgItemTitleClass = clsx(
-    'mx-[20px] bg-white text-[18px] tracking-[0.4px] hover:cursor-pointer hover:underline',
+    'text-[18px] tracking-[0.4px] hover:cursor-pointer hover:underline',
     (active || childrenActive) && 'text-primary underline',
   );
 
   const smItemClass = clsx(
-    'relative flex flex-col md:max-w-[300px]',
-    !children ? 'md:w-[100%]' : 'md:min-w-[30%]',
+    'relative flex flex-col md:max-w-[250px] md:ms-[20px]',
+    children ? '' : 'md:w-[100%]',
   );
 
   const smItemTitleClass = clsx(
-    'flex items-center justify-between rounded-[8px] bg-white px-[20px] py-[16px] transition-all hover:cursor-pointer',
+    'flex items-center justify-between rounded-[8px] px-[20px] py-[16px] transition-all hover:cursor-pointer',
     active && (logout ? 'bg-red/[.1]' : 'bg-royal-300/[.1]'),
     logout ? 'hover:bg-red/[.1]' : ' hover:bg-royal-300/[.1]',
   );
@@ -286,11 +287,17 @@ export function NavItem(props: NavItem) {
     showingChildren ? 'h-[112px]' : 'h-0',
   );
 
-  const itemIcon = active || childrenActive ? getActiveIcon(imgSrc) : imgSrc;
+  const itemIcon = getIcon(
+    '/icons/header',
+    iconFilename,
+    logout ? null : active || childrenActive ? Icon.ACTIVE : Icon.INACTIVE,
+  );
 
-  const collapseIcon = showingChildren
-    ? getActiveIcon('/icons/collapse.svg')
-    : '/icons/collapse.svg';
+  const collapseIcon = getIcon(
+    '/icons/header',
+    'collapse.svg',
+    showingChildren ? Icon.ACTIVE : Icon.INACTIVE,
+  );
 
   if (screenSize === ScreenSize.LG) {
     return (
@@ -302,7 +309,7 @@ export function NavItem(props: NavItem) {
           {children && (
             <ul
               className={clsx(
-                'absolute left-0 mt-[8px] overflow-hidden whitespace-nowrap rounded-[8px] bg-white transition-all duration-500',
+                'absolute left-0 mt-[8px] overflow-hidden whitespace-nowrap rounded-[8px] transition-all duration-500',
                 showingChildren ? 'h-[80px] border-[1px]' : 'h-0 border-white',
               )}
             >
@@ -391,11 +398,13 @@ export function User(props: UserProps) {
 
   const userAvatar = whiteTheme
     ? '/images/user_white.svg'
-    : '/images/user_loyal.svg';
+    : '/images/user_royal.svg';
 
-  const collapseIcon = showingOption
-    ? getActiveIcon('/icons/collapse_grey.svg')
-    : '/icons/collapse_grey.svg';
+  const collapseIcon = getIcon(
+    '/icons/header/',
+    whiteTheme ? 'collapse_white.svg' : 'collapse_grey.svg',
+    showingOption ? Icon.ACTIVE : Icon.INACTIVE,
+  );
 
   return (
     <div ref={optionRef} onClick={handleUserClick} className={userClass}>
@@ -430,7 +439,7 @@ export function User(props: UserProps) {
               className='flex h-[44px] cursor-pointer items-center px-[12px] transition-all hover:bg-royal-300/[.1] hover:text-primary focus:bg-primary'
             >
               <Image
-                src='/icons/user_profile.svg'
+                src='/icons/header/user_profile.svg'
                 alt=''
                 width={0}
                 height={0}
@@ -445,7 +454,7 @@ export function User(props: UserProps) {
               className='flex h-[44px] cursor-pointer items-center px-[12px] text-red transition-all hover:bg-red/[.1] focus:bg-primary'
             >
               <Image
-                src='/icons/logout.svg'
+                src='/icons/header/logout.svg'
                 alt=''
                 width={0}
                 height={0}

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import Footer from '@/components/footer';
+import Header from '@/components/header';
 import HomeAvailableTools from '@/components/home-available-tools';
 import HomeProjectCarousel from '@/components/home-project-carousel';
 import HomeTools from '@/components/home-tools';
@@ -15,6 +16,7 @@ export default function HomePage() {
 
   return (
     <>
+      <Header />
       <div>
         {/* ------------PART 1-------------- */}
         <div className="xl:min-h-none mb-[80px] h-screen min-h-[800px] bg-[url('/images/home/background_1.svg')] bg-cover xl:mb-0">

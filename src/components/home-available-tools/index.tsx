@@ -178,7 +178,7 @@ export function ComingSoonInfo() {
           </p>
         </div>
       </div>
-      <div className="hidden aspect-square w-[30%] flex-col items-center justify-center bg-[url('/images/home/side_coming_soon.svg')] bg-cover md:flex md:justify-end md:pb-[36px] xl:aspect-auto xl:h-[100%]"></div>
+      <div className="hidden aspect-square w-[30%] flex-col items-center justify-center bg-[url('/images/home/side_coming_soon.svg')] bg-cover md:flex md:justify-end md:pb-[36px] xl:aspect-auto xl:h-[100%] xl:min-w-[400px]"></div>
     </div>
   );
 }
