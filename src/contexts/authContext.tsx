@@ -72,7 +72,11 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
 
     if (!token) return;
 
-    await serviceLogout({ token });
+    try {
+      await serviceLogout({ token });
+    } catch (e: any) {
+      console.log(e.response.data.message);
+    }
 
     setMeProfile(null);
     storage.removeItem('token');

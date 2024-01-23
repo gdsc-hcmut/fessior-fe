@@ -2,8 +2,9 @@ import { clsx } from 'clsx';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 
+import AuthContext from '@/contexts/authContext';
 import useAuthRouter from '@/hooks/useAuthRouter';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 import useScreenSize from '@/hooks/useScreenSize';
@@ -66,7 +67,7 @@ export function AuthButton(props: AuthButtonProps) {
 }
 
 export default function Nav(props: NavProps) {
-  const isAuth = true;
+  const { meProfile } = useContext(AuthContext);
 
   const { isHome, isCollapsed, setIsCollapsed } = props;
   const { screenSize, loaded } = useScreenSize();
@@ -116,7 +117,7 @@ export default function Nav(props: NavProps) {
     </button>
   );
 
-  if (!isAuth) {
+  if (!meProfile) {
     if (screenSize === ScreenSize.SM)
       return (
         <div>
@@ -369,7 +370,10 @@ export function User(props: UserProps) {
   const { border, className, whiteTheme, optionDropdown } = props;
 
   const [showingOption, setShowingOption] = useState(false);
+  const { screenSize } = useScreenSize();
   const optionRef = useRef(null);
+
+  const { logout, meProfile } = useContext(AuthContext);
 
   useOnClickOutside(optionRef, () => setShowingOption(false));
 
@@ -382,7 +386,7 @@ export function User(props: UserProps) {
       (whiteTheme
         ? 'border-[1px] border-white'
         : 'border-[1px] border-primary'),
-    'relative flex items-center rounded-full hover:cursor-pointer',
+    'relative flex items-center rounded-full hover:cursor-pointer lg:min-w-[170px] md:min-w-[145px]',
     className,
   );
 
@@ -396,9 +400,12 @@ export function User(props: UserProps) {
     showingOption ? 'max-h-[88px] border-[1px]' : 'max-h-0 border-white',
   );
 
-  const userAvatar = whiteTheme
-    ? '/images/user_white.svg'
-    : '/images/user_royal.svg';
+  const userAvatar =
+    meProfile && meProfile.picture
+      ? meProfile.picture
+      : whiteTheme
+      ? '/images/user_white.svg'
+      : '/images/user_royal.svg';
 
   const collapseIcon = getIcon(
     '/icons/header/',
@@ -411,16 +418,33 @@ export function User(props: UserProps) {
       <Image
         src={userAvatar}
         alt=''
-        width={0}
-        height={0}
+        width={
+          screenSize === ScreenSize.SM
+            ? 52
+            : screenSize === ScreenSize.MD
+            ? 42
+            : screenSize === ScreenSize.LG
+            ? 52
+            : 0
+        }
+        height={
+          screenSize === ScreenSize.SM
+            ? 52
+            : screenSize === ScreenSize.MD
+            ? 42
+            : screenSize === ScreenSize.LG
+            ? 52
+            : 0
+        }
         className='aspect-square h-[52px] w-auto rounded-full md:h-[42px] lg:h-[48px]'
       />
       <div className={usernameClass}>
         <p className='mb-[-4px] text-[12px] tracking-[0.24px]'>Welcome</p>
         <h6 className='text-[20px] font-[500] tracking-[0.4px] md:text-[16px] md:tracking-[0.32px] lg:text-[16px]'>
-          Username
+          {meProfile?.firstName}
         </h6>
       </div>
+      <div className='flex-grow'></div>
       {optionDropdown && (
         <>
           <Image
@@ -448,9 +472,7 @@ export function User(props: UserProps) {
               <p className='font-[500]'>User Profile</p>
             </li>
             <li
-              onClick={() => {
-                console.log('clicked');
-              }}
+              onClick={logout}
               className='flex h-[44px] cursor-pointer items-center px-[12px] text-red transition-all hover:bg-red/[.1] focus:bg-primary'
             >
               <Image

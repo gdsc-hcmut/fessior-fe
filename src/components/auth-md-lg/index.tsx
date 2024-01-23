@@ -132,7 +132,7 @@ export default function AuthModal() {
   if (allowAuth == null) return <LoadingPage />;
 
   return (
-    <div className='fixed bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black/[0.3]'>
+    <div className='fixed bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center bg-black/[0.3]'>
       <div className='relative flex w-[560px] items-stretch overflow-hidden rounded-[8px] bg-white lg:w-[680px]'>
         <div className='flex w-[65%] flex-col px-[40px] py-[60px] lg:px-[54px]'>
           <AuthModalContent authType={authType} />
@@ -153,7 +153,7 @@ export default function AuthModal() {
           className='absolute right-[16px] top-[16px] aspect-square w-[32px] rounded-full bg-white p-[8px]'
         >
           <Image
-            src='/icons/close_loyal.svg'
+            src='/icons/auth/close_royal.svg'
             alt=''
             width={0}
             height={0}

@@ -14,6 +14,7 @@ import useScreenSize from '@/hooks/useScreenSize';
 import { createPassword, recoverPassword } from '@/libs/api/auth';
 import meService from '@/libs/api/me';
 import AuthType from '@/types/auth-type-enum';
+import ScreenSize from '@/types/screen-size-enum';
 
 type AuthFormField = {
   label: string;
@@ -147,8 +148,8 @@ export function AuthForm(props: AuthFormProps) {
             iconSrc={
               field.isPassword && field.currentValue.length > 0
                 ? passwordVisible[index]
-                  ? '/icons/visibility.svg'
-                  : '/icons/visibility_off.svg'
+                  ? '/icons/auth/visibility.svg'
+                  : '/icons/auth/visibility_off.svg'
                 : undefined
             }
             iconPosition={field.isPassword ? 'right' : undefined}
@@ -544,7 +545,7 @@ export function CheckEmailIcon({ className }: { className?: string }) {
       )}
     >
       <Image
-        src='/icons/check_email.svg'
+        src='/icons/auth/check_email.svg'
         alt=''
         width={0}
         height={0}
@@ -560,7 +561,7 @@ export function ForgotPasswordCommon2() {
 
   return (
     <>
-      {screenSize === 'sm' && <CheckEmailIcon className='mb-[12px]' />}
+      {screenSize === ScreenSize.SM && <CheckEmailIcon className='mb-[12px]' />}
       <p className='mb-[20px] font-[500] text-primary md:text-[14px] lg:text-[16px]'>
         If we find a matching account, we will send you an email with password
         recovery instructions.

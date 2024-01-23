@@ -4,6 +4,7 @@ type Url = {
   slug: string;
   domain: string;
   totalClicks: number;
+  organizationId: string;
 };
 
 export default Url;

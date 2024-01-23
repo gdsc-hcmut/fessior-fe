@@ -10,12 +10,9 @@ import ShortenTools from '@/components/shorten-tools';
 import TextInput from '@/components/text-input';
 import AuthContext from '@/contexts/authContext';
 import meService from '@/libs/api/me';
-import { tools } from '@/services/tool.service';
 import urlService from '@/services/url.service';
 import Organization from '@/types/organization-type';
 import Url from '@/types/url-type';
-
-import ToolItem from '@/components/tool-item';
 
 export default function Shorten() {
   const [organizationOptions, setOrganizationOptions] = useState<
@@ -85,6 +82,7 @@ export default function Shorten() {
           originalUrl: longUrl,
           slug: slug.length ? slug : null,
           domain: domainValue,
+          organizationId: organizationValue?._id,
         } as Url),
       );
   };
