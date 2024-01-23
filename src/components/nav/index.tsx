@@ -232,13 +232,15 @@ export function NavList(props: NavListProps) {
 }
 
 export function NavItem(props: NavItem) {
-  const { text, iconFilename, imgAlt, logout, path, children } = props;
+  const { text, iconFilename, imgAlt, isLogout, path, children } = props;
 
   const [showingChildren, setShowingChildren] = useState(false);
   const { screenSize, loaded } = useScreenSize();
   const childrenRef = useRef(null);
   const pathname = usePathname();
   const router = useRouter();
+
+  const { logout } = useContext(AuthContext);
 
   const active = path === pathname;
   const isMdScreen = screenSize === ScreenSize.MD;
@@ -255,6 +257,10 @@ export function NavItem(props: NavItem) {
   useOnClickOutside(childrenRef, () => setShowingChildren(false));
 
   const handleClick = () => {
+    if (isLogout) {
+      logout();
+    }
+
     if (children) {
       if (!isMdScreen) setShowingChildren(!showingChildren);
     } else {
@@ -274,13 +280,13 @@ export function NavItem(props: NavItem) {
 
   const smItemTitleClass = clsx(
     'flex items-center justify-between rounded-[8px] px-[20px] py-[16px] transition-all hover:cursor-pointer',
-    active && (logout ? 'bg-red/[.1]' : 'bg-royal-300/[.1]'),
-    logout ? 'hover:bg-red/[.1]' : ' hover:bg-royal-300/[.1]',
+    active && (isLogout ? 'bg-red/[.1]' : 'bg-royal-300/[.1]'),
+    isLogout ? 'hover:bg-red/[.1]' : ' hover:bg-royal-300/[.1]',
   );
 
   const itemTitleClass = clsx(
     'ms-[16px] font-[500]',
-    logout ? 'text-red' : active ? 'text-primary' : 'text-[#696969]',
+    isLogout ? 'text-red' : active ? 'text-primary' : 'text-[#696969]',
   );
 
   const childrenContainerClass = clsx(
@@ -291,7 +297,7 @@ export function NavItem(props: NavItem) {
   const itemIcon = getIcon(
     '/icons/header',
     iconFilename,
-    logout ? null : active || childrenActive ? Icon.ACTIVE : Icon.INACTIVE,
+    isLogout ? null : active || childrenActive ? Icon.ACTIVE : Icon.INACTIVE,
   );
 
   const collapseIcon = getIcon(
@@ -302,7 +308,7 @@ export function NavItem(props: NavItem) {
 
   if (screenSize === ScreenSize.LG) {
     return (
-      !logout && (
+      !isLogout && (
         <div ref={childrenRef} className='relative'>
           <li onClick={handleClick} className={lgItemTitleClass}>
             {text}
@@ -310,7 +316,7 @@ export function NavItem(props: NavItem) {
           {children && (
             <ul
               className={clsx(
-                'absolute left-0 mt-[8px] overflow-hidden whitespace-nowrap rounded-[8px] transition-all duration-500',
+                'absolute left-0 mt-[8px] overflow-hidden whitespace-nowrap rounded-[8px] bg-white transition-all duration-500',
                 showingChildren ? 'h-[80px] border-[1px]' : 'h-0 border-white',
               )}
             >
