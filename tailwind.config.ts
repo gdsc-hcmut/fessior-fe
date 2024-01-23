@@ -6,12 +6,16 @@ const config: Config = {
       screens: {
         sm: '480px',
         md: '768px',
-        lg: '1300px',
+        lg: '1200px',
       },
       colors: {
         white: '#ffffff',
         primary: '#0B2878',
-        black: '#000000',
+        'default-text': '#252641',
+        disabled: '#6d7eae',
+        red: '#db4437',
+        green: '#0f9d58',
+        'royal-300': '#6D7EAE',
       },
     },
   },
