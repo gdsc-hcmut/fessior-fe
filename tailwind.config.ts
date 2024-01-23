@@ -5,8 +5,9 @@ const config: Config = {
     extend: {
       screens: {
         sm: '480px',
-        md: '768px',
-        lg: '1200px',
+        md: '760px',
+        lg: '960px',
+        xl: '1300px',
       },
       colors: {
         white: '#ffffff',
@@ -23,6 +24,7 @@ const config: Config = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/services/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   plugins: [],
 };

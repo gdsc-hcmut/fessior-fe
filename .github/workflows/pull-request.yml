@@ -43,7 +43,7 @@ jobs:
             exit 0
           fi
 
-          if [ ${{ steps.changed-files.outputs.all_modified_files_count }} -gt 15 ]; then
+          if [ ${{ steps.changed-files.outputs.all_changed_files_count }} -gt 15 ]; then
             echo "Too many files changed. One PR should only change <= 15 files."
             exit 1
           fi
@@ -51,7 +51,7 @@ jobs:
 
       - name: Lint check
         run: |
-          yarn eslint ${{ steps.changed-files.outputs.all_modified_files }} --ignore-pattern '*.json'
+          yarn eslint ${{ steps.changed-files.outputs.all_changed_files	 }} --ignore-pattern '*.json'
 
       - name: Install dependencies
         run: yarn --frozen-lockfile

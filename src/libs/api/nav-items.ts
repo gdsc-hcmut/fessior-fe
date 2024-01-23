@@ -3,25 +3,25 @@ import { NavItem } from './types/nav-item';
 export const navItems: NavItem[] = [
   {
     text: 'Home',
-    imgSrc: '/icons/home.svg',
+    iconFilename: 'home.svg',
     imgAlt: '',
     path: '/',
   },
   {
     text: 'URL Shortener',
-    imgSrc: '/icons/shortener.svg',
+    iconFilename: 'shortener.svg',
     imgAlt: '',
     path: '',
     children: [
       {
         text: 'Shorten Now',
-        imgSrc: '/icons/my_url.svg',
+        iconFilename: 'my_url.svg',
         imgAlt: '',
         path: '/shorten',
       },
       {
         text: 'My URLs',
-        imgSrc: '/icons/statistics.svg',
+        iconFilename: 'statistics.svg',
         imgAlt: '',
         path: '/statistics',
       },
@@ -29,25 +29,25 @@ export const navItems: NavItem[] = [
   },
   {
     text: 'Organization',
-    imgSrc: '/icons/organization.svg',
+    iconFilename: 'organization.svg',
     imgAlt: '',
     path: '/organization',
   },
   {
     text: 'About Us',
-    imgSrc: '/icons/about.svg',
+    iconFilename: 'about.svg',
     imgAlt: '',
     path: '',
     children: [
       {
         text: 'Fessior Community',
-        imgSrc: '/icons/my_url.svg',
+        iconFilename: 'my_url.svg',
         imgAlt: '',
         path: '',
       },
       {
         text: 'GDSC HCMUT',
-        imgSrc: '/icons/my_url.svg',
+        iconFilename: 'my_url.svg',
         imgAlt: '',
         path: '',
       },
@@ -55,7 +55,7 @@ export const navItems: NavItem[] = [
   },
   {
     text: 'Log out',
-    imgSrc: '/icons/logout.svg',
+    iconFilename: 'logout.svg',
     imgAlt: '',
     path: '',
     logout: true,
