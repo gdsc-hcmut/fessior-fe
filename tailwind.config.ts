@@ -6,7 +6,7 @@ const config: Config = {
       screens: {
         sm: '480px',
         md: '768px',
-        lg: '1300px',
+        lg: '1200px',
       },
       colors: {
         white: '#ffffff',
@@ -15,6 +15,7 @@ const config: Config = {
         disabled: '#6d7eae',
         red: '#db4437',
         green: '#0f9d58',
+        'royal-300': '#6D7EAE',
       },
     },
   },

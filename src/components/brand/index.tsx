@@ -1,32 +1,34 @@
 import { clsx } from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export type BrandProps = {
   theme: 'white' | 'primary';
 };
 
-export default function Brand({ theme = 'primary' }: BrandProps) {
+export default function Brand(props: BrandProps) {
+  const { theme = 'primary' } = props;
+
+  const titleClass = clsx(
+    'text-[20px] font-[700] tracking-[0.4px] md:tracking-[0.48px] lg:tracking-[0.56px] leading-[1px] md:text-[24px] lg:text-[28px]',
+    theme === 'white' ? 'text-white' : 'text-primary',
+  );
+
+  const logoSrc =
+    theme === 'white'
+      ? '/logo_transparent_white.svg'
+      : '/logo_transparent_navy.svg';
+
   return (
-    <div className='flex h-[40px] items-center md:h-[44px] lg:h-[50px]'>
+    <Link href='/' className='flex items-center'>
       <Image
-        src={
-          theme === 'white'
-            ? '/logo_transparent_white.svg'
-            : '/logo_transparent_navy.svg'
-        }
+        src={logoSrc}
         alt=''
         width={0}
         height={0}
-        className='me-[4px] h-[100%] w-auto'
+        className='me-[4px] h-[36px] w-auto md:me-[8px] md:h-[36px] lg:h-[40px]'
       />
-      <h4
-        className={clsx(
-          'text-[20px] font-[700] leading-[1px] md:text-[24px] lg:text-[28px]',
-          theme === 'white' ? 'text-white' : 'text-primary',
-        )}
-      >
-        Fessior Tools
-      </h4>
-    </div>
+      <h4 className={titleClass}>Fessior Tools</h4>
+    </Link>
   );
 }

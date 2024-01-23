@@ -94,7 +94,7 @@ export default function Shorten() {
 
   return (
     <>
-      <div className='relative flex flex-col items-center overflow-hidden leading-[1.2] text-primary'>
+      <div className='relative flex flex-col items-center overflow-hidden pt-[80px] leading-[1.2] text-primary md:pt-[90px] lg:pt-[108px]'>
         <div className='md:max-w-[1000px] lg:flex lg:flex-col lg:items-center'>
           <div className='text-center'>
             <h1 className='mt-[86px] text-[40px] font-[700] leading-[65px] md:text-[48px] lg:text-[60px]'>
@@ -234,7 +234,7 @@ export default function Shorten() {
             </div>
           </div>
         </div>
-        <div className='absolute right-[-10px] top-[46px] h-[40px] w-[40px] rounded-full bg-primary'></div>
+        <div className='absolute right-[-10px] top-[100px] h-[40px] w-[40px] rounded-full bg-primary lg:top-[130px]'></div>
         <div className='absolute left-[40px] top-[145px] h-[12px] w-[12px] rounded-full bg-primary md:left-[30px] md:h-[28px] md:w-[28px] lg:left-[100px] lg:h-[40px] lg:w-[40px]'></div>
         <div className='absolute left-[-70px] top-[679px] h-[120px] w-[120px] rounded-full bg-primary'></div>
         <div className='absolute bottom-[9px] right-[-30px] h-[80px] w-[80px] rounded-full bg-primary md:hidden'></div>
