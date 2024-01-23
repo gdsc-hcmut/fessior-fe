@@ -6,14 +6,16 @@ import Button from '@/components/button';
 import CategoryItem from '@/components/category-item';
 import Modal from '@/components/modal-shorten';
 import SelectInput from '@/components/select-input';
+import ShortenTools from '@/components/shorten-tools';
 import TextInput from '@/components/text-input';
-import ToolItem from '@/components/tool-item';
 import AuthContext from '@/contexts/authContext';
 import meService from '@/libs/api/me';
 import { tools } from '@/services/tool.service';
 import urlService from '@/services/url.service';
 import Organization from '@/types/organization-type';
 import Url from '@/types/url-type';
+
+import ToolItem from '@/components/tool-item';
 
 export default function Shorten() {
   const [organizationOptions, setOrganizationOptions] = useState<
@@ -227,11 +229,7 @@ export default function Shorten() {
               world of community-driven tools that simplify your daily tasks.
             </p>
 
-            <div className='md:flex md:flex-wrap md:justify-around'>
-              {tools.map((tool) => (
-                <ToolItem key={tool.name} {...tool} />
-              ))}
-            </div>
+            <ShortenTools />
           </div>
         </div>
         <div className='absolute right-[-10px] top-[100px] h-[40px] w-[40px] rounded-full bg-primary lg:top-[130px]'></div>

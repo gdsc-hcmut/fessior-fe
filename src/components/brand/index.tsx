@@ -16,8 +16,8 @@ export default function Brand(props: BrandProps) {
 
   const logoSrc =
     theme === 'white'
-      ? '/logo_transparent_white.svg'
-      : '/logo_transparent_navy.svg';
+      ? '/images/logo_transparent_white.svg'
+      : '/images/logo_transparent_navy.svg';
 
   return (
     <Link href='/' className='flex items-center'>
