@@ -1,15 +1,13 @@
 'use client';
 
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 import CategoryItem from '@/components/category-item';
 import Modal from '@/components/modal-shorten';
 import SelectInput from '@/components/select-input';
+import ShortenTools from '@/components/shorten-tools';
 import TextInput from '@/components/text-input';
-import ToolItem from '@/components/tool-item';
 import meService from '@/services/me.service';
-import { tools } from '@/services/tool.service';
 import urlService from '@/services/url.service';
 import Organization from '@/types/organization-type';
 import Url from '@/types/url-type';
@@ -93,7 +91,7 @@ export default function Shorten() {
 
   return (
     <>
-      <div className='relative flex flex-col items-center overflow-hidden leading-[1.2] text-primary'>
+      <div className='relative flex flex-col items-center overflow-hidden pt-[80px] leading-[1.2] text-primary md:pt-[90px] lg:pt-[108px]'>
         <div className='md:max-w-[1000px] lg:flex lg:flex-col lg:items-center'>
           <div className='text-center'>
             <h1 className='mt-[86px] text-[40px] font-[700] leading-[65px] md:text-[48px] lg:text-[60px]'>
@@ -213,14 +211,10 @@ export default function Shorten() {
               world of community-driven tools that simplify your daily tasks.
             </p>
 
-            <div className='md:flex md:flex-wrap md:justify-around'>
-              {tools.map((tool) => (
-                <ToolItem key={tool.name} {...tool} />
-              ))}
-            </div>
+            <ShortenTools />
           </div>
         </div>
-        <div className='absolute right-[-10px] top-[46px] h-[40px] w-[40px] rounded-full bg-primary'></div>
+        <div className='absolute right-[-10px] top-[100px] h-[40px] w-[40px] rounded-full bg-primary lg:top-[130px]'></div>
         <div className='absolute left-[40px] top-[145px] h-[12px] w-[12px] rounded-full bg-primary md:left-[30px] md:h-[28px] md:w-[28px] lg:left-[100px] lg:h-[40px] lg:w-[40px]'></div>
         <div className='absolute left-[-70px] top-[679px] h-[120px] w-[120px] rounded-full bg-primary'></div>
         <div className='absolute bottom-[9px] right-[-30px] h-[80px] w-[80px] rounded-full bg-primary md:hidden'></div>

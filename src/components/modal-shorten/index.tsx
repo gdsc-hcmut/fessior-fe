@@ -25,7 +25,7 @@ export default function ModalShorten(props: ModalProps) {
           </h6>
           <div className='relative mb-[42px] h-[140px] w-[140px] rounded-[8px] p-[10px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)]'>
             <Image
-              src='images/sample_qr.svg'
+              src='images/shorten/sample_qr.svg'
               alt='qr'
               width={0}
               height={0}
@@ -61,14 +61,14 @@ export default function ModalShorten(props: ModalProps) {
             </button>
           </div>
           <Image
-            src='images/qr_decor.svg'
+            src='images/shorten/qr_decor.svg'
             alt='qr-decor'
             width={0}
             height={0}
             className='absolute left-[-20px] top-[40px] h-[60px] w-[60px]'
           />
           <Image
-            src='images/qr_decor.svg'
+            src='images/shorten/qr_decor.svg'
             alt='qr-decor'
             width={0}
             height={0}
@@ -77,7 +77,7 @@ export default function ModalShorten(props: ModalProps) {
         </div>
         <div className='absolute left-[12px] top-[-20px] flex h-[40px] w-[40px] items-center rounded-full bg-primary p-[4px]'>
           <Image
-            src='images/gdsc_white.svg'
+            src='images/shorten/gdsc_white.svg'
             alt='GDSC Logo'
             width={0}
             height={0}
