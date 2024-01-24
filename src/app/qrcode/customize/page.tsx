@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
+import { Title } from '@/app/qrcode/sub-nav';
 import CategoryItem from '@/components/category-item';
 import Modal from '@/components/modal-shorten';
 import QrHomeButton from '@/components/qr-home-button';
@@ -18,33 +19,48 @@ import Url from '@/types/url-type';
 export default function Shorten() {
   return (
     <>
-      <div className='relative flex flex-col items-center overflow-hidden leading-[1.2] text-primary'>
-        <div className='md:max-w-[1000px] lg:flex lg:flex-col lg:items-center'>
-          <div className='text-center'>
-            <h1 className='mt-[86px] text-[40px] font-[700] leading-[65px] md:text-[48px] lg:text-[60px]'>
-              <span className='hidden md:inline'>Fessior</span> QR Generator
-            </h1>
-            <p className='mb-[46px] leading-[24px] md:text-[24px] lg:text-[28px] lg:leading-[65px]'>
-              Convenience, efficiency, and versatility:{' '}
-              <br className='md:hidden' /> QR Code Management Made Easy
-            </p>
-          </div>
-          <div className='lg:[70%] relative  mx-auto mb-[172px] w-[90%] items-start rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow lg:max-w-[740px]'>
-            <div className='lg:md-8  md:m-4 md:flex-grow'>
-              <QrHomeButton
-                type='Website URL'
-                image='icons/link-qr.svg'
-                content='Link to a website of your choice'
-              />
-              <div className='mt-4 md:mt-6 lg:mt-5'>
-                <QrHomeButton
-                  type='Wi-Fi'
-                  image='icons/wifi.svg'
-                  content='Connect to a wireless network'
+      <div className='relative flex flex-col items-center overflow-hidden pt-[88px] leading-[1.2] text-primary '>
+        <div className='w-[80%] lg:flex lg:flex-col lg:items-center '>
+          <button
+            className='mr-auto inline-flex'
+            onClick={() => {
+              alert('Clicked Back');
+            }}
+          >
+            <div className='font-baloo-chettan-2 mr-auto inline-flex text-center '>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                strokeWidth={1.5}
+                stroke='currentColor'
+                className='mr-1 h-6 gap-2'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18'
                 />
+              </svg>
+              <div className='m-auto text-[16px]'>Back</div>
+            </div>
+          </button>
+          <div className=' mb-2 ml-auto mr-auto w-[100%] rounded-lg border border-black border-opacity-30 bg-white p-6 pb-[15px] shadow-[0_20px_20px_0px_rgba(11,40,120,0.2)] '>
+            <div className='text-center text-[16px] font-[900] md:text-[20px]'>
+              Customize QR
+            </div>
+            <div className='mb-3 mt-2 flex justify-center'>
+              <div className='h-1 w-[600px] rounded-lg bg-[#D9D9D9]  md:h-2'>
+                <div className='relative left-0 h-1 w-[25%] rounded-lg bg-[#0B2878] md:h-2'></div>
               </div>
-              <div className='absolute left-[-15px] top-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-primary'></div>
-              <div className='absolute bottom-[-15px] right-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-primary'></div>
+            </div>
+            <div className=' ml-auto mr-auto flex justify-center'>
+              <div className='inline-flex gap-2'>
+                <Title content='Information' />
+                <Title content='Frame' />
+                <Title content='Pattern' />
+                <Title content='Logo' />
+              </div>
             </div>
           </div>
 

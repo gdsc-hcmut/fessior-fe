@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
+import { Title } from '@/app/qrcode/sub-nav';
 import CategoryItem from '@/components/category-item';
 import Modal from '@/components/modal-shorten';
 import QrHomeButton from '@/components/qr-home-button';
@@ -29,22 +30,28 @@ export default function Shorten() {
               <br className='md:hidden' /> QR Code Management Made Easy
             </p>
           </div>
-          <div className='lg:[70%] relative  mx-auto mb-[172px] w-[90%] items-start rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow lg:max-w-[740px]'>
-            <div className='lg:md-8  md:m-4 md:flex-grow'>
-              <QrHomeButton
-                type='Website URL'
-                image='icons/link-qr.svg'
-                content='Link to a website of your choice'
+
+          <div className='font-baloo-chettan-2 mr-auto inline-flex text-center'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='mr-1 h-6 gap-2'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18'
               />
-              <div className='mt-4 md:mt-6 lg:mt-5'>
-                <QrHomeButton
-                  type='Wi-Fi'
-                  image='icons/wifi.svg'
-                  content='Connect to a wireless network'
-                />
-              </div>
-              <div className='absolute left-[-15px] top-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-primary'></div>
-              <div className='absolute bottom-[-15px] right-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-primary'></div>
+            </svg>
+            <div className='m-auto'>Back</div>
+          </div>
+          <div className='mb-2 w-[100%] rounded-lg border border-black border-opacity-30 bg-white p-6 shadow-[0_20px_20px_0px_rgba(11,40,120,0.2)]'>
+            Inside the sub nav
+            <div>
+              <Title content='Pattern' />
             </div>
           </div>
 
