@@ -5,7 +5,7 @@ export type NavItem = {
   iconFilename: string;
   imgAlt: string;
   path: string;
-  logout?: boolean;
+  isLogout?: boolean;
   children?: NonEmptyArray<
     Pick<NavItem, 'text' | 'iconFilename' | 'imgAlt' | 'path'>
   >;
