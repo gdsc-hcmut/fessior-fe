@@ -1,3 +1,5 @@
+import Icon from '@/types/icon-enum';
+
 export const detectOS = (): string => {
   let osDetected;
   if (navigator.userAgent.match(/Android/i)) {
@@ -20,4 +22,20 @@ export const detectOS = (): string => {
 };
 export const getCurrentYear = () => {
   return new Date().getFullYear();
+};
+export const getIcon = (
+  iconLocation: string,
+  filename: string,
+  mode: Icon | null,
+) => {
+  let iconPath = '';
+
+  iconPath +=
+    iconLocation[iconLocation.length - 1] === '/'
+      ? iconLocation
+      : iconLocation + '/';
+  iconPath += mode === null ? '' : mode + '/';
+  iconPath += filename;
+
+  return iconPath;
 };
