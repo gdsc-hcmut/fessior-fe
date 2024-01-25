@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
+import LinkIcon from '@/app/qrcode/linkIcon';
 import { Title } from '@/app/qrcode/sub-nav';
 import CategoryItem from '@/components/category-item';
 import { InputWithLabel } from '@/components/customize-qr/label-input';
@@ -17,6 +18,8 @@ import { tools } from '@/services/tool.service';
 import urlService from '@/services/url.service';
 import Organization from '@/types/organization-type';
 import Url from '@/types/url-type';
+
+import DomainOrg from './domain-org';
 
 export default function Shorten() {
   return (
@@ -76,11 +79,17 @@ export default function Shorten() {
                 }
                 placeHolder='Enter your QR name'
               />
-              <InputWithLabel
-                label='Your URL'
-                icon={<div></div>}
-                placeHolder='Enter your URL'
-              />
+              <div className='pt-[12px]'>
+                <InputWithLabel
+                  label='Your URL'
+                  icon={<LinkIcon />}
+                  placeHolder='Enter your URL'
+                />
+              </div>
+
+              <DomainOrg label='Organization' placeholder='GDSC' />
+              <DomainOrg label='Domain' placeholder='furl.one' />
+              <div className='pb-[10px]' />
               <InputWithLabel
                 label='Category'
                 icon={
@@ -101,6 +110,15 @@ export default function Shorten() {
                 }
                 placeHolder='Add or create categories'
               />
+              <div className='mb-[8px] mt-[7px]'>
+                <p className='me-[6px] inline text-[12px] font-[500] text-black md:text-[16px]'>
+                  Chosen categories
+                </p>
+                <div className='inline'>
+                  <CategoryItem text='Event' />
+                  <CategoryItem text='Favorite' />
+                </div>
+              </div>
             </div>
           </div>
 
