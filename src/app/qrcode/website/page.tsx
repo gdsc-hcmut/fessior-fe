@@ -30,10 +30,11 @@ export default function Shorten() {
               <br className='md:hidden' /> QR Code Management Made Easy
             </p>
           </div>
-          <div className='font-baloo-chettan-2 m-5 mx-auto flex w-[90%] max-w-[320px] justify-between text-[16px] md:max-w-[416px] md:text-[20px]'>
+          <div className='font-baloo-chettan-2 m-6 mx-auto flex w-[90%] max-w-[320px] justify-between text-[16px] md:max-w-[416px] md:text-[20px]'>
             <Button
               image='/icons/link-qr-choosen.svg'
               imageAlt='icons'
+              imageSize={28}
               onClick={() => console.log('Alo')}
               className='px-auto flex items-center justify-center py-2'
               width='full'
@@ -44,6 +45,7 @@ export default function Shorten() {
             <Button
               image='/icons/wifi.svg'
               imageAlt='icons'
+              imageSize={28}
               width='full'
               type='neutral'
               className='px-auto ml-6 flex items-center justify-center py-2'
@@ -53,32 +55,36 @@ export default function Shorten() {
             </Button>
           </div>
 
-          <div className='relative mx-auto mb-[172px]  w-[90%] items-start rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow md:flex-col lg:w-[100%] lg:max-w-[740px]'>
-            <div className='mb-[8px] w-full md:inline-flex'>
-              <h6 className='mb-[4px] text-[16px] font-[500] md:mb-[8px] md:mt-[6px] md:pr-[20px] md:text-[20px]'>
+          <div className='relative mx-auto mb-[172px]  w-[90%] rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow md:flex-col lg:w-[100%] lg:max-w-[740px]'>
+            <div className='container mb-[8px] md:inline-flex'>
+              <h6 className='mb-[4px] flex-shrink-0 text-[20px] font-[500] md:mb-[8px] md:mt-[6px] md:pr-[20px]'>
                 QR Name
               </h6>
-              <div className='mb-[8px]'>
+              <div className='mb-[8px] w-[90%]'>
                 <TextInput
-                  iconSrc='icons/label_outline.svg'
+                  iconSrc='/icons/label_outline.svg'
                   iconAlt='icon'
                   placeholder='Enter your QR name'
                   value=''
+                  divider={true}
+                  iconPosition='left'
                   onInput={() => {}}
                   onEnter={() => {}}
                 />
               </div>
             </div>
-            <div className='mb-[8px] md:inline-flex'>
-              <h6 className='mb-[4px] text-[16px] font-[500] md:mb-[8px] md:mt-[6px] md:pr-[20px] md:text-[20px]'>
+            <div className='container mb-[8px] md:inline-flex'>
+              <h6 className='mb-[4px] flex-shrink-0 text-[20px] font-[500] md:mb-[8px] md:mt-[6px] md:pr-[20px]'>
                 Your URL
               </h6>
-              <div className='mb-[8px]'>
+              <div className='mb-[8px] md:w-[90%]'>
                 <TextInput
-                  iconSrc='icons/link.svg'
+                  iconSrc='/icons/link-qr-20px.svg'
                   iconAlt='icon'
                   placeholder='Enter your URL'
                   value=''
+                  iconPosition='left'
+                  divider={true}
                   onInput={() => {}}
                   onEnter={() => {}}
                 />
@@ -87,7 +93,7 @@ export default function Shorten() {
             <div>
               <div className='inline-block md:mb-[8px] md:flex md:flex-grow'>
                 <div className='mb-[8px] flex items-center justify-between md:me-[20px] md:inline-flex'>
-                  <p className='inline text-[12px] font-[500] text-black md:text-[16px]'>
+                  <p className='inline text-[16px] font-[500] text-black md:text-[16px]'>
                     Organization
                   </p>
                   <SelectInput
@@ -98,7 +104,7 @@ export default function Shorten() {
                   />
                 </div>
                 <div className='flex items-center justify-between md:mb-2 md:inline-flex'>
-                  <p className='inline text-[12px] font-[500] text-black md:text-[16px]'>
+                  <p className='inline text-[16px] font-[500] text-black md:text-[16px]'>
                     Domain
                   </p>
                   <SelectInput
@@ -111,21 +117,22 @@ export default function Shorten() {
               </div>
             </div>
             <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
-              <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[100px] md:text-[20px]'>
+              <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:w-[100px] md:text-[20px]'>
                 Category
               </h6>
               <div className='md:-ml-[2px] md:inline-block md:flex-grow'>
                 <TextInput
-                  iconSrc='icons/search.svg'
+                  iconSrc='/icons/search.svg'
                   iconAlt='search'
                   placeholder='Add or create categories'
                   value={''}
+                  divider={true}
                   onInput={() => {}}
                 />
               </div>
             </div>
             <div className='mb-[8px]'>
-              <p className='me-[6px] inline text-[12px] font-[500] text-black md:text-[16px]'>
+              <p className='me-[6px] inline text-[16px] font-[500] text-black md:text-[16px]'>
                 Chosen categories
               </p>
               <div className='inline'>
@@ -134,10 +141,20 @@ export default function Shorten() {
               </div>
             </div>
             <div className='mx-auto mt-5 flex max-w-[288px] items-center justify-between space-x-4 md:max-w-[352px]'>
-              <Button width='full' type='positive' onClick={() => {}}>
+              <Button
+                width='full'
+                type='positive'
+                className='h-[40px] w-[136px] md:w-[160px]'
+                onClick={() => {}}
+              >
                 Create Now
               </Button>
-              <Button width='full' type='neutral' onClick={() => {}}>
+              <Button
+                width='full'
+                type='neutral'
+                className='h-[40px] w-[136px] md:w-[160px]'
+                onClick={() => {}}
+              >
                 Customize QR
               </Button>
             </div>

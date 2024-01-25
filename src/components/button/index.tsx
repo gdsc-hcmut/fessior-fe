@@ -6,6 +6,7 @@ type ButtonProps = {
   disabled?: boolean;
   image?: string;
   imageAlt?: string;
+  imageSize?: number;
   onClick: () => void;
   className?: string;
   width?: 'fit' | 'full';
@@ -19,6 +20,7 @@ export default function Button(props: ButtonProps) {
     onClick,
     image,
     imageAlt,
+    imageSize,
     className,
     width = 'fit',
     type = 'positive',
@@ -34,10 +36,16 @@ export default function Button(props: ButtonProps) {
     'rounded-[8px] px-[16px] py-[8px] transition-all',
     className,
   );
-  if (image && imageAlt) {
+  if (image && imageAlt && imageSize) {
     return (
       <button disabled={disabled} onClick={onClick} className={buttonClass}>
-        <Image src={image} alt={imageAlt} width={20} height={20} />
+        <Image
+          src={image}
+          alt={imageAlt}
+          width={imageSize}
+          height={imageSize}
+          className='pr-1'
+        />
         {children}
       </button>
     );
