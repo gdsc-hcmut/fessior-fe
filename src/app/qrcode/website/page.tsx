@@ -16,7 +16,7 @@ import urlService from '@/services/url.service';
 import Organization from '@/types/organization-type';
 import Url from '@/types/url-type';
 
-export default function Shorten() {
+export default function qrWebsite() {
   return (
     <>
       <div className='relative flex flex-col items-center overflow-hidden leading-[1.2] text-primary'>
@@ -122,7 +122,7 @@ export default function Shorten() {
               </h6>
               <div className='md:-ml-[2px] md:inline-block md:flex-grow'>
                 <TextInput
-                  iconSrc='/icons/search.svg'
+                  iconSrc='/icons/search-20px.svg'
                   iconAlt='search'
                   placeholder='Add or create categories'
                   value={''}
