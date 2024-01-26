@@ -58,6 +58,6 @@ export const navItems: NavItem[] = [
     iconFilename: 'logout.svg',
     imgAlt: '',
     path: '',
-    logout: true,
+    isLogout: true,
   },
 ];

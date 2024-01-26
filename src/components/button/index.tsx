@@ -33,7 +33,7 @@ export default function Button(props: ButtonProps) {
   const buttonClass = clsx(
     width === 'full' && 'w-[100%]',
     disabled
-      ? 'bg-disabled'
+      ? 'bg-royal-300 text-white'
       : type === 'positive'
       ? 'bg-primary text-white'
       : 'border-[1px] border-primary bg-white text-primary hover:bg-primary hover:text-white',
