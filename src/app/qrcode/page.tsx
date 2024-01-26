@@ -1,4 +1,4 @@
-'use client';
+'use server';
 
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
@@ -15,7 +15,7 @@ import urlService from '@/services/url.service';
 import Organization from '@/types/organization-type';
 import Url from '@/types/url-type';
 
-export default function qrHomePage() {
+export default function QRHomePage() {
   return (
     <>
       <div className='relative flex flex-col items-center overflow-hidden leading-[1.2] text-primary'>

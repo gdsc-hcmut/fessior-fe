@@ -1,10 +1,12 @@
 import { clsx } from 'clsx';
 import Image from 'next/image';
+import { useState } from 'react';
 
 type ButtonProps = {
   children: string;
   disabled?: boolean;
   image?: string;
+  imageOnHover?: string;
   imageAlt?: string;
   imageSize?: number;
   onClick: () => void;
@@ -14,11 +16,13 @@ type ButtonProps = {
 };
 
 export default function Button(props: ButtonProps) {
+  const [isHovered, setIsHovered] = useState(false);
   const {
     children,
     disabled,
     onClick,
     image,
+    imageOnHover,
     imageAlt,
     imageSize,
     className,
@@ -36,23 +40,26 @@ export default function Button(props: ButtonProps) {
     'rounded-[8px] px-[16px] py-[8px] transition-all',
     className,
   );
-  if (image && imageAlt && imageSize) {
-    return (
-      <button disabled={disabled} onClick={onClick} className={buttonClass}>
-        <Image
-          src={image}
-          alt={imageAlt}
-          width={imageSize}
-          height={imageSize}
-          className='pr-1'
-        />
-        {children}
-      </button>
-    );
-  } else
-    return (
-      <button disabled={disabled} onClick={onClick} className={buttonClass}>
-        {children}
-      </button>
-    );
+  return (
+    <button
+      disabled={disabled}
+      onClick={onClick}
+      className={buttonClass}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {image && imageAlt && imageSize && imageOnHover ? (
+        <div className='transition-all'>
+          <Image
+            src={isHovered ? imageOnHover : image}
+            alt={imageAlt}
+            width={imageSize}
+            height={imageSize}
+            className='pr-2'
+          />
+        </div>
+      ) : null}
+      {children}
+    </button>
+  );
 }

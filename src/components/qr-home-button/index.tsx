@@ -14,7 +14,7 @@ const QrHomeButton = ({ type, image, content }: QrHomeButtonProps) => {
       pr-8 shadow-[0_20px_20px_0px_rgba(11,40,120,0.2)] md:pl-6 lg:pl-5'
     >
       <div className='flex py-1 md:py-5'>
-        <Image src={image} alt='icon' height={60} width={60} />
+        <Image src={image} alt='qr-icon' height={60} width={60} />
         <div className='my-3 ml-3 flex flex-col text-left md:ml-5 md:pl-0'>
           <h1 className='font-baloo-chettan-2 text-[20px] font-bold text-black md:text-[24px]'>
             {type}

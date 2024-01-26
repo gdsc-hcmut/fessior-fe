@@ -5,8 +5,9 @@ const config: Config = {
     extend: {
       screens: {
         sm: '480px',
-        md: '768px',
-        lg: '1300px',
+        md: '760px',
+        lg: '960px',
+        xl: '1300px',
       },
       colors: {
         white: '#ffffff',

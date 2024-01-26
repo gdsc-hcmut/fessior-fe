@@ -16,13 +16,13 @@ import urlService from '@/services/url.service';
 import Organization from '@/types/organization-type';
 import Url from '@/types/url-type';
 
-export default function qrWebsite() {
+export default function CreateQRURLScreen() {
   return (
     <>
       <div className='relative flex flex-col items-center overflow-hidden leading-[1.2] text-primary'>
         <div className='md:max-w-[1000px] lg:flex lg:flex-col lg:items-center'>
           <div className='text-center'>
-            <h1 className='mt-[86px] text-[36px] font-[700] leading-[65px] md:text-[48px] lg:text-[60px]'>
+            <h1 className='mt-[80px] text-[36px] font-[700] leading-[65px] md:mt-[168px] md:text-[48px] lg:text-[60px]'>
               <span className=' md:inline'>Fessior</span> QR Generator
             </h1>
             <p className='mb-[20px] hidden leading-[24px] md:block md:text-[24px] lg:mb-0 lg:text-[28px] lg:leading-[65px]'>
@@ -30,13 +30,14 @@ export default function qrWebsite() {
               <br className='md:hidden' /> QR Code Management Made Easy
             </p>
           </div>
-          <div className='font-baloo-chettan-2 m-6 mx-auto flex w-[90%] max-w-[320px] justify-between text-[16px] md:max-w-[416px] md:text-[20px]'>
+          <div className='font-baloo-chettan-2 m-6 mx-auto flex w-[100%] max-w-[360px] justify-between text-[16px] font-[500] md:max-w-[416px] md:text-[20px]'>
             <Button
               image='/icons/link-qr-choosen.svg'
+              imageOnHover='/icons/link-qr-choosen.svg'
               imageAlt='icons'
-              imageSize={28}
-              onClick={() => console.log('Alo')}
-              className='px-auto flex items-center justify-center py-2'
+              imageSize={40}
+              onClick={() => {}}
+              className='flex items-center justify-center'
               width='full'
               type='positive'
             >
@@ -44,23 +45,24 @@ export default function qrWebsite() {
             </Button>
             <Button
               image='/icons/wifi.svg'
+              imageOnHover='/icons/wifi-white.svg'
               imageAlt='icons'
-              imageSize={28}
+              imageSize={40}
               width='full'
               type='neutral'
-              className='px-auto ml-6 flex items-center justify-center py-2'
-              onClick={() => console.log('Alo')}
+              className='ml-6 flex items-center justify-center'
+              onClick={() => {}}
             >
               Wi-fi
             </Button>
           </div>
 
-          <div className='relative mx-auto mb-[172px]  w-[90%] rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow md:flex-col lg:w-[100%] lg:max-w-[740px]'>
+          <div className='relative mx-auto mb-[172px]  w-[90%] rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow md:flex-col lg:w-[100%] lg:max-w-[740px] lg:p-[24px]'>
             <div className='container mb-[8px] md:inline-flex'>
               <h6 className='mb-[4px] flex-shrink-0 text-[20px] font-[500] md:mb-[8px] md:mt-[6px] md:pr-[20px]'>
                 QR Name
               </h6>
-              <div className='mb-[8px] w-[90%]'>
+              <div className='mb-[16px] md:w-[90%]'>
                 <TextInput
                   iconSrc='/icons/label_outline.svg'
                   iconAlt='icon'
@@ -77,7 +79,7 @@ export default function qrWebsite() {
               <h6 className='mb-[4px] flex-shrink-0 text-[20px] font-[500] md:mb-[8px] md:mt-[6px] md:pr-[20px]'>
                 Your URL
               </h6>
-              <div className='mb-[8px] md:w-[90%]'>
+              <div className='mb-[12px] md:w-[90%]'>
                 <TextInput
                   iconSrc='/icons/link-qr-20px.svg'
                   iconAlt='icon'
@@ -117,7 +119,7 @@ export default function qrWebsite() {
               </div>
             </div>
             <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
-              <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:w-[100px] md:text-[20px]'>
+              <h6 className='mb-[4px] text-[20px] font-[500] md:mb-0 md:inline md:w-[100px]'>
                 Category
               </h6>
               <div className='md:-ml-[2px] md:inline-block md:flex-grow'>
