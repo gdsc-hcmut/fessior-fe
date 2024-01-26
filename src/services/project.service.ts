@@ -33,7 +33,8 @@ export const projects: Project[] = [
   },
   {
     name: 'GDSC x OISP CAMP 2023',
-    description: 'ized by the Office for International Study Programs (OISP).',
+    description:
+      'Game application for OISP CAMP events organized by the Office for International Study Programs (OISP).',
     imgSrc: 'images/home/project_3.svg',
     imgAlt: 'GDSC x OISP CAMP 2023',
     url: '',
