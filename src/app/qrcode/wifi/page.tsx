@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import Button from '@/components/button';
@@ -9,11 +8,12 @@ import SelectInput from '@/components/select-input';
 import ShortenTools from '@/components/shorten-tools';
 import TextInput from '@/components/text-input';
 
-export default function CreateQRURLScreen() {
+export default function CreateQRWifiScreen() {
   const router = useRouter();
-  function navToWifi() {
-    router.push('/qrcode/wifi');
+  function navToWebsite() {
+    router.push('/qrcode/website');
   }
+
   return (
     <>
       <div className='relative flex flex-col items-center overflow-hidden leading-[1.2] text-primary'>
@@ -27,32 +27,32 @@ export default function CreateQRURLScreen() {
               <br className='md:hidden' /> QR Code Management Made Easy
             </p>
           </div>
-          <div className='font-baloo-chettan-2 m-6 mx-auto flex w-[100%] max-w-[360px] text-[16px] font-[500] md:max-w-[416px] md:text-[20px]'>
+          <div className='font-baloo-chettan-2 m-6 mx-auto flex w-[100%] max-w-[360px] justify-between text-[16px] font-[500] md:max-w-[416px] md:text-[20px]'>
             <Button
-              image='/icons/link-qr-choosen.svg'
+              image='/icons/link-qr.svg'
               imageOnHover='/icons/link-qr-choosen.svg'
               imageAlt='icons'
               imageSize={40}
-              onClick={() => {}}
+              onClick={() => {
+                navToWebsite();
+              }}
               className='flex items-center justify-center'
               width='full'
-              type='positive'
+              type='neutral'
             >
               Website URL
             </Button>
             <Button
-              image='/icons/wifi.svg'
+              image='/icons/wifi-white.svg'
               imageOnHover='/icons/wifi-white.svg'
               imageAlt='icons'
               imageSize={40}
               width='full'
-              type='neutral'
+              type='positive'
               className='ml-6 flex items-center justify-center'
-              onClick={() => {
-                navToWifi();
-              }}
+              onClick={() => {}}
             >
-              <Link href='/qrcode/wifi'>Wi-fi</Link>
+              Wi-fi
             </Button>
           </div>
 
@@ -76,13 +76,13 @@ export default function CreateQRURLScreen() {
             </div>
             <div className='container mb-[8px] md:inline-flex'>
               <h6 className='mb-[4px] flex-shrink-0 text-[20px] font-[500] md:mb-[8px] md:mt-[6px] md:pr-[20px]'>
-                Your URL
+                Wifi SSID
               </h6>
               <div className='mb-[12px] md:w-[90%]'>
                 <TextInput
-                  iconSrc='/icons/link-qr-20px.svg'
+                  iconSrc='/icons/label_outline.svg'
                   iconAlt='icon'
-                  placeholder='Enter your URL'
+                  placeholder='Enter your wifi SSID (name)'
                   value=''
                   iconPosition='left'
                   divider={true}
@@ -94,27 +94,29 @@ export default function CreateQRURLScreen() {
             <div>
               <div className='inline-block md:mb-[8px] md:flex md:flex-grow'>
                 <div className='mb-[8px] flex items-center justify-between md:me-[20px] md:inline-flex'>
-                  <p className='inline text-[16px] font-[500] text-black md:text-[16px]'>
-                    Organization
-                  </p>
+                  <p className='inline text-[20px] font-[500]'>Encryption</p>
                   <SelectInput
-                    value='GDSC'
-                    options={['GDSC', 'CTCT', 'OISP']}
+                    value='WPA/WPA2'
+                    options={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
                     onChange={() => {}}
-                    className='ms-[4px] w-[160px] md:ms-[8px]'
+                    className='ms-[4px] w-[160px]'
                   />
                 </div>
-                <div className='flex items-center justify-between md:mb-2 md:inline-flex'>
-                  <p className='inline text-[16px] font-[500] text-black md:text-[16px]'>
-                    Domain
-                  </p>
-                  <SelectInput
-                    value='gic.gdsc.app'
-                    options={['furl.one', 'bkoisp.info', 'gic.gdsc.app']}
-                    onChange={() => {}}
-                    className='ms-[4px] w-[160px] md:ms-[8px]'
-                  />
-                </div>
+              </div>
+            </div>
+            <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
+              <h6 className='mb-[4px] text-[20px] font-[500] md:mb-0 md:inline md:w-[100px]'>
+                Password
+              </h6>
+              <div className='md:-ml-[2px] md:inline-block md:flex-grow'>
+                <TextInput
+                  iconSrc='/icons/verified_user.svg'
+                  iconAlt='search'
+                  placeholder='Enter your password'
+                  value={''}
+                  divider={true}
+                  onInput={() => {}}
+                />
               </div>
             </div>
             <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>

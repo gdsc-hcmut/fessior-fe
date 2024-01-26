@@ -1,9 +1,10 @@
 import { clsx } from 'clsx';
 import Image from 'next/image';
-import { useState } from 'react';
+import Link from 'next/link';
+import { ReactNode, useState } from 'react';
 
 type ButtonProps = {
-  children: string;
+  children: string | ReactNode;
   disabled?: boolean;
   image?: string;
   imageOnHover?: string;
@@ -11,6 +12,7 @@ type ButtonProps = {
   imageSize?: number;
   onClick: () => void;
   className?: string;
+  link?: string;
   width?: 'fit' | 'full';
   type?: 'positive' | 'neutral';
 };
@@ -26,6 +28,7 @@ export default function Button(props: ButtonProps) {
     imageAlt,
     imageSize,
     className,
+    link,
     width = 'fit',
     type = 'positive',
   } = props;
