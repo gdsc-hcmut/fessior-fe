@@ -100,8 +100,8 @@ export default function HomePage() {
           </div>
         </div>
         {/* ----------PART 4------------- */}
-        <div className='flex flex-col px-[20px] xl:px-[calc(160px-(1920px-100vw)/3)]'>
-          <h3 className='mb-[40px] mt-[80px] text-[40px] font-[700] text-primary xl:mx-[20px]'>
+        <div className='flex flex-col lg:px-[20px] xl:px-[calc(160px-(1920px-100vw)/3)]'>
+          <h3 className='mb-[40px] mt-[80px] px-[20px] text-[40px] font-[700] text-primary lg:px-0 xl:mx-[20px]'>
             Our Projects
           </h3>
           {loaded && (

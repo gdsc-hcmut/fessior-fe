@@ -25,7 +25,7 @@ export function HomeProjectItem(props: HomeProjectItemProps) {
     <div
       className={clsx(
         className,
-        'flex h-[500px] flex-col rounded-[20px] shadow-[0px_18.83px_24px_0px_rgba(47,50,125,0.10)] md:h-[450px]',
+        'flex h-[500px] flex-col rounded-[20px] shadow-[0px_18.83px_47.08px_0px_rgba(47,50,125,0.10)] md:h-[450px]',
       )}
     >
       <Image
@@ -96,7 +96,7 @@ export default function HomeProjectCarousel(props: HomeProjectCarouselProps) {
       <Swiper {...swiperProps}>
         {projects.map((project) => (
           <SwiperSlide className='pb-[40px]' key={project.name}>
-            <HomeProjectItem {...project} className='md:mx-[10px]' />
+            <HomeProjectItem {...project} className='mx-[20px] lg:mx-[10px]' />
           </SwiperSlide>
         ))}
       </Swiper>

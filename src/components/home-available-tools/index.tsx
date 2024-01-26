@@ -98,7 +98,7 @@ export function HomeAvailableToolItem(props: HomeAvailableToolItemProps) {
 
 export function ShortenerInfo() {
   return (
-    <div className='flex min-h-[100%] flex-grow flex-col overflow-hidden rounded-[8px] border-t-[0.5px] shadow-[0px_4px_47.08px_0px_rgba(11,40,120,0.10)] md:flex-row xl:mx-[40px]'>
+    <div className='flex min-h-[100%] flex-grow flex-col overflow-hidden rounded-[8px] border-[0.5px] md:flex-row xl:mx-[40px]'>
       <div className='px-[24px] py-[28px] xl:p-[40px]'>
         <h4 className='mb-[12px] text-[32px] leading-[1.2] text-primary md:mb-[8px] xl:mb-0 xl:text-[40px]'>
           Introducing <br />
@@ -163,7 +163,7 @@ export function ShortenerInfo() {
 
 export function ComingSoonInfo() {
   return (
-    <div className='flex min-h-[100%] flex-grow flex-col overflow-hidden rounded-[8px] border-t-[0.5px] shadow-[0px_4px_47.08px_0px_rgba(11,40,120,0.10)] md:flex-row xl:mx-[40px]'>
+    <div className='flex min-h-[100%] flex-grow flex-col overflow-hidden rounded-[8px] border-[0.5px] md:flex-row xl:mx-[40px]'>
       <div className='flex flex-grow items-center justify-center p-[40px] xl:min-h-[480px]'>
         <div className='flex flex-col items-center'>
           <Image
@@ -201,11 +201,7 @@ export default function HomeAvailableTools() {
   const getToolInfos = () => {
     return tools.map((tool, index) =>
       tool.active ? (
-        <SwiperSlide
-          // style={{ height: 'auto' }}
-          className='h-auto pb-[40px]'
-          key={tool.name}
-        >
+        <SwiperSlide className='h-auto pb-[40px]' key={tool.name}>
           {toolInfos[index]}
         </SwiperSlide>
       ) : (
