@@ -98,7 +98,7 @@ export function HomeAvailableToolItem(props: HomeAvailableToolItemProps) {
 
 export function ShortenerInfo() {
   return (
-    <div className='flex min-h-[100%] flex-grow flex-col overflow-hidden rounded-[8px] border-[0.5px] md:flex-row xl:mx-[40px]'>
+    <div className='mx-[20px] flex min-h-[100%] flex-grow flex-col overflow-hidden rounded-[8px] border-[0.5px] md:flex-row xl:mx-[40px]'>
       <div className='px-[24px] py-[28px] xl:p-[40px]'>
         <h4 className='mb-[12px] text-[32px] leading-[1.2] text-primary md:mb-[8px] xl:mb-0 xl:text-[40px]'>
           Introducing <br />
@@ -163,7 +163,7 @@ export function ShortenerInfo() {
 
 export function ComingSoonInfo() {
   return (
-    <div className='flex min-h-[100%] flex-grow flex-col overflow-hidden rounded-[8px] border-[0.5px] md:flex-row xl:mx-[40px]'>
+    <div className='mx-[20px] flex min-h-[100%] flex-grow flex-col overflow-hidden rounded-[8px] border-[0.5px] md:flex-row xl:mx-[40px]'>
       <div className='flex flex-grow items-center justify-center p-[40px] xl:min-h-[480px]'>
         <div className='flex flex-col items-center'>
           <Image
@@ -242,9 +242,9 @@ export default function HomeAvailableTools() {
   };
 
   return (
-    <div className='mb-[80px] flex w-[100%] flex-col self-center overflow-hidden px-[20px] xl:mb-[200px] xl:flex-row xl:items-stretch xl:px-[calc(160px-(1920px-100vw)/3)]'>
+    <div className='mb-[80px] flex w-[100%] flex-col self-center overflow-hidden xl:mb-[200px] xl:flex-row xl:items-stretch xl:px-[calc(160px-(1920px-100vw)/3)]'>
       {/* ----------LEFT----------- */}
-      <div className='xl:mx-[20px] xl:me-[60px] xl:flex xl:min-w-[287px] xl:flex-col xl:items-stretch'>
+      <div className='px-[20px] xl:mx-[20px] xl:me-[60px] xl:flex xl:min-w-[287px] xl:flex-col xl:items-stretch xl:px-0'>
         <h5
           onClick={() => toolSwiper?.slideNext()}
           className='text-[32px] font-[700] leading-[65px] text-primary xl:ms-[16px] xl:text-[28px]'
