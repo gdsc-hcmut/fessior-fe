@@ -25,93 +25,128 @@ export default function Shorten() {
   return (
     <>
       <div className='relative flex flex-col items-center overflow-hidden pt-[88px] leading-[1.2] text-primary '>
-        <div className='w-[88%] lg:flex lg:flex-col lg:items-center '>
-          <div className='w-[100%] flex-col items-center gap-2'>
-            <button
-              className='mr-auto inline-flex'
-              onClick={() => {
-                alert('Clicked Back');
-              }}
-            >
-              <div className='font-baloo-chettan-2 mr-auto inline-flex text-center '>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth={1.5}
-                  stroke='currentColor'
-                  className='mr-1 hidden h-6 gap-2 md:flex'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18'
+        {/* ///////////// MAIN ////////////// */}
+        <div>
+          {/* ////// HEADER + PROCESS BAR ////////// */}
+          {/* This will be replaced by Bun's nav bar when it bigger */}
+          <div className='w-[296px] flex-col md:hidden'>
+            <p className='text-center text-base font-bold'>Customize QR</p>
+            <div className='relative'>
+              <div className='absolute h-1 w-[100%] rounded-lg bg-[#D9D9D9]' />
+              <div className='absolute h-1 w-[20%] rounded-lg bg-[#0B2878]' />
+            </div>
+          </div>
+          {/* //////// CUSTOM PARTS //////////// */}
+          <div className='mt-[35px] w-[320px] flex-col rounded-lg border-2 border-[#0B2878] px-[16px] pb-[16px] pt-[8px] shadow md:w-[648px]'>
+            {/* //////// INFORMATION /////////*/}
+            <div className='flex-col'>
+              <div>
+                <p className='text-center text-base font-bold md:text-left'>
+                  Information
+                </p>
+              </div>
+              <div className='md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
+                <p className='text-base font-medium md:w-[104px]'>QR name</p>
+                <div className='md:ml-[34px] md:w-[464px]'>
+                  <TextInput
+                    iconSrc='/icons/label_outline.svg'
+                    iconAlt='icon'
+                    placeholder='Enter your QR name'
+                    value=''
+                    iconPosition='left'
+                    divider={true}
+                    onInput={() => {}}
+                    onEnter={() => {}}
                   />
-                </svg>
-                <div className='m-auto hidden text-[16px] md:flex'>Back</div>
-              </div>
-            </button>
-            <div className='ml-auto mr-auto w-[100%] rounded-lg border-black border-opacity-30 bg-transparent px-6 pb-[15px] pt-[8px] md:border md:bg-white md:shadow-[0_20px_20px_0px_rgba(11,40,120,0.2)] '>
-              <div className='text-center text-[16px] font-[900] md:text-[20px]'>
-                Customize QR
-              </div>
-              <div className='mb-3 mt-[4px] flex justify-center'>
-                <div className='h-1 w-[600px] rounded-lg bg-[#D9D9D9]  md:h-2'>
-                  <div className='relative left-0 h-1 w-[25%] rounded-lg bg-[#0B2878] md:h-2'></div>
                 </div>
               </div>
-              <div className='ml-auto mr-auto hidden flex-row justify-center gap-2 md:flex'>
-                <Title content='Information' isActive='true' />
-                <Title content='Frame' isActive='false' />
-                <Title content='Pattern' isActive='false' />
-                <Title content='Logo' isActive='false' />
+
+              <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
+                <p className='text-base font-medium md:w-[104px]'>Wifi SSID</p>
+                <div className='md:ml-[34px] md:w-[464px]'>
+                  <TextInput
+                    iconSrc='/icons/label_outline.svg'
+                    iconAlt='icon'
+                    placeholder='Enter your Wifi SSID (name)'
+                    value=''
+                    iconPosition='left'
+                    divider={true}
+                    onInput={() => {}}
+                    onEnter={() => {}}
+                  />
+                </div>
               </div>
-            </div>
-            This is the information box
-            <div className='w-[100%] flex-col rounded-lg border-2 border-[#0B2878] bg-white p-[16px] pt-[8px] shadow'>
-              <h1 className='text-center font-semibold'>Information</h1>
-              <InputWithLabel
-                label='QR name'
-                icon={
-                  <div className=''>
-                    <LabelLogo />
+              <div className='md:hidden'>
+                <div className='mt-[16px] inline-flex items-center md:ml-[2px] md:h-[48px]'>
+                  <p className='mr-[14px] text-base font-medium md:w-[104px]'>
+                    Encryption
+                  </p>
+
+                  <SelectInput
+                    value='WPA/WPA2'
+                    options={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
+                    onChange={() => {}}
+                    className='ms-[4px] w-[136px] md:ms-[8px]'
+                  />
+                </div>
+                <div className='mt-[16px]'>
+                  <p className='mr-[14px] text-base font-medium'>Password</p>
+                  <div className='md:-ml-[2px] md:inline-block md:flex-grow'>
+                    <TextInput
+                      iconSrc='/icons/verified_user.svg'
+                      iconAlt='search'
+                      placeholder='Enter your password'
+                      value={''}
+                      divider={true}
+                      onInput={() => {}}
+                    />
                   </div>
-                }
-                placeHolder='Enter your QR name'
-              />
-              <div className='pt-[12px]'>
-                <InputWithLabel
-                  label='Your URL'
-                  icon={<LinkIcon />}
-                  placeHolder='Enter your URL'
-                />
+                </div>
+              </div>
+              <div className='hidden flex-col md:flex'>
+                <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
+                  <p className='text-base font-medium md:w-[104px]'>Password</p>
+                  <div className='md:ml-[34px] md:w-[464px]'>
+                    <TextInput
+                      iconSrc='/icons/verified_user.svg'
+                      iconAlt='search'
+                      placeholder='Enter your password'
+                      value={''}
+                      divider={true}
+                      onInput={() => {}}
+                    />
+                  </div>
+                </div>
+                <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
+                  <p className='text-base font-medium md:w-[104px]'>
+                    Encryption
+                  </p>
+                  <div className='md:ml-[28px] md:w-[464px]'>
+                    <SelectInput
+                      value='WPA/WPA2'
+                      options={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
+                      onChange={() => {}}
+                      className='ms-[4px] w-[136px] md:ms-[8px]'
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
+                <p className='text-base font-medium md:w-[104px]'>Category</p>
+                <div className='md:ml-[34px] md:w-[464px]'>
+                  <TextInput
+                    iconSrc='/icons/search-20px.svg'
+                    iconAlt='search'
+                    placeholder='Add or create categories'
+                    value={''}
+                    divider={true}
+                    onInput={() => {}}
+                  />
+                </div>
               </div>
 
-              <DomainOrg label='Organization' placeholder='GDSC' />
-              <DomainOrg label='Domain' placeholder='furl.one' />
-              <div className='pb-[10px]' />
-              <InputWithLabel
-                label='Category'
-                icon={
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    strokeWidth={1.5}
-                    stroke='currentColor'
-                    className='h-4 w-4'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z'
-                    />
-                  </svg>
-                }
-                placeHolder='Add or create categories'
-              />
-              <div className='mb-[8px] mt-[7px]'>
-                <p className='me-[6px] inline text-[12px] font-[500] text-black md:text-[16px]'>
+              <div className='mt-[8px]'>
+                <p className='me-[6px] inline text-[16px] font-[500] text-black md:text-[16px]'>
                   Chosen categories
                 </p>
                 <div className='inline'>
@@ -120,8 +155,12 @@ export default function Shorten() {
                 </div>
               </div>
             </div>
+            {/* /////////// FRAME ////////// */}
+            <div></div>
           </div>
+        </div>
 
+        <div>
           <div className='mx-[20px] text-center md:flex md:flex-col md:items-center'>
             <h2 className='text-[36px] font-[700] leading-[65px]'>
               Fessior Tools
