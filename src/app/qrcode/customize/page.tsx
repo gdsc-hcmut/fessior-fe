@@ -1,15 +1,8 @@
 'use client';
 
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import LinkIcon from '@/app/qrcode/linkIcon';
-import { Title } from '@/app/qrcode/sub-nav';
 import CategoryItem from '@/components/category-item';
-import { InputWithLabel } from '@/components/customize-qr/label-input';
-import LabelLogo from '@/components/customize-qr/labelLogo';
-import Modal from '@/components/modal-shorten';
-import QrHomeButton from '@/components/qr-home-button';
 import SelectInput from '@/components/select-input';
 import TextInput from '@/components/text-input';
 // import ToolItem from '@/components/tool-item';
@@ -19,9 +12,8 @@ import urlService from '@/services/url.service';
 import Organization from '@/types/organization-type';
 import Url from '@/types/url-type';
 
-import DomainOrg from './domain-org';
-
 export default function Shorten() {
+  const [typeOfQR, setTypeOfQR] = useState('url');
   return (
     <>
       <div className='relative flex flex-col items-center overflow-hidden pt-[88px] leading-[1.2] text-primary '>
@@ -37,9 +29,9 @@ export default function Shorten() {
             </div>
           </div>
           {/* //////// CUSTOM PARTS //////////// */}
-          <div className='mt-[35px] w-[320px] flex-col rounded-lg border-2 border-[#0B2878] px-[16px] pb-[16px] pt-[8px] shadow md:w-[648px]'>
+          <div className=''>
             {/* //////// INFORMATION /////////*/}
-            <div className='flex-col'>
+            <div className='mt-[35px] w-[320px] flex-col rounded-lg border-2 border-[#0B2878] px-[16px] pb-[16px] pt-[8px] shadow md:w-[648px]'>
               <div>
                 <p className='text-center text-base font-bold md:text-left'>
                   Information
@@ -60,68 +52,30 @@ export default function Shorten() {
                   />
                 </div>
               </div>
-
-              <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
-                <p className='text-base font-medium md:w-[104px]'>Wifi SSID</p>
-                <div className='md:ml-[34px] md:w-[464px]'>
-                  <TextInput
-                    iconSrc='/icons/label_outline.svg'
-                    iconAlt='icon'
-                    placeholder='Enter your Wifi SSID (name)'
-                    value=''
-                    iconPosition='left'
-                    divider={true}
-                    onInput={() => {}}
-                    onEnter={() => {}}
-                  />
-                </div>
-              </div>
-              <div className='md:hidden'>
-                <div className='mt-[16px] inline-flex items-center md:ml-[2px] md:h-[48px]'>
-                  <p className='mr-[14px] text-base font-medium md:w-[104px]'>
-                    Encryption
-                  </p>
-
-                  <SelectInput
-                    value='WPA/WPA2'
-                    options={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
-                    onChange={() => {}}
-                    className='ms-[4px] w-[136px] md:ms-[8px]'
-                  />
-                </div>
-                <div className='mt-[16px]'>
-                  <p className='mr-[14px] text-base font-medium'>Password</p>
-                  <div className='md:-ml-[2px] md:inline-block md:flex-grow'>
-                    <TextInput
-                      iconSrc='/icons/verified_user.svg'
-                      iconAlt='search'
-                      placeholder='Enter your password'
-                      value={''}
-                      divider={true}
-                      onInput={() => {}}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className='hidden flex-col md:flex'>
-                <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
-                  <p className='text-base font-medium md:w-[104px]'>Password</p>
-                  <div className='md:ml-[34px] md:w-[464px]'>
-                    <TextInput
-                      iconSrc='/icons/verified_user.svg'
-                      iconAlt='search'
-                      placeholder='Enter your password'
-                      value={''}
-                      divider={true}
-                      onInput={() => {}}
-                    />
-                  </div>
-                </div>
+              <div className={typeOfQR === 'url' ? 'hidden' : 'flex-col'}>
                 <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
                   <p className='text-base font-medium md:w-[104px]'>
-                    Encryption
+                    Wifi SSID
                   </p>
-                  <div className='md:ml-[28px] md:w-[464px]'>
+                  <div className='md:ml-[34px] md:w-[464px]'>
+                    <TextInput
+                      iconSrc='/icons/label_outline.svg'
+                      iconAlt='icon'
+                      placeholder='Enter your Wifi SSID (name)'
+                      value=''
+                      iconPosition='left'
+                      divider={true}
+                      onInput={() => {}}
+                      onEnter={() => {}}
+                    />
+                  </div>
+                </div>
+                <div className='md:hidden'>
+                  <div className='mt-[16px] inline-flex items-center md:ml-[2px] md:h-[48px]'>
+                    <p className='mr-[14px] text-base font-medium md:w-[104px]'>
+                      Encryption
+                    </p>
+
                     <SelectInput
                       value='WPA/WPA2'
                       options={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
@@ -129,8 +83,98 @@ export default function Shorten() {
                       className='ms-[4px] w-[136px] md:ms-[8px]'
                     />
                   </div>
+                  <div className='mt-[16px]'>
+                    <p className='mr-[14px] text-base font-medium'>Password</p>
+                    <div className='md:-ml-[2px] md:inline-block md:flex-grow'>
+                      <TextInput
+                        iconSrc='/icons/verified_user.svg'
+                        iconAlt='search'
+                        placeholder='Enter your password'
+                        value={''}
+                        divider={true}
+                        onInput={() => {}}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className='hidden flex-col md:flex'>
+                  <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
+                    <p className='text-base font-medium md:w-[104px]'>
+                      Password
+                    </p>
+                    <div className='md:ml-[34px] md:w-[464px]'>
+                      <TextInput
+                        iconSrc='/icons/verified_user.svg'
+                        iconAlt='search'
+                        placeholder='Enter your password'
+                        value={''}
+                        divider={true}
+                        onInput={() => {}}
+                      />
+                    </div>
+                  </div>
+                  <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
+                    <p className='text-base font-medium md:w-[104px]'>
+                      Encryption
+                    </p>
+                    <div className='md:ml-[28px] md:w-[464px]'>
+                      <SelectInput
+                        value='WPA/WPA2'
+                        options={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
+                        onChange={() => {}}
+                        className='ms-[4px] w-[136px] md:ms-[8px]'
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              <div className={typeOfQR === 'wifi' ? 'hidden' : 'flex-col'}>
+                <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
+                  <p className='text-base font-medium md:w-[104px]'>Your URL</p>
+                  <div className='md:ml-[34px] md:w-[464px]'>
+                    <TextInput
+                      iconSrc='/icons/link-qr-20px.svg'
+                      iconAlt='icon'
+                      placeholder='Enter your URL'
+                      value=''
+                      iconPosition='left'
+                      divider={true}
+                      onInput={() => {}}
+                      onEnter={() => {}}
+                    />
+                  </div>
+                </div>
+                <div className='md:inline-flex md:items-center '>
+                  <div className='mt-[10px] inline-flex items-center md:ml-[2px] md:h-[48px]'>
+                    <p className='mr-[8px] w-[68px] text-xs font-medium md:w-[104px] md:text-base'>
+                      Organization
+                    </p>
+                    <div className='w-[160px] md:ml-[18px] md:w-[137px]'>
+                      <SelectInput
+                        value='GDSC'
+                        options={['GDSC', 'CTCT', 'OISP']}
+                        onChange={() => {}}
+                        className='ms-[4px] md:ms-[8px]'
+                      />
+                    </div>
+                  </div>
+                  <div className='mt-[10px] inline-flex items-center md:ml-[67px] md:h-[48px]'>
+                    <p className='mr-[8px] w-[68px] text-xs font-medium md:w-[104px] md:text-base'>
+                      Domain
+                    </p>
+                    <div className='w-[160px] md:ml-[18px] md:w-[137px]'>
+                      <SelectInput
+                        value='furl.one'
+                        options={['furl.one', 'bksp.info', 'gic.gdsc.app']}
+                        onChange={() => {}}
+                        className='ms-[4px] md:ms-[8px]'
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
                 <p className='text-base font-medium md:w-[104px]'>Category</p>
                 <div className='md:ml-[34px] md:w-[464px]'>
@@ -144,7 +188,6 @@ export default function Shorten() {
                   />
                 </div>
               </div>
-
               <div className='mt-[8px]'>
                 <p className='me-[6px] inline text-[16px] font-[500] text-black md:text-[16px]'>
                   Chosen categories
@@ -156,7 +199,59 @@ export default function Shorten() {
               </div>
             </div>
             {/* /////////// FRAME ////////// */}
-            <div></div>
+            <div className='mt-[20px] w-[320px] flex-col rounded-lg border-2 border-[#0B2878] px-[16px] pb-[16px] pt-[8px] shadow md:w-[648px]'>
+              <div>
+                <p className='text-center text-base font-bold md:text-left'>
+                  Frame
+                </p>
+              </div>
+              <div className='md:ml-[2px]  md:items-center'>
+                <p className='text-base font-medium md:w-[155px]'>
+                  Frame background
+                </p>
+                <div className='mt-[4px] inline-flex h-[40px] w-[112px] items-center rounded-lg border pl-[10px] pr-[6px] md:h-[60px] md:w-[202px]'>
+                  <div>
+                    <p className='text-sm font-medium md:text-base'>#FFFFFF</p>
+                  </div>
+                  <div className='ml-auto h-[28px] w-[28px] rounded-lg border md:h-[48px] md:w-[48px]'></div>
+                </div>
+                <div className='mt-[8px] inline-flex items-center'>
+                  <p className='text-sx font-normal'>Transparent background</p>
+                  <div className='relative ml-[28px] h-[14px] w-[22px] flex-col items-start justify-start'>
+                    <div className='absolute h-[14px] w-[22px] rounded-2xl border' />
+                    <div className='absolute left-[3px] top-[3px] h-[8px] w-[8px] rounded-2xl bg-[#0B2878]' />
+                  </div>
+                </div>
+              </div>
+              <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
+                <p className='text-base font-medium md:w-[104px]'>
+                  Additional text
+                </p>
+                <input
+                  type='text'
+                  placeholder='Enter additional text'
+                  className='mt-[4px] w-[100%] rounded-lg border py-[10px] pl-[12px]'
+                />
+              </div>
+            </div>
+            {/* PATTERN */}
+            <div className='mt-[20px] w-[320px] flex-col rounded-lg border-2 border-[#0B2878] px-[16px] pb-[16px] pt-[8px] shadow md:w-[648px]'>
+              PATTERN GOES HERE
+            </div>
+            {/* LOGO */}
+            <div className='mt-[20px] w-[320px] flex-col rounded-lg border-2 border-[#0B2878] px-[16px] pb-[16px] pt-[8px] shadow md:w-[648px]'>
+              LOGO GOES HERE
+            </div>
+            {/* SAVE */}
+            <div className='mt-[20px] w-[320px] flex-col rounded-lg border-2 border-[#0B2878] px-[16px] pb-[16px] pt-[8px] shadow md:w-[648px]'>
+              SAVE GOES HERE
+            </div>
+            <button
+              className=' mt-2 rounded-lg border-2 border-black bg-white p-2 hover:bg-blue-900 hover:text-white'
+              onClick={() => setTypeOfQR(typeOfQR === 'wifi' ? 'url' : 'wifi')}
+            >
+              CHANGE TO {typeOfQR === 'wifi' ? 'url' : 'wifi'}
+            </button>
           </div>
         </div>
 
