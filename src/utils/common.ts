@@ -2,6 +2,11 @@ import Icon from '@/types/icon-enum';
 
 export const detectOS = (): string => {
   let osDetected;
+  if (typeof window === 'undefined') {
+    console.log('Hello');
+    return 'others';
+  }
+  console.log(typeof window === 'undefined', typeof window);
   if (navigator.userAgent.match(/Android/i)) {
     osDetected = 'android';
   } else if (navigator.userAgent.match(/BlackBerry/i)) {
