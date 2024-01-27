@@ -11,7 +11,7 @@ import TextInput from '@/components/text-input';
 export default function CreateQRWifiScreen() {
   const router = useRouter();
   function navToWebsite() {
-    router.push('/qrcode/website');
+    router.push('/qrcode/qr-url');
   }
 
   return (

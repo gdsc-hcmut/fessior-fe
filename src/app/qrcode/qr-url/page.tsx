@@ -12,7 +12,7 @@ import TextInput from '@/components/text-input';
 export default function CreateQRURLScreen() {
   const router = useRouter();
   function navToWifi() {
-    router.push('/qrcode/wifi');
+    router.push('/qrcode/qr-wifi');
   }
   return (
     <>
