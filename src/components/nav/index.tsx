@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, useRef, useContext } from 'react';
 
+import CloseButton from '@/components/close-button';
 import AuthContext from '@/contexts/authContext';
 import useAuthRouter from '@/hooks/useAuthRouter';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
@@ -56,7 +57,6 @@ export function AuthButton(props: AuthButtonProps) {
   return (
     <button
       onClick={() => {
-        console.log('clicked');
         authRouter(isLogin ? AuthType.LOGIN : AuthType.SIGN_UP);
       }}
       className={buttonClass}
@@ -67,23 +67,14 @@ export function AuthButton(props: AuthButtonProps) {
 }
 
 export default function Nav(props: NavProps) {
-  const { meProfile } = useContext(AuthContext);
+  const { meProfile, isAuthStatusReady } = useContext(AuthContext);
 
   const { isHome, isCollapsed, setIsCollapsed } = props;
   const { screenSize, loaded } = useScreenSize();
 
-  const closeButtonClass = clsx(
-    isHome ? 'border-white' : 'border-primary',
-    'aspect-square w-[32px] self-end rounded-[8px] border-[1px] p-[8px]',
-  );
-
   const collapseIcon = isHome
     ? '/icons/header/collapse_nav_white.svg'
     : '/icons/header/collapse_nav_royal.svg';
-
-  const closeIcon = isHome
-    ? '/icons/header/close_white.svg'
-    : '/icons/header/close_royal.svg';
 
   const collapseButton = isCollapsed ? (
     <button
@@ -101,21 +92,16 @@ export default function Nav(props: NavProps) {
       />
     </button>
   ) : (
-    <button
+    <CloseButton
       onClick={() => {
         setIsCollapsed(true);
       }}
-      className={closeButtonClass}
-    >
-      <Image
-        src={closeIcon}
-        alt=''
-        width={0}
-        height={0}
-        className='h-[100%] w-auto'
-      />
-    </button>
+      shape='square'
+      className='w-[32px] self-end'
+    />
   );
+
+  if (!isAuthStatusReady) return;
 
   if (!meProfile) {
     if (screenSize === ScreenSize.SM)
@@ -158,20 +144,13 @@ export default function Nav(props: NavProps) {
             <div className='flex h-[100%] w-[100%] flex-col'>
               <div className='mb-[36px] mt-[24px] flex items-center justify-between'>
                 <User />
-                <button
+                <CloseButton
                   onClick={() => {
                     setIsCollapsed(true);
                   }}
-                  className='aspect-square w-[28px] rounded-[8px] border-[1px] border-primary p-[8px]'
-                >
-                  <Image
-                    src={closeIcon}
-                    alt=''
-                    width={0}
-                    height={0}
-                    className='h-[100%] w-auto'
-                  />
-                </button>
+                  className='w-[28px]'
+                  shape='square'
+                />
               </div>
               <NavList items={navItems} />
             </div>
@@ -410,8 +389,8 @@ export function User(props: UserProps) {
     meProfile && meProfile.picture
       ? meProfile.picture
       : whiteTheme
-      ? '/images/user_white.svg'
-      : '/images/user_royal.svg';
+      ? '/images/header/user_white.svg'
+      : '/images/header/user_royal.svg';
 
   const collapseIcon = getIcon(
     '/icons/header/',
@@ -463,9 +442,7 @@ export function User(props: UserProps) {
 
           <ul className={optionClass}>
             <li
-              onClick={() => {
-                console.log('clicked');
-              }}
+              onClick={() => {}}
               className='flex h-[44px] cursor-pointer items-center px-[12px] transition-all hover:bg-royal-300/[.1] hover:text-primary focus:bg-primary'
             >
               <Image

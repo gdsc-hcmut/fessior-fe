@@ -546,7 +546,7 @@ export function CheckEmailIcon({ className }: { className?: string }) {
     >
       <Image
         src='/icons/auth/check_email.svg'
-        alt=''
+        alt='check-email'
         width={0}
         height={0}
         className='h-[100%] w-auto'

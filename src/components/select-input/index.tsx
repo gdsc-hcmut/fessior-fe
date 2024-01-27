@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import Image from 'next/image';
+import { useRef, useState } from 'react';
 
+import useOnClickOutside from '@/hooks/useOnClickOutside';
+import Icon from '@/types/icon-enum';
 import Organization from '@/types/organization-type';
+import { getIcon } from '@/utils/common';
 
 type SelectInputProps = {
   value: string | Organization;
@@ -12,6 +16,11 @@ type SelectInputProps = {
 export default function SelectInput(props: SelectInputProps) {
   const { value, options, onChange, className } = props;
   const [isSelecting, setIsSelecting] = useState(false);
+  const ref = useRef(null);
+
+  useOnClickOutside(ref, () => {
+    setIsSelecting(false);
+  });
 
   const isOrganization = (
     option: string | Organization,
@@ -29,26 +38,43 @@ export default function SelectInput(props: SelectInputProps) {
 
   return (
     <div
+      onClick={() => {
+        setIsSelecting(!isSelecting);
+      }}
       tabIndex={1}
-      onFocus={() => setIsSelecting(true)}
-      onBlur={() => setIsSelecting(false)}
+      ref={ref}
       className={`relative cursor-pointer text-[12px] text-black ${
         className ? className : ''
       }`}
     >
-      <div className='flex h-[40px] items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] px-[8px] focus:border-[1px] focus:border-primary'>
-        <p>{renderOption(value)}</p>
+      <div className='flex h-[40px] items-center justify-between rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] px-[8px] focus:border-[1px] focus:border-primary'>
+        <p className='truncate'>{renderOption(value)}</p>
+        <Image
+          src={getIcon(
+            '/icons/shorten',
+            'collapse_grey.svg',
+            isSelecting ? Icon.ACTIVE : Icon.INACTIVE,
+          )}
+          alt='collapse'
+          width={0}
+          height={0}
+          className='h-auto w-auto'
+        />
       </div>
       {isSelecting && (
         <div className='absolute top-[44px] z-[1] w-[100%] overflow-hidden rounded-[12px] bg-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'>
           {options.map((option) => (
             <div
               key={renderOption(option)}
-              onMouseDown={() => onChange(option)}
+              onClick={(e) => {
+                e.stopPropagation();
+                onChange(option);
+                setIsSelecting(false);
+              }}
               tabIndex={1}
               className='flex h-[40px] cursor-pointer items-center px-[8px] hover:bg-primary hover:text-white focus:bg-primary'
             >
-              <p>{renderOption(option)}</p>
+              <p className='truncate'>{renderOption(option)}</p>
             </div>
           ))}
         </div>

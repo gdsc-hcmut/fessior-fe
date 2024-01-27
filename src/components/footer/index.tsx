@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { getCurrentYear } from '@/utils/common';
 
@@ -10,9 +9,9 @@ import SocialMediaButton from '../socialMediaButton';
 export default function Footer() {
   return (
     <div className='leading-[28.8px] tracking-[0.32px] text-[#333333]'>
-      <div className='relative flex flex-col overflow-hidden px-[24px] py-[40px] md:px-[40px] lg:flex-row lg:items-stretch lg:justify-between lg:px-[120px] lg:py-[60px]'>
+      <div className='relative flex flex-col overflow-hidden px-[24px] py-[40px] md:px-[40px] lg:flex-row lg:items-stretch lg:justify-between lg:px-[calc(160px-(1920px-100vw)/4)] lg:py-[60px]'>
         {/* LEFT */}
-        <div className='mb-[40px] lg:w-[600px]'>
+        <div className='mb-[40px] lg:mx-[24px] lg:w-[600px]'>
           <div className='mb-[16px] flex items-center'>
             <div className='relative h-[48px] w-[48px] md:h-[56px] md:w-[56px] lg:h-[56px] lg:w-[56px]'>
               <Image
@@ -35,30 +34,24 @@ export default function Footer() {
           <div className='flex'>
             <SocialMediaButton
               link='https://facebook.com/dscxhcmut'
-              iconSrc='/icons/facebook.svg'
-              iconAlt=''
-              iconWidth={12}
-              iconHeight={16.8}
+              iconSrc='/icons/footer/facebook.svg'
+              iconAlt='facebook'
             />
             <SocialMediaButton
               link='https://furl.one/discord'
-              iconSrc='/icons/discord.svg'
-              iconAlt=''
-              iconWidth={22.2}
-              iconHeight={17.1}
+              iconSrc='/icons/footer/discord.svg'
+              iconAlt='discord'
             />
             <SocialMediaButton
               link='https://www.linkedin.com/company/gdschcmut/mycompany/'
-              iconSrc='/icons/linkedin.svg'
-              iconAlt=''
-              iconWidth={20}
-              iconHeight={20}
+              iconSrc='/icons/footer/linkedin.svg'
+              iconAlt='linkedin'
             />
           </div>
         </div>
         {/* RIGHT */}
         <div className='w-500 me-[100px] flex max-w-[500px] flex-col justify-between md:flex-row lg:w-[30%] lg:min-w-[]'>
-          <div className='mb-[20px]'>
+          <div className='mx-[12px] mb-[20px]'>
             <h4 className='text-[24px] font-[700] leading-[43.2px] tracking-[0.48px] text-primary'>
               Resources
             </h4>
@@ -83,12 +76,12 @@ export default function Footer() {
             </h4>
             <hr className='h-[4px] w-[60px] rounded-[9999px] bg-primary' />
             <ul className='mt-[16px]'>
-              <li className='mb-[12px]'>
+              <li className='mb-[12px] min-w-[180px]'>
                 <FooterContactItem
                   text='admin@fessior.com'
                   link='mailto:admin@fessior.com'
-                  iconSrc='/icons/email.svg'
-                  iconAlt=''
+                  iconSrc='/icons/footer/email.svg'
+                  iconAlt='email'
                   iconWidth={20}
                   iconHeight={16}
                 />
@@ -97,8 +90,8 @@ export default function Footer() {
                 <FooterContactItem
                   text='0937501230'
                   link='tel:0937501230'
-                  iconSrc='/icons/phonelink_ring.svg'
-                  iconAlt=''
+                  iconSrc='/icons/footer/phonelink_ring.svg'
+                  iconAlt='phonelink-ring'
                   iconWidth={24}
                   iconHeight={24}
                 />
@@ -110,7 +103,7 @@ export default function Footer() {
           <Image
             className=''
             src='/images/logo_transparent_navy.svg'
-            alt='logo'
+            alt='fessior-logo'
             fill
           />
         </div>
