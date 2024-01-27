@@ -16,10 +16,10 @@ const QrHomeButton = ({ type, image, content }: QrHomeButtonProps) => {
       <div className='flex py-1 md:py-5'>
         <Image src={image} alt='qr-icon' height={60} width={60} />
         <div className='my-3 ml-3 flex flex-col text-left md:ml-5 md:pl-0'>
-          <h1 className='font-baloo-chettan-2 text-[20px] font-bold text-black md:text-[24px]'>
+          <h1 className='text-[20px] font-bold text-black md:text-[24px]'>
             {type}
           </h1>
-          <p className='font-baloo-chettan-2 text-[16px] font-normal text-black/[0.6] md:text-[20px]'>
+          <p className='text-[16px] font-normal text-black/[0.6] md:text-[20px]'>
             {content}
           </p>
         </div>

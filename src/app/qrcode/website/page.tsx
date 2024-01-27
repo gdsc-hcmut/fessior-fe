@@ -27,7 +27,7 @@ export default function CreateQRURLScreen() {
               <br className='md:hidden' /> QR Code Management Made Easy
             </p>
           </div>
-          <div className='font-baloo-chettan-2 m-6 mx-auto flex w-[100%] max-w-[360px] text-[16px] font-[500] md:max-w-[416px] md:text-[20px]'>
+          <div className='m-6 mx-auto flex w-[100%] max-w-[360px] text-[16px] font-[500] md:max-w-[416px] md:text-[20px]'>
             <Button
               image='/icons/link-qr-choosen.svg'
               imageOnHover='/icons/link-qr-choosen.svg'
