@@ -1,10 +1,10 @@
 'use client';
-
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import Button from '@/components/button';
 import CategoryItem from '@/components/category-item';
+import QRNavBar from '@/components/qr-navbar';
 import SelectInput from '@/components/select-input';
 import ShortenTools from '@/components/shorten-tools';
 import TextInput from '@/components/text-input';
@@ -19,6 +19,7 @@ export default function CreateQRURLScreen() {
       <div className='relative flex flex-col items-center overflow-hidden leading-[1.2] text-primary'>
         <div className='md:max-w-[1000px] lg:flex lg:flex-col lg:items-center'>
           <div className='text-center'>
+            <QRNavBar />
             <h1 className='mt-[80px] text-[36px] font-[700] leading-[65px] md:mt-[168px] md:text-[48px] lg:text-[60px]'>
               <span className=' md:inline'>Fessior</span> QR Generator
             </h1>
