@@ -7,15 +7,6 @@ const QRNavBar = () => {
   return (
     <>
       <div className='hidden xl:block'>
-        <button className='mt-10 border-black'>
-          <img
-            src='/icons/arrow_back.svg'
-            alt='back-icon'
-            width={20}
-            height={20}
-          />
-          Back
-        </button>
         <div className='mx-auto mt-[160px] h-[144px] w-[1280px] rounded-lg border border-zinc-500 border-opacity-40 bg-white shadow-2xl'>
           <div className="font-['Baloo Chettan 2'] mt-[20px] text-center text-[28px] font-bold text-blue-900">
             Customize QR
