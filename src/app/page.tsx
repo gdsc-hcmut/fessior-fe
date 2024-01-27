@@ -17,7 +17,7 @@ export default function HomePage() {
   return (
     <>
       <Header />
-      <div>
+      <div className='flex flex-col'>
         {/* ------------PART 1-------------- */}
         <div className="xl:min-h-none mb-[80px] h-screen min-h-[800px] bg-[url('/images/home/background_1.svg')] bg-cover xl:mb-0">
           <div className='relative h-[100%] bg-primary/[0.7] px-[20px] pt-[160px] xl:flex xl:flex-row xl:items-center xl:justify-between xl:px-[calc(160px-(1920px-100vw)/3)] xl:pt-0'>
@@ -100,8 +100,8 @@ export default function HomePage() {
           </div>
         </div>
         {/* ----------PART 4------------- */}
-        <div className='flex flex-col px-[20px] xl:px-[calc(160px-(1920px-100vw)/3)]'>
-          <h3 className='mb-[40px] mt-[80px] text-[40px] font-[700] text-primary xl:mx-[20px]'>
+        <div className='flex flex-col lg:px-[20px] xl:px-[calc(160px-(1920px-100vw)/3)]'>
+          <h3 className='mb-[40px] mt-[80px] px-[20px] text-[40px] font-[700] text-primary lg:px-0 xl:mx-[20px]'>
             Our Projects
           </h3>
           {loaded && (
