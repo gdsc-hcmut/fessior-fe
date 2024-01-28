@@ -4,7 +4,7 @@
     "es2024": true
   },
   "extends": ["next", "prettier"],
-  "plugins": ["react"],
+  "plugins": ["react", "decorators", "decorators-legacy"],
   "rules": {
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
