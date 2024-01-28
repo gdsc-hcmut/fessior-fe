@@ -5,9 +5,9 @@ import Link from 'next/link';
 
 import Footer from '@/components/footer';
 import Header from '@/components/header';
-import HomeAvailableTools from '@/components/home-available-tools';
-import HomeProjectCarousel from '@/components/home-project-carousel';
-import HomeTools from '@/components/home-tools';
+import HomeAvailableTools from '@/components/home/home-available-tools';
+import HomeProjectCarousel from '@/components/home/home-project-carousel';
+import HomeTools from '@/components/home/home-tools';
 import useScreenSize from '@/hooks/useScreenSize';
 import { projects } from '@/services/project.service';
 import '@/styles/wave.css';

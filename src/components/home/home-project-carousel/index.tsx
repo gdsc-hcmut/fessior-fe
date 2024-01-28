@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
-import { HomeAvailableToolIndicator } from '@/components/home-available-tools';
+import { HomeAvailableToolIndicator } from '@/components/home/home-available-tools';
 import { Project } from '@/services/project.service';
 import ScreenSize from '@/types/screen-size-enum';
 
