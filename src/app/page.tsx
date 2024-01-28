@@ -10,7 +10,7 @@ import HomeProjectCarousel from '@/components/home-project-carousel';
 import HomeTools from '@/components/home-tools';
 import useScreenSize from '@/hooks/useScreenSize';
 import { projects } from '@/services/project.service';
-import './css/index.css';
+import '@/styles/wave.css';
 
 export default function HomePage() {
   const { screenSize, loaded } = useScreenSize();

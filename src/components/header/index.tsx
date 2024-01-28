@@ -47,13 +47,16 @@ export default function Header() {
   if (!loaded) return;
 
   return (
-    <div className={headerClass}>
-      <Brand theme={isHome ? 'white' : 'primary'} />
-      <Nav
-        isHome={isHome}
-        isCollapsed={isCollapsed}
-        setIsCollapsed={setIsCollapsed}
-      />
-    </div>
+    <>
+      <div></div>
+      <div className={headerClass}>
+        <Brand theme={isHome ? 'white' : 'primary'} />
+        <Nav
+          isHome={isHome}
+          isCollapsed={isCollapsed}
+          setIsCollapsed={setIsCollapsed}
+        />
+      </div>
+    </>
   );
 }

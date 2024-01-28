@@ -464,7 +464,7 @@ export function ForgotPasswordCommon0({ nextStep }: { nextStep: () => void }) {
 
   useEffect(() => {
     setAuthErrorText(0, '');
-  }, [username]);
+  }, [username, setAuthErrorText]);
 
   return (
     <>

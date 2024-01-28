@@ -2,9 +2,9 @@ import Image from 'next/image';
 
 import { getCurrentYear } from '@/utils/common';
 
-import FooterContactItem from '../footerContactItem';
-import FooterResourceItem from '../footerResourceItem';
-import SocialMediaButton from '../socialMediaButton';
+import FooterContactItemList from './footer-contact-item-list';
+import FooterResourceItemList from './footer-resource-item-list';
+import SocialMediaButtonList from './social-media-button-list';
 
 export default function Footer() {
   return (
@@ -31,23 +31,7 @@ export default function Footer() {
             society and build a community of students who are passionate about
             technology.
           </p>
-          <div className='flex'>
-            <SocialMediaButton
-              link='https://facebook.com/dscxhcmut'
-              iconSrc='/icons/footer/facebook.svg'
-              iconAlt='facebook'
-            />
-            <SocialMediaButton
-              link='https://furl.one/discord'
-              iconSrc='/icons/footer/discord.svg'
-              iconAlt='discord'
-            />
-            <SocialMediaButton
-              link='https://www.linkedin.com/company/gdschcmut/mycompany/'
-              iconSrc='/icons/footer/linkedin.svg'
-              iconAlt='linkedin'
-            />
-          </div>
+          <SocialMediaButtonList />
         </div>
         {/* RIGHT */}
         <div className='w-500 me-[100px] flex max-w-[500px] flex-col justify-between md:flex-row lg:w-[30%] lg:min-w-[]'>
@@ -56,47 +40,14 @@ export default function Footer() {
               Resources
             </h4>
             <hr className='h-[4px] w-[60px] rounded-[9999px] bg-primary' />
-            <ul className='mt-[16px]'>
-              <FooterResourceItem
-                text='About Us'
-                link='#'
-                className='mb-[12px]'
-              />
-              <FooterResourceItem
-                text='Privacy Policy'
-                link='#'
-                className='mb-[12px]'
-              />
-              <FooterResourceItem text='FAQ' link='#' className='mb-[12px]' />
-            </ul>
+            <FooterResourceItemList />
           </div>
           <div className=''>
             <h4 className='text-[24px] font-[700] leading-[43.2px] tracking-[0.48px] text-primary'>
               Contact Us
             </h4>
             <hr className='h-[4px] w-[60px] rounded-[9999px] bg-primary' />
-            <ul className='mt-[16px]'>
-              <li className='mb-[12px] min-w-[180px]'>
-                <FooterContactItem
-                  text='admin@fessior.com'
-                  link='mailto:admin@fessior.com'
-                  iconSrc='/icons/footer/email.svg'
-                  iconAlt='email'
-                  iconWidth={20}
-                  iconHeight={16}
-                />
-              </li>
-              <li className='mb-[12px]'>
-                <FooterContactItem
-                  text='0937501230'
-                  link='tel:0937501230'
-                  iconSrc='/icons/footer/phonelink_ring.svg'
-                  iconAlt='phonelink-ring'
-                  iconWidth={24}
-                  iconHeight={24}
-                />
-              </li>
-            </ul>
+            <FooterContactItemList />
           </div>
         </div>
         <div className='absolute right-[-67px] top-[380px] h-[180px] w-[180px] md:right-[-80px] md:top-[0px] md:h-[160px] md:w-[160px] lg:right-[-126px] lg:top-[0px] lg:h-[240px] lg:w-[240px]'>
