@@ -53,6 +53,8 @@ type TextInputProps = {
   fontSize?: number;
   disabled?: boolean;
   className?: string;
+  font?: string;
+  height?: string;
 };
 
 export default function TextInput(props: TextInputProps) {
@@ -70,11 +72,15 @@ export default function TextInput(props: TextInputProps) {
     fontSize = 16,
     disabled,
     className,
+    font,
+    height,
   } = props;
   return (
     <div
       className={clsx(
-        'flex h-[40px] w-[100%] items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border-[1px] focus-within:border-primary',
+        `flex ${
+          height ? `h-[${height}]` : 'h-[40px]'
+        }  w-[100%] items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border-[1px] focus-within:border-primary`,
         disabled && 'bg-primary/[.2] text-primary',
         className,
       )}

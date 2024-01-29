@@ -7,10 +7,13 @@ type SelectInputProps = {
   options: string[] | Organization[];
   onChange: (value: string | Organization) => void;
   className?: string;
+  height?: string;
+  textSize?: string;
+  childrenSpacing?: string;
 };
 
 export default function SelectInput(props: SelectInputProps) {
-  const { value, options, onChange, className } = props;
+  const { value, options, onChange, className, height } = props;
   const [isSelecting, setIsSelecting] = useState(false);
 
   const isOrganization = (
@@ -36,7 +39,11 @@ export default function SelectInput(props: SelectInputProps) {
         className ? className : ''
       }`}
     >
-      <div className='flex h-[40px] items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] px-[8px] focus:border-[1px] focus:border-primary'>
+      <div
+        className={`flex ${
+          height ? `h-[${height}]` : 'h-[40px]'
+        } items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] px-[8px] focus:border-[1px] focus:border-primary`}
+      >
         <p>{renderOption(value)}</p>
       </div>
       {isSelecting && (

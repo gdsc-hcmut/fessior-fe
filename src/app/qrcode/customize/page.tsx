@@ -6,6 +6,7 @@ import CategoryItem from '@/components/category-item';
 import SelectInput from '@/components/select-input';
 import TextInput from '@/components/text-input';
 // import ToolItem from '@/components/tool-item';
+import ToggleButton from '@/components/toggle-button';
 import meService from '@/services/me.service';
 import { tools } from '@/services/tool.service';
 import urlService from '@/services/url.service';
@@ -152,6 +153,7 @@ export default function Shorten() {
                     </p>
                     <div className='w-[160px] md:ml-[18px] md:w-[137px]'>
                       <SelectInput
+                        height='28px'
                         value='GDSC'
                         options={['GDSC', 'CTCT', 'OISP']}
                         onChange={() => {}}
@@ -165,6 +167,7 @@ export default function Shorten() {
                     </p>
                     <div className='w-[160px] md:ml-[18px] md:w-[137px]'>
                       <SelectInput
+                        height='28px'
                         value='furl.one'
                         options={['furl.one', 'bksp.info', 'gic.gdsc.app']}
                         onChange={() => {}}
@@ -205,33 +208,157 @@ export default function Shorten() {
                   Frame
                 </p>
               </div>
-              <div className='md:ml-[2px]  md:items-center'>
+              <div className='md:ml-[2px]  md:items-center md:justify-center'>
                 <p className='text-base font-medium md:w-[155px]'>
                   Frame background
                 </p>
-                <div className='mt-[4px] inline-flex h-[40px] w-[112px] items-center rounded-lg border pl-[10px] pr-[6px] md:h-[60px] md:w-[202px]'>
-                  <div>
-                    <p className='text-sm font-medium md:text-base'>#FFFFFF</p>
+                <div className='md:inline-flex'>
+                  <div className='mt-[4px] inline-flex h-[40px] w-[112px] items-center rounded-lg border pl-[10px] pr-[6px] md:h-[48px] md:w-[202px] md:pr-[4px]'>
+                    <div>
+                      <p className='text-sm font-medium md:text-base'>
+                        #FFFFFF
+                      </p>
+                    </div>
+                    <div className='ml-auto h-[28px] w-[28px] rounded-lg border md:h-[40px] md:w-[40px]'></div>
                   </div>
-                  <div className='ml-auto h-[28px] w-[28px] rounded-lg border md:h-[48px] md:w-[48px]'></div>
-                </div>
-                <div className='mt-[8px] inline-flex items-center'>
-                  <p className='text-sx font-normal'>Transparent background</p>
-                  <div className='relative ml-[28px] h-[14px] w-[22px] flex-col items-start justify-start'>
-                    <div className='absolute h-[14px] w-[22px] rounded-2xl border' />
-                    <div className='absolute left-[3px] top-[3px] h-[8px] w-[8px] rounded-2xl bg-[#0B2878]' />
+                  <div className='md:hidden'>
+                    <div className='mt-[8px] inline-flex items-center gap-7'>
+                      <p className='text-sx flex items-center font-normal'>
+                        Transparent background
+                      </p>
+                      <div className='relative h-[11px] w-[22px]'>
+                        <ToggleButton
+                          className='absolute left-0 top-0 h-full w-full'
+                          childRadius={6}
+                          motherHeight={11}
+                          motherWidth={22}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className='hidden items-center justify-center pl-[52px] md:inline-flex'>
+                    <div className='relative h-[20px] w-[38px]'>
+                      <ToggleButton
+                        className='absolute left-0 top-0 h-full w-full'
+                        childRadius={12}
+                        motherHeight={20}
+                        motherWidth={38}
+                      />
+                    </div>
+                    <p className='text-sx ml-[16px] flex items-center font-normal'>
+                      Transparent background
+                    </p>
                   </div>
                 </div>
               </div>
-              <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
+              <div className='mt-[16px] md:ml-[2px] md:items-center'>
                 <p className='text-base font-medium md:w-[104px]'>
                   Additional text
                 </p>
-                <input
-                  type='text'
-                  placeholder='Enter additional text'
-                  className='mt-[4px] w-[100%] rounded-lg border py-[10px] pl-[12px]'
-                />
+                <div className='md:ml-[2px] md:w-[600px]'>
+                  <TextInput
+                    placeholder='Enter addtional text'
+                    value=''
+                    divider={false}
+                    onInput={() => {}}
+                    onEnter={() => {}}
+                  />
+                </div>
+              </div>
+
+              <div className='mt-[20px] inline-flex gap-[18px]'>
+                <div className='w-[100px] '>
+                  <p className='text-left text-xs font-medium'>Font</p>
+                  <div className='mt-[4px] md:ml-[2px]'>
+                    <SelectInput
+                      height='38px'
+                      value='Roboto'
+                      options={[
+                        'Times New Roman',
+                        'Baloo Chettan 2',
+                        'Glory',
+                        'Arial',
+                        'ABeeZee',
+                      ]}
+                      onChange={() => {}}
+                      className='ms-[0px] md:ms-[0px]'
+                    />
+                  </div>
+                </div>
+                <div className='w-[100px]'>
+                  <p className='text-left text-xs font-medium'>Text color</p>
+                  <div className='mt-[4px] inline-flex h-[28px] w-[100px] items-center rounded-lg border pl-[8px] pr-[4px] md:h-[60px] md:w-[202px]'>
+                    <div>
+                      <p className='text-xs font-normal md:text-base'>
+                        #FFFFFF
+                      </p>
+                    </div>
+                    <div className='ml-auto h-[20px] w-[20px] rounded-lg border md:h-[48px] md:w-[48px]'></div>
+                  </div>
+                </div>
+                <div className='w-[52px]'>
+                  <p className='text-left text-xs font-medium'>Text size</p>
+                  <div className='mt-[4px]'>
+                    <SelectInput
+                      height='28px'
+                      value='18'
+                      options={['16', '20', '24', '28', '32']}
+                      onChange={() => {}}
+                      className='ms-[0px] md:ms-[8px]'
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className='mt-[8px] grid grid-cols-2 gap-x-[16px] gap-y-[8px]'>
+                <div className='w-[136px]'>
+                  <p className='text-left text-xs font-medium'>Border width</p>
+                  <div className='mt-[4px]'>
+                    <SelectInput
+                      height='28px'
+                      value='18px'
+                      options={['16px', '20px', '24px', '28px', '32px']}
+                      onChange={() => {}}
+                      className='ms-[0px] md:ms-[8px]'
+                    />
+                  </div>
+                </div>
+                <div className='w-[136px]'>
+                  <p className='text-left text-xs font-medium'>Border radius</p>
+                  <div className='mt-[4px]'>
+                    <SelectInput
+                      height='28px'
+                      value='18px'
+                      options={['16px', '20px', '24px', '28px', '32px']}
+                      onChange={() => {}}
+                      className='ms-[0px] md:ms-[8px]'
+                    />
+                  </div>
+                </div>
+                <div className='w-[136px]'>
+                  <p className='text-left text-xs font-medium'>Padding</p>
+                  <div className='mt-[4px]'>
+                    <SelectInput
+                      height='28px'
+                      value='18px'
+                      options={['16px', '20px', '24px', '28px', '32px']}
+                      onChange={() => {}}
+                      className='ms-[0px] md:ms-[8px]'
+                    />
+                  </div>
+                </div>
+                <div className='w-[136px]'>
+                  <p className='text-left text-xs font-medium'>Margin</p>
+                  <div className='mt-[4px]'>
+                    <SelectInput
+                      height='28px'
+                      value='18px'
+                      options={['16px', '20px', '24px', '28px', '32px']}
+                      onChange={() => {}}
+                      className='ms-[0px] md:ms-[8px]'
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             {/* PATTERN */}
