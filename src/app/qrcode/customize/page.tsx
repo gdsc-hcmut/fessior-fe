@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import CategoryItem from '@/components/category-item';
+import QRNavBar from '@/components/qr-navbar';
 import SelectInput from '@/components/select-input';
 import TextInput from '@/components/text-input';
 // import ToolItem from '@/components/tool-item';
@@ -22,13 +23,19 @@ export default function Shorten() {
         <div>
           {/* ////// HEADER + PROCESS BAR ////////// */}
           {/* This will be replaced by Bun's nav bar when it bigger */}
-          <div className='w-[296px] flex-col md:hidden'>
-            <p className='text-center text-base font-bold'>Customize QR</p>
-            <div className='relative'>
-              <div className='absolute h-1 w-[100%] rounded-lg bg-[#D9D9D9]' />
-              <div className='absolute h-1 w-[20%] rounded-lg bg-[#0B2878]' />
+          <div>
+            <div className='w-[320px] flex-col md:mt-2 md:w-[648px] xl:hidden'>
+              <p className='text-center text-base font-bold md:text-[24px]'>
+                Customize QR
+              </p>
+              <div className='relative md:mt-2'>
+                <div className='absolute h-1 w-[100%] rounded-lg bg-[#D9D9D9] md:h-[6px]' />
+                <div className='absolute h-1 w-[20%] rounded-lg bg-[#0B2878] md:h-[6px]' />
+              </div>
             </div>
+            <QRNavBar />
           </div>
+
           {/* //////// CUSTOM PARTS //////////// */}
           <div className=''>
             {/* //////// INFORMATION /////////*/}
@@ -40,8 +47,9 @@ export default function Shorten() {
               </div>
               <div className='md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
                 <p className='text-base font-medium md:w-[104px]'>QR name</p>
-                <div className='md:ml-[34px] md:w-[464px]'>
+                <div className='mt-[4px] md:ml-[34px] md:w-[464px]'>
                   <TextInput
+                    height='h-[40px] md:h-[48px]'
                     iconSrc='/icons/label_outline.svg'
                     iconAlt='icon'
                     placeholder='Enter your QR name'
@@ -60,6 +68,7 @@ export default function Shorten() {
                   </p>
                   <div className='md:ml-[34px] md:w-[464px]'>
                     <TextInput
+                      height='h-[40px] md:h-[48px]'
                       iconSrc='/icons/label_outline.svg'
                       iconAlt='icon'
                       placeholder='Enter your Wifi SSID (name)'
@@ -88,6 +97,7 @@ export default function Shorten() {
                     <p className='mr-[14px] text-base font-medium'>Password</p>
                     <div className='md:-ml-[2px] md:inline-block md:flex-grow'>
                       <TextInput
+                        height='h-[40px] md:h-[48px]'
                         iconSrc='/icons/verified_user.svg'
                         iconAlt='search'
                         placeholder='Enter your password'
@@ -105,6 +115,7 @@ export default function Shorten() {
                     </p>
                     <div className='md:ml-[34px] md:w-[464px]'>
                       <TextInput
+                        height='h-[40px] md:h-[48px]'
                         iconSrc='/icons/verified_user.svg'
                         iconAlt='search'
                         placeholder='Enter your password'
@@ -131,10 +142,11 @@ export default function Shorten() {
               </div>
 
               <div className={typeOfQR === 'wifi' ? 'hidden' : 'flex-col'}>
-                <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
+                <div className='mt-[16px] md:ml-[2px] md:mt-[20px] md:inline-flex md:h-[48px] md:items-center'>
                   <p className='text-base font-medium md:w-[104px]'>Your URL</p>
-                  <div className='md:ml-[34px] md:w-[464px]'>
+                  <div className='mt-[4px] md:ml-[34px] md:w-[464px]'>
                     <TextInput
+                      height='h-[40px] md:h-[48px]'
                       iconSrc='/icons/link-qr-20px.svg'
                       iconAlt='icon'
                       placeholder='Enter your URL'
@@ -147,13 +159,13 @@ export default function Shorten() {
                   </div>
                 </div>
                 <div className='md:inline-flex md:items-center '>
-                  <div className='mt-[10px] inline-flex items-center md:ml-[2px] md:h-[48px]'>
+                  <div className='mt-[10px] inline-flex items-center md:ml-[2px] md:mt-[20px] md:h-[32px]'>
                     <p className='mr-[8px] w-[68px] text-xs font-medium md:w-[104px] md:text-base'>
                       Organization
                     </p>
                     <div className='w-[160px] md:ml-[18px] md:w-[137px]'>
                       <SelectInput
-                        height='28px'
+                        height='h-[28px] md:h-[32px]'
                         value='GDSC'
                         options={['GDSC', 'CTCT', 'OISP']}
                         onChange={() => {}}
@@ -161,13 +173,13 @@ export default function Shorten() {
                       />
                     </div>
                   </div>
-                  <div className='mt-[10px] inline-flex items-center md:ml-[67px] md:h-[48px]'>
-                    <p className='mr-[8px] w-[68px] text-xs font-medium md:w-[104px] md:text-base'>
+                  <div className='mt-[10px] inline-flex items-center md:ml-[118px] md:mt-[20px] md:h-[32px]'>
+                    <p className='mr-[8px] w-[68px] text-xs font-medium md:w-[54px] md:text-base'>
                       Domain
                     </p>
                     <div className='w-[160px] md:ml-[18px] md:w-[137px]'>
                       <SelectInput
-                        height='28px'
+                        height='h-[28px] md:h-[32px]'
                         value='furl.one'
                         options={['furl.one', 'bksp.info', 'gic.gdsc.app']}
                         onChange={() => {}}
@@ -178,10 +190,11 @@ export default function Shorten() {
                 </div>
               </div>
 
-              <div className='mt-[16px] md:ml-[2px] md:inline-flex md:h-[48px] md:items-center'>
+              <div className='mt-[14px] md:ml-[2px] md:mt-[20px] md:inline-flex md:h-[48px] md:items-center'>
                 <p className='text-base font-medium md:w-[104px]'>Category</p>
-                <div className='md:ml-[34px] md:w-[464px]'>
+                <div className='mt-[4px] md:ml-[34px] md:w-[464px]'>
                   <TextInput
+                    height='h-[40px] md:h-[48px]'
                     iconSrc='/icons/search-20px.svg'
                     iconAlt='search'
                     placeholder='Add or create categories'
@@ -192,7 +205,7 @@ export default function Shorten() {
                 </div>
               </div>
               <div className='mt-[8px]'>
-                <p className='me-[6px] inline text-[16px] font-[500] text-black md:text-[16px]'>
+                <p className='me-[6px] inline text-[16px] text-xs font-[500]  text-black '>
                   Chosen categories
                 </p>
                 <div className='inline'>
@@ -213,13 +226,13 @@ export default function Shorten() {
                   Frame background
                 </p>
                 <div className='md:inline-flex'>
-                  <div className='mt-[4px] inline-flex h-[40px] w-[112px] items-center rounded-lg border pl-[10px] pr-[6px] md:h-[48px] md:w-[202px] md:pr-[4px]'>
+                  <div className='mt-[4px] inline-flex h-[40px] w-[112px] items-center rounded-lg border pl-[10px] pr-[6px] md:h-[48px] md:w-[202px] md:pr-[6px]'>
                     <div>
                       <p className='text-sm font-medium md:text-base'>
                         #FFFFFF
                       </p>
                     </div>
-                    <div className='ml-auto h-[28px] w-[28px] rounded-lg border md:h-[40px] md:w-[40px]'></div>
+                    <div className='ml-auto h-[28px] w-[28px] rounded-lg border md:h-[36px] md:w-[36px]'></div>
                   </div>
                   <div className='md:hidden'>
                     <div className='mt-[8px] inline-flex items-center gap-7'>
@@ -255,8 +268,9 @@ export default function Shorten() {
                 <p className='text-base font-medium md:w-[104px]'>
                   Additional text
                 </p>
-                <div className='md:ml-[2px] md:w-[600px]'>
+                <div className='mt-[4px] md:ml-[2px] md:w-[600px]'>
                   <TextInput
+                    height='h-[40px] md:h-[48px]'
                     placeholder='Enter addtional text'
                     value=''
                     divider={false}
@@ -266,12 +280,14 @@ export default function Shorten() {
                 </div>
               </div>
 
-              <div className='mt-[20px] inline-flex gap-[18px]'>
-                <div className='w-[100px] '>
-                  <p className='text-left text-xs font-medium'>Font</p>
-                  <div className='mt-[4px] md:ml-[2px]'>
+              <div className='mt-[8px] inline-flex gap-[18px] md:mt-[16px] md:gap-[40px]'>
+                <div className='w-[100px]  md:w-[202px]'>
+                  <p className='text-left text-xs font-medium md:text-base'>
+                    Font
+                  </p>
+                  <div className='mt-[4px] '>
                     <SelectInput
-                      height='38px'
+                      height='h-[28px] md:h-[48px]'
                       value='Roboto'
                       options={[
                         'Times New Roman',
@@ -285,74 +301,86 @@ export default function Shorten() {
                     />
                   </div>
                 </div>
-                <div className='w-[100px]'>
-                  <p className='text-left text-xs font-medium'>Text color</p>
-                  <div className='mt-[4px] inline-flex h-[28px] w-[100px] items-center rounded-lg border pl-[8px] pr-[4px] md:h-[60px] md:w-[202px]'>
+                <div className='w-[100px]  md:w-[202px]'>
+                  <p className='text-left text-xs font-medium md:text-base'>
+                    Text color
+                  </p>
+                  <div className='mt-[4px] inline-flex h-[28px] w-[100px] items-center rounded-lg border pl-[8px] pr-[4px] md:h-[48px] md:w-[202px] md:pr-[4px]'>
                     <div>
                       <p className='text-xs font-normal md:text-base'>
                         #FFFFFF
                       </p>
                     </div>
-                    <div className='ml-auto h-[20px] w-[20px] rounded-lg border md:h-[48px] md:w-[48px]'></div>
+                    <div className='ml-auto h-[20px] w-[20px] rounded-lg border md:h-[38px] md:w-[38px]'></div>
                   </div>
                 </div>
-                <div className='w-[52px]'>
-                  <p className='text-left text-xs font-medium'>Text size</p>
+                <div className='w-[52px]  md:w-[124px]'>
+                  <p className='text-left text-xs font-medium md:text-base'>
+                    Text size
+                  </p>
                   <div className='mt-[4px]'>
                     <SelectInput
-                      height='28px'
+                      height='h-[28px] md:h-[48px]'
                       value='18'
                       options={['16', '20', '24', '28', '32']}
                       onChange={() => {}}
-                      className='ms-[0px] md:ms-[8px]'
+                      className='ms-[0px] md:ms-[0px]'
                     />
                   </div>
                 </div>
               </div>
 
-              <div className='mt-[8px] grid grid-cols-2 gap-x-[16px] gap-y-[8px]'>
-                <div className='w-[136px]'>
-                  <p className='text-left text-xs font-medium'>Border width</p>
-                  <div className='mt-[4px]'>
+              <div className='mt-[8px] grid grid-cols-2 gap-x-[16px] gap-y-[8px] md:mt-[16px] md:w-[444px] md:gap-x-[40px] md:gap-y-[16px]'>
+                <div className='w-[136px] md:inline-flex md:w-[202px] md:items-center'>
+                  <p className='text-left text-xs font-medium md:text-base'>
+                    Border width
+                  </p>
+                  <div className='mt-[4px] md:ml-auto md:w-[88px]'>
                     <SelectInput
-                      height='28px'
-                      value='18px'
+                      height='h-[28px] md:h-[36px]'
+                      value='100px'
                       options={['16px', '20px', '24px', '28px', '32px']}
                       onChange={() => {}}
                       className='ms-[0px] md:ms-[8px]'
                     />
                   </div>
                 </div>
-                <div className='w-[136px]'>
-                  <p className='text-left text-xs font-medium'>Border radius</p>
-                  <div className='mt-[4px]'>
+                <div className='w-[136px] md:inline-flex md:w-[202px] md:items-center'>
+                  <p className='text-left text-xs font-medium md:text-base'>
+                    Border radius
+                  </p>
+                  <div className='mt-[4px] md:ml-auto md:w-[88px]'>
                     <SelectInput
-                      height='28px'
-                      value='18px'
+                      height='h-[28px] md:h-[36px]'
+                      value='100px'
                       options={['16px', '20px', '24px', '28px', '32px']}
                       onChange={() => {}}
                       className='ms-[0px] md:ms-[8px]'
                     />
                   </div>
                 </div>
-                <div className='w-[136px]'>
-                  <p className='text-left text-xs font-medium'>Padding</p>
-                  <div className='mt-[4px]'>
+                <div className='w-[136px] md:inline-flex md:w-[202px] md:items-center'>
+                  <p className='text-left text-xs font-medium md:text-base'>
+                    Padding
+                  </p>
+                  <div className='mt-[4px] md:ml-auto md:w-[88px]'>
                     <SelectInput
-                      height='28px'
-                      value='18px'
+                      height='h-[28px] md:h-[36px]'
+                      value='100px'
                       options={['16px', '20px', '24px', '28px', '32px']}
                       onChange={() => {}}
                       className='ms-[0px] md:ms-[8px]'
                     />
                   </div>
                 </div>
-                <div className='w-[136px]'>
-                  <p className='text-left text-xs font-medium'>Margin</p>
-                  <div className='mt-[4px]'>
+                <div className='w-[136px] md:inline-flex md:w-[202px] md:items-center'>
+                  <p className='text-left text-xs font-medium md:text-base'>
+                    Margin
+                  </p>
+                  <div className='mt-[4px] md:ml-auto md:w-[88px]'>
                     <SelectInput
-                      height='28px'
-                      value='18px'
+                      height='h-[28px] md:h-[36px]'
+                      value='100px'
                       options={['16px', '20px', '24px', '28px', '32px']}
                       onChange={() => {}}
                       className='ms-[0px] md:ms-[8px]'

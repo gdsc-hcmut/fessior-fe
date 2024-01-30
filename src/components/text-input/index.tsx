@@ -79,7 +79,7 @@ export default function TextInput(props: TextInputProps) {
     <div
       className={clsx(
         `flex ${
-          height ? `h-[${height}]` : 'h-[40px]'
+          height ? `${height}` : 'h-[40px]'
         }  w-[100%] items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border-[1px] focus-within:border-primary`,
         disabled && 'bg-primary/[.2] text-primary',
         className,

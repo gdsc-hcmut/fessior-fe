@@ -41,7 +41,7 @@ export default function SelectInput(props: SelectInputProps) {
     >
       <div
         className={`flex ${
-          height ? `h-[${height}]` : 'h-[40px]'
+          height ? `${height}` : 'h-[40px]'
         } items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] px-[8px] focus:border-[1px] focus:border-primary`}
       >
         <p>{renderOption(value)}</p>
