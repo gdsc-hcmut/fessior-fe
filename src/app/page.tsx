@@ -10,6 +10,7 @@ import HomeProjectCarousel from '@/components/home-project-carousel';
 import HomeTools from '@/components/home-tools';
 import useScreenSize from '@/hooks/useScreenSize';
 import { projects } from '@/services/project.service';
+import './css/index.css';
 
 export default function HomePage() {
   const { screenSize, loaded } = useScreenSize();
@@ -17,7 +18,7 @@ export default function HomePage() {
   return (
     <>
       <Header />
-      <div>
+      <div className='flex flex-col'>
         {/* ------------PART 1-------------- */}
         <div className="xl:min-h-none mb-[80px] h-screen min-h-[800px] bg-[url('/images/home/background_1.svg')] bg-cover xl:mb-0">
           <div className='relative h-[100%] bg-primary/[0.7] px-[20px] pt-[160px] xl:flex xl:flex-row xl:items-center xl:justify-between xl:px-[calc(160px-(1920px-100vw)/3)] xl:pt-0'>
@@ -37,16 +38,57 @@ export default function HomePage() {
             </div>
             <HomeTools />
             <div className='absolute bottom-[0] left-[0] z-[1] w-[100%]'>
-              <Image
+              {/* <Image
                 src='/images/home/decor.svg'
                 alt='decor'
                 width={0}
                 height={0}
                 className='w-[100%]'
-              />
+              /> */}
+              {/* <!--Waves Container--> */}
+              <div>
+                <svg
+                  className='waves'
+                  xmlns='http://www.w3.org/2000/svg'
+                  xmlnsXlink='http://www.w3.org/1999/xlink'
+                  viewBox='0 24 150 28'
+                  preserveAspectRatio='none'
+                  shapeRendering='auto'
+                >
+                  <defs>
+                    <path
+                      id='gentle-wave'
+                      d='M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z'
+                    />
+                  </defs>
+                  <g className='parallax'>
+                    <use
+                      xlinkHref='#gentle-wave'
+                      x='48'
+                      y='0'
+                      fill='rgba(255,255,255,0.7)'
+                    />
+                    <use
+                      xlinkHref='#gentle-wave'
+                      x='48'
+                      y='3'
+                      fill='rgba(255,255,255,0.5)'
+                    />
+                    <use
+                      xlinkHref='#gentle-wave'
+                      x='48'
+                      y='5'
+                      fill='rgba(255,255,255,0.3)'
+                    />
+                    <use xlinkHref='#gentle-wave' x='48' y='7' fill='#fff' />
+                  </g>
+                </svg>
+              </div>
+              {/* <!--Waves end--> */}
             </div>
           </div>
         </div>
+
         {/* -------------PART 2------------- */}
         <HomeAvailableTools />
         {/* ----------PART 3------------ */}
@@ -100,8 +142,8 @@ export default function HomePage() {
           </div>
         </div>
         {/* ----------PART 4------------- */}
-        <div className='flex flex-col px-[20px] xl:px-[calc(160px-(1920px-100vw)/3)]'>
-          <h3 className='mb-[40px] mt-[80px] text-[40px] font-[700] text-primary xl:mx-[20px]'>
+        <div className='flex flex-col lg:px-[20px] xl:px-[calc(160px-(1920px-100vw)/3)]'>
+          <h3 className='mb-[40px] mt-[80px] px-[20px] text-[40px] font-[700] text-primary lg:px-0 xl:mx-[20px]'>
             Our Projects
           </h3>
           {loaded && (
