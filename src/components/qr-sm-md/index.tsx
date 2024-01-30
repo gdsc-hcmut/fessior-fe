@@ -8,7 +8,7 @@ const QRBoxMobile = () => {
   return (
     <>
       {isShowed ? (
-        <div className='top-15 fixed right-2 z-10 h-[132px] w-[132px] lg:hidden'>
+        <div className='top-15 fixed right-2 z-10 h-[132px] w-[132px] md:right-[44px] md:scale-150 lg:hidden'>
           <Image
             src='/icons/qr-image.svg'
             alt='qr image'
@@ -28,7 +28,7 @@ const QRBoxMobile = () => {
           </div>
         </div>
       ) : (
-        <div className='absolute right-2 h-6 w-6 rounded-full bg-primary'>
+        <div className='fixed right-2 h-6 w-6 rounded-full bg-primary md:scale-150 lg:hidden'>
           <Image
             src='/icons/plus.magnifyingglass.svg'
             alt='show qr'
