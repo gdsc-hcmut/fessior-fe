@@ -71,7 +71,7 @@ const SizeSelectInput = ({ name }: SizeSelectInputProps) => {
 };
 const QRBox = () => {
   return (
-    <div className='h-[632px] w-[472px] rounded-lg border border-zinc-500 border-opacity-30 bg-white shadow-xl'>
+    <div className='hidden h-[632px] w-[472px] rounded-lg border border-zinc-500 border-opacity-30 bg-white shadow-xl lg:block'>
       <div className='mx-5 mt-5 h-[432px] w-[432px] rounded-lg border border-black bg-white  md:bg-primary'>
         <Image
           src='/icons/qr-image.svg'

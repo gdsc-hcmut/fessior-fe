@@ -6,6 +6,7 @@ import Button from '@/components/button';
 import CategoryItem from '@/components/category-item';
 import QRBox from '@/components/qr-box';
 import QRNavBar from '@/components/qr-navbar';
+import QRBoxMobile from '@/components/qr-sm-md';
 import SelectInput from '@/components/select-input';
 import ShortenTools from '@/components/shorten-tools';
 import TextInput from '@/components/text-input';
@@ -29,6 +30,7 @@ export default function CreateQRURLScreen() {
             </p>
           </div>
           <QRBox />
+          <QRBoxMobile />
           <div className='font-baloo-chettan-2 m-6 mx-auto flex w-[100%] max-w-[360px] text-[16px] font-[500] md:max-w-[416px] md:text-[20px]'>
             <Button
               image='/icons/link-qr-choosen.svg'
