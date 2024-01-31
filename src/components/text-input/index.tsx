@@ -96,7 +96,7 @@ export default function TextInput(props: TextInputProps) {
         onInput={(e) => {
           onInput(e.currentTarget.value);
         }}
-        className='mx-[4px] h-[100%] flex-grow px-[4px] outline-none placeholder:text-default-text'
+        className='mx-[4px] h-[100%] flex-grow px-[4px] outline-none placeholder:text-royal-300'
         style={{ fontSize: `${fontSize}px` }}
         placeholder={placeholder}
         type={type ? type : 'text'}

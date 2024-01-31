@@ -8,7 +8,7 @@ import SocialMediaButtonList from './social-media-button-list';
 
 export default function Footer() {
   return (
-    <div className='leading-[28.8px] tracking-[0.32px] text-[#333333]'>
+    <div className='leading-[28.8px] tracking-[0.32px] text-default-text'>
       <div className='relative flex flex-col overflow-hidden px-[24px] py-[40px] md:px-[40px] lg:flex-row lg:items-stretch lg:justify-between lg:px-[calc(160px-(1920px-100vw)/4)] lg:py-[60px]'>
         {/* LEFT */}
         <div className='mb-[40px] lg:mx-[24px] lg:w-[600px]'>

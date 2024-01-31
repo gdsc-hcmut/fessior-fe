@@ -1,3 +1,4 @@
+import { clsx } from 'clsx';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 
@@ -43,9 +44,10 @@ export default function SelectInput(props: SelectInputProps) {
       }}
       tabIndex={1}
       ref={ref}
-      className={`relative cursor-pointer text-[12px] text-black ${
-        className ? className : ''
-      }`}
+      className={clsx(
+        'relative cursor-pointer text-[12px] text-default-text',
+        className,
+      )}
     >
       <div className='flex h-[40px] items-center justify-between rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] px-[8px] focus:border-[1px] focus:border-primary'>
         <p className='truncate'>{renderOption(value)}</p>
@@ -72,7 +74,7 @@ export default function SelectInput(props: SelectInputProps) {
                 setIsSelecting(false);
               }}
               tabIndex={1}
-              className='flex h-[40px] cursor-pointer items-center px-[8px] hover:bg-primary hover:text-white focus:bg-primary'
+              className='flex h-[40px] cursor-pointer items-center px-[8px] transition-all hover:bg-primary hover:text-white focus:bg-primary'
             >
               <p className='truncate'>{renderOption(option)}</p>
             </div>

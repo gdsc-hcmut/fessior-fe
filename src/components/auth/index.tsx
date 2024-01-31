@@ -182,7 +182,7 @@ export function AuthForm(props: AuthFormProps) {
           onClick={() => {
             authRouter(subActionAuthType);
           }}
-          className='mb-[20px] mt-[-4px] cursor-pointer self-end text-[12px] text-[#252641] underline lg:mb-[40px] lg:mt-0 lg:text-[16px]'
+          className='mb-[20px] mt-[-4px] cursor-pointer self-end text-[12px] text-default-text underline lg:mb-[40px] lg:mt-0 lg:text-[16px]'
         >
           {subActionText}
         </p>
