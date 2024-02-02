@@ -56,12 +56,12 @@ export default function CreateQRURLScreen() {
             </Button>
           </div>
 
-          <div className='relative mx-auto mb-[172px]  w-[90%] rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow md:flex-col lg:w-[100%] lg:max-w-[740px] lg:p-[24px]'>
-            <div className='container mb-[8px] md:inline-flex'>
-              <h6 className='mb-[4px] flex-shrink-0 text-[20px] font-[500] md:mb-[8px] md:mt-[6px] md:pr-[20px]'>
+          <div className='relative mx-auto mb-[172px]  w-[90%] rounded-[8px] border-[3px] border-solid border-primary bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow md:flex-col md:border-[0.5px] md:border-[#7e7e7e4d] lg:w-[100%] lg:max-w-[740px] lg:p-[24px]'>
+            <div className='container md:inline-flex'>
+              <h6 className='mb-[4px] flex-shrink-0 text-[16px] font-[500] md:mb-[8px] md:mt-[6px] md:text-[20px]'>
                 QR Name
               </h6>
-              <div className='mb-[16px] md:w-[90%]'>
+              <div className='mb-[16px] md:ml-6 md:w-[90%]'>
                 <TextInput
                   iconSrc='/icons/label_outline.svg'
                   iconAlt='icon'
@@ -74,11 +74,11 @@ export default function CreateQRURLScreen() {
                 />
               </div>
             </div>
-            <div className='container mb-[8px] md:inline-flex'>
-              <h6 className='mb-[4px] flex-shrink-0 text-[20px] font-[500] md:mb-[8px] md:mt-[6px] md:pr-[20px]'>
+            <div className='container md:inline-flex'>
+              <h6 className='mb-[4px] flex-shrink-0 text-[16px] font-[500] md:mb-[8px] md:mt-[6px] md:text-[20px]'>
                 Your URL
               </h6>
-              <div className='mb-[12px] md:w-[90%]'>
+              <div className='mb-[12px] md:mb-[20px] md:ml-6 md:w-[90%]'>
                 <TextInput
                   iconSrc='/icons/link-qr-20px.svg'
                   iconAlt='icon'
@@ -92,36 +92,36 @@ export default function CreateQRURLScreen() {
               </div>
             </div>
             <div>
-              <div className='inline-block md:mb-[8px] md:flex md:flex-grow'>
-                <div className='mb-[8px] flex items-center justify-between md:me-[20px] md:inline-flex'>
-                  <p className='inline text-[16px] font-[500] text-black md:text-[16px]'>
+              <div className='inline-block md:mb-[8px] md:flex md:flex-grow lg:mb-0'>
+                <div className='mb-[8px] flex items-center justify-between md:me-[20px] md:inline-flex lg:mb-5'>
+                  <p className='inline  text-[12px] font-[500] text-black md:text-[16px]'>
                     Organization
                   </p>
                   <SelectInput
                     value='GDSC'
                     options={['GDSC', 'CTCT', 'OISP']}
                     onChange={() => {}}
-                    className='ms-[4px] w-[160px] md:ms-[8px]'
+                    className='ms-[8px] w-[124px] md:ms-[13px]'
                   />
                 </div>
-                <div className='flex items-center justify-between md:mb-2 md:inline-flex'>
-                  <p className='inline text-[16px] font-[500] text-black md:text-[16px]'>
+                <div className='flex items-center justify-between md:mb-2 md:inline-flex lg:mb-5'>
+                  <p className='inline text-[12px] font-[500] text-black md:text-[16px]'>
                     Domain
                   </p>
                   <SelectInput
                     value='gic.gdsc.app'
                     options={['furl.one', 'bkoisp.info', 'gic.gdsc.app']}
                     onChange={() => {}}
-                    className='ms-[4px] w-[160px] md:ms-[8px]'
+                    className='ms-[8px] w-[124px] md:ms-[13px]'
                   />
                 </div>
               </div>
             </div>
             <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
-              <h6 className='mb-[4px] text-[20px] font-[500] md:mb-0 md:inline md:w-[100px]'>
+              <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>
                 Category
               </h6>
-              <div className='md:-ml-[2px] md:inline-block md:flex-grow'>
+              <div className='md:ml-6 md:inline-block md:flex-grow'>
                 <TextInput
                   iconSrc='/icons/search-20px.svg'
                   iconAlt='search'
@@ -133,7 +133,7 @@ export default function CreateQRURLScreen() {
               </div>
             </div>
             <div className='mb-[8px]'>
-              <p className='me-[6px] inline text-[16px] font-[500] text-black md:text-[16px]'>
+              <p className='me-[6px] inline text-[12px] font-[500] text-black md:text-[16px]'>
                 Chosen categories
               </p>
               <div className='inline'>
@@ -141,7 +141,7 @@ export default function CreateQRURLScreen() {
                 <CategoryItem text='Favorite' />
               </div>
             </div>
-            <div className='mx-auto mt-5 flex max-w-[288px] items-center justify-between space-x-4 md:max-w-[352px]'>
+            <div className='mx-auto mt-6 flex max-w-[288px] items-center justify-between space-x-4 md:max-w-[352px]'>
               <Button
                 width='full'
                 type='positive'
@@ -174,9 +174,9 @@ export default function CreateQRURLScreen() {
             <ShortenTools />
           </div>
         </div>
-        <div className='absolute right-[-10px] top-[46px] h-[40px] w-[40px] rounded-full bg-primary'></div>
+        <div className='absolute right-[-10px] top-[100px] hidden h-[40px] w-[40px] rounded-full bg-primary md:block'></div>
         <div className='absolute left-[40px] top-[145px] hidden h-[12px] w-[12px] rounded-full bg-primary md:left-[30px] md:h-[28px] md:w-[28px] lg:left-[100px] lg:h-[40px] lg:w-[40px]'></div>
-        <div className='absolute left-[-70px] top-[679px] h-[120px] w-[120px] rounded-full bg-primary'></div>
+        <div className='absolute left-[-70px] top-[727px] h-[120px] w-[120px] rounded-full bg-primary'></div>
         <div className='absolute bottom-[9px] right-[-30px] h-[80px] w-[80px] rounded-full bg-primary md:hidden'></div>
         <div className='absolute bottom-[0px] right-[60px] h-[20px] w-[20px] rounded-full bg-primary md:hidden'></div>
       </div>
