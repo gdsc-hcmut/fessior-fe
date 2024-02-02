@@ -2,7 +2,7 @@ import { SidebarItem } from '@/types/sidebar-item';
 
 export const sidebarItems: SidebarItem[] = [
   {
-    name: 'URLs',
+    name: 'URLS',
     children: [
       {
         text: 'My URLs',
@@ -19,7 +19,7 @@ export const sidebarItems: SidebarItem[] = [
     ],
   },
   {
-    name: 'Campaigns',
+    name: 'CAMPAIGNS',
     children: [
       {
         text: 'My Collection',
@@ -29,14 +29,14 @@ export const sidebarItems: SidebarItem[] = [
       },
       {
         text: 'Analytics Dashboard',
-        iconFilename: 'home.svg',
+        iconFilename: 'timeline.svg',
         imgAlt: '',
         path: '/campaign-analytics',
       },
     ],
   },
   {
-    name: 'Management',
+    name: 'MANAGEMENT',
     children: [
       {
         text: 'Organiazation',
@@ -46,7 +46,7 @@ export const sidebarItems: SidebarItem[] = [
       },
       {
         text: 'Custom Domain',
-        iconFilename: 'home.svg',
+        iconFilename: 'domain.svg',
         imgAlt: '',
         path: '/custom-domain',
       },
