@@ -12,10 +12,11 @@ function URLsLayout(props: URLsLayoutProps) {
 
   return (
     <section className='flex min-h-[100vh] flex-col'>
-      Layout for (url-shortener) group
       <Header />
-      <div className='flex-grow'>{children}</div>
-      <Footer />
+      <aside className='fixed left-0 h-full w-[16vw] bg-white shadow-[6px_6px_15px_0_rgba(64,79,104,0.05)]'>
+        d
+      </aside>
+      <div className='h-[1000px] flex-grow'>{children}</div>
     </section>
   );
 }
