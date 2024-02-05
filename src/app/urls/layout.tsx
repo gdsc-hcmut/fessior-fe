@@ -11,10 +11,10 @@ function URLsLayout(props: URLsLayoutProps) {
   const { children } = props;
 
   return (
-    <section className='flex min-h-[100vh] flex-col'>
+    <section className='min-h-[100vh]'>
       <Header />
       <Sidebar />
-      <div className='h-[1000px] flex-grow'>{children}</div>
+      <div className='pl-[16vw] pt-[85.6px]'>{children}</div>
     </section>
   );
 }
