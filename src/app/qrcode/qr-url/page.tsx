@@ -22,12 +22,12 @@ export default function CreateQRURLScreen() {
             <h1 className='mt-[80px] text-[36px] font-[700] leading-[65px] md:mt-[168px] md:text-[48px] lg:text-[60px]'>
               <span className=' md:inline'>Fessior</span> QR Generator
             </h1>
-            <p className='mb-[20px] hidden leading-[24px] md:block md:text-[24px] lg:mb-0 lg:text-[28px] lg:leading-[65px]'>
+            <p className='hidden leading-[24px] md:block md:text-[20px] lg:mb-0 lg:mt-3 lg:text-[24px]'>
               Convenience, efficiency, and versatility:{' '}
               <br className='md:hidden' /> QR Code Management Made Easy
             </p>
           </div>
-          <div className='m-6 mx-auto flex w-[100%] max-w-[360px] text-[16px] font-[500] md:max-w-[416px] md:text-[20px]'>
+          <div className='mx-auto my-5 flex w-[100%] max-w-[360px] text-[16px] font-[500] md:my-6 md:max-w-[416px] md:text-[20px]'>
             <Button
               image='/icons/link-qr-choosen.svg'
               imageOnHover='/icons/link-qr-choosen.svg'
@@ -56,7 +56,7 @@ export default function CreateQRURLScreen() {
             </Button>
           </div>
 
-          <div className='relative mx-auto mb-[172px]  w-[90%] rounded-[8px] border-[3px] border-solid border-primary bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow md:flex-col md:border-[0.5px] md:border-[#7e7e7e4d] lg:w-[100%] lg:max-w-[740px] lg:p-[24px]'>
+          <div className='relative mx-auto mb-[172px]  w-[90%] rounded-[8px] border-[3px] border-solid border-primary bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow md:flex-col md:border-[0.5px] md:border-[#7e7e7e4d] lg:w-[100%] lg:max-w-[856px] lg:p-[24px]'>
             <div className='container md:inline-flex'>
               <h6 className='mb-[4px] flex-shrink-0 text-[16px] font-[500] md:mb-[8px] md:mt-[6px] md:text-[20px]'>
                 QR Name
@@ -132,16 +132,16 @@ export default function CreateQRURLScreen() {
                 />
               </div>
             </div>
-            <div className='mb-[8px]'>
-              <p className='me-[6px] inline text-[12px] font-[500] text-black md:text-[16px]'>
+            <div className='mb-0'>
+              <p className='me-[16px] inline text-[12px] font-[500] text-black md:text-[16px]'>
                 Chosen categories
               </p>
-              <div className='inline'>
-                <CategoryItem text='Event' />
+              <div className='inline space-x-2'>
+                <CategoryItem text='Events' />
                 <CategoryItem text='Favorite' />
               </div>
             </div>
-            <div className='mx-auto mt-6 flex max-w-[288px] items-center justify-between space-x-4 md:max-w-[352px]'>
+            <div className='mx-auto mt-6 flex max-w-[288px] items-center justify-between space-x-4 md:max-w-[352px] md:space-x-8'>
               <Button
                 width='full'
                 type='positive'

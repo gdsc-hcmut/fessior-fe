@@ -5,9 +5,9 @@ type CategoryItemProps = {
 export default function CategoryItem(props: CategoryItemProps) {
   const { text } = props;
   return (
-    <p className='mx-[2px] inline rounded-[20px] bg-primary px-[8px] py-[2px] align-middle text-[12px] text-white'>
+    <p className='inline rounded-[8px] bg-primary px-[12px] py-[4px] align-middle text-[12px] leading-[35px] text-white'>
       {text}{' '}
-      <span className='align-middle text-[8px] hover:cursor-pointer hover:text-[#cccccc]'>
+      <span className='ml-1 align-middle text-[8px] hover:cursor-pointer hover:text-[#cccccc]'>
         &#10005;
       </span>
     </p>

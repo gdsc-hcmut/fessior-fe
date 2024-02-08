@@ -20,7 +20,7 @@ export function TextInputIcon(props: TextInputIconProps) {
         width={0}
         height={0}
         className={clsx(
-          'mx-[4px] h-auto w-auto',
+          'mx-[8px] h-auto w-auto',
           !divider && (position === 'left' ? 'ms-[12px]' : 'me-[12px]'),
           onIconClick &&
             'rounded-full p-[4px] hover:cursor-pointer hover:bg-[#ccc] active:bg-[#ccc]',
