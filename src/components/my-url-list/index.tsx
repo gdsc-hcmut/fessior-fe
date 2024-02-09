@@ -77,7 +77,7 @@ function UrlItem(props: UrlItemProps) {
   }, [width, url.category]);
 
   return (
-    <div className='relative flex flex-shrink-0 items-center overflow-hidden rounded-lg px-10 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
+    <div className='relative flex flex-shrink-0 items-center overflow-hidden rounded-lg bg-white px-10 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
       <div className='absolute left-0 top-0 h-full w-1 flex-[0] bg-primary' />
       <div className='mr-5 flex flex-[1.5] overflow-hidden'>
         <p className='w-[96%] truncate font-semibold text-primary'>
@@ -157,7 +157,7 @@ export default function MyUrlList(props: MyUrlListProps) {
   const { myUrlList } = props;
 
   return (
-    <div className='mt-9'>
+    <div className='relative z-20 mt-9'>
       <div className='flex flex-shrink-0 space-x-5 px-10'>
         <p className='flex flex-[1.5] text-xl font-semibold text-primary'>
           Shortened link

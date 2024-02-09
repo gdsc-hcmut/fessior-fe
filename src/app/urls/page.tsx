@@ -2,10 +2,11 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 
 import '../css/index.css';
 import MyUrlList from '@/components/my-url-list';
+import Pagination from '@/components/pagination';
 import { myUrlListData } from '@/services/url.service';
 
 type URLsPageProps = {
@@ -14,16 +15,17 @@ type URLsPageProps = {
 
 function URLsPage(props: URLsPageProps) {
   const { searchParams } = props;
-  const [isSortCollapsed, setIsSortCollapsed] = React.useState(true);
-  const [currentSortOption, setCurrentSortOption] = React.useState('Latest');
+  const [isSortCollapsed, setIsSortCollapsed] = useState<boolean>(true);
+  const [currentSortOption, setCurrentSortOption] = useState<string>('Latest');
   const sortOption = ['Latest', 'Oldest', 'Most Clicked', 'Least Clicked'];
   const swithSortOption = (option: string) => {
     setIsSortCollapsed(true);
     setCurrentSortOption(option);
   };
+  const [page, setPage] = useState<number>(1);
 
   return (
-    <div className='px-[80px] pt-[60px]'>
+    <div className='relative px-[80px] pt-[60px]'>
       <div className='flex items-end justify-between'>
         <div>
           <h1 className='text-[60px] font-bold text-primary'>My URLs</h1>
@@ -129,6 +131,23 @@ function URLsPage(props: URLsPageProps) {
         </div>
       </div>
       <MyUrlList myUrlList={myUrlListData} />
+      <Pagination
+        totalCount={121}
+        currentPage={page}
+        pageSize={7}
+        onPageChange={(pageNumber: number) => {
+          setPage(pageNumber);
+        }}
+      />
+      <div className='absolute bottom-[-1px] right-0'>
+        <Image
+          src='/images/url/decor.svg'
+          alt='Decor image'
+          width={0}
+          height={0}
+          className='h-auto w-[42vw]'
+        />
+      </div>
     </div>
   );
 }
