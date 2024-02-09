@@ -25,15 +25,17 @@ function URLsPage(props: URLsPageProps) {
   const [page, setPage] = useState<number>(1);
 
   return (
-    <div className='relative px-[80px] pt-[60px]'>
+    <div className='relative px-10 pt-10 2xl:px-[60px] 2xl:pt-[60px] 3xl:px-[80px]'>
       <div className='flex items-end justify-between'>
         <div>
-          <h1 className='text-[60px] font-bold text-primary'>My URLs</h1>
-          <p className='text-[28px] text-primary'>
+          <h1 className='text-[40px] font-bold text-primary 2xl:text-[48px] 3xl:text-[60px]'>
+            My URLs
+          </h1>
+          <p className='text-xl text-primary 2xl:text-[24px] 3xl:text-[28px]'>
             Effortlessly organize and access your shortened URLs
           </p>
         </div>
-        <div className='flex items-center space-x-2 rounded-lg bg-primary/20 px-5 py-2'>
+        <div className='flex items-center space-x-2 rounded-lg bg-primary/20 px-3 py-1 2xl:px-5 2xl:py-2'>
           <div className='flex h-10 w-10 items-center justify-center rounded-full bg-white'>
             <Image
               src='/icons/click.svg'
@@ -44,14 +46,16 @@ function URLsPage(props: URLsPageProps) {
             />
           </div>
           <div className='flex flex-col'>
-            <p className='text-xl font-semibold text-primary'>1120</p>
-            <p className='text-primary'>clicks on your links today</p>
+            <p className='font-semibold text-primary 2xl:text-xl'>1120</p>
+            <p className='text-[14px] text-primary 2xl:text-base'>
+              clicks on your links today
+            </p>
           </div>
         </div>
       </div>
       <div className='mt-8'>
         <div className='flex justify-between'>
-          <div className='flex w-[25vw] items-center rounded-lg border-[0.5px] border-[#7E7E7E] py-3 pl-2'>
+          <div className='flex w-[30vw] items-center rounded-lg border-[0.5px] border-[#7E7E7E] py-3 pl-2 3xl:w-[25vw]'>
             <Image
               src='/icons/search.svg'
               alt='Search icon'

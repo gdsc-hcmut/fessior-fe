@@ -68,7 +68,7 @@ const Pagination = ({
             alt='Chevron double left'
             width={0}
             height={0}
-            className='h-6 w-auto'
+            className='h-5 w-auto 3xl:h-6'
           />
         </button>
       </li>
@@ -86,7 +86,7 @@ const Pagination = ({
             alt='Chevron left'
             width={0}
             height={0}
-            className='h-6 w-auto'
+            className='h-5 w-auto 3xl:h-6'
           />
         </button>
       </li>
@@ -98,13 +98,13 @@ const Pagination = ({
             className='flex h-fit w-fit items-center'
           >
             <button
-              className={`aspect-square h-8 w-8 rounded-full  ${
+              className={`aspect-square h-6 w-6 rounded-full 2xl:h-8 2xl:w-8  ${
                 pageNumber === currentPage ? 'bg-primary' : 'hover:bg-primary'
               }`}
               onClick={() => submitPageChanage(pageNumber as number)}
             >
               <p
-                className={`text-xl font-semibold ${
+                className={`font-semibold 3xl:text-xl ${
                   pageNumber === currentPage && 'text-white'
                 }`}
               >
@@ -128,7 +128,7 @@ const Pagination = ({
             alt='Chevron right'
             width={0}
             height={0}
-            className='h-6 w-auto rotate-180'
+            className='h-5 w-auto rotate-180 3xl:h-6'
           />
         </button>
       </li>
@@ -145,7 +145,7 @@ const Pagination = ({
             alt='Chevron double right'
             width={0}
             height={0}
-            className='h-6 w-auto rotate-180'
+            className='h-5 w-auto rotate-180 3xl:h-6'
           />
         </button>
       </li>
@@ -160,7 +160,7 @@ const Pagination = ({
           <p className='font-semibold'>Go to page</p>
           <input
             type='number'
-            className='h-8 w-10 rounded-lg border-[1px] border-primary px-2 py-1 font-semibold'
+            className='h-7 w-8 rounded-lg border-[1px] border-primary px-2 py-1 font-semibold 2xl:h-8 2xl:w-10'
             value={inputPage}
             max={totalPages}
             min={1}

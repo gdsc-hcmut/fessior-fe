@@ -14,7 +14,9 @@ function URLsLayout(props: URLsLayoutProps) {
     <section className='min-h-[100vh]'>
       <Header />
       <Sidebar />
-      <div className='pl-[16vw] pt-[85.6px]'>{children}</div>
+      <div className='pl-[18vw] pt-[85.6px] 2xl:pl-[17vw] 3xl:pl-[16vw]'>
+        {children}
+      </div>
     </section>
   );
 }
