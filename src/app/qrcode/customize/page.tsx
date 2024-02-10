@@ -120,6 +120,8 @@ export default function Shorten() {
                       paddingLeft='8'
                       mediumHeight='32'
                       mediumTextSize='16'
+                      paddingRight='4'
+                      mediumPaddingRight='6'
                     />
                   </div>
                 </div>
@@ -138,6 +140,8 @@ export default function Shorten() {
                       paddingLeft='8'
                       mediumHeight='32'
                       mediumTextSize='16'
+                      paddingRight='4'
+                      mediumPaddingRight='6'
                     />
                   </div>
                 </div>
@@ -184,6 +188,8 @@ export default function Shorten() {
                     paddingLeft='16'
                     mediumHeight='48'
                     mediumTextSize='20'
+                    paddingRight='4'
+                    mediumPaddingRight='12'
                   />
                 </div>
               </div>
@@ -293,40 +299,52 @@ export default function Shorten() {
                 Frame
               </p>
             </div>
-            <div className='mt-[10px] md:ml-[4px]'>
-              <div className='flex h-[24px] flex-col justify-center md:h-[30px] md:justify-end'>
-                <p className='text-[16px] font-medium '>Frame background</p>
+            <div className='flex flex-col md:flex-row'>
+              <div className='mt-[10px] md:ml-[4px]'>
+                <div className='flex h-[24px] flex-col justify-center md:h-[30px] md:justify-end'>
+                  <p className='text-[16px] font-medium '>Frame background</p>
+                </div>
+                <div className='mt-[4px] flex h-[40px] w-[112px] flex-row items-center rounded-[8px] border pl-[10px] pr-[6px] md:h-[60px] md:w-[200px] md:pl-[12px]'>
+                  <p className='text-[14px] font-medium text-primary md:text-[16px]'>
+                    #FFFFFF
+                  </p>
+                  <div className='ml-auto h-[28px] w-[28px] rounded-[8px] border md:h-[48px] md:w-[48px]'></div>
+                </div>
               </div>
-              <div className='mt-[4px] flex h-[40px] w-[112px] flex-row items-center rounded-[8px] border pl-[10px] pr-[6px]'>
-                <p className='text-[14px] font-medium text-primary'>#FFFFFF</p>
-                <div className='ml-auto h-[28px] w-[28px] rounded-[8px] border'></div>
+              <div className='mt-[8px] inline-flex flex-row items-center md:ml-[52px] md:self-end '>
+                <div className='mr-[14px] hidden md:flex'>
+                  <ToggleButton type='tablet' />
+                </div>
+                <div className='mr-[27px] flex h-[16px] w-[129px] flex-row items-center md:w-[220px]'>
+                  <p className='text-[12px] font-normal md:text-[16px]'>
+                    Transparent background
+                  </p>
+                </div>
+                <div className='md:hidden'>
+                  <ToggleButton type='mobile' />
+                </div>
               </div>
             </div>
-            <div className='mt-[8px] inline-flex flex-row items-center '>
-              <div className='mr-[27px] flex h-[16px] w-[129px] flex-row items-center'>
-                <p className='text-[12px] font-normal'>
-                  Transparent background
-                </p>
-              </div>
-              <ToggleButton type='phone' />
-            </div>
+
             <div className='mt-[16px]'>
-              <div className='flex h-[24px] flex-col justify-center'>
+              <div className='flex h-[24px] flex-col justify-center md:ml-[4px] md:h-[20px]'>
                 <p className='text-[16px]  font-medium '>Additional text</p>
               </div>
-              <div className='relative mt-[4px] h-[40px] w-auto rounded-[8px] border-[0.5px] border-gray-300'>
+              <div className='relative mt-[4px] h-[40px] w-auto rounded-[8px] border-[0.5px] border-gray-300 md:ml-[4px] md:h-[60px]'>
                 <input
                   type='text'
-                  className='h-full w-full rounded-[8px] pl-[12px] text-[12px] focus:outline-[1px] focus:outline-primary'
+                  className='h-full w-full rounded-[8px] pl-[12px] text-[12px] focus:outline-[1px] focus:outline-primary md:text-[16px]'
                   placeholder='Enter additional text'
                 />
               </div>
-              <div className='mt-[8px] flex flex-row gap-[18px]'>
-                <div className='w-[100px] max-w-[125px] grow'>
-                  <div className='flex-cols flex h-[16px] items-center justify-start'>
-                    <p className='text-[12px] font-medium'> Font</p>
+              <div className='mt-[8px] flex flex-row gap-[18px] md:ml-[4px] md:mt-[16px] md:gap-[40px]'>
+                <div className='w-[100px]  grow md:w-[202px] '>
+                  <div className='flex-cols flex h-[16px] items-center justify-start md:h-[20px]'>
+                    <p className='text-[12px] font-medium md:text-[16px]'>
+                      Font
+                    </p>
                   </div>
-                  <div className='mt-[4px]'>
+                  <div className='mt-[4px] font-medium'>
                     <DropDown
                       value='Roboto'
                       options={[
@@ -340,23 +358,35 @@ export default function Shorten() {
                       heightOfDropDown='28'
                       textSize='12'
                       paddingLeft='8'
+                      mediumHeight='60'
+                      mediumPaddingLeft='16'
+                      mediumTextSize='16'
+                      paddingRight='4'
+                      mediumPaddingRight='20'
                     />
                   </div>
                 </div>
-                <div className='w-[100px] max-w-[125px] grow'>
-                  <div className='flex-cols flex h-[16px] items-center justify-start'>
-                    <p className='text-[12px] font-medium'> Text color</p>
+                <div className='w-[100px]  grow md:w-[202px] '>
+                  <div className='flex-cols flex h-[16px] items-center justify-start md:h-[20px]'>
+                    <p className='text-[12px] font-medium md:text-[16px]'>
+                      {' '}
+                      Text color
+                    </p>
                   </div>
-                  <div className='mt-[4px] flex h-[28px] w-auto flex-row items-center rounded-[8px] border pl-[8px] pr-[4px]'>
-                    <p className='text-[12px]'>#FFFFFF</p>
-                    <div className='ml-auto h-[20px] w-[20px] rounded-[8px] border'></div>
+                  <div className='mt-[4px] flex h-[28px] w-auto flex-row items-center rounded-[8px] border pl-[8px] pr-[4px] md:h-[60px] md:pl-[16px] md:pr-[6px]'>
+                    <p className='text-[12px] md:text-[16px] md:font-medium'>
+                      #FFFFFF
+                    </p>
+                    <div className='ml-auto h-[20px] w-[20px] rounded-[8px] border md:h-[48px] md:w-[48px]'></div>
                   </div>
                 </div>
-                <div className='w-[52px] grow'>
-                  <div className='flex-cols flex h-[16px] items-center justify-start'>
-                    <p className='text-[12px] font-medium'> Text size</p>
+                <div className='w-[52px] grow md:w-[124px]'>
+                  <div className='flex-cols flex h-[16px] items-center justify-start md:h-[20px]'>
+                    <p className='text-[12px] font-medium md:text-[16px]'>
+                      Text size
+                    </p>
                   </div>
-                  <div className='mt-[4px] max-w-[72px]'>
+                  <div className='mt-[4px] md:font-medium'>
                     <DropDown
                       value='18px'
                       options={[
@@ -372,180 +402,224 @@ export default function Shorten() {
                       heightOfDropDown='28'
                       textSize='12'
                       paddingLeft='6'
+                      mediumHeight='60'
+                      mediumPaddingLeft='16'
+                      mediumTextSize='20'
+                      paddingRight='4'
+                      mediumPaddingRight='20'
                     />
                   </div>
                 </div>
               </div>
-              <div className='mt-[8px] grid grid-cols-2 gap-x-[16px] gap-y-[8px]'>
-                <div>
-                  <div className='flex-cols flex h-[16px] items-center justify-start'>
-                    <p className='text-[12px] font-medium'> Border width</p>
+              <div className='mt-[8px] flex flex-col gap-y-[8px] md:ml-[4px] md:mt-[16px] md:gap-y-[16px]'>
+                <div className='flex flex-row gap-x-[16px] md:gap-x-[40px]'>
+                  <div className='grow md:flex md:w-[202px] md:flex-row md:items-center  '>
+                    <div className='flex-cols flex h-[16px] items-center justify-start  md:w-[95px]'>
+                      <p className='text-[12px] font-medium md:text-[16px]'>
+                        Border width
+                      </p>
+                    </div>
+                    <div className='mt-[4px] grow md:ml-[19px] md:mt-0 md:w-[88px]'>
+                      <DropDown
+                        value='18px'
+                        options={[
+                          '16px',
+                          '18px',
+                          '20px',
+                          '24px',
+                          '28px',
+                          '32px',
+                          '36px',
+                          '40px',
+                        ]}
+                        heightOfDropDown='28'
+                        textSize='12'
+                        paddingLeft='6'
+                        mediumHeight='36'
+                        mediumPaddingLeft='8'
+                        mediumTextSize='20'
+                        paddingRight='4'
+                        mediumPaddingRight='0'
+                      />
+                    </div>
                   </div>
-                  <div className='mt-[4px]'>
-                    <DropDown
-                      value='18px'
-                      options={[
-                        '16px',
-                        '18px',
-                        '20px',
-                        '24px',
-                        '28px',
-                        '32px',
-                        '36px',
-                        '40px',
-                      ]}
-                      heightOfDropDown='28'
-                      textSize='12'
-                      paddingLeft='6'
-                    />
+                  <div className='grow md:flex md:w-[202px] md:flex-row md:items-center'>
+                    <div className='flex-cols flex h-[16px] items-center justify-start  md:w-[95px]'>
+                      <p className='text-[12px] font-medium md:text-[16px]'>
+                        {' '}
+                        Border radius
+                      </p>
+                    </div>
+                    <div className='mt-[4px] grow md:ml-[19px] md:mt-0 md:w-[88px]'>
+                      <DropDown
+                        value='18px'
+                        options={[
+                          '16px',
+                          '18px',
+                          '20px',
+                          '24px',
+                          '28px',
+                          '32px',
+                          '36px',
+                          '40px',
+                        ]}
+                        heightOfDropDown='28'
+                        textSize='12'
+                        paddingLeft='6'
+                        mediumHeight='36'
+                        mediumPaddingLeft='8'
+                        mediumTextSize='20'
+                        paddingRight='4'
+                        mediumPaddingRight='0'
+                      />
+                    </div>
                   </div>
+                  <div className='md:w-[124px] md:grow'></div>
                 </div>
-                <div>
-                  <div className='flex-cols flex h-[16px] items-center justify-start'>
-                    <p className='text-[12px] font-medium'> Border radius</p>
+                <div className='flex flex-row gap-x-[16px] md:gap-x-[40px]'>
+                  <div className='grow md:flex md:w-[202px] md:flex-row md:items-center'>
+                    <div className='flex-cols flex h-[16px] items-center justify-start  md:w-[95px]'>
+                      <p className='text-[12px] font-medium md:text-[16px]'>
+                        {' '}
+                        Padding
+                      </p>
+                    </div>
+                    <div className='mt-[4px] grow md:ml-[19px] md:mt-0 md:w-[88px]'>
+                      <DropDown
+                        value='18px'
+                        options={[
+                          '16px',
+                          '18px',
+                          '20px',
+                          '24px',
+                          '28px',
+                          '32px',
+                          '36px',
+                          '40px',
+                        ]}
+                        heightOfDropDown='28'
+                        textSize='12'
+                        paddingLeft='6'
+                        mediumHeight='36'
+                        mediumPaddingLeft='8'
+                        mediumTextSize='20'
+                        paddingRight='4'
+                        mediumPaddingRight='0'
+                      />
+                    </div>
                   </div>
-                  <div className='mt-[4px]'>
-                    <DropDown
-                      value='18px'
-                      options={[
-                        '16px',
-                        '18px',
-                        '20px',
-                        '24px',
-                        '28px',
-                        '32px',
-                        '36px',
-                        '40px',
-                      ]}
-                      heightOfDropDown='28'
-                      textSize='12'
-                      paddingLeft='6'
-                    />
+                  <div className='grow md:flex md:w-[202px] md:flex-row md:items-center '>
+                    <div className='flex-cols flex h-[16px] items-center justify-start  md:w-[95px]'>
+                      <p className='text-[12px] font-medium md:text-[16px]'>
+                        {' '}
+                        Margin
+                      </p>
+                    </div>
+                    <div className='mt-[4px] grow md:ml-[19px] md:mt-0 md:w-[88px]'>
+                      <DropDown
+                        value='18px'
+                        options={[
+                          '16px',
+                          '18px',
+                          '20px',
+                          '24px',
+                          '28px',
+                          '32px',
+                          '36px',
+                          '40px',
+                        ]}
+                        heightOfDropDown='28'
+                        textSize='12'
+                        paddingLeft='6'
+                        mediumHeight='36'
+                        mediumPaddingLeft='8'
+                        mediumTextSize='20'
+                        paddingRight='4'
+                        mediumPaddingRight='0'
+                      />
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div className='flex-cols flex h-[16px] items-center justify-start'>
-                    <p className='text-[12px] font-medium'> Padding</p>
-                  </div>
-                  <div className='mt-[4px]'>
-                    <DropDown
-                      value='18px'
-                      options={[
-                        '16px',
-                        '18px',
-                        '20px',
-                        '24px',
-                        '28px',
-                        '32px',
-                        '36px',
-                        '40px',
-                      ]}
-                      heightOfDropDown='28'
-                      textSize='12'
-                      paddingLeft='6'
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className='flex-cols flex h-[16px] items-center justify-start'>
-                    <p className='text-[12px] font-medium'> Margin</p>
-                  </div>
-                  <div className='mt-[4px]'>
-                    <DropDown
-                      value='18px'
-                      options={[
-                        '16px',
-                        '18px',
-                        '20px',
-                        '24px',
-                        '28px',
-                        '32px',
-                        '36px',
-                        '40px',
-                      ]}
-                      heightOfDropDown='28'
-                      textSize='12'
-                      paddingLeft='6'
-                    />
-                  </div>
+                  <div className='md:w-[124px] md:grow'></div>
                 </div>
               </div>
             </div>
           </div>
 
           <div className='mt-[20px] flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] pb-[16px] pl-[16px] pr-[16px] pt-[8px]'>
-            <div className='flex h-[20px] flex-col items-center'>
-              <p className=' text-center text-[16px] font-bold'>Pattern</p>
+            <div className='mt-[8px] h-[20px] md:mt-[16px] md:h-[29px]'>
+              <p className=' text-center text-[16px] font-bold  md:text-left md:text-[20px] md:font-medium'>
+                Pattern
+              </p>
             </div>
 
-            <div className='mt-[8px] flex flex-wrap items-center justify-start gap-[12px]'>
-              <div className='h-[64px] w-[64px]'>
+            <div className='mt-[8px] flex flex-wrap items-center justify-start gap-[12px] md:ml-[4px]'>
+              <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
                 <Image
                   src='/images/qrcode/pattern/example1.png'
                   alt='Pattern 1'
-                  height='100'
-                  width='100'
+                  height='140'
+                  width='140'
                 />
               </div>
-              <div className='h-[64px] w-[64px]'>
+              <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px] '>
                 <Image
                   src='/images/qrcode/pattern/example2.png'
                   alt='Pattern 1'
-                  height='100'
-                  width='100'
+                  height='140'
+                  width='140'
                 />
               </div>
-              <div className='h-[64px] w-[64px]'>
+              <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
                 <Image
                   src='/images/qrcode/pattern/example3.png'
                   alt='Pattern 1'
-                  height='100'
-                  width='100'
+                  height='140'
+                  width='140'
                 />
               </div>
-              <div className='h-[64px] w-[64px]'>
+              <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
                 <Image
                   src='/images/qrcode/pattern/example1.png'
                   alt='Pattern 1'
-                  height='100'
-                  width='100'
+                  height='140'
+                  width='140'
                 />
               </div>
-              <div className='h-[64px] w-[64px]'>
+              <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
                 <Image
                   src='/images/qrcode/pattern/example2.png'
                   alt='Pattern 1'
-                  height='100'
-                  width='100'
+                  height='140'
+                  width='140'
                 />
               </div>
-              <div className='h-[64px] w-[64px]'>
+              <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
                 <Image
                   src='/images/qrcode/pattern/example3.png'
                   alt='Pattern 1'
-                  height='100'
-                  width='100'
+                  height='140'
+                  width='140'
                 />
               </div>
-              <div className='h-[64px] w-[64px]'>
+              <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
                 <Image
                   src='/images/qrcode/pattern/example2.png'
                   alt='Pattern 1'
-                  height='100'
-                  width='100'
+                  height='140'
+                  width='140'
                 />
               </div>
-              <div className='h-[64px] w-[64px]'>
+              <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
                 <Image
                   src='/images/qrcode/pattern/example3.png'
                   alt='Pattern 1'
-                  height='100'
-                  width='100'
+                  height='140'
+                  width='140'
                 />
               </div>
             </div>
             <div className='mt-[8px] flex flex-col justify-center'>
-              <div className='flex flex-row gap-[65px]'>
+              <div className='flex flex-row gap-[65px] md:ml-[4px]'>
                 {/* SingleColor and Gradient */}
                 <div className='flex flex-row items-center'>
                   <input
@@ -558,7 +632,7 @@ export default function Shorten() {
                   />
                   <label
                     htmlFor='singleColor'
-                    className='font-base ms-2 text-[12px]'
+                    className='font-base ms-2 text-[12px] md:font-bold'
                   >
                     Single color
                   </label>
@@ -574,21 +648,27 @@ export default function Shorten() {
                   />
                   <label
                     htmlFor='gradientColor'
-                    className='font-base ms-2 text-[12px]'
+                    className='font-base ms-2 text-[12px] md:font-bold'
                   >
                     Gradient color
                   </label>
                 </div>
               </div>
-              <div className='mt-[8px] flex flex-row'>
+              <div className='ml-[4px] mt-[14px]  hidden h-[24px] w-[100px] text-[16px] font-medium md:block'>
+                Pattern color
+              </div>
+              <div className='mt-[8px] flex flex-row md:ml-[4px] md:mt-[2px]'>
                 {/* Chosen color*/}
+
                 <div
                   className={`${
                     patternColorType === 'singleColor' ? '' : 'hidden'
-                  }    flex h-[40px] w-[138px] flex-row items-center rounded-[8px] border-[0.5px] pl-[8px] pr-[6px]`}
+                  }  flex h-[40px]  w-[138px] flex-row items-center rounded-[8px] border-[1px] border-primary pl-[8px] pr-[6px] md:h-[56px] md:w-[168px] md:pl-[12px] md:pr-[4px]`}
                 >
-                  <p className='text-[14px] font-medium'>#FFFFFF</p>
-                  <div className='ml-auto h-[28px] w-[28px] rounded-[8px] border-[0.5px]'></div>
+                  <p className='text-[14px] font-medium md:text-[16px]'>
+                    #FFFFFF
+                  </p>
+                  <div className='ml-auto h-[28px] w-[28px] rounded-[8px] border-[1px] border-primary md:h-[48px] md:w-[48px]'></div>
                 </div>
                 <div
                   className={`${
@@ -598,16 +678,43 @@ export default function Shorten() {
                   }    `}
                 >
                   <div
-                    className={'flex h-[40px] w-[138px] flex-row items-center rounded-[8px] border-[0.5px] pl-[8px] pr-[6px]'}
+                    className={
+                      'flex h-[40px]  w-[138px] flex-row items-center rounded-[8px] border-[1px] border-primary pl-[8px] pr-[6px] md:h-[56px] md:w-[168px] md:pl-[12px] md:pr-[4px]'
+                    }
                   >
-                    <p className='text-[14px] font-medium'>#FFFFFF</p>
-                    <div className='ml-auto h-[28px] w-[28px] rounded-[8px] border-[0.5px]'></div>
+                    <p className='text-[14px] font-medium md:text-[16px]'>
+                      #FFFFFF
+                    </p>
+                    <div className='ml-auto h-[28px] w-[28px] rounded-[8px] border-[1px] border-primary md:h-[48px] md:w-[48px]'></div>
                   </div>
                   <div
-                    className={'flex h-[40px] w-[138px] flex-row items-center rounded-[8px] border-[0.5px] pl-[8px] pr-[6px]'}
+                    className={
+                      'flex h-[40px]  w-[138px] flex-row items-center rounded-[8px] border-[1px] border-primary pl-[8px] pr-[6px] md:h-[56px] md:w-[168px] md:pl-[12px] md:pr-[4px]'
+                    }
                   >
-                    <p className='text-[14px] font-medium'>#FFFFFF</p>
-                    <div className='ml-auto h-[28px] w-[28px] rounded-[8px] border-[0.5px]'></div>
+                    <p className='text-[14px] font-medium md:text-[16px]'>
+                      #FFFFFF
+                    </p>
+                    <div className='ml-auto h-[28px] w-[28px] rounded-[8px] border-[1px] border-primary md:h-[48px] md:w-[48px]'></div>
+                  </div>
+                  <div className='hidden w-[100px] self-start md:flex md:flex-col'>
+                    <div className='flex h-[16px] flex-col items-center justify-start'>
+                      <p className='text-[12px] font-medium md:text-[16px]'>
+                        {' '}
+                        Gradient type
+                      </p>
+                    </div>
+                    <div className='mt-[4px] h-[28px] w-[100px] grow'>
+                      <DropDown
+                        value='Horizontal'
+                        options={['Horizontal', 'Vertical', 'Radio']}
+                        heightOfDropDown='28'
+                        textSize='12'
+                        paddingLeft='8'
+                        paddingRight='4'
+                        mediumPaddingRight='4'
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -617,10 +724,10 @@ export default function Shorten() {
                 }    `}
               >
                 {/* Gradient Type*/}
-                <div className='flex-cols flex h-[16px] items-center justify-start'>
+                <div className='flex-cols flex h-[16px] items-center justify-start md:hidden'>
                   <p className='text-[12px] font-medium'> Gradient type</p>
                 </div>
-                <div className='h-[28px] w-[100px]'>
+                <div className='h-[28px] w-[100px] md:hidden'>
                   <DropDown
                     value='Horizontal'
                     options={['Horizontal', 'Vertical', 'Radio']}
@@ -632,12 +739,15 @@ export default function Shorten() {
               </div>
             </div>
           </div>
+
           <div className='mt-[20px] flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] px-[15px] pb-[16px] pt-[8px]'>
-            <div className='flex h-[20px] flex-col items-center justify-center'>
-              <p className='text-center text-[16px] font-bold'>Logo</p>
+            <div className='mt-[8px] h-[20px] md:mt-[16px] md:h-[29px]'>
+              <p className='text-center text-[16px] font-bold  md:text-left md:text-[20px] md:font-medium'>
+                Logo
+              </p>
             </div>
-            <div className='mt-[8px] flex flex-row flex-wrap gap-[10px]'>
-              <div className='h-[40px] w-[40px]'>
+            <div className='mt-[8px] flex flex-row flex-wrap gap-[10px] md:ml-[1px] md:gap-x-[20px] md:gap-y-[36px]'>
+              <div className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
                 <Image
                   src='/images/qrcode/logo/none.png'
                   alt='Pattern 1'
@@ -645,7 +755,7 @@ export default function Shorten() {
                   width='100'
                 />
               </div>
-              <div className='h-[40px] w-[40px]'>
+              <div className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
                 <Image
                   src='/images/qrcode/logo/youtube.png'
                   alt='Pattern 1'
@@ -653,7 +763,7 @@ export default function Shorten() {
                   width='100'
                 />
               </div>
-              <div className='h-[40px] w-[40px]'>
+              <div className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
                 <Image
                   src='/images/qrcode/logo/facebook.png'
                   alt='Pattern 1'
@@ -661,7 +771,7 @@ export default function Shorten() {
                   width='100'
                 />
               </div>
-              <div className='h-[40px] w-[40px]'>
+              <div className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
                 <Image
                   src='/images/qrcode/logo/instagram.png'
                   alt='Pattern 1'
@@ -669,7 +779,7 @@ export default function Shorten() {
                   width='100'
                 />
               </div>
-              <div className='h-[40px] w-[40px]'>
+              <div className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
                 <Image
                   src='/images/qrcode/logo/google.png'
                   alt='Pattern 1'
@@ -677,7 +787,7 @@ export default function Shorten() {
                   width='100'
                 />
               </div>
-              <div className='h-[40px] w-[40px]'>
+              <div className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
                 <Image
                   src='/images/qrcode/logo/twitter.png'
                   alt='Pattern 1'
@@ -762,6 +872,7 @@ export default function Shorten() {
                     heightOfDropDown='24'
                     textSize='12'
                     paddingLeft='4'
+                    paddingRight='2'
                   />
                 </div>
               </div>

@@ -11,6 +11,8 @@ type DropDownProps = {
   mediumHeight?: '32' | '36' | '48' | '60';
   mediumTextSize?: '16' | '20';
   mediumPaddingLeft?: '8' | '16';
+  paddingRight?: '2' | '4';
+  mediumPaddingRight?: '0' | '4' | '6' | '12' | '20';
 };
 
 export default function DropDown(props: DropDownProps) {
@@ -24,6 +26,8 @@ export default function DropDown(props: DropDownProps) {
     mediumHeight,
     mediumPaddingLeft,
     mediumTextSize,
+    paddingRight,
+    mediumPaddingRight,
   } = props;
   const [selected, setSelected] = useState(value);
   const currentDevice = typeOfDevice ? typeOfDevice : 'mobile';
@@ -41,7 +45,17 @@ export default function DropDown(props: DropDownProps) {
             ${mediumPaddingLeft === '8' ? 'md:pl-[8px]' : ''}
             ${mediumPaddingLeft === '16' ? 'md:pl-[16px]' : ''}
             
-             pr-[20px] text-left ${textSize === '12' ? 'text-[12px]' : ''}
+            ${paddingRight === '2' ? 'pr-[2px]' : ''}
+            ${paddingRight === '4' ? 'pr-[4px]' : ''}
+            ${mediumPaddingRight === '0' ? 'md:pr-[0px]' : ''}
+            ${mediumPaddingRight === '4' ? 'md:pr-[4px]' : ''}
+            ${mediumPaddingRight === '6' ? 'md:pr-[6px]' : ''}
+            ${mediumPaddingRight === '12' ? 'md:pr-[12px]' : ''}
+            ${mediumPaddingRight === '20' ? 'md:pr-[20px]' : ''}
+            ${paddingRight ? '' : 'pr-2'}
+            ${mediumPaddingRight ? '' : 'md:pr-[20px]'} text-left ${
+              textSize === '12' ? 'text-[12px]' : ''
+            }
              ${textSize === '16' ? 'text-[16px]' : ''}
              ${mediumTextSize === '16' ? 'md:text-[16px]' : ''}
              ${
@@ -63,16 +77,28 @@ export default function DropDown(props: DropDownProps) {
                 {selected}
               </div>
             </span>
-            <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
+            <span
+              className={`pointer-events-none absolute inset-y-0 right-0 flex items-center 
+            ${paddingRight === '2' ? 'pr-[2px]' : ''}
+            ${paddingRight === '4' ? 'pr-[4px]' : ''}
+            ${mediumPaddingRight === '0' ? 'md:pr-[0px]' : ''}
+            ${mediumPaddingRight === '4' ? 'md:pr-[4px]' : ''}
+            ${mediumPaddingRight === '6' ? 'md:pr-[6px]' : ''}
+            ${mediumPaddingRight === '12' ? 'md:pr-[12px]' : ''}
+            ${mediumPaddingRight === '20' ? 'md:pr-[20px]' : ''}
+            ${paddingRight ? '' : 'pr-2'}
+            ${mediumPaddingRight ? '' : 'md:pr-[20px]'}
+            `}
+            >
               <svg
-                width='10'
-                height='7'
-                viewBox='0 0 10 7'
+                width='20'
+                height='20'
+                viewBox='0 0 20 20'
                 fill='none'
                 xmlns='http://www.w3.org/2000/svg'
               >
                 <path
-                  d='M1.175 0.533203L5 4.34987L8.825 0.533203L10 1.7082L5 6.7082L0 1.7082L1.175 0.533203Z'
+                  d='M6.175 6.53516L10 10.3518L13.825 6.53516L15 7.71016L10 12.7102L5 7.71016L6.175 6.53516Z'
                   fill='#252641'
                   fill-opacity='0.87'
                 />
@@ -100,7 +126,7 @@ export default function DropDown(props: DropDownProps) {
                 <Listbox.Option
                   key={optionIdx}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-1 pr-4
+                    `relative cursor-default select-none py-1 
                     ${paddingLeft === '4' ? 'pl-[4px]' : ''}
                     ${paddingLeft === '6' ? 'pl-[6px]' : ''}
                     ${paddingLeft === '8' ? 'pl-[8px]' : ''}
