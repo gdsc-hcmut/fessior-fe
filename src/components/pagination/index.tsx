@@ -151,7 +151,7 @@ const Pagination = ({
           />
         </button>
       </li>
-      <li className='pl-2'>
+      <li className='relative z-[5] pl-2 max-[419px]:hidden min-[420px]:block'>
         <form
           className='flex items-center space-x-2'
           onSubmit={(e) => {
@@ -159,7 +159,7 @@ const Pagination = ({
             onPageChange(inputPage);
           }}
         >
-          <p className='font-semibold'>Go to page</p>
+          <p className='text-[12px] font-semibold md:text-base'>Go to page</p>
           <input
             type='number'
             className='h-7 w-8 rounded-lg border-[1px] border-primary px-2 py-1 font-semibold 2xl:h-8 2xl:w-10'
@@ -168,7 +168,9 @@ const Pagination = ({
             min={1}
             onChange={(e) => setInputPage(Number(e.target.value))}
           />
-          <p className='font-semibold'>of {totalPages}</p>
+          <p className='text-[12px] font-semibold text-white min-[500px]:text-inherit md:text-base'>
+            of {totalPages}
+          </p>
         </form>
       </li>
     </ul>

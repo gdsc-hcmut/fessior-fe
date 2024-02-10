@@ -164,11 +164,72 @@ function UrlItemXL(props: UrlItemProps) {
 }
 function UrlItemMD(props: UrlItemProps) {
   const { url } = props;
+  const mobile_ref = useRef<HTMLDivElement | null>(null);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [isDivFull, setIsDivFull] = useState(false);
+  const [width, setWidth] = useState<number | null>(0);
+
+  useLayoutEffect(() => {
+    function updateSize() {
+      if (mobile_ref.current) {
+        setWidth(mobile_ref.current.offsetWidth);
+      }
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
+  const calculateBoxWidth = (text: string) => {
+    const fontSize = 12;
+    const padding = 8;
+    const dummyDiv = document.createElement('div');
+    dummyDiv.style.fontSize = `${fontSize}px`;
+    dummyDiv.style.padding = `${padding}px`;
+    dummyDiv.style.width = 'fit-content';
+    dummyDiv.textContent = text;
+
+    document.body.appendChild(dummyDiv);
+    const elementWidth = dummyDiv.clientWidth + 1;
+    document.body.removeChild(dummyDiv);
+
+    return elementWidth;
+  };
+
+  useEffect(() => {
+    const renderBoxes = () => {
+      let currentWidth = 0;
+      const newCategories = [];
+
+      for (let i = 0; i < url.category.length; i++) {
+        const boxWidth = calculateBoxWidth(url.category[i]);
+        if (
+          currentWidth + boxWidth <=
+          (width && width != 0
+            ? width * 0.8
+            : mobile_ref.current
+            ? mobile_ref.current.clientWidth * 0.8
+            : 0)
+        ) {
+          newCategories.push(url.category[i]);
+          currentWidth += boxWidth;
+        } else {
+          setIsDivFull(true);
+          break;
+        }
+      }
+
+      setCategories(newCategories);
+    };
+
+    setIsDivFull(false);
+    renderBoxes();
+  }, [width, url.category]);
 
   return (
     <div className='relative flex w-full justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
       <div className='absolute left-0 top-4 h-9 w-2 bg-primary' />
-      <div className='ml-3 flex flex-col'>
+      <div className='flex flex-col'>
         <div className='flex items-center space-x-2'>
           <div
             className={clsx(
@@ -176,12 +237,12 @@ function UrlItemMD(props: UrlItemProps) {
               url.enable ? 'bg-[#7BCFA9]' : 'bg-[#ED9D97]',
             )}
           />
-          <p className='truncate text-xl font-semibold text-primary'>
+          <p className='w-[50vw] truncate text-xl font-semibold text-primary'>
             https://{url.domain}/{url.slug}
           </p>
         </div>
-        <p className='mt-5 truncate'>{url.originalUrl}</p>
-        <div className='mt-5 flex items-center space-x-6'>
+        <p className='mt-5 w-[70vw] truncate'>{url.originalUrl}</p>
+        <div className='mt-5 flex flex-col items-start space-y-2 md:flex-row md:items-center md:space-x-6 md:space-y-0'>
           <div className='flex items-center space-x-1'>
             <Image
               src='/icons/click.svg'
@@ -212,8 +273,11 @@ function UrlItemMD(props: UrlItemProps) {
             className='h-5 w-auto'
           />
           <p className='font-semibold'>Category:</p>
-          <div className='ml-3 flex items-center space-x-1'>
-            {url.category.map((category) => (
+          <div
+            ref={mobile_ref}
+            className='ml-3 flex w-full items-center space-x-1'
+          >
+            {categories.map((category) => (
               <div
                 key={category}
                 className='rounded-lg bg-primary px-2 py-1 text-[12px] text-white'
@@ -221,6 +285,17 @@ function UrlItemMD(props: UrlItemProps) {
                 {category}
               </div>
             ))}
+            {isDivFull && (
+              <div className='flex h-[26px] w-[26px] items-center justify-center rounded-lg bg-primary'>
+                <Image
+                  src='/icons/url/more_horiz.svg'
+                  alt='More icon'
+                  width={0}
+                  height={0}
+                  className='h-5 w-auto'
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
