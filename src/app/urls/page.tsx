@@ -25,17 +25,17 @@ function URLsPage(props: URLsPageProps) {
   const [page, setPage] = useState<number>(1);
 
   return (
-    <div className='relative px-10 pt-10 2xl:px-[60px] 2xl:pt-[60px] 3xl:px-[80px]'>
+    <div className='relative px-10 pt-[48px] xl:pt-10 2xl:px-[60px] 2xl:pt-[60px] 3xl:px-[80px]'>
       <div className='flex items-end justify-between'>
         <div>
           <h1 className='text-[40px] font-bold text-primary 2xl:text-[48px] 3xl:text-[60px]'>
             My URLs
           </h1>
-          <p className='text-xl text-primary 2xl:text-[24px] 3xl:text-[28px]'>
+          <p className='text-primary xl:text-xl 2xl:text-[24px] 3xl:text-[28px]'>
             Effortlessly organize and access your shortened URLs
           </p>
         </div>
-        <div className='flex items-center space-x-2 rounded-lg bg-primary/20 px-3 py-1 2xl:px-5 2xl:py-2'>
+        <div className='hidden items-center space-x-2 rounded-lg bg-primary/20 px-3 py-1 xl:flex 2xl:px-5 2xl:py-2'>
           <div className='flex h-10 w-10 items-center justify-center rounded-full bg-white'>
             <Image
               src='/icons/click.svg'
@@ -52,16 +52,25 @@ function URLsPage(props: URLsPageProps) {
             </p>
           </div>
         </div>
+        <button className='flex h-10 w-10 items-center justify-center rounded-lg bg-primary xl:hidden'>
+          <Image
+            src='/icons/url/collections_bookmark.svg'
+            alt='Sidebar toggle'
+            width={0}
+            height={0}
+            className='h-7 w-auto'
+          />
+        </button>
       </div>
       <div className='mt-8'>
         <div className='flex justify-between'>
-          <div className='flex w-[30vw] items-center rounded-lg border-[0.5px] border-[#7E7E7E] py-3 pl-2 3xl:w-[25vw]'>
+          <div className='flex w-[420px] items-center rounded-lg border-[0.5px] border-[#7E7E7E] py-2 pl-2 xl:w-[30vw] xl:py-3 3xl:w-[25vw]'>
             <Image
               src='/icons/search.svg'
               alt='Search icon'
               width={0}
               height={0}
-              className='h-5 w-auto'
+              className='h-4 w-auto xl:h-5'
             />
             <div className='ml-2 mr-3 h-full w-[1px] bg-[#696969]/30' />
             <input
@@ -132,6 +141,9 @@ function URLsPage(props: URLsPageProps) {
         </div>
         <div className='mt-4 flex h-[42px] items-center'>
           <p className='font-semibold text-primary'>123 Results</p>
+          <button className='ml-3 text-[#4D4D4D] underline'>
+            Clear filter
+          </button>
         </div>
       </div>
       <MyUrlList myUrlList={myUrlListData} />
@@ -149,7 +161,7 @@ function URLsPage(props: URLsPageProps) {
           alt='Decor image'
           width={0}
           height={0}
-          className='h-auto w-[42vw]'
+          className='h-auto w-[70vw] xl:w-[42vw]'
         />
       </div>
     </div>

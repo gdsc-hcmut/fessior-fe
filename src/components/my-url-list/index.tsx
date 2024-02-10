@@ -12,7 +12,7 @@ type UrlItemProps = {
   url: MyUrl;
 };
 
-function UrlItem(props: UrlItemProps) {
+function UrlItemXL(props: UrlItemProps) {
   const { url } = props;
   const ref = useRef<HTMLDivElement | null>(null);
   const [categories, setCategories] = useState<string[]>([]);
@@ -162,12 +162,106 @@ function UrlItem(props: UrlItemProps) {
     </div>
   );
 }
+function UrlItemMD(props: UrlItemProps) {
+  const { url } = props;
+
+  return (
+    <div className='relative flex w-full justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
+      <div className='absolute left-0 top-4 h-9 w-2 bg-primary' />
+      <div className='ml-3 flex flex-col'>
+        <div className='flex items-center space-x-2'>
+          <div
+            className={clsx(
+              'h-6 w-6 rounded-full',
+              url.enable ? 'bg-[#7BCFA9]' : 'bg-[#ED9D97]',
+            )}
+          />
+          <p className='truncate text-xl font-semibold text-primary'>
+            https://{url.domain}/{url.slug}
+          </p>
+        </div>
+        <p className='mt-5 truncate'>{url.originalUrl}</p>
+        <div className='mt-5 flex items-center space-x-6'>
+          <div className='flex items-center space-x-1'>
+            <Image
+              src='/icons/click.svg'
+              alt='Click icon'
+              width={0}
+              height={0}
+              className='h-5 w-auto'
+            />
+            <p className='font-semibold'>Total clicks: {url.totalClicks}</p>
+          </div>
+          <div className='flex items-center space-x-1'>
+            <Image
+              src='/icons/url/event_note.svg'
+              alt='Calendar icon'
+              width={0}
+              height={0}
+              className='h-5 w-auto'
+            />
+            <p className='font-semibold'>Created at: {url.createdAt}</p>
+          </div>
+        </div>
+        <div className='mt-3 flex items-center space-x-1'>
+          <Image
+            src='/icons/url/tag.svg'
+            alt='Calendar icon'
+            width={0}
+            height={0}
+            className='h-5 w-auto'
+          />
+          <p className='font-semibold'>Category:</p>
+          <div className='ml-3 flex items-center space-x-1'>
+            {url.category.map((category) => (
+              <div
+                key={category}
+                className='rounded-lg bg-primary px-2 py-1 text-[12px] text-white'
+              >
+                {category}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className='flex flex-col justify-end space-y-2 self-start'>
+        <button className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary'>
+          <Image
+            src='/icons/content_copy.svg'
+            alt='Copy icon'
+            width={0}
+            height={0}
+            className='h-4 w-auto'
+          />
+        </button>
+        <button className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary'>
+          <Image
+            src='/icons/url/edit.svg'
+            alt='Edit icon'
+            width={0}
+            height={0}
+            className='h-4 w-auto'
+          />
+        </button>
+        <button className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary'>
+          <Image
+            src='/icons/url/delete.svg'
+            alt='Delete icon'
+            width={0}
+            height={0}
+            className='h-4 w-auto'
+          />
+        </button>
+      </div>
+    </div>
+  );
+}
 export default function MyUrlList(props: MyUrlListProps) {
   const { myUrlList } = props;
 
   return (
-    <div className='relative z-[5] mt-9'>
-      <div className='flex flex-shrink-0 space-x-5 px-5 2xl:px-7 3xl:px-10'>
+    <div className='relative z-[5] mt-3 xl:mt-9'>
+      <div className='hidden flex-shrink-0 space-x-5 px-5 xl:flex 2xl:px-7 3xl:px-10'>
         <p className='flex flex-[2] text-[14px] font-semibold text-primary 2xl:flex-[1.9] 2xl:text-base 3xl:flex-[1.5] 3xl:text-xl'>
           Shortened link
         </p>
@@ -188,9 +282,14 @@ export default function MyUrlList(props: MyUrlListProps) {
         </p>
         <div className='flex flex-[1]' />
       </div>
-      <div className='mt-9 flex flex-col space-y-3'>
+      <div className='mt-9 hidden flex-col space-y-3 xl:flex'>
         {myUrlList.map((url, idx) => (
-          <UrlItem key={idx} url={url} />
+          <UrlItemXL key={idx} url={url} />
+        ))}
+      </div>
+      <div className='flex flex-col space-y-5 xl:hidden'>
+        {myUrlList.map((url, idx) => (
+          <UrlItemMD key={idx} url={url} />
         ))}
       </div>
     </div>

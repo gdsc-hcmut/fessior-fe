@@ -99,13 +99,15 @@ const Pagination = ({
           >
             <button
               className={`aspect-square h-6 w-6 rounded-full 2xl:h-8 2xl:w-8  ${
-                pageNumber === currentPage ? 'bg-primary' : 'hover:bg-primary'
+                pageNumber === currentPage
+                  ? 'bg-primary'
+                  : 'ml-[-4px] mr-[-4px] hover:bg-primary'
               }`}
               onClick={() => submitPageChanage(pageNumber as number)}
             >
               <p
                 className={`font-semibold 3xl:text-xl ${
-                  pageNumber === currentPage && 'text-white'
+                  pageNumber === currentPage ? 'text-white' : 'hover:text-white'
                 }`}
               >
                 {pageNumber}

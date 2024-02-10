@@ -63,7 +63,7 @@ export function SidebarItem(props: SidebarItemProps) {
 
 export default function Sidebar() {
   return (
-    <aside className='fixed left-0 top-[85.6px] flex h-full w-[18vw] flex-col space-y-3 bg-white px-4 pt-10 shadow-[6px_6px_15px_0_rgba(64,79,104,0.05)] 2xl:w-[17w] 2xl:space-y-5 2xl:px-7 3xl:w-[16vw]'>
+    <aside className='fixed left-0 top-[85.6px] hidden h-full w-[18vw] flex-col space-y-3 bg-white px-4 pt-10 shadow-[6px_6px_15px_0_rgba(64,79,104,0.05)] xl:flex 2xl:w-[17w] 2xl:space-y-5 2xl:px-7 3xl:w-[16vw]'>
       {sidebarItems.map((item, idx) => (
         <div key={idx}>
           <h3 className='mb-2 text-[18px] font-semibold text-primary 2xl:mb-3 3xl:text-xl'>
