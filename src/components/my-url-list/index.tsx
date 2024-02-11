@@ -241,7 +241,7 @@ function UrlItemMD(props: UrlItemProps) {
             https://{url.domain}/{url.slug}
           </p>
         </div>
-        <p className='mt-5 w-[70vw] truncate'>{url.originalUrl}</p>
+        <p className='mt-5 w-[70vw] truncate lg:w-[60vw]'>{url.originalUrl}</p>
         <div className='mt-5 flex flex-col items-start space-y-2 md:flex-row md:items-center md:space-x-6 md:space-y-0'>
           <div className='flex items-center space-x-1'>
             <Image

@@ -13,10 +13,7 @@ function URLsLayout(props: URLsLayoutProps) {
   return (
     <section className='min-h-[100vh]'>
       <Header />
-      <Sidebar />
-      <div className='pt-[71.6px] xl:pl-[18vw] xl:pt-[85.6px] 2xl:pl-[17vw] 3xl:pl-[16vw]'>
-        {children}
-      </div>
+      {children}
     </section>
   );
 }
