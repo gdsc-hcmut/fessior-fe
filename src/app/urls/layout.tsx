@@ -11,7 +11,7 @@ function URLsLayout(props: URLsLayoutProps) {
   const { children } = props;
 
   return (
-    <section className='min-h-[100vh]'>
+    <section>
       <Header />
       {children}
     </section>

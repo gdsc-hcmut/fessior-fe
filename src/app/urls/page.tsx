@@ -36,14 +36,11 @@ function URLsPage(props: URLsPageProps) {
         <div className='relative px-5 pt-10 md:px-10 md:pt-[48px] xl:pt-10 2xl:px-[60px] 2xl:pt-[60px] 3xl:px-[80px]'>
           <div className='flex items-end justify-between'>
             <div className='w-full md:w-fit'>
-              <h1 className='hidden text-[40px] font-bold text-primary md:block 2xl:text-[48px] 3xl:text-[60px]'>
-                My URLs
-              </h1>
-              <div className='flex items-center justify-between md:hidden'>
+              <div className='flex items-center justify-between 2xl:text-[48px] 3xl:text-[60px]'>
                 <h1 className='text-[40px] font-bold text-primary'>My URLs</h1>
                 <button
                   onClick={() => setIsCollapsed(false)}
-                  className='flex h-10 w-10 items-center justify-center rounded-lg bg-primary'
+                  className='flex h-10 w-10 items-center justify-center rounded-lg bg-primary md:hidden'
                 >
                   <Image
                     src='/icons/url/collections_bookmark.svg'
