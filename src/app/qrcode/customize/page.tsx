@@ -19,12 +19,138 @@ import Url from '@/types/url-type';
 export default function Shorten() {
   const [typeOfQR, setTypeOfQR] = useState('url');
   const [patternColorType, setPatternColorType] = useState('singleColor');
+  const [zoomMiniQR, setZoomMiniQR] = useState(true);
   const handleRadioButton = (value: string) => {
     setPatternColorType(value);
   };
   return (
     <>
       <div className='relative flex w-[100%] flex-col items-center justify-start overflow-hidden pt-[88px] leading-[1.2] text-primary'>
+        <div
+          className={`fixed right-[8px] top-[112px] z-50 hidden h-[222px] w-[224px]  ${
+            zoomMiniQR ? 'flex-col md:flex' : 'hidden'
+          }`}
+        >
+          <button
+            className='z-50 h-[28px] w-[28px] self-start rounded-full bg-primary'
+            onClick={() => {
+              setZoomMiniQR(!zoomMiniQR);
+            }}
+          >
+            {' '}
+            <svg
+              width='12'
+              height='12'
+              viewBox='0 0 12 12'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+              className='absolute left-[8px] top-[8px]'
+            >
+              <path
+                d='M4.95228 9.81195C5.95281 9.81195 6.8904 9.51273 7.67069 9.00156L10.4268 11.7382C10.6093 11.9127 10.8422 12 11.0939 12C11.6162 12 12 11.5948 12 11.0836C12 10.8468 11.9182 10.6161 11.742 10.4416L9.00472 7.7174C9.57105 6.91948 9.90456 5.95325 9.90456 4.90597C9.90456 2.20675 7.67698 0 4.95228 0C2.23388 0 0 2.20675 0 4.90597C0 7.6052 2.22758 9.81195 4.95228 9.81195ZM4.95228 8.50286C2.95753 8.50286 1.32145 6.88208 1.32145 4.90597C1.32145 2.92987 2.95753 1.30909 4.95228 1.30909C6.94704 1.30909 8.58312 2.92987 8.58312 4.90597C8.58312 6.88208 6.94704 8.50286 4.95228 8.50286ZM3.32879 5.39844H6.57577C6.84636 5.39844 7.07289 5.17403 7.07289 4.90597C7.07289 4.63792 6.84636 4.41351 6.57577 4.41351H3.32879C3.05821 4.41351 2.83167 4.63792 2.83167 4.90597C2.83167 5.17403 3.05821 5.39844 3.32879 5.39844Z'
+                fill='white'
+              />
+            </svg>
+          </button>
+          <div className='ml-[-20px] mt-[-17px] h-[212px] w-[212px] self-end rounded-[8px] border-[3px] border-primary bg-white p-[3px] '>
+            <Image
+              src='/images/qrcode/example-qr.png'
+              alt='Pattern 1'
+              height='250'
+              width='250'
+            />
+          </div>
+        </div>
+        <div
+          className={`fixed right-[8px] top-[112px] z-50 flex h-[132px] w-[132px] flex-col 
+                        ${!zoomMiniQR ? '' : 'hidden'}
+        `}
+        >
+          <button
+            className='z-50 mr-[-2px] h-[24px] w-[24px] self-end rounded-full bg-primary'
+            onClick={() => {
+              setZoomMiniQR(!zoomMiniQR);
+            }}
+          >
+            {' '}
+            <svg
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <circle cx='12' cy='12' r='12' fill='#0B2878' />
+              <path
+                d='M10.9523 15.8119C11.9528 15.8119 12.8904 15.5127 13.6707 15.0016L16.4268 17.7382C16.6093 17.9127 16.8422 18 17.0939 18C17.6162 18 18 17.5948 18 17.0836C18 16.8468 17.9182 16.6161 17.742 16.4416L15.0047 13.7174C15.5711 12.9195 15.9046 11.9532 15.9046 10.906C15.9046 8.20675 13.677 6 10.9523 6C8.23388 6 6 8.20675 6 10.906C6 13.6052 8.22758 15.8119 10.9523 15.8119ZM10.9523 14.5029C8.95753 14.5029 7.32145 12.8821 7.32145 10.906C7.32145 8.92987 8.95753 7.30909 10.9523 7.30909C12.947 7.30909 14.5831 8.92987 14.5831 10.906C14.5831 12.8821 12.947 14.5029 10.9523 14.5029ZM9.32879 11.3984H10.4552V12.5143C10.4552 12.7886 10.6754 13.0068 10.9523 13.0068C11.2292 13.0068 11.4431 12.7886 11.4431 12.5143V11.3984H12.5758C12.8526 11.3984 13.0729 11.1803 13.0729 10.906C13.0729 10.6317 12.8526 10.4135 12.5758 10.4135H11.4431V9.29766C11.4431 9.02338 11.2292 8.80519 10.9523 8.80519C10.6754 8.80519 10.4552 9.02338 10.4552 9.29766V10.4135H9.32879C9.05191 10.4135 8.83167 10.6317 8.83167 10.906C8.83167 11.1803 9.05191 11.3984 9.32879 11.3984Z'
+                fill='white'
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div
+          className={`fixed right-[8px] top-[112px] z-50 flex h-[132px] w-[132px] flex-col ${
+            zoomMiniQR ? '' : 'hidden'
+          } md:hidden`}
+        >
+          <button
+            className='z-50 h-[24px] w-[24px] self-start rounded-full bg-primary'
+            onClick={() => {
+              setZoomMiniQR(!zoomMiniQR);
+            }}
+          >
+            {' '}
+            <svg
+              width='12'
+              height='12'
+              viewBox='0 0 12 12'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+              className='absolute left-[6px] top-[6px]'
+            >
+              <path
+                d='M4.95228 9.81195C5.95281 9.81195 6.8904 9.51273 7.67069 9.00156L10.4268 11.7382C10.6093 11.9127 10.8422 12 11.0939 12C11.6162 12 12 11.5948 12 11.0836C12 10.8468 11.9182 10.6161 11.742 10.4416L9.00472 7.7174C9.57105 6.91948 9.90456 5.95325 9.90456 4.90597C9.90456 2.20675 7.67698 0 4.95228 0C2.23388 0 0 2.20675 0 4.90597C0 7.6052 2.22758 9.81195 4.95228 9.81195ZM4.95228 8.50286C2.95753 8.50286 1.32145 6.88208 1.32145 4.90597C1.32145 2.92987 2.95753 1.30909 4.95228 1.30909C6.94704 1.30909 8.58312 2.92987 8.58312 4.90597C8.58312 6.88208 6.94704 8.50286 4.95228 8.50286ZM3.32879 5.39844H6.57577C6.84636 5.39844 7.07289 5.17403 7.07289 4.90597C7.07289 4.63792 6.84636 4.41351 6.57577 4.41351H3.32879C3.05821 4.41351 2.83167 4.63792 2.83167 4.90597C2.83167 5.17403 3.05821 5.39844 3.32879 5.39844Z'
+                fill='white'
+              />
+            </svg>
+          </button>
+          <div className='mt-[-12px] h-[120px] w-[120px] self-end rounded-[8px] border-[3px] border-primary bg-white p-[3px] '>
+            <Image
+              src='/images/qrcode/example-qr.png'
+              alt='Pattern 1'
+              height='200'
+              width='200'
+            />
+          </div>
+        </div>
+        <div
+          className={`fixed right-[8px] top-[112px] z-50 flex h-[132px] w-[132px] flex-col 
+                        ${!zoomMiniQR ? '' : 'hidden'} md:hidden
+        `}
+        >
+          <button
+            className='z-50 mr-[-2px] h-[24px] w-[24px] self-end rounded-full bg-primary'
+            onClick={() => {
+              setZoomMiniQR(!zoomMiniQR);
+            }}
+          >
+            {' '}
+            <svg
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <circle cx='12' cy='12' r='12' fill='#0B2878' />
+              <path
+                d='M10.9523 15.8119C11.9528 15.8119 12.8904 15.5127 13.6707 15.0016L16.4268 17.7382C16.6093 17.9127 16.8422 18 17.0939 18C17.6162 18 18 17.5948 18 17.0836C18 16.8468 17.9182 16.6161 17.742 16.4416L15.0047 13.7174C15.5711 12.9195 15.9046 11.9532 15.9046 10.906C15.9046 8.20675 13.677 6 10.9523 6C8.23388 6 6 8.20675 6 10.906C6 13.6052 8.22758 15.8119 10.9523 15.8119ZM10.9523 14.5029C8.95753 14.5029 7.32145 12.8821 7.32145 10.906C7.32145 8.92987 8.95753 7.30909 10.9523 7.30909C12.947 7.30909 14.5831 8.92987 14.5831 10.906C14.5831 12.8821 12.947 14.5029 10.9523 14.5029ZM9.32879 11.3984H10.4552V12.5143C10.4552 12.7886 10.6754 13.0068 10.9523 13.0068C11.2292 13.0068 11.4431 12.7886 11.4431 12.5143V11.3984H12.5758C12.8526 11.3984 13.0729 11.1803 13.0729 10.906C13.0729 10.6317 12.8526 10.4135 12.5758 10.4135H11.4431V9.29766C11.4431 9.02338 11.2292 8.80519 10.9523 8.80519C10.6754 8.80519 10.4552 9.02338 10.4552 9.29766V10.4135H9.32879C9.05191 10.4135 8.83167 10.6317 8.83167 10.906C8.83167 11.1803 9.05191 11.3984 9.32879 11.3984Z'
+                fill='white'
+              />
+            </svg>
+          </button>
+        </div>
         {/* ///////////// MAIN ////////////// */}
         <div className='w-[90%] md:w-[85%]'>
           <p>Start</p>
@@ -96,7 +222,7 @@ export default function Shorten() {
                     <path
                       d='M3.24984 9.9987C3.24984 8.5737 4.40817 7.41536 5.83317 7.41536H9.1665V5.83203H5.83317C3.53317 5.83203 1.6665 7.6987 1.6665 9.9987C1.6665 12.2987 3.53317 14.1654 5.83317 14.1654H9.1665V12.582H5.83317C4.40817 12.582 3.24984 11.4237 3.24984 9.9987ZM6.6665 10.832H13.3332V9.16536H6.6665V10.832ZM14.1665 5.83203H10.8332V7.41536H14.1665C15.5915 7.41536 16.7498 8.5737 16.7498 9.9987C16.7498 11.4237 15.5915 12.582 14.1665 12.582H10.8332V14.1654H14.1665C16.4665 14.1654 18.3332 12.2987 18.3332 9.9987C18.3332 7.6987 16.4665 5.83203 14.1665 5.83203Z'
                       fill='#0B2878'
-                      fill-opacity='0.87'
+                      fillOpacity='0.87'
                     />
                   </svg>
                   <div className='absolute left-[30px] top-[8px] h-[24px] w-[0.5px] bg-[#696969] opacity-[30%] md:left-[40px] md:top-[12px]'></div>
@@ -117,6 +243,7 @@ export default function Shorten() {
                       options={['GDSC', 'CTCT', 'OISP']}
                       heightOfDropDown='28'
                       textSize='12'
+                      mediumPaddingLeft='8'
                       paddingLeft='8'
                       mediumHeight='32'
                       mediumTextSize='16'
@@ -137,6 +264,7 @@ export default function Shorten() {
                       options={['furl.one', 'bkoisp.info', 'gic.gdsc.app']}
                       heightOfDropDown='28'
                       textSize='12'
+                      mediumPaddingLeft='8'
                       paddingLeft='8'
                       mediumHeight='32'
                       mediumTextSize='16'
@@ -190,6 +318,7 @@ export default function Shorten() {
                     mediumTextSize='20'
                     paddingRight='4'
                     mediumPaddingRight='12'
+                    mediumPaddingLeft='16'
                   />
                 </div>
               </div>
@@ -713,6 +842,7 @@ export default function Shorten() {
                         paddingLeft='8'
                         paddingRight='4'
                         mediumPaddingRight='4'
+                        mediumPaddingLeft='8'
                       />
                     </div>
                   </div>
@@ -734,6 +864,9 @@ export default function Shorten() {
                     heightOfDropDown='28'
                     textSize='12'
                     paddingLeft='8'
+                    mediumPaddingLeft='8'
+                    mediumPaddingRight='4'
+                    paddingRight='4'
                   />
                 </div>
               </div>
@@ -797,37 +930,66 @@ export default function Shorten() {
               </div>
             </div>
             <div className='mt-[16px] rounded-[8px]'>
-              <button className='flex w-[100%] flex-col items-center justify-center rounded-[8px] border border-primary py-[6px]'>
+              <button className='flex w-[100%] flex-col items-center justify-center rounded-[8px] border border-primary py-[6px] md:bg-primary'>
                 <div className='flex flex-row items-center'>
-                  <div className='h-[20px] w-[20px]'>
-                    <Image
-                      src='/images/qrcode/logo/file-upload.png'
-                      alt='Pattern 1'
-                      height='100'
-                      width='100'
+                  <svg
+                    width='20'
+                    height='20'
+                    viewBox='0 0 20 20'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='block md:hidden'
+                  >
+                    <rect width='20' height='20' fill='white' />
+                    <path
+                      d='M7.50033 13.3333H12.5003V8.33333H15.8337L10.0003 2.5L4.16699 8.33333H7.50033V13.3333ZM4.16699 15H15.8337V16.6667H4.16699V15Z'
+                      fill='#0B2878'
                     />
-                  </div>
+                  </svg>
+
+                  <svg
+                    width='25'
+                    height='24'
+                    viewBox='0 0 25 24'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='hidden md:block'
+                  >
+                    <rect
+                      width='24'
+                      height='24'
+                      transform='translate(0.397461)'
+                      fill='#0B2878'
+                    />
+                    <path
+                      d='M9.39746 16H15.3975V10H19.3975L12.3975 3L5.39746 10H9.39746V16ZM5.39746 18H19.3975V20H5.39746V18Z'
+                      fill='white'
+                    />
+                  </svg>
+
                   <div className='ml-[4px] flex h-[20px] w-[82px] flex-col justify-center'>
-                    <p className='text-[14px]'>Upload image</p>
+                    <p className='text-[14px] font-normal md:text-white'>
+                      Upload image
+                    </p>
                   </div>
                 </div>
               </button>
             </div>
           </div>
           <div className='mt-[20px] flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] px-[35px] pb-[16px] pt-[28px]'>
-            <div className='ml-auto mr-auto h-[200px] w-[200px] rounded-[8px] border p-[10px]'>
+            <div className=' ml-auto mr-auto h-[200px] w-[200px] rounded-[8px] border border-primary p-[10px] md:h-[532px] md:w-[532px]'>
               <Image
                 src='/images/qrcode/example-qr.png'
                 alt='Pattern 1'
-                height='200'
-                width='200'
+                height='600'
+                width='600'
               />
             </div>
-            <div className='gr w- mt-[20px] flex flex-row flex-wrap justify-center gap-x-[24px] gap-y-[8px]'>
-              <div className='flex w-[50px] flex-row items-center'>
+            <div className='mt-[20px] flex flex-row flex-wrap justify-center gap-x-[24px] gap-y-[8px] md:mt-[12px] md:gap-x-[60px]'>
+              <div className='flex w-[50px] flex-row items-center md:w-[68px]'>
                 <label
                   htmlFor='saveSVG'
-                  className='mr-[8px] text-[14px] font-bold'
+                  className='mr-[8px] text-[14px] font-bold md:hidden'
                 >
                   SVG
                 </label>
@@ -836,13 +998,19 @@ export default function Shorten() {
                   type='radio'
                   value=''
                   name='saveType'
-                  className='h-[16px] w-[16px]'
+                  className='h-[16px] w-[16px] md:mr-[11px] md:h-[24px] md:w-[24px]'
                 />
+                <label
+                  htmlFor='saveSVG'
+                  className='hidden text-[18px] font-bold md:block'
+                >
+                  SVG
+                </label>
               </div>
-              <div className='flex w-[50px] flex-row items-center'>
+              <div className='flex w-[50px] flex-row items-center md:w-[68px]'>
                 <label
                   htmlFor='savePNG'
-                  className='mr-[8px] text-[14px] font-bold'
+                  className='mr-[8px] text-[14px] font-bold md:hidden'
                 >
                   PNG
                 </label>
@@ -851,12 +1019,20 @@ export default function Shorten() {
                   type='radio'
                   value=''
                   name='saveType'
-                  className='h-[16px] w-[16px]'
+                  className='h-[16px] w-[16px] md:mr-[11px] md:h-[24px] md:w-[24px]'
                 />
+                <label
+                  htmlFor='savePNG'
+                  className='hidden text-[18px] font-bold md:block'
+                >
+                  PNG
+                </label>
               </div>
               <div className='flex h-[24px] flex-row items-center'>
-                <p className='mr-[8px] text-[14px] font-bold'>Size</p>
-                <div className='w-[56px]'>
+                <p className='mr-[8px] text-[14px] font-bold md:text-[18px] '>
+                  Size
+                </p>
+                <div className='w-[56px] md:w-[80px]'>
                   <DropDown
                     value='100px'
                     options={[
@@ -870,14 +1046,18 @@ export default function Shorten() {
                       '48px',
                     ]}
                     heightOfDropDown='24'
+                    mediumHeight='28'
                     textSize='12'
                     paddingLeft='4'
                     paddingRight='2'
+                    mediumPaddingRight='2'
+                    mediumPaddingLeft='8'
+                    mediumTextSize='16'
                   />
                 </div>
               </div>
             </div>
-            <div className='mt-[8px] h-[40px] w-full'>
+            <div className='mt-[8px] h-[40px] w-full md:mt-[14px]'>
               <button className='h-[40px] w-full rounded-[8px] bg-primary'>
                 <p className='text-center text-[16px] font-bold text-white'>
                   Save this QR Code

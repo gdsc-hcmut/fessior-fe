@@ -8,11 +8,11 @@ type DropDownProps = {
   heightOfDropDown: '28' | '24' | '40';
   textSize: '12' | '16';
   paddingLeft: '4' | '6' | '8' | '16';
-  mediumHeight?: '32' | '36' | '48' | '60';
-  mediumTextSize?: '16' | '20';
-  mediumPaddingLeft?: '8' | '16';
-  paddingRight?: '2' | '4';
-  mediumPaddingRight?: '0' | '4' | '6' | '12' | '20';
+  mediumHeight?: '28' | '32' | '36' | '48' | '60';
+  mediumTextSize?: '16' | '20' | '18';
+  mediumPaddingLeft: '8' | '16';
+  paddingRight: '2' | '4';
+  mediumPaddingRight: '0' | '2' | '4' | '6' | '12' | '20';
 };
 
 export default function DropDown(props: DropDownProps) {
@@ -48,6 +48,7 @@ export default function DropDown(props: DropDownProps) {
             ${paddingRight === '2' ? 'pr-[2px]' : ''}
             ${paddingRight === '4' ? 'pr-[4px]' : ''}
             ${mediumPaddingRight === '0' ? 'md:pr-[0px]' : ''}
+            ${mediumPaddingRight === '2' ? 'md:pr-[2px]' : ''}
             ${mediumPaddingRight === '4' ? 'md:pr-[4px]' : ''}
             ${mediumPaddingRight === '6' ? 'md:pr-[6px]' : ''}
             ${mediumPaddingRight === '12' ? 'md:pr-[12px]' : ''}
@@ -58,8 +59,9 @@ export default function DropDown(props: DropDownProps) {
             }
              ${textSize === '16' ? 'text-[16px]' : ''}
              ${mediumTextSize === '16' ? 'md:text-[16px]' : ''}
+             ${mediumTextSize === '20' ? 'md:text-[20px]' : ''}
              ${
-               mediumTextSize === '20' ? 'md:text-[20px]' : ''
+               mediumTextSize === '18' ? 'md:text-[18px]' : ''
              } focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300`}
           >
             <span className='block truncate'>
@@ -68,6 +70,7 @@ export default function DropDown(props: DropDownProps) {
                 ${heightOfDropDown === '28' ? 'h-[28px]' : ''} 
                 ${heightOfDropDown === '24' ? 'h-[24px]' : ''}
                 ${heightOfDropDown === '40' ? 'h-[40px]' : ''}
+                ${mediumHeight === '28' ? 'md:h-[28px]' : ''}
                 ${mediumHeight === '32' ? 'md:h-[32px]' : ''}
                 ${mediumHeight === '36' ? 'md:h-[36px]' : ''}
                 ${mediumHeight === '48' ? 'md:h-[48px]' : ''}
@@ -82,6 +85,7 @@ export default function DropDown(props: DropDownProps) {
             ${paddingRight === '2' ? 'pr-[2px]' : ''}
             ${paddingRight === '4' ? 'pr-[4px]' : ''}
             ${mediumPaddingRight === '0' ? 'md:pr-[0px]' : ''}
+            ${mediumPaddingRight === '2' ? 'md:pr-[2px]' : ''}
             ${mediumPaddingRight === '4' ? 'md:pr-[4px]' : ''}
             ${mediumPaddingRight === '6' ? 'md:pr-[6px]' : ''}
             ${mediumPaddingRight === '12' ? 'md:pr-[12px]' : ''}
@@ -119,6 +123,7 @@ export default function DropDown(props: DropDownProps) {
               ${textSize === '12' ? 'text-[12px]' : ''}
               ${textSize === '16' ? 'text-[16px]' : ''}
               ${mediumTextSize === '16' ? 'md:text-[16px]' : ''}
+              ${mediumTextSize === '18' ? 'md:text-[18px]' : ''}
               ${mediumTextSize === '20' ? 'md:text-[20px]' : ''}
               `}
             >
