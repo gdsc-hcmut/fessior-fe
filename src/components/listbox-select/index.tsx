@@ -10,9 +10,9 @@ type DropDownProps = {
   paddingLeft: '4' | '6' | '8' | '16';
   mediumHeight?: '28' | '32' | '36' | '48' | '60';
   mediumTextSize?: '16' | '20' | '18';
-  mediumPaddingLeft: '8' | '16';
+  mediumPaddingLeft?: '8' | '16';
   paddingRight: '2' | '4';
-  mediumPaddingRight: '0' | '2' | '4' | '6' | '12' | '20';
+  mediumPaddingRight?: '0' | '2' | '4' | '6' | '12' | '20';
 };
 
 export default function DropDown(props: DropDownProps) {
@@ -53,10 +53,7 @@ export default function DropDown(props: DropDownProps) {
             ${mediumPaddingRight === '6' ? 'md:pr-[6px]' : ''}
             ${mediumPaddingRight === '12' ? 'md:pr-[12px]' : ''}
             ${mediumPaddingRight === '20' ? 'md:pr-[20px]' : ''}
-            ${paddingRight ? '' : 'pr-2'}
-            ${mediumPaddingRight ? '' : 'md:pr-[20px]'} text-left ${
-              textSize === '12' ? 'text-[12px]' : ''
-            }
+             text-left ${textSize === '12' ? 'text-[12px]' : ''}
              ${textSize === '16' ? 'text-[16px]' : ''}
              ${mediumTextSize === '16' ? 'md:text-[16px]' : ''}
              ${mediumTextSize === '20' ? 'md:text-[20px]' : ''}
@@ -90,8 +87,7 @@ export default function DropDown(props: DropDownProps) {
             ${mediumPaddingRight === '6' ? 'md:pr-[6px]' : ''}
             ${mediumPaddingRight === '12' ? 'md:pr-[12px]' : ''}
             ${mediumPaddingRight === '20' ? 'md:pr-[20px]' : ''}
-            ${paddingRight ? '' : 'pr-2'}
-            ${mediumPaddingRight ? '' : 'md:pr-[20px]'}
+            
             `}
             >
               <svg

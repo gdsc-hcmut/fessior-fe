@@ -5,8 +5,8 @@ import Button from '../button';
 const QRNavBar = () => {
   return (
     <>
-      <div className='hidden xl:block'>
-        <div className='mx-auto h-[144px] w-[1280px] rounded-lg border border-zinc-500 border-opacity-40 bg-white shadow-2xl'>
+      <div className='hidden lg:block'>
+        <div className='mx-auto w-full rounded-lg border border-zinc-500 border-opacity-40 bg-white pb-[15px] shadow-2xl'>
           <div className='mt-[20px] text-center text-[28px] font-bold text-blue-900'>
             Customize QR
           </div>
