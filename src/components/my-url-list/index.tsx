@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import { MyUrl } from '@/types/url-type';
@@ -331,8 +332,39 @@ function UrlItemMD(props: UrlItemProps) {
     </div>
   );
 }
+function EmptyList() {
+  return (
+    <div className='mt-10 flex min-h-[70vh] flex-col items-center 3xl:mt-[60px]'>
+      <Image
+        src='/images/url/empty_list.svg'
+        alt='Empty icon'
+        width={0}
+        height={0}
+        className='h-auto w-[200px] md:w-[280px] xl:w-[320px] 3xl:w-[364px]'
+      />
+      <p className='mt-5 text-xl font-semibold text-primary md:mt-6 xl:mt-8 xl:text-[28px]'>
+        You haven’t shorten a link
+      </p>
+      <div className='mt-3 flex items-center space-x-2 space-y-0 max-[374px]:flex-col max-[374px]:space-y-2 xl:mt-2'>
+        <Link
+          href='/shorten'
+          className='rounded-full border-[1px] border-primary px-3 py-1 text-[12px] font-semibold text-primary hover:bg-primary hover:text-white md:text-base xl:text-xl'
+        >
+          Shorten
+        </Link>
+        <p className='text-[12px] text-black md:text-base xl:text-xl'>
+          an URL now to start manage your customized links
+        </p>
+      </div>
+    </div>
+  );
+}
 export default function MyUrlList(props: MyUrlListProps) {
   const { myUrlList } = props;
+
+  if (myUrlList.length === 0) {
+    return <EmptyList />;
+  }
 
   return (
     <div className='relative z-[5] mt-3 xl:mt-9'>

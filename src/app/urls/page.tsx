@@ -9,6 +9,7 @@ import MyUrlList from '@/components/my-url-list';
 import Pagination from '@/components/pagination';
 import Sidebar from '@/components/sidebar';
 import { myUrlListData } from '@/services/url.service';
+import { MyUrl } from '@/types/url-type';
 
 type URLsPageProps = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -25,6 +26,7 @@ function URLsPage(props: URLsPageProps) {
   };
   const [page, setPage] = useState<number>(1);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
+  const [urlList, setUrlList] = useState<MyUrl[]>(myUrlListData);
 
   return (
     <div>
@@ -222,37 +224,25 @@ function URLsPage(props: URLsPageProps) {
               </ul>
             </div>
             <div className='mt-4 flex h-[42px] items-center'>
-              <p className='font-semibold text-primary'>123 Results</p>
+              <p className='font-semibold text-primary'>
+                {urlList.length} Results
+              </p>
               <button className='ml-3 text-[#4D4D4D] underline'>
                 Clear filter
               </button>
             </div>
           </div>
-          <MyUrlList myUrlList={myUrlListData} />
-          <Pagination
-            totalCount={121}
-            currentPage={page}
-            pageSize={7}
-            onPageChange={(pageNumber: number) => {
-              setPage(pageNumber);
-            }}
-          />
-          <div className='absolute bottom-[-1px] right-0'>
-            <Image
-              src='/images/url/decor.svg'
-              alt='Decor image'
-              width={0}
-              height={0}
-              className='hidden h-auto w-[70vw] md:block xl:w-[42vw]'
+          <MyUrlList myUrlList={urlList} />
+          {urlList.length > 0 && (
+            <Pagination
+              totalCount={121}
+              currentPage={page}
+              pageSize={7}
+              onPageChange={(pageNumber: number) => {
+                setPage(pageNumber);
+              }}
             />
-            <Image
-              src='/images/url/decor_mobile.svg'
-              alt='Decor image'
-              width={0}
-              height={0}
-              className='h-auto w-[100vw] md:hidden'
-            />
-          </div>
+          )}
         </div>
       </div>
     </div>
