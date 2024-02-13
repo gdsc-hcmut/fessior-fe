@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 
 import '../css/index.css';
+import EditSlugModal from '@/components/modal-url/edit-slug';
 import MyUrlList from '@/components/my-url-list';
 import Pagination from '@/components/pagination';
 import Sidebar from '@/components/sidebar';
@@ -26,7 +27,30 @@ function URLsPage(props: URLsPageProps) {
   };
   const [page, setPage] = useState<number>(1);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
+  const [isShowModal, setIsShowModal] = useState<boolean>(true);
   const [urlList, setUrlList] = useState<MyUrl[]>(myUrlListData);
+  const [filterUrlList, setFilterUrlList] = useState<MyUrl[]>(urlList);
+  const [searchText, setSearchText] = useState<string>('');
+  const [displayUrlList, setDisplayUrlList] = useState<MyUrl[]>(
+    filterUrlList.slice((page - 1) * 7, 7 * page),
+  );
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+    const newfilterUrlList = myUrlListData.filter(
+      (url) =>
+        `https://${url.domain}/${url.slug}`.includes(searchText) ||
+        url.originalUrl.includes(searchText),
+    );
+    setFilterUrlList(newfilterUrlList);
+  };
+
+  const handlePageChange = (pageNumber: number) => {
+    setPage(pageNumber);
+    setDisplayUrlList(
+      filterUrlList.slice((pageNumber - 1) * 7, 7 * pageNumber),
+    );
+  };
 
   return (
     <div>
@@ -34,6 +58,9 @@ function URLsPage(props: URLsPageProps) {
         isCollapsed={isCollapsed}
         hideSidebar={() => setIsCollapsed(true)}
       />
+      {isShowModal && (
+        <EditSlugModal hideEditSlugModal={() => setIsShowModal(true)} />
+      )}
       <div className='pt-[71.6px] lg:pl-[24vw] xl:pl-[18vw] xl:pt-[85.6px] 2xl:pl-[17vw] 3xl:pl-[16vw]'>
         <div className='relative px-5 pt-10 md:px-10 md:pt-[48px] xl:pt-10 2xl:px-[60px] 2xl:pt-[60px] 3xl:px-[80px]'>
           <div className='flex items-end justify-between'>
@@ -99,9 +126,10 @@ function URLsPage(props: URLsPageProps) {
                 />
                 <div className='ml-2 mr-3 h-full w-[1px] bg-[#696969]/30' />
                 <input
-                  className='text-primary'
+                  className='w-full pr-3 text-primary outline-none'
                   id='my-urls-search-bar'
                   placeholder='Search by slug or long URL'
+                  onChange={handleSearch}
                 />
               </div>
               <div className='relative hidden items-center md:flex'>
@@ -225,22 +253,20 @@ function URLsPage(props: URLsPageProps) {
             </div>
             <div className='mt-4 flex h-[42px] items-center'>
               <p className='font-semibold text-primary'>
-                {urlList.length} Results
+                {filterUrlList.length} Results
               </p>
               <button className='ml-3 text-[#4D4D4D] underline'>
                 Clear filter
               </button>
             </div>
           </div>
-          <MyUrlList myUrlList={urlList} />
-          {urlList.length > 0 && (
+          <MyUrlList myUrlList={displayUrlList} />
+          {filterUrlList.length > 0 && (
             <Pagination
-              totalCount={121}
+              totalCount={filterUrlList.length}
               currentPage={page}
               pageSize={7}
-              onPageChange={(pageNumber: number) => {
-                setPage(pageNumber);
-              }}
+              onPageChange={handlePageChange}
             />
           )}
         </div>

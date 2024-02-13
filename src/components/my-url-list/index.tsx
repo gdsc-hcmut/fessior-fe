@@ -5,6 +5,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import { MyUrl } from '@/types/url-type';
 
+import UrlButton from '../button/url-button';
+
 type MyUrlListProps = {
   myUrlList: MyUrl[];
 };
@@ -78,7 +80,7 @@ function UrlItemXL(props: UrlItemProps) {
   }, [width, url.category]);
 
   return (
-    <div className='relative flex flex-shrink-0 items-center overflow-hidden rounded-lg bg-white px-5 py-3 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] 2xl:px-7 2xl:py-4 3xl:px-10 3xl:py-5'>
+    <div className='relative flex flex-shrink-0 items-center rounded-lg bg-white px-5 py-3 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] 2xl:px-7 2xl:py-4 3xl:px-10 3xl:py-5'>
       <div className='absolute left-0 top-0 h-full w-1 flex-[0] bg-primary' />
       <div className='mr-5 flex flex-[2] overflow-hidden 2xl:flex-[1.9] 3xl:flex-[1.5]'>
         <p className='w-[96%] truncate text-[14px] font-semibold text-primary 2xl:text-base'>
@@ -131,35 +133,7 @@ function UrlItemXL(props: UrlItemProps) {
           {url.enable ? 'Enable' : 'Disable'}
         </p>
       </div>
-      <div className='flex flex-[1] space-x-1 3xl:space-x-2'>
-        <button className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'>
-          <Image
-            src='/icons/content_copy.svg'
-            alt='Copy icon'
-            width={0}
-            height={0}
-            className='h-4 w-auto 3xl:h-5'
-          />
-        </button>
-        <button className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'>
-          <Image
-            src='/icons/url/edit.svg'
-            alt='Edit icon'
-            width={0}
-            height={0}
-            className='h-4 w-auto 3xl:h-5'
-          />
-        </button>
-        <button className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'>
-          <Image
-            src='/icons/url/delete.svg'
-            alt='Delete icon'
-            width={0}
-            height={0}
-            className='h-4 w-auto 3xl:h-5'
-          />
-        </button>
-      </div>
+      <UrlButton copyContent={`https://${url.domain}/${url.slug}`} />
     </div>
   );
 }
@@ -300,35 +274,7 @@ function UrlItemMD(props: UrlItemProps) {
           </div>
         </div>
       </div>
-      <div className='flex flex-col justify-end space-y-2 self-start'>
-        <button className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary'>
-          <Image
-            src='/icons/content_copy.svg'
-            alt='Copy icon'
-            width={0}
-            height={0}
-            className='h-4 w-auto'
-          />
-        </button>
-        <button className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary'>
-          <Image
-            src='/icons/url/edit.svg'
-            alt='Edit icon'
-            width={0}
-            height={0}
-            className='h-4 w-auto'
-          />
-        </button>
-        <button className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary'>
-          <Image
-            src='/icons/url/delete.svg'
-            alt='Delete icon'
-            width={0}
-            height={0}
-            className='h-4 w-auto'
-          />
-        </button>
-      </div>
+      <UrlButton copyContent={`https://${url.domain}/${url.slug}`} />
     </div>
   );
 }
@@ -367,7 +313,7 @@ export default function MyUrlList(props: MyUrlListProps) {
   }
 
   return (
-    <div className='relative z-[5] mt-3 xl:mt-9'>
+    <div className='relative z-[5] mt-3 min-h-[70vh] xl:mt-9'>
       <div className='hidden flex-shrink-0 space-x-5 px-5 xl:flex 2xl:px-7 3xl:px-10'>
         <p className='flex flex-[2] text-[14px] font-semibold text-primary 2xl:flex-[1.9] 2xl:text-base 3xl:flex-[1.5] 3xl:text-xl'>
           Shortened link

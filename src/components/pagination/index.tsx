@@ -33,7 +33,11 @@ const Pagination = ({
         pageRange.push(i);
       }
     } else {
-      for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+      for (
+        let i = currentPage - 2 > 0 ? currentPage - 2 : 1;
+        i <= currentPage + 2 && i <= totalPages;
+        i++
+      ) {
         pageRange.push(i);
       }
     }

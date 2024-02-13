@@ -79,6 +79,9 @@ p {
 #my-urls-search-bar::-webkit-input-placeholder {
   color: #6d7eae;
 }
+#edit-slug-category::-webkit-input-placeholder {
+  color: #6d7eae;
+}
 @keyframes move-forever {
   0% {
    transform: translate3d(-90px,0,0);
