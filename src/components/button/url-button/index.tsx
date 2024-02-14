@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
+import { useUrlModalStore } from '@/store/url-modal';
+
 interface UrlButtonProps {
   copyContent: any;
 }
@@ -8,6 +10,8 @@ interface UrlButtonProps {
 export default function UrlButton(props: UrlButtonProps) {
   const [copied, setCopied] = useState(false);
   const { copyContent } = props;
+
+  const { setShowEditModal, setShowDeleteModal } = useUrlModalStore();
 
   const onCopy = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation();
@@ -39,7 +43,10 @@ export default function UrlButton(props: UrlButtonProps) {
           <div className='absolute bottom-[-4px] h-2 w-2 rotate-45 bg-white' />
         </span>
       </div>
-      <button className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'>
+      <button
+        onClick={() => setShowEditModal(true)}
+        className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'
+      >
         <Image
           src='/icons/url/edit.svg'
           alt='Edit icon'
@@ -48,7 +55,10 @@ export default function UrlButton(props: UrlButtonProps) {
           className='h-4 w-auto 3xl:h-5'
         />
       </button>
-      <button className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'>
+      <button
+        onClick={() => setShowDeleteModal(true)}
+        className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'
+      >
         <Image
           src='/icons/url/delete.svg'
           alt='Delete icon'

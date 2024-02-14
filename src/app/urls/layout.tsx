@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import Header from '@/components/header';
-import Sidebar from '@/components/sidebar';
+import 'react-toastify/dist/ReactToastify.css';
 
 type URLsLayoutProps = {
   children: React.ReactNode;
@@ -15,6 +16,7 @@ function URLsLayout(props: URLsLayoutProps) {
     <section className='relative min-h-[100vh]'>
       <Header />
       {children}
+      <ToastContainer />
       <div className='absolute bottom-[-1px] right-0'>
         <Image
           src='/images/url/decor.svg'

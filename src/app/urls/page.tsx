@@ -5,11 +5,13 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 
 import '../css/index.css';
+import DeleteLinkModal from '@/components/modal-url/delete-modal';
 import EditSlugModal from '@/components/modal-url/edit-slug';
 import MyUrlList from '@/components/my-url-list';
 import Pagination from '@/components/pagination';
 import Sidebar from '@/components/sidebar';
 import { myUrlListData } from '@/services/url.service';
+import { useUrlModalStore } from '@/store/url-modal';
 import { MyUrl } from '@/types/url-type';
 
 type URLsPageProps = {
@@ -27,13 +29,14 @@ function URLsPage(props: URLsPageProps) {
   };
   const [page, setPage] = useState<number>(1);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
-  const [isShowModal, setIsShowModal] = useState<boolean>(true);
   const [urlList, setUrlList] = useState<MyUrl[]>(myUrlListData);
   const [filterUrlList, setFilterUrlList] = useState<MyUrl[]>(urlList);
   const [searchText, setSearchText] = useState<string>('');
   const [displayUrlList, setDisplayUrlList] = useState<MyUrl[]>(
     filterUrlList.slice((page - 1) * 7, 7 * page),
   );
+
+  const { isShow } = useUrlModalStore();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -58,9 +61,8 @@ function URLsPage(props: URLsPageProps) {
         isCollapsed={isCollapsed}
         hideSidebar={() => setIsCollapsed(true)}
       />
-      {isShowModal && (
-        <EditSlugModal hideEditSlugModal={() => setIsShowModal(true)} />
-      )}
+      {isShow.edit && <EditSlugModal />}
+      {isShow.delete && <DeleteLinkModal />}
       <div className='pt-[71.6px] lg:pl-[24vw] xl:pl-[18vw] xl:pt-[85.6px] 2xl:pl-[17vw] 3xl:pl-[16vw]'>
         <div className='relative px-5 pt-10 md:px-10 md:pt-[48px] xl:pt-10 2xl:px-[60px] 2xl:pt-[60px] 3xl:px-[80px]'>
           <div className='flex items-end justify-between'>
