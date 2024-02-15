@@ -4,15 +4,18 @@ type UrlModalStore = {
   isShow: {
     delete: boolean;
     edit: boolean;
+    category: boolean;
   };
   setShowEditModal: (value: boolean) => void;
   setShowDeleteModal: (value: boolean) => void;
+  setShowCategoryModal: (value: boolean) => void;
 };
 
 export const useUrlModalStore = create<UrlModalStore>((set) => ({
   isShow: {
     delete: false,
     edit: false,
+    category: true,
   },
   setShowEditModal: (value) =>
     set((state) => ({
@@ -26,6 +29,13 @@ export const useUrlModalStore = create<UrlModalStore>((set) => ({
       isShow: {
         ...state.isShow,
         delete: value,
+      },
+    })),
+  setShowCategoryModal: (value) =>
+    set((state) => ({
+      isShow: {
+        ...state.isShow,
+        category: value,
       },
     })),
 }));

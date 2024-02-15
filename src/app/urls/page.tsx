@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 
 import '../css/index.css';
+import CategoryModal from '@/components/modal-url/category-modal';
 import DeleteLinkModal from '@/components/modal-url/delete-modal';
 import EditSlugModal from '@/components/modal-url/edit-slug';
 import MyUrlList from '@/components/my-url-list';
@@ -36,7 +37,7 @@ function URLsPage(props: URLsPageProps) {
     filterUrlList.slice((page - 1) * 7, 7 * page),
   );
 
-  const { isShow } = useUrlModalStore();
+  const { isShow, setShowCategoryModal } = useUrlModalStore();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -63,6 +64,7 @@ function URLsPage(props: URLsPageProps) {
       />
       {isShow.edit && <EditSlugModal />}
       {isShow.delete && <DeleteLinkModal />}
+      <CategoryModal />
       <div className='pt-[71.6px] lg:pl-[24vw] xl:pl-[18vw] xl:pt-[85.6px] 2xl:pl-[17vw] 3xl:pl-[16vw]'>
         <div className='relative px-5 pt-10 md:px-10 md:pt-[48px] xl:pt-10 2xl:px-[60px] 2xl:pt-[60px] 3xl:px-[80px]'>
           <div className='flex items-end justify-between'>
@@ -152,7 +154,10 @@ function URLsPage(props: URLsPageProps) {
                     className='h-2 w-auto'
                   />
                 </button>
-                <button className='flex items-center space-x-1 rounded-lg bg-primary px-3 py-2'>
+                <button
+                  onClick={() => setShowCategoryModal(true)}
+                  className='flex items-center space-x-1 rounded-lg bg-primary px-3 py-2'
+                >
                   <Image
                     src='/icons/filter_list.svg'
                     alt='Filter icon'
