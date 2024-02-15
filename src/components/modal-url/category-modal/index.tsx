@@ -18,6 +18,30 @@ function FilterSelection(props: FilterSelectionProps) {
   const { isDomain, optionList } = props;
   const { screenSize } = useScreenSize();
 
+  if (optionList.length !== 0) {
+    return (
+      <div className='flex flex-col space-y-2'>
+        <p className='font-medium'>
+          Chosen {isDomain ? 'domains' : 'categories'}
+        </p>
+        <div className='flex items-center space-x-1'>
+          <div className='flex h-6 w-6 items-center justify-center rounded-full bg-primary/20'>
+            <Image
+              src='/icons/url/tray.svg'
+              alt='Tray icon'
+              width={0}
+              height={0}
+              className='h-5 w-auto'
+            />
+          </div>
+          <p className='text-[#808080]'>
+            You haven’t chosen any {isDomain ? 'domains' : 'categories'}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   if (screenSize === ScreenSize.SM) {
     return (
       <div>
@@ -49,7 +73,31 @@ function FilterSelection(props: FilterSelectionProps) {
       </div>
     );
   }
-  return <div>d</div>;
+  return (
+    <div className='flex flex-wrap gap-x-1 gap-y-2'>
+      <p className={clsx('font-medium', isDomain ? 'mr-[23px]' : 'mr-2')}>
+        Chosen {isDomain ? 'domains' : 'categories'}
+      </p>
+      {optionList.map((option, index) => (
+        <div
+          key={index}
+          className='flex items-center space-x-1 rounded-lg bg-primary px-2 py-1 text-xs text-white'
+        >
+          <p>{option}</p>
+          <Image
+            src='/icons/header/close_white.svg'
+            alt='Close icon'
+            width={0}
+            height={0}
+            className='h-auto w-2'
+          />
+        </div>
+      ))}
+      <button className='text-xs text-[#4D4D4D] underline'>
+        Clear selection
+      </button>
+    </div>
+  );
 }
 
 export default function CategoryModal() {
@@ -86,7 +134,7 @@ export default function CategoryModal() {
     <div
       onClick={() => setShowCategoryModal(false)}
       className={clsx(
-        'fixed bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center transition-all duration-300 md:items-start md:justify-end',
+        'fixed bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center bg-black/40 transition-all duration-300 md:items-start md:justify-end md:bg-transparent',
         !isShow.category ? 'translate-x-[100%]' : 'translate-x-0',
       )}
     >
@@ -98,97 +146,9 @@ export default function CategoryModal() {
           <p className='mb-3 text-2xl font-semibold text-primary md:mb-4 xl:text-2xl 2xl:mb-8 2xl:text-[28px]'>
             Filter
           </p>
-          <div className='mb-4 md:hidden'>
-            <div className='mb-2 flex w-full justify-between'>
-              <p className='font-medium'>Chosen domains</p>
-              <button className='text-xs text-[#4D4D4D] underline'>
-                Clear selection
-              </button>
-            </div>
-            <div className='flex flex-wrap gap-x-1 gap-y-2'>
-              {demoDomains.map((domain, index) => (
-                <div
-                  key={index}
-                  className='flex items-center space-x-1 rounded-lg bg-primary px-2 py-1 text-xs text-white md:px-3'
-                >
-                  <p>{domain}</p>
-                  <Image
-                    src='/icons/header/close_white.svg'
-                    alt='Close icon'
-                    width={0}
-                    height={0}
-                    className='h-auto w-2'
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className='mb-4 hidden flex-wrap gap-x-1 gap-y-2 md:flex'>
-            <p className='mr-[23px] font-medium'>Chosen domains</p>
-            {demoDomains.map((domain, index) => (
-              <div
-                key={index}
-                className='flex items-center space-x-1 rounded-lg bg-primary px-2 py-1 text-xs text-white'
-              >
-                <p>{domain}</p>
-                <Image
-                  src='/icons/header/close_white.svg'
-                  alt='Close icon'
-                  width={0}
-                  height={0}
-                  className='h-auto w-2'
-                />
-              </div>
-            ))}
-            <button className='text-xs text-[#4D4D4D] underline'>
-              Clear selection
-            </button>
-          </div>
-          <div className='md:hidden'>
-            <div className='mb-2 flex w-full justify-between'>
-              <p className='font-medium'>Chosen categories</p>
-              <button className='text-xs text-[#4D4D4D] underline'>
-                Clear selection
-              </button>
-            </div>
-            <div className='flex flex-wrap gap-x-1 gap-y-2'>
-              {demoCategories.map((category, index) => (
-                <div
-                  key={index}
-                  className='flex items-center space-x-1 rounded-lg bg-primary px-2 py-1 text-xs text-white md:px-3'
-                >
-                  <p>{category}</p>
-                  <Image
-                    src='/icons/header/close_white.svg'
-                    alt='Close icon'
-                    width={0}
-                    height={0}
-                    className='h-auto w-2'
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className='hidden flex-wrap gap-x-1 gap-y-2 md:flex'>
-            <p className='mr-2 font-medium'>Chosen categories</p>
-            {demoCategories.map((category, index) => (
-              <div
-                key={index}
-                className='flex items-center space-x-1 rounded-lg bg-primary px-2 py-1 text-xs text-white'
-              >
-                <p>{category}</p>
-                <Image
-                  src='/icons/header/close_white.svg'
-                  alt='Close icon'
-                  width={0}
-                  height={0}
-                  className='h-auto w-2'
-                />
-              </div>
-            ))}
-            <button className='text-xs text-[#4D4D4D] underline'>
-              Clear selection
-            </button>
+          <div className='flex flex-col space-y-4'>
+            <FilterSelection isDomain={true} optionList={demoDomains} />
+            <FilterSelection isDomain={false} optionList={demoCategories} />
           </div>
           <div className='mt-5 w-full 2xl:mt-6'>
             <div className='flex w-full justify-between'>

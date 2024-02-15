@@ -120,7 +120,7 @@ function URLsPage(props: URLsPageProps) {
           </div>
           <div className='mt-8'>
             <div className='flex justify-between'>
-              <div className='flex w-[420px] items-center rounded-lg border-[0.5px] border-[#7E7E7E] py-2 pl-2 xl:w-[30vw] xl:py-3 3xl:w-[25vw]'>
+              <div className='flex w-[420px] items-center rounded-lg border-[0.5px] border-[#7E7E7E] py-2 pl-2 lg:w-[400px] xl:w-[30vw] xl:py-3 3xl:w-[25vw]'>
                 <Image
                   src='/icons/search.svg'
                   alt='Search icon'
@@ -217,7 +217,10 @@ function URLsPage(props: URLsPageProps) {
                   className='h-2 w-auto'
                 />
               </button>
-              <button className='flex items-center space-x-1 rounded-lg bg-primary px-3 py-2'>
+              <button
+                onClick={() => setShowCategoryModal(true)}
+                className='flex items-center space-x-1 rounded-lg bg-primary px-3 py-2'
+              >
                 <Image
                   src='/icons/filter_list.svg'
                   alt='Filter icon'

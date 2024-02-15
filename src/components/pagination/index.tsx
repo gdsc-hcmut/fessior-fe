@@ -58,7 +58,7 @@ const Pagination = ({
   if ((pageRange?.length || 0) <= 1) return null;
 
   return (
-    <ul className='mt-10 flex items-center space-x-1 pb-[54px]'>
+    <ul className='mt-10 flex items-center space-x-1 pb-[80px] md:pb-[54px]'>
       <li className='flex h-fit w-fit items-center justify-center'>
         <button
           className={`rounded-full ${
@@ -172,7 +172,7 @@ const Pagination = ({
             min={1}
             onChange={(e) => setInputPage(Number(e.target.value))}
           />
-          <p className='text-[12px] font-semibold text-white min-[500px]:text-inherit md:text-base'>
+          <p className='text-[12px] font-semibold min-[500px]:text-inherit md:text-base'>
             of {totalPages}
           </p>
         </form>

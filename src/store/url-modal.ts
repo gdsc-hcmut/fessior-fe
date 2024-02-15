@@ -15,7 +15,7 @@ export const useUrlModalStore = create<UrlModalStore>((set) => ({
   isShow: {
     delete: false,
     edit: false,
-    category: true,
+    category: false,
   },
   setShowEditModal: (value) =>
     set((state) => ({
