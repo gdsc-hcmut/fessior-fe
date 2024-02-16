@@ -19,6 +19,7 @@ function UrlItemXL(props: UrlItemProps) {
   const { url } = props;
   const ref = useRef<HTMLDivElement | null>(null);
   const [categories, setCategories] = useState<string[]>([]);
+  const [hiddenCategories, setHiddenCategories] = useState<string[]>([]);
   const [isDivFull, setIsDivFull] = useState(false);
   const [width, setWidth] = useState<number | null>(0);
 
@@ -53,6 +54,7 @@ function UrlItemXL(props: UrlItemProps) {
     const renderBoxes = () => {
       let currentWidth = 0;
       const newCategories = [];
+      const newHiddenCategories = [];
 
       for (let i = 0; i < url.category.length; i++) {
         const boxWidth = calculateBoxWidth(url.category[i]);
@@ -67,12 +69,13 @@ function UrlItemXL(props: UrlItemProps) {
           newCategories.push(url.category[i]);
           currentWidth += boxWidth;
         } else {
-          setIsDivFull(true);
-          break;
+          if (!isDivFull) setIsDivFull(true);
+          newHiddenCategories.push(url.category[i]);
         }
       }
 
       setCategories(newCategories);
+      setHiddenCategories(newHiddenCategories);
     };
 
     setIsDivFull(false);
@@ -111,14 +114,28 @@ function UrlItemXL(props: UrlItemProps) {
           </div>
         ))}
         {isDivFull && (
-          <div className='flex h-[29px] w-[29px] items-center justify-center rounded-lg bg-primary 2xl:h-8 2xl:w-8 3xl:h-10 3xl:w-10'>
-            <Image
-              src='/icons/url/more_horiz.svg'
-              alt='More icon'
-              width={0}
-              height={0}
-              className='h-5 w-auto 2xl:h-6'
-            />
+          <div className='group relative overflow-visible'>
+            <div className='flex h-[29px] w-[29px] items-center justify-center rounded-lg bg-primary 2xl:h-8 2xl:w-8 3xl:h-10 3xl:w-10'>
+              <Image
+                src='/icons/url/more_horiz.svg'
+                alt='More icon'
+                width={0}
+                height={0}
+                className='h-5 w-auto 2xl:h-6'
+              />
+            </div>
+            <span className='absolute left-[0px] top-[32px] z-[5] flex max-w-[320px] scale-0 items-center justify-center rounded bg-white px-4 py-3 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] group-hover:scale-100'>
+              <div className='flex flex-wrap gap-x-2 gap-y-2'>
+                {hiddenCategories.map((category) => (
+                  <div
+                    key={category}
+                    className='rounded-lg bg-primary px-2 py-1 text-[14px] text-white 2xl:text-base 3xl:px-3 3xl:py-2'
+                  >
+                    {category}
+                  </div>
+                ))}
+              </div>
+            </span>
           </div>
         )}
       </div>

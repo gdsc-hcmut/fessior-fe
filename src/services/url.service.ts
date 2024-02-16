@@ -22,7 +22,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 12,
     enable: true,
     createdAt: '22/12/2023',
-    category: ['Favorite', 'Recruit22-23', 'Testting123'],
+    category: ['Favorite', 'Recruit22_23', 'Testting123'],
   },
   {
     originalUrl: 'https://www.messenger.com/longlinksccccccc',
@@ -40,7 +40,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 23,
     enable: false,
     createdAt: '03/04/2023',
-    category: ['Favorite', 'Recruit22-23', 'Testting123'],
+    category: ['Favorite', 'Recruit22_23', 'Testting123'],
   },
   {
     originalUrl: 'https://hahaha/t/1000000',
@@ -58,7 +58,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 35,
     enable: true,
     createdAt: '23/11/2023',
-    category: ['Favorite', 'Recruitment22-23'],
+    category: ['Favorite', 'Recruitment22_23'],
   },
   {
     originalUrl: 'https://www.messenger.com/longlinksccccccc',
@@ -76,7 +76,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 87,
     enable: false,
     createdAt: '30/11/2023',
-    category: ['Favorite', 'Recruit22-23', 'Testting123'],
+    category: ['Favorite', 'Recruit22_23', 'Testting123'],
   },
   {
     originalUrl: 'https://www.messenger.com/t/1000000',
@@ -85,7 +85,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 12,
     enable: true,
     createdAt: '22/12/2023',
-    category: ['Favorite', 'Recruit22-23', 'Testting123'],
+    category: ['Favorite', 'Recruit22_23', 'Testting123'],
   },
   {
     originalUrl: 'https://www.messenger.com/longlinksccccccc',
@@ -103,7 +103,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 23,
     enable: false,
     createdAt: '03/04/2023',
-    category: ['Favorite', 'Recruit22-23', 'Testting123'],
+    category: ['Favorite', 'Recruit22_23', 'Testting123'],
   },
   {
     originalUrl: 'https://hahaha/t/1000000',
@@ -121,7 +121,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 35,
     enable: true,
     createdAt: '23/11/2023',
-    category: ['Favorite', 'Recruitment22-23'],
+    category: ['Favorite', 'Recruitment22_23'],
   },
   {
     originalUrl: 'https://www.messenger.com/longlinksccccccc',
@@ -139,7 +139,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 87,
     enable: false,
     createdAt: '30/11/2023',
-    category: ['Favorite', 'Recruit22-23', 'Testting123'],
+    category: ['Favorite', 'Recruit22_23', 'Testting123'],
   },
   {
     originalUrl: 'https://www.messenger.com/longlinksccccccc',
@@ -157,6 +157,33 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 87,
     enable: false,
     createdAt: '30/11/2023',
-    category: ['Favorite', 'Recruit22-23', 'Testting123'],
+    category: ['Favorite', 'Recruit22_23', 'Testting123'],
   },
+];
+
+export const domainListData: string[] = [
+  'gdsc.app',
+  'bk.oisp.info',
+  'furl.one',
+  'gic.gdsc.app',
+  'elog.bkoisp.info',
+  'uit.gdsc.app',
+  'gdsc.link',
+  'gdsc.one',
+  'gdsc.tech',
+  'gdsc.page',
+];
+
+export const categoryListData: string[] = [
+  'event',
+  'spring recruitment 2024',
+  'gic2023',
+  'misc',
+  'go for git',
+  'marketing',
+  'development',
+  'external relations',
+  'email',
+  'testing',
+  'recruitment',
 ];

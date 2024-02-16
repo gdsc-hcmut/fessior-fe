@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import useScreenSize from '@/hooks/useScreenSize';
+import { categoryListData, domainListData } from '@/services/url.service';
 import { useUrlModalStore } from '@/store/url-modal';
 import ScreenSize from '@/types/screen-size-enum';
 
@@ -103,6 +104,7 @@ function FilterSelection(props: FilterSelectionProps) {
 export default function CategoryModal() {
   const { setShowCategoryModal, isShow } = useUrlModalStore();
   const [isDomain, setIsDomain] = useState(true);
+  const allOptions = isDomain ? domainListData : categoryListData;
 
   const demoDomains = [
     'gic.gdsc.app',
@@ -199,19 +201,19 @@ export default function CategoryModal() {
                 isDomain && 'rounded-ss-none',
               )}
             >
-              {demoDomains1.map((domain, index) => (
+              {allOptions.map((option, index) => (
                 <div
                   key={index}
                   className='flex cursor-pointer items-center space-x-1'
                 >
                   <input
                     type='checkbox'
-                    id={domain}
-                    name={domain}
-                    value={domain}
+                    id={option}
+                    name={option}
+                    value={option}
                     className='category-checkbox'
                   />
-                  <label htmlFor={domain}>{domain}</label>
+                  <label htmlFor={option}>{option}</label>
                 </div>
               ))}
             </div>

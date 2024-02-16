@@ -11,6 +11,7 @@ import EditSlugModal from '@/components/modal-url/edit-slug';
 import MyUrlList from '@/components/my-url-list';
 import Pagination from '@/components/pagination';
 import Sidebar from '@/components/sidebar';
+import UrlSelectionList from '@/components/url-selection-list';
 import { myUrlListData } from '@/services/url.service';
 import { useUrlModalStore } from '@/store/url-modal';
 import { MyUrl } from '@/types/url-type';
@@ -265,6 +266,24 @@ function URLsPage(props: URLsPageProps) {
               <p className='font-semibold text-primary'>
                 {filterUrlList.length} Results
               </p>
+              <div className='hidden xl:flex'>
+                <UrlSelectionList
+                  isDomain
+                  selectionList={['furl.one', 'gdsc.app', 'gdsc.community']}
+                />
+                <UrlSelectionList
+                  isDomain={false}
+                  selectionList={[
+                    'event',
+                    'gdsc',
+                    'test',
+                    'favorite',
+                    'recruit',
+                    'testing',
+                    'spring recruitment 2024',
+                  ]}
+                />
+              </div>
               <button className='ml-3 text-[#4D4D4D] underline'>
                 Clear filter
               </button>
