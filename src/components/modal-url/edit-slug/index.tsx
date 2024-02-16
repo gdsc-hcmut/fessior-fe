@@ -1,15 +1,41 @@
 'use client';
 
 import Image from 'next/image';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 
+import { categoryListData } from '@/services/url.service';
 import { useUrlModalStore } from '@/store/url-modal';
-
 
 export default function EditSlugModal() {
   const { setShowEditModal } = useUrlModalStore();
 
-  const onEdit = () => {
+  const [slug, setSlug] = useState('mySlug');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [searchText, setSearchText] = useState('');
+  const [categoryList, setCategoryList] = useState<string[]>([
+    ...categoryListData,
+  ]);
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+    const newfilterCategoryList = categoryListData.filter((category) =>
+      category.includes(searchText),
+    );
+    setCategoryList(newfilterCategoryList);
+  };
+
+  const isValidSlug = (slug: string) => {
+    const regexExp = /^[a-z0-9]+(?:-[a-z0-9]+)*$/g;
+    return regexExp.test(slug);
+  };
+
+  const onEdit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isValidSlug(slug)) {
+      setErrorMsg('Invalid slug');
+      return;
+    }
     toast.success('Link updated successfully');
     setShowEditModal(false);
   };
@@ -27,7 +53,7 @@ export default function EditSlugModal() {
           <p className='mb-4 text-xl font-bold text-primary md:mb-6 xl:mb-7 xl:text-2xl 2xl:mb-8 2xl:text-[28px]'>
             Edit Link
           </p>
-          <label htmlFor='slug' className='mb-2 font-medium xl:text-xl'>
+          <label htmlFor='slug' className='mb-2 w-fit font-medium xl:text-xl'>
             Slug
           </label>
           <input
@@ -35,24 +61,36 @@ export default function EditSlugModal() {
             id='slug'
             name='slug'
             className='w-[280px] rounded-lg border-[0.5px] border-primary p-2 md:w-[320px] xl:p-3'
-            defaultValue='mySlug'
+            value={slug}
+            onChange={(e) => setSlug(e.target.value)}
           />
+          <p className='mt-1 h-4 text-xs text-red'>{errorMsg}</p>
           <label
             htmlFor='edit-slug-category'
-            className='mb-2 mt-[30px] font-medium xl:text-xl'
+            className='mb-2 mt-2 w-fit font-medium xl:text-xl'
           >
             Category
           </label>
-          <input
-            type='text'
-            id='edit-slug-category'
-            name='category'
-            className='w-[280px] rounded-lg border-[0.5px] border-primary p-2 md:w-[320px] xl:p-3'
-            placeholder='Add or create categories'
-          />
-          <div className='mt-2 flex items-center space-x-2'>
+          <div className='group relative'>
+            <input
+              type='text'
+              id='edit-slug-category'
+              name='category'
+              className='w-[280px] rounded-lg border-[0.5px] border-primary p-2 md:w-[320px] xl:p-3'
+              placeholder='Add or create categories'
+              onChange={handleSearch}
+            />
+            <div className='show-scrollbar absolute flex max-h-[100px] w-[280px] scale-0 flex-col space-y-1 overflow-y-scroll rounded-lg bg-white p-2 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] group-hover:scale-100 md:w-[320px]'>
+              {categoryList.map((category, index) => (
+                <button className='w-full text-start text-xs' key={index}>
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className='mt-2 flex flex-col space-y-1'>
             <p className='font-medium'>Chosen categories</p>
-            <div className='flex space-x-1 md:space-x-2'>
+            <div className='flex space-x-1 pb-1 md:space-x-2'>
               <div className='flex items-center space-x-1 rounded-lg bg-primary px-1 py-1 text-xs text-white md:px-3'>
                 <p>Events</p>
                 <Image

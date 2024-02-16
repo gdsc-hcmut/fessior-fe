@@ -80,7 +80,7 @@ function UrlItemXL(props: UrlItemProps) {
 
     setIsDivFull(false);
     renderBoxes();
-  }, [width, url.category, isDivFull]);
+  }, [width, url.category]);
 
   return (
     <div className='relative flex flex-shrink-0 items-center rounded-lg bg-white px-5 py-3 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] 2xl:px-7 2xl:py-4 3xl:px-10 3xl:py-5'>
@@ -216,7 +216,7 @@ function UrlItemMD(props: UrlItemProps) {
 
     setIsDivFull(false);
     renderBoxes();
-  }, [width, url.category, isDivFull]);
+  }, [width, url.category]);
 
   return (
     <div className='relative flex w-full justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>

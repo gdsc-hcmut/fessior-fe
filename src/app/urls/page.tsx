@@ -32,8 +32,8 @@ function URLsPage(props: URLsPageProps) {
   };
   const [page, setPage] = useState<number>(1);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
-  const [urlList, setUrlList] = useState<MyUrl[]>(myUrlListData);
-  const [filterUrlList, setFilterUrlList] = useState<MyUrl[]>(urlList);
+  const [urlList, setUrlList] = useState<MyUrl[]>([...myUrlListData]);
+  const [filterUrlList, setFilterUrlList] = useState<MyUrl[]>([...urlList]);
   const [searchText, setSearchText] = useState<string>('');
   const [displayUrlList, setDisplayUrlList] = useState<MyUrl[]>(
     filterUrlList.slice((page - 1) * 7, 7 * page),
