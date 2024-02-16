@@ -123,6 +123,30 @@ p {
   border-radius: 20px;
   border: 0;
 }
+.show-scrollbar-no-mt::-webkit-scrollbar {
+  display: block;
+  background-color: transparent;
+  width: 4px;
+}
+.show-scrollbar-no-mt::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+.show-scrollbar-no-mt::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 20px;
+  border: 0;
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.slide-in {
+  animation: slideIn 0.3s ease-in-out;
+}
 @keyframes move-forever {
   0% {
    transform: translate3d(-90px,0,0);
@@ -131,6 +155,7 @@ p {
     transform: translate3d(85px,0,0);
   }
 }
+
 /*Shrinking for mobile*/
 @media (max-width: 768px) {
   .waves {

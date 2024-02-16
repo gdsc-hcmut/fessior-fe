@@ -37,6 +37,8 @@ function URLsPage(props: URLsPageProps) {
   const [displayUrlList, setDisplayUrlList] = useState<MyUrl[]>(
     filterUrlList.slice((page - 1) * 7, 7 * page),
   );
+  const [filterDomain, setFilterDomain] = useState<string[]>([]);
+  const [filterCategory, setFilterCategory] = useState<string[]>([]);
 
   const { isShow, setShowCategoryModal } = useUrlModalStore();
 
@@ -65,7 +67,14 @@ function URLsPage(props: URLsPageProps) {
       />
       {isShow.edit && <EditSlugModal />}
       {isShow.delete && <DeleteLinkModal />}
-      <CategoryModal />
+      {isShow.category && (
+        <CategoryModal
+          filterCategory={filterCategory}
+          filterDomain={filterDomain}
+          setFilterDomain={setFilterDomain}
+          setFilterCategory={setFilterCategory}
+        />
+      )}
       <div className='pt-[71.6px] lg:pl-[24vw] xl:pl-[18vw] xl:pt-[85.6px] 2xl:pl-[17vw] 3xl:pl-[16vw]'>
         <div className='relative px-5 pt-10 md:px-10 md:pt-[48px] xl:pt-10 2xl:px-[60px] 2xl:pt-[60px] 3xl:px-[80px]'>
           <div className='flex items-end justify-between'>
@@ -170,7 +179,7 @@ function URLsPage(props: URLsPageProps) {
                 </button>
                 <ul
                   className={clsx(
-                    'absolute left-0 top-full flex w-[135px] flex-col items-start space-y-1 overflow-hidden rounded-lg pl-3 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] transition-[max-height,border] duration-500',
+                    'absolute left-0 top-full z-10 flex w-[135px] flex-col items-start space-y-1 overflow-hidden rounded-lg bg-white pl-3 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] transition-[max-height,border] duration-500',
                     isSortCollapsed ? 'max-h-0' : 'max-h-[100px]',
                   )}
                 >
@@ -233,7 +242,7 @@ function URLsPage(props: URLsPageProps) {
               </button>
               <ul
                 className={clsx(
-                  'absolute left-0 top-full flex w-[135px] flex-col items-start space-y-1 overflow-hidden rounded-lg pl-3 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] transition-[max-height,border] duration-500',
+                  'absolute left-0 top-full z-10 flex w-[135px] flex-col items-start space-y-1 overflow-hidden rounded-lg bg-white pl-3 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] transition-[max-height,border] duration-500',
                   isSortCollapsed ? 'max-h-0' : 'max-h-[100px]',
                 )}
               >
@@ -263,28 +272,23 @@ function URLsPage(props: URLsPageProps) {
               </ul>
             </div>
             <div className='mt-4 flex h-[42px] items-center'>
-              <p className='font-semibold text-primary'>
+              <p className='whitespace-nowrap font-semibold text-primary'>
                 {filterUrlList.length} Results
               </p>
               <div className='hidden xl:flex'>
-                <UrlSelectionList
-                  isDomain
-                  selectionList={['furl.one', 'gdsc.app', 'gdsc.community']}
-                />
+                <UrlSelectionList isDomain selectionList={filterDomain} />
                 <UrlSelectionList
                   isDomain={false}
-                  selectionList={[
-                    'event',
-                    'gdsc',
-                    'test',
-                    'favorite',
-                    'recruit',
-                    'testing',
-                    'spring recruitment 2024',
-                  ]}
+                  selectionList={filterCategory}
                 />
               </div>
-              <button className='ml-3 text-[#4D4D4D] underline'>
+              <button
+                onClick={() => {
+                  setFilterCategory([]);
+                  setFilterDomain([]);
+                }}
+                className='ml-3 whitespace-nowrap text-[#4D4D4D] underline'
+              >
                 Clear filter
               </button>
             </div>
