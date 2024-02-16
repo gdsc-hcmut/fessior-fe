@@ -13,6 +13,7 @@ import Pagination from '@/components/pagination';
 import Sidebar from '@/components/sidebar';
 import UrlSelectionList from '@/components/url-selection-list';
 import { myUrlListData } from '@/services/url.service';
+import { useFilterOptionStore } from '@/store/filter-option';
 import { useUrlModalStore } from '@/store/url-modal';
 import { MyUrl } from '@/types/url-type';
 
@@ -37,10 +38,10 @@ function URLsPage(props: URLsPageProps) {
   const [displayUrlList, setDisplayUrlList] = useState<MyUrl[]>(
     filterUrlList.slice((page - 1) * 7, 7 * page),
   );
-  const [filterDomain, setFilterDomain] = useState<string[]>([]);
-  const [filterCategory, setFilterCategory] = useState<string[]>([]);
 
   const { isShow, setShowCategoryModal } = useUrlModalStore();
+  const { filterCategory, filterDomain, setFilterDomain, setFilterCategory } =
+    useFilterOptionStore();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -67,14 +68,7 @@ function URLsPage(props: URLsPageProps) {
       />
       {isShow.edit && <EditSlugModal />}
       {isShow.delete && <DeleteLinkModal />}
-      {isShow.category && (
-        <CategoryModal
-          filterCategory={filterCategory}
-          filterDomain={filterDomain}
-          setFilterDomain={setFilterDomain}
-          setFilterCategory={setFilterCategory}
-        />
-      )}
+      {isShow.category && <CategoryModal />}
       <div className='pt-[71.6px] lg:pl-[24vw] xl:pl-[18vw] xl:pt-[85.6px] 2xl:pl-[17vw] 3xl:pl-[16vw]'>
         <div className='relative px-5 pt-10 md:px-10 md:pt-[48px] xl:pt-10 2xl:px-[60px] 2xl:pt-[60px] 3xl:px-[80px]'>
           <div className='flex items-end justify-between'>
@@ -164,19 +158,26 @@ function URLsPage(props: URLsPageProps) {
                     className='h-2 w-auto'
                   />
                 </button>
-                <button
-                  onClick={() => setShowCategoryModal(true)}
-                  className='flex items-center space-x-1 rounded-lg bg-primary px-3 py-2'
-                >
-                  <Image
-                    src='/icons/filter_list.svg'
-                    alt='Filter icon'
-                    width={0}
-                    height={0}
-                    className='h-5 w-auto'
-                  />
-                  <p className='font-semibold text-white'>Filter</p>
-                </button>
+                <div className='relative'>
+                  <button
+                    onClick={() => setShowCategoryModal(true)}
+                    className='flex items-center space-x-1 rounded-lg bg-primary px-3 py-2'
+                  >
+                    <Image
+                      src='/icons/filter_list.svg'
+                      alt='Filter icon'
+                      width={0}
+                      height={0}
+                      className='h-5 w-auto'
+                    />
+                    <p className='font-semibold text-white'>Filter</p>
+                  </button>
+                  {(filterDomain.length > 0 || filterCategory.length > 0) && (
+                    <div className='absolute right-[-8px] top-[-8px] flex h-6 w-6 items-center justify-center rounded-full border-[1px] border-primary bg-white text-xs font-semibold text-primary'>
+                      {filterDomain.length + filterCategory.length}
+                    </div>
+                  )}
+                </div>
                 <ul
                   className={clsx(
                     'absolute left-0 top-full z-10 flex w-[135px] flex-col items-start space-y-1 overflow-hidden rounded-lg bg-white pl-3 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] transition-[max-height,border] duration-500',
@@ -227,19 +228,26 @@ function URLsPage(props: URLsPageProps) {
                   className='h-2 w-auto'
                 />
               </button>
-              <button
-                onClick={() => setShowCategoryModal(true)}
-                className='flex items-center space-x-1 rounded-lg bg-primary px-3 py-2'
-              >
-                <Image
-                  src='/icons/filter_list.svg'
-                  alt='Filter icon'
-                  width={0}
-                  height={0}
-                  className='h-5 w-auto'
-                />
-                <p className='font-semibold text-white'>Filter</p>
-              </button>
+              <div className='relative'>
+                <button
+                  onClick={() => setShowCategoryModal(true)}
+                  className='flex items-center space-x-1 rounded-lg bg-primary px-3 py-2'
+                >
+                  <Image
+                    src='/icons/filter_list.svg'
+                    alt='Filter icon'
+                    width={0}
+                    height={0}
+                    className='h-5 w-auto'
+                  />
+                  <p className='font-semibold text-white'>Filter</p>
+                </button>
+                {(filterDomain.length > 0 || filterCategory.length > 0) && (
+                  <div className='absolute right-[-8px] top-[-8px] flex h-6 w-6 items-center justify-center rounded-full border-[1px] border-primary bg-white text-xs font-semibold text-primary'>
+                    {filterDomain.length + filterCategory.length}
+                  </div>
+                )}
+              </div>
               <ul
                 className={clsx(
                   'absolute left-0 top-full z-10 flex w-[135px] flex-col items-start space-y-1 overflow-hidden rounded-lg bg-white pl-3 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] transition-[max-height,border] duration-500',
@@ -276,11 +284,8 @@ function URLsPage(props: URLsPageProps) {
                 {filterUrlList.length} Results
               </p>
               <div className='hidden xl:flex'>
-                <UrlSelectionList isDomain selectionList={filterDomain} />
-                <UrlSelectionList
-                  isDomain={false}
-                  selectionList={filterCategory}
-                />
+                <UrlSelectionList isDomain />
+                <UrlSelectionList isDomain={false} />
               </div>
               <button
                 onClick={() => {

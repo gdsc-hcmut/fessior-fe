@@ -2,27 +2,21 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import useScreenSize from '@/hooks/useScreenSize';
 import { categoryListData, domainListData } from '@/services/url.service';
+import { useFilterOptionStore } from '@/store/filter-option';
 import { useUrlModalStore } from '@/store/url-modal';
-
-type CategoryModalProps = {
-  filterDomain: string[];
-  filterCategory: string[];
-  setFilterDomain: (newFilterDomain: string[]) => void;
-  setFilterCategory: (newFilterCategory: string[]) => void;
-};
 
 type FilterSelectionProps = {
   isDomain: boolean;
   optionList: string[];
   clearSelection: (clearDomain: boolean) => void;
+  removeOption: (option: string, fromDomain: boolean) => void;
 };
 
 function FilterSelection(props: FilterSelectionProps) {
-  const { isDomain, optionList, clearSelection } = props;
+  const { isDomain, optionList, clearSelection, removeOption } = props;
 
   if (optionList.length === 0) {
     return (
@@ -69,13 +63,15 @@ function FilterSelection(props: FilterSelectionProps) {
             className='flex h-6 items-center space-x-1 rounded-lg bg-primary px-2 py-1 text-xs text-white md:px-3'
           >
             <p>{option}</p>
-            <Image
-              src='/icons/header/close_white.svg'
-              alt='Close icon'
-              width={0}
-              height={0}
-              className='h-auto w-2'
-            />
+            <button onClick={() => removeOption(option, isDomain)}>
+              <Image
+                src='/icons/header/close_white.svg'
+                alt='Close icon'
+                width={0}
+                height={0}
+                className='h-auto w-2'
+              />
+            </button>
           </div>
         ))}
       </div>
@@ -83,10 +79,10 @@ function FilterSelection(props: FilterSelectionProps) {
   );
 }
 
-export default function CategoryModal(props: CategoryModalProps) {
+export default function CategoryModal() {
   const { filterDomain, filterCategory, setFilterCategory, setFilterDomain } =
-    props;
-  const { setShowCategoryModal, isShow } = useUrlModalStore();
+    useFilterOptionStore();
+  const { setShowCategoryModal } = useUrlModalStore();
   const [isDomain, setIsDomain] = useState(true);
   const [allOptions, setAllOptions] = useState<string[]>(
     isDomain ? domainListData : categoryListData,
@@ -98,9 +94,12 @@ export default function CategoryModal(props: CategoryModalProps) {
     categoryListData.map((item) => filterCategory.includes(item)),
   );
   const [searchText, setSearchText] = useState('');
-  const [curDomainList, setCurDomainList] = useState<string[]>(filterDomain);
-  const [curCategoryList, setCurCategoryList] =
-    useState<string[]>(filterCategory);
+  const [curDomainList, setCurDomainList] = useState<string[]>([
+    ...filterDomain,
+  ]);
+  const [curCategoryList, setCurCategoryList] = useState<string[]>([
+    ...filterCategory,
+  ]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -135,16 +134,31 @@ export default function CategoryModal(props: CategoryModalProps) {
     }
   };
 
-  const onCloseModal = () => {
-    setShowCategoryModal(false);
-    setSearchText('');
-  };
-
   const onSubmitFilter = () => {
     setFilterDomain(curDomainList);
     setFilterCategory(curCategoryList);
     setShowCategoryModal(false);
     setSearchText('');
+  };
+
+  const removeOption = (option: string, fromDomain: boolean) => {
+    if (fromDomain) {
+      const index = domainListData.indexOf(option);
+      const newChosenDomains = [...chosenDomains];
+      newChosenDomains[index] = false;
+      setChosenDomains(newChosenDomains);
+      let newFilterDomain = curDomainList;
+      newFilterDomain = newFilterDomain.filter((item) => item !== option);
+      setCurDomainList(newFilterDomain);
+    } else {
+      const index = categoryListData.indexOf(option);
+      const newChosenCategories = [...chosenCategories];
+      newChosenCategories[index] = false;
+      setChosenCategories(newChosenCategories);
+      let newFilterCategory = curCategoryList;
+      newFilterCategory = newFilterCategory.filter((item) => item !== option);
+      setCurCategoryList(newFilterCategory);
+    }
   };
 
   return (
@@ -167,11 +181,13 @@ export default function CategoryModal(props: CategoryModalProps) {
               clearSelection={clearSelection}
               isDomain={true}
               optionList={curDomainList}
+              removeOption={removeOption}
             />
             <FilterSelection
               clearSelection={clearSelection}
               isDomain={false}
               optionList={curCategoryList}
+              removeOption={removeOption}
             />
           </div>
           <div className='mt-5 w-full 2xl:mt-6'>
@@ -293,7 +309,7 @@ export default function CategoryModal(props: CategoryModalProps) {
           </div>
         </div>
         <button
-          onClick={onCloseModal}
+          onClick={() => setShowCategoryModal(false)}
           className='absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-[#E6E6E6] xl:h-8 xl:w-8'
         >
           <Image

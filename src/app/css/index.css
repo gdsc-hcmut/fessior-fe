@@ -112,6 +112,7 @@ p {
   display: block;
   background-color: transparent;
   width: 4px;
+  height: 4px;
 }
 .show-scrollbar::-webkit-scrollbar-track {
   background-color: #fff;
