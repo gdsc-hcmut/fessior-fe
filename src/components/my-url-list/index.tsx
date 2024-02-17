@@ -54,7 +54,7 @@ function UrlItemXL(props: UrlItemProps) {
     const renderBoxes = () => {
       let currentWidth = 0;
       const newCategories = [];
-      const newHiddenCategories = [];
+      let newHiddenCategories: string[] = [];
 
       for (let i = 0; i < url.category.length; i++) {
         const boxWidth = calculateBoxWidth(url.category[i]);
@@ -69,8 +69,9 @@ function UrlItemXL(props: UrlItemProps) {
           newCategories.push(url.category[i]);
           currentWidth += boxWidth;
         } else {
-          if (!isDivFull) setIsDivFull(true);
-          newHiddenCategories.push(url.category[i]);
+          setIsDivFull(true);
+          newHiddenCategories = url.category.slice(i);
+          break;
         }
       }
 
@@ -80,7 +81,7 @@ function UrlItemXL(props: UrlItemProps) {
 
     setIsDivFull(false);
     renderBoxes();
-  }, [width, url.category]);
+  }, [width, url.category, isDivFull]);
 
   return (
     <div className='relative flex flex-shrink-0 items-center rounded-lg bg-white px-5 py-3 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] 2xl:px-7 2xl:py-4 3xl:px-10 3xl:py-5'>
@@ -219,7 +220,7 @@ function UrlItemMD(props: UrlItemProps) {
 
     setIsDivFull(false);
     renderBoxes();
-  }, [width, url.category]);
+  }, [width, url.category, isDivFull]);
 
   return (
     <div className='relative flex w-full justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
