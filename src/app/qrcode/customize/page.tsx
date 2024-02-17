@@ -20,73 +20,77 @@ export default function Shorten() {
   const [typeOfQR, setTypeOfQR] = useState('url');
   const [patternColorType, setPatternColorType] = useState('singleColor');
   const [zoomMiniQR, setZoomMiniQR] = useState(true);
+  const [isViewSaveOptionExpand, setIsViewSaveOptionExpand] = useState(false);
+
   const handleRadioButton = (value: string) => {
     setPatternColorType(value);
   };
   return (
     <>
       <div className='relative flex w-[100%] flex-col items-center justify-start overflow-hidden pt-[88px] leading-[1.2] text-primary'>
-        <div
-          className={`fixed right-[8px] top-[112px] z-50 hidden h-[222px] w-[224px]  ${
-            zoomMiniQR ? 'flex-col md:flex' : 'hidden'
-          }`}
-        >
-          <button
-            className='z-50 h-[28px] w-[28px] self-start rounded-full bg-primary'
-            onClick={() => {
-              setZoomMiniQR(!zoomMiniQR);
-            }}
+        <div className='lg:hidden'>
+          <div
+            className={`fixed right-[8px] top-[112px] z-50 hidden h-[222px] w-[224px]  ${
+              zoomMiniQR ? 'flex-col md:flex' : 'hidden'
+            }`}
           >
-            {' '}
-            <svg
-              width='12'
-              height='12'
-              viewBox='0 0 12 12'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-              className='absolute left-[8px] top-[8px]'
+            <button
+              className='z-50 h-[28px] w-[28px] self-start rounded-full bg-primary'
+              onClick={() => {
+                setZoomMiniQR(!zoomMiniQR);
+              }}
             >
-              <path
-                d='M4.95228 9.81195C5.95281 9.81195 6.8904 9.51273 7.67069 9.00156L10.4268 11.7382C10.6093 11.9127 10.8422 12 11.0939 12C11.6162 12 12 11.5948 12 11.0836C12 10.8468 11.9182 10.6161 11.742 10.4416L9.00472 7.7174C9.57105 6.91948 9.90456 5.95325 9.90456 4.90597C9.90456 2.20675 7.67698 0 4.95228 0C2.23388 0 0 2.20675 0 4.90597C0 7.6052 2.22758 9.81195 4.95228 9.81195ZM4.95228 8.50286C2.95753 8.50286 1.32145 6.88208 1.32145 4.90597C1.32145 2.92987 2.95753 1.30909 4.95228 1.30909C6.94704 1.30909 8.58312 2.92987 8.58312 4.90597C8.58312 6.88208 6.94704 8.50286 4.95228 8.50286ZM3.32879 5.39844H6.57577C6.84636 5.39844 7.07289 5.17403 7.07289 4.90597C7.07289 4.63792 6.84636 4.41351 6.57577 4.41351H3.32879C3.05821 4.41351 2.83167 4.63792 2.83167 4.90597C2.83167 5.17403 3.05821 5.39844 3.32879 5.39844Z'
-                fill='white'
+              {' '}
+              <svg
+                width='12'
+                height='12'
+                viewBox='0 0 12 12'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+                className='absolute left-[8px] top-[8px]'
+              >
+                <path
+                  d='M4.95228 9.81195C5.95281 9.81195 6.8904 9.51273 7.67069 9.00156L10.4268 11.7382C10.6093 11.9127 10.8422 12 11.0939 12C11.6162 12 12 11.5948 12 11.0836C12 10.8468 11.9182 10.6161 11.742 10.4416L9.00472 7.7174C9.57105 6.91948 9.90456 5.95325 9.90456 4.90597C9.90456 2.20675 7.67698 0 4.95228 0C2.23388 0 0 2.20675 0 4.90597C0 7.6052 2.22758 9.81195 4.95228 9.81195ZM4.95228 8.50286C2.95753 8.50286 1.32145 6.88208 1.32145 4.90597C1.32145 2.92987 2.95753 1.30909 4.95228 1.30909C6.94704 1.30909 8.58312 2.92987 8.58312 4.90597C8.58312 6.88208 6.94704 8.50286 4.95228 8.50286ZM3.32879 5.39844H6.57577C6.84636 5.39844 7.07289 5.17403 7.07289 4.90597C7.07289 4.63792 6.84636 4.41351 6.57577 4.41351H3.32879C3.05821 4.41351 2.83167 4.63792 2.83167 4.90597C2.83167 5.17403 3.05821 5.39844 3.32879 5.39844Z'
+                  fill='white'
+                />
+              </svg>
+            </button>
+            <div className='ml-[-20px] mt-[-17px] h-[212px] w-[212px] self-end rounded-[8px] border-[3px] border-primary bg-white p-[3px] '>
+              <Image
+                src='/images/qrcode/example-qr.png'
+                alt='Pattern 1'
+                height='250'
+                width='250'
               />
-            </svg>
-          </button>
-          <div className='ml-[-20px] mt-[-17px] h-[212px] w-[212px] self-end rounded-[8px] border-[3px] border-primary bg-white p-[3px] '>
-            <Image
-              src='/images/qrcode/example-qr.png'
-              alt='Pattern 1'
-              height='250'
-              width='250'
-            />
+            </div>
           </div>
-        </div>
-        <div
-          className={`fixed right-[8px] top-[112px] z-50 flex h-[132px] w-[132px] flex-col 
+          <div
+            className={`fixed right-[8px] top-[112px] z-50 flex h-[132px] w-[132px] flex-col 
                         ${!zoomMiniQR ? '' : 'hidden'}
         `}
-        >
-          <button
-            className='z-50 mr-[-2px] h-[24px] w-[24px] self-end rounded-full bg-primary'
-            onClick={() => {
-              setZoomMiniQR(!zoomMiniQR);
-            }}
           >
-            {' '}
-            <svg
-              width='24'
-              height='24'
-              viewBox='0 0 24 24'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
+            <button
+              className='z-50 mr-[-2px] h-[24px] w-[24px] self-end rounded-full bg-primary'
+              onClick={() => {
+                setZoomMiniQR(!zoomMiniQR);
+              }}
             >
-              <circle cx='12' cy='12' r='12' fill='#0B2878' />
-              <path
-                d='M10.9523 15.8119C11.9528 15.8119 12.8904 15.5127 13.6707 15.0016L16.4268 17.7382C16.6093 17.9127 16.8422 18 17.0939 18C17.6162 18 18 17.5948 18 17.0836C18 16.8468 17.9182 16.6161 17.742 16.4416L15.0047 13.7174C15.5711 12.9195 15.9046 11.9532 15.9046 10.906C15.9046 8.20675 13.677 6 10.9523 6C8.23388 6 6 8.20675 6 10.906C6 13.6052 8.22758 15.8119 10.9523 15.8119ZM10.9523 14.5029C8.95753 14.5029 7.32145 12.8821 7.32145 10.906C7.32145 8.92987 8.95753 7.30909 10.9523 7.30909C12.947 7.30909 14.5831 8.92987 14.5831 10.906C14.5831 12.8821 12.947 14.5029 10.9523 14.5029ZM9.32879 11.3984H10.4552V12.5143C10.4552 12.7886 10.6754 13.0068 10.9523 13.0068C11.2292 13.0068 11.4431 12.7886 11.4431 12.5143V11.3984H12.5758C12.8526 11.3984 13.0729 11.1803 13.0729 10.906C13.0729 10.6317 12.8526 10.4135 12.5758 10.4135H11.4431V9.29766C11.4431 9.02338 11.2292 8.80519 10.9523 8.80519C10.6754 8.80519 10.4552 9.02338 10.4552 9.29766V10.4135H9.32879C9.05191 10.4135 8.83167 10.6317 8.83167 10.906C8.83167 11.1803 9.05191 11.3984 9.32879 11.3984Z'
-                fill='white'
-              />
-            </svg>
-          </button>
+              {' '}
+              <svg
+                width='24'
+                height='24'
+                viewBox='0 0 24 24'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <circle cx='12' cy='12' r='12' fill='#0B2878' />
+                <path
+                  d='M10.9523 15.8119C11.9528 15.8119 12.8904 15.5127 13.6707 15.0016L16.4268 17.7382C16.6093 17.9127 16.8422 18 17.0939 18C17.6162 18 18 17.5948 18 17.0836C18 16.8468 17.9182 16.6161 17.742 16.4416L15.0047 13.7174C15.5711 12.9195 15.9046 11.9532 15.9046 10.906C15.9046 8.20675 13.677 6 10.9523 6C8.23388 6 6 8.20675 6 10.906C6 13.6052 8.22758 15.8119 10.9523 15.8119ZM10.9523 14.5029C8.95753 14.5029 7.32145 12.8821 7.32145 10.906C7.32145 8.92987 8.95753 7.30909 10.9523 7.30909C12.947 7.30909 14.5831 8.92987 14.5831 10.906C14.5831 12.8821 12.947 14.5029 10.9523 14.5029ZM9.32879 11.3984H10.4552V12.5143C10.4552 12.7886 10.6754 13.0068 10.9523 13.0068C11.2292 13.0068 11.4431 12.7886 11.4431 12.5143V11.3984H12.5758C12.8526 11.3984 13.0729 11.1803 13.0729 10.906C13.0729 10.6317 12.8526 10.4135 12.5758 10.4135H11.4431V9.29766C11.4431 9.02338 11.2292 8.80519 10.9523 8.80519C10.6754 8.80519 10.4552 9.02338 10.4552 9.29766V10.4135H9.32879C9.05191 10.4135 8.83167 10.6317 8.83167 10.906C8.83167 11.1803 9.05191 11.3984 9.32879 11.3984Z'
+                  fill='white'
+                />
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div
@@ -168,60 +172,90 @@ export default function Shorten() {
           <QRNavBar />
           {/* //////// INFORMATION PARTS //////////// */}
           <div className='lg:flex lg:flex-row lg:gap-[28px]'>
-            <div>
-              <div className='mt-[35px] flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] px-[16px] md:pr-[32px] lg:mt-[28px]'>
-                <div className='mt-[8px] h-[20px] md:mt-[16px] md:h-[29px]'>
-                  <p className=' text-center text-[16px] font-bold  md:text-left md:text-[20px] md:font-medium'>
+            <div className='lg-items-center lg:mt-[28px] lg:flex lg:flex-col lg:rounded-[8px] lg:border-[0.5px] lg:border-[#7E7E7E] lg:border-opacity-30 lg:bg-white lg:px-[24px]'>
+              <div className='mt-[35px] flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] px-[16px] md:pr-[32px] lg:mt-[24px] lg:px-[36px]'>
+                <div className='mt-[8px] h-[20px] md:mt-[16px] md:h-[29px] lg:ml-[-8px] lg:mt-[28px] lg:flex lg:h-[28px] lg:items-center'>
+                  <p className=' text-center text-[16px] font-bold  md:text-left md:text-[20px] md:font-medium lg:text-[28px]'>
                     Information
                   </p>
                 </div>
+                <div
+                  className={`${
+                    typeOfQR === 'wifi' ? 'md:mt-[20px]' : 'mt-[40px]'
+                  } mt-[8px] hidden w-full flex-row items-center lg:flex`}
+                >
+                  <div className='flex h-[24px] flex-col justify-center md:ml-[4px] lg:ml-0 lg:h-[20px]'>
+                    <p className='text-[16px] font-medium md:w-[104px] lg:w-[128px] lg:text-[20px]'>
+                      Categories
+                    </p>
+                  </div>
 
+                  <div className='relative mt-[4px] h-[40px] w-full rounded-[8px] border-[0.5px] border-gray-300 md:ml-[33px] md:mt-0 md:h-[48px] lg:ml-[8px] lg:h-[60px] lg:border-[1px] lg:border-primary'>
+                    <input
+                      type='text'
+                      className='h-full w-full rounded-[8px] pl-[36px] text-[12px] focus:outline-[1px] focus:outline-primary md:pl-[48px] md:text-[16px] lg:pl-[78px] lg:text-[18px]'
+                      placeholder='Add or create categories'
+                    />
+                    <svg
+                      viewBox='0 0 20 20'
+                      fill='none'
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='absolute left-[5px] top-2.5 h-[20px] w-[20px] md:left-[10px] md:top-[12px] md:h-[24px] md:w-[24px] lg:left-[18px] lg:top-[18px]'
+                    >
+                      <path
+                        d='M12.9167 11.6667H12.2583L12.025 11.4417C12.8417 10.4917 13.3333 9.25833 13.3333 7.91667C13.3333 4.925 10.9083 2.5 7.91667 2.5C4.925 2.5 2.5 4.925 2.5 7.91667C2.5 10.9083 4.925 13.3333 7.91667 13.3333C9.25833 13.3333 10.4917 12.8417 11.4417 12.025L11.6667 12.2583V12.9167L15.8333 17.075L17.075 15.8333L12.9167 11.6667ZM7.91667 11.6667C5.84167 11.6667 4.16667 9.99167 4.16667 7.91667C4.16667 5.84167 5.84167 4.16667 7.91667 4.16667C9.99167 4.16667 11.6667 5.84167 11.6667 7.91667C11.6667 9.99167 9.99167 11.6667 7.91667 11.6667Z'
+                        fill='#0B2878'
+                      />
+                    </svg>
+                    <div className='absolute left-[30px] top-[8px] h-[24px] w-[0.5px] bg-[#696969] opacity-[30%] md:left-[40px] md:top-[12px] lg:left-[60px] lg:top-[18px]'></div>
+                  </div>
+                </div>
                 <div className='mt-[8px] flex w-full flex-col  md:mt-[15px] md:flex-row md:items-center'>
-                  <div className='flex h-[24px] flex-col justify-center md:ml-[4px]'>
-                    <p className='text-[16px] font-medium md:w-[104px]'>
+                  <div className='flex h-[24px] flex-col justify-center md:ml-[4px] lg:ml-0 lg:h-[20px]'>
+                    <p className='text-[16px] font-medium md:w-[104px] lg:w-[128px] lg:text-[20px]'>
                       QR name
                     </p>
                   </div>
 
-                  <div className='relative mt-[4px] h-[40px] w-full rounded-[8px] border-[0.5px] border-gray-300 md:ml-[33px] md:mt-0 md:h-[48px]'>
+                  <div className='relative mt-[4px] h-[40px] w-full rounded-[8px] border-[0.5px] border-gray-300 md:ml-[33px] md:mt-0 md:h-[48px] lg:ml-[8px] lg:h-[60px] lg:border-[1px] lg:border-primary'>
                     <input
                       type='text'
-                      className='h-full w-full rounded-[8px] pl-[36px] text-[12px] focus:outline-[1px] focus:outline-primary md:pl-[48px] md:text-[16px]'
+                      className='h-full w-full rounded-[8px] pl-[36px] text-[12px] focus:outline-[1px] focus:outline-primary md:pl-[48px] md:text-[16px] lg:pl-[78px] lg:text-[18px]'
                       placeholder='Enter your QR name'
                     />
                     <svg
                       viewBox='0 0 20 20'
                       fill='none'
                       xmlns='http://www.w3.org/2000/svg'
-                      className='absolute left-[5px] top-2.5 h-[20px] w-[20px] md:left-[10px] md:top-[12px] md:h-[24px] md:w-[24px]'
+                      className='absolute left-[5px] top-2.5 h-[20px] w-[20px] md:left-[10px] md:top-[12px] md:h-[24px] md:w-[24px] lg:left-[18px] lg:top-[18px]'
                     >
                       <path
                         d='M14.32 5.6C14.0168 5.23571 13.5116 5 12.9474 5L3.68421 5.00714C2.75789 5.00714 2 5.64286 2 6.42857V13.5714C2 14.3571 2.75789 14.9929 3.68421 14.9929L12.9474 15C13.5116 15 14.0168 14.7643 14.32 14.4L18 10L14.32 5.6ZM12.9474 13.5714H3.68421V6.42857H12.9474L15.9368 10L12.9474 13.5714Z'
                         fill='#0B2878'
                       />
                     </svg>
-                    <div className='absolute left-[30px] top-[8px] h-[24px] w-[0.5px] bg-[#696969] opacity-[30%] md:left-[40px] md:top-[12px]'></div>
+                    <div className='absolute left-[30px] top-[8px] h-[24px] w-[0.5px] bg-[#696969] opacity-[30%] md:left-[40px] md:top-[12px] lg:left-[60px] lg:top-[18px]'></div>
                   </div>
                 </div>
                 <div className={`${typeOfQR === 'url' ? '' : 'hidden'}`}>
-                  <div className='mt-[8px] flex w-full flex-col  md:mt-[20px] md:flex-row md:items-center'>
-                    <div className='flex h-[24px] flex-col justify-center md:ml-[4px]'>
-                      <p className='text-[16px] font-medium md:w-[104px]'>
+                  <div className='mt-[8px] flex w-full flex-col  md:mt-[20px] md:flex-row md:items-center '>
+                    <div className='flex h-[24px] flex-col justify-center md:ml-[4px] lg:ml-0 lg:h-[20px]'>
+                      <p className='text-[16px] font-medium md:w-[104px] lg:w-[128px] lg:text-[20px]'>
                         Your URL
                       </p>
                     </div>
 
-                    <div className='relative mt-[4px] h-[40px] w-full rounded-[8px] border-[0.5px] border-gray-300 md:ml-[33px] md:mt-0 md:h-[48px]'>
+                    <div className='relative mt-[4px] h-[40px] w-full rounded-[8px] border-[0.5px] border-gray-300 md:ml-[33px] md:mt-0 md:h-[48px]  lg:ml-[8px] lg:h-[60px] lg:border-[1px] lg:border-primary'>
                       <input
                         type='text'
-                        className='h-full w-full rounded-[8px] pl-[36px] text-[12px] focus:outline-[1px] focus:outline-primary md:pl-[48px] md:text-[16px]'
+                        className='h-full w-full rounded-[8px] pl-[36px] text-[12px] focus:outline-[1px] focus:outline-primary md:pl-[48px] md:text-[16px] lg:pl-[78px] lg:text-[18px]'
                         placeholder='Enter your URL'
                       />
                       <svg
                         viewBox='0 0 20 20'
                         fill='none'
                         xmlns='http://www.w3.org/2000/svg'
-                        className='absolute left-[5px] top-2.5 h-[20px] w-[20px] md:left-[10px] md:top-[12px] md:h-[24px] md:w-[24px]'
+                        className='absolute left-[5px] top-2.5 h-[20px] w-[20px] md:left-[10px] md:top-[12px] md:h-[24px] md:w-[24px] lg:left-[18px] lg:top-[18px]'
                       >
                         <path
                           d='M3.24984 9.9987C3.24984 8.5737 4.40817 7.41536 5.83317 7.41536H9.1665V5.83203H5.83317C3.53317 5.83203 1.6665 7.6987 1.6665 9.9987C1.6665 12.2987 3.53317 14.1654 5.83317 14.1654H9.1665V12.582H5.83317C4.40817 12.582 3.24984 11.4237 3.24984 9.9987ZM6.6665 10.832H13.3332V9.16536H6.6665V10.832ZM14.1665 5.83203H10.8332V7.41536H14.1665C15.5915 7.41536 16.7498 8.5737 16.7498 9.9987C16.7498 11.4237 15.5915 12.582 14.1665 12.582H10.8332V14.1654H14.1665C16.4665 14.1654 18.3332 12.2987 18.3332 9.9987C18.3332 7.6987 16.4665 5.83203 14.1665 5.83203Z'
@@ -229,19 +263,19 @@ export default function Shorten() {
                           fillOpacity='0.87'
                         />
                       </svg>
-                      <div className='absolute left-[30px] top-[8px] h-[24px] w-[0.5px] bg-[#696969] opacity-[30%] md:left-[40px] md:top-[12px]'></div>
+                      <div className='absolute left-[30px] top-[8px] h-[24px] w-[0.5px] bg-[#696969] opacity-[30%] md:left-[40px] md:top-[12px] lg:left-[60px] lg:top-[18px]'></div>
                     </div>
                   </div>
-                  <div className='mr-[52px] mt-[10px] flex w-auto flex-col md:ml-[4px] md:mr-[0px] md:flex-row'>
+                  <div className='mr-[52px] mt-[10px] flex w-auto flex-col md:ml-[4px] md:mr-[0px] md:flex-row lg:mb-[28px] lg:ml-[0px] lg:mt-[20px] lg:w-full'>
                     {/* Organization and Domain*/}
-                    <div className='flex flex-row items-center md:w-[277px] md:grow'>
-                      <div className='flex h-[18px] w-[68px] flex-col justify-center md:w-[104px]'>
-                        <p className='text-[12px] md:text-[16px] md:font-medium'>
+                    <div className='flex flex-row items-center md:w-[277px] md:grow lg:w-[272px] lg:grow-0'>
+                      <div className='flex h-[18px] w-[68px] flex-col justify-center md:w-[104px] lg:h-[28px] lg:w-[128px]'>
+                        <p className='text-[12px] md:text-[16px] md:font-medium lg:text-[20px]'>
                           Organization
                         </p>
                       </div>
 
-                      <div className='relative ml-[8px] grow md:ml-[33px]'>
+                      <div className='relative ml-[8px] grow md:ml-[33px] lg:ml-[8px] lg:block lg:w-[136px] lg:grow-0 lg:rounded-[8px] lg:border-[1px]  lg:border-primary'>
                         <DropDown
                           value='GDSC'
                           options={['GDSC', 'CTCT', 'OISP']}
@@ -253,16 +287,21 @@ export default function Shorten() {
                           mediumTextSize='16'
                           paddingRight='4'
                           mediumPaddingRight='6'
+                          largeFont='regular'
+                          largeHeight='32'
+                          largePaddingLeft='8'
+                          largePaddingRight='4'
+                          largeTextSize='16'
                         />
                       </div>
                     </div>
-                    <div className='mt-[10px] flex flex-row items-center md:ml-[85px] md:w-[240px] md:grow'>
-                      <div className='flex h-[18px] w-[68px] flex-col justify-center md:w-[54px]'>
-                        <p className='text-[12px] md:text-[16px] md:font-medium'>
+                    <div className='mt-[10px] flex flex-row items-center md:ml-[85px] md:w-[240px] md:grow lg:ml-[62px] lg:mt-0'>
+                      <div className='flex h-[18px] w-[68px] flex-col justify-center md:w-[54px] lg:h-[32px] lg:w-[80px]'>
+                        <p className='text-[12px] md:text-[16px] md:font-medium lg:text-[20px]'>
                           Domain
                         </p>
                       </div>
-                      <div className='relative ml-[8px] grow md:ml-[46px]'>
+                      <div className='relative ml-[8px] grow md:ml-[46px]  lg:ml-[8px] lg:block lg:w-[136px] lg:grow-0 lg:rounded-[8px] lg:border-[1px]  lg:border-primary'>
                         <DropDown
                           value='furl.one'
                           options={['furl.one', 'bkoisp.info', 'gic.gdsc.app']}
@@ -274,6 +313,11 @@ export default function Shorten() {
                           mediumTextSize='16'
                           paddingRight='4'
                           mediumPaddingRight='6'
+                          largeFont='regular'
+                          largeHeight='32'
+                          largePaddingLeft='8'
+                          largePaddingRight='4'
+                          largeTextSize='16'
                         />
                       </div>
                     </div>
@@ -354,11 +398,10 @@ export default function Shorten() {
                     </div>
                   </div>
                 </div>
-
                 <div
                   className={`${
                     typeOfQR === 'wifi' ? 'md:mt-[20px]' : 'md:mt-[10px]'
-                  } mt-[8px] flex w-full flex-col md:flex-row md:items-center`}
+                  } mt-[8px] flex w-full flex-col md:flex-row md:items-center lg:hidden`}
                 >
                   <div className='flex h-[24px] flex-col justify-center md:ml-[4px]'>
                     <p className='text-[16px] font-medium md:w-[104px]'>
@@ -386,7 +429,7 @@ export default function Shorten() {
                     <div className='absolute left-[30px] top-[8px] h-[24px] w-[0.5px] bg-[#696969] opacity-[30%] md:left-[40px] md:top-[12px]'></div>
                   </div>
                 </div>
-                <div className='mb-[16px] mt-[12px] flex flex-row items-center'>
+                <div className='mb-[16px] mt-[12px] flex flex-row items-center lg:hidden'>
                   <div className='flex h-[15px] flex-col justify-center'>
                     <p className='text-[12px] font-medium  text-black md:text-[16px]'>
                       Chosen categories
@@ -428,7 +471,7 @@ export default function Shorten() {
                   </div>
                 </div>
               </div>
-              <div className='mt-[20px] flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] px-[16px] pb-[16px]'>
+              <div className='mt-[20px] flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] px-[16px] pb-[16px] lg:mt-[24px]'>
                 <div className='mt-[8px] h-[20px] md:mt-[16px] md:h-[29px]'>
                   <p className=' text-center text-[16px] font-bold  md:text-left md:text-[20px] md:font-medium'>
                     Frame
@@ -682,7 +725,7 @@ export default function Shorten() {
                 </div>
               </div>
 
-              <div className='mt-[20px] flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] pb-[16px] pl-[16px] pr-[16px] pt-[8px]'>
+              <div className='mt-[20px] flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] pb-[16px] pl-[16px] pr-[16px] pt-[8px] lg:mt-[24px]'>
                 <div className='mt-[8px] h-[20px] md:mt-[16px] md:h-[29px]'>
                   <p className=' text-center text-[16px] font-bold  md:text-left md:text-[20px] md:font-medium'>
                     Pattern
@@ -881,7 +924,7 @@ export default function Shorten() {
                 </div>
               </div>
 
-              <div className='mt-[20px] flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] px-[15px] pb-[16px] pt-[8px]'>
+              <div className='mt-[20px] flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] px-[15px] pb-[16px] pt-[8px] lg:mb-[24px] lg:mt-[24px]'>
                 <div className='mt-[8px] h-[20px] md:mt-[16px] md:h-[29px]'>
                   <p className='text-center text-[16px] font-bold  md:text-left md:text-[20px] md:font-medium'>
                     Logo
@@ -984,7 +1027,7 @@ export default function Shorten() {
                   </button>
                 </div>
               </div>
-              <div className='mt-[20px] flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] px-[35px] pb-[16px] pt-[28px]'>
+              <div className='mt-[20px] flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] px-[35px] pb-[2px] pt-[28px] lg:hidden'>
                 <div className=' ml-auto mr-auto h-[200px] w-[200px] rounded-[8px] border border-primary p-[10px] md:h-[532px] md:w-[532px]'>
                   <Image
                     src='/images/qrcode/example-qr.png'
@@ -1065,17 +1108,46 @@ export default function Shorten() {
                     </div>
                   </div>
                 </div>
-                <div className='mt-[8px] h-[40px] w-full md:mt-[14px]'>
+                <div className='mt-[8px] flex w-full flex-col md:mt-[14px]'>
                   <button className='h-[40px] w-full rounded-[8px] bg-primary'>
-                    <p className='text-center text-[16px] font-bold text-white'>
+                    <p className='py-[10px] text-center text-[16px] font-bold text-white'>
                       Save this QR Code
                     </p>
+                  </button>
+                  <button
+                    className={`h-[40px] w-full rounded-[8px] bg-primary ${
+                      isViewSaveOptionExpand ? 'mt-[4px]' : 'hidden'
+                    }`}
+                  >
+                    <p className='py-[10px] text-center text-[16px] font-bold text-white'>
+                      Save and copy to clipboard
+                    </p>
+                  </button>
+                  <button
+                    className={`h-[40px] w-full rounded-[8px] bg-primary ${
+                      isViewSaveOptionExpand ? 'mt-[4px]' : 'hidden'
+                    }`}
+                  >
+                    <p className='py-[10px] text-center text-[16px] font-bold text-white'>
+                      Save and download
+                    </p>
+                  </button>
+
+                  <button
+                    className='px-auto mr-[-27px] mt-[8px] h-[18px] self-end text-[12px] font-bold text-[#6D7EAE] underline'
+                    onClick={() => {
+                      setIsViewSaveOptionExpand(!isViewSaveOptionExpand);
+                    }}
+                  >
+                    {isViewSaveOptionExpand
+                      ? 'View less'
+                      : 'View more save option'}
                   </button>
                 </div>
               </div>
             </div>
             <div className='sticky top-[28px] mt-[28px]  hidden h-[632px] w-[472px] items-center bg-green lg:flex lg:flex-col'>
-              <div></div>
+              <div>IMAGE OF QR</div>
               <div className='mt-[32px] flex h-[] flex-row'>
                 <div className='mr-[32px] flex h-[20px] w-[64px] flex-row items-center '>
                   <input
