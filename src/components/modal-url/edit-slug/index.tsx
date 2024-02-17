@@ -12,7 +12,6 @@ export default function EditSlugModal() {
 
   const [slug, setSlug] = useState(editedUrl.slug);
   const [errorMsg, setErrorMsg] = useState('');
-  const [searchText, setSearchText] = useState('');
   const [categoryList, setCategoryList] = useState<string[]>([
     ...categoryListData,
   ]);
@@ -21,7 +20,7 @@ export default function EditSlugModal() {
   ]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
+    const searchText = e.target.value;
     const newfilterCategoryList = categoryListData.filter((category) =>
       category.includes(searchText),
     );
@@ -151,6 +150,10 @@ export default function EditSlugModal() {
                       width={0}
                       height={0}
                       className='h-auto w-2'
+                      style={{
+                        minWidth: '8px',
+                        minHeight: '8px',
+                      }}
                     />
                   </button>
                 </div>
@@ -159,12 +162,17 @@ export default function EditSlugModal() {
           </div>
           <div className='mt-7 flex space-x-5 self-end md:mt-10'>
             <button
-              onClick={() => setShowEditModal(false)}
+              type='button'
+              onClick={(e) => {
+                e.preventDefault();
+                setShowEditModal(false);
+              }}
               className='font-semibold'
             >
               Cancel
             </button>
             <button
+              type='submit'
               onClick={onEdit}
               className='rounded-lg bg-primary px-3 py-2 font-semibold text-white md:px-4'
             >

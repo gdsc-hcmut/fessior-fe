@@ -1,15 +1,16 @@
 'use client';
 
 import Image from 'next/image';
+import React from 'react';
 import { toast } from 'react-toastify';
 
 import { useUrlModalStore } from '@/store/url-modal';
 
-
 export default function DeleteLinkModal() {
   const { setShowDeleteModal } = useUrlModalStore();
 
-  const onDelete = () => {
+  const onDelete = (e: React.FormEvent) => {
+    e.preventDefault();
     toast.success('Link deleted successfully');
     setShowDeleteModal(false);
   };
@@ -34,6 +35,7 @@ export default function DeleteLinkModal() {
           </p>
           <div className='mt-10 flex space-x-5 self-end md:mt-10'>
             <button
+              type='button'
               onClick={() => setShowDeleteModal(false)}
               className='font-semibold'
             >
@@ -41,6 +43,7 @@ export default function DeleteLinkModal() {
             </button>
             <button
               onClick={onDelete}
+              type='submit'
               className='rounded-lg bg-red px-2 py-1 font-semibold text-white md:px-3 md:py-2'
             >
               Delete link

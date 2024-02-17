@@ -44,6 +44,10 @@ export default function UrlSelectionList(props: UrlSelectionListProps) {
                 width={0}
                 height={0}
                 className='h-auto w-2'
+                style={{
+                  minWidth: '8px',
+                  minHeight: '8px',
+                }}
               />
             </button>
           </div>

@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import '../css/index.css';
 import CategoryModal from '@/components/modal-url/category-modal';
@@ -34,7 +34,6 @@ function URLsPage(props: URLsPageProps) {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const [urlList, setUrlList] = useState<MyUrl[]>([...myUrlListData]);
   const [filterUrlList, setFilterUrlList] = useState<MyUrl[]>([...urlList]);
-  const [searchText, setSearchText] = useState<string>('');
   const [displayUrlList, setDisplayUrlList] = useState<MyUrl[]>(
     filterUrlList.slice((page - 1) * 7, 7 * page),
   );
@@ -44,13 +43,14 @@ function URLsPage(props: URLsPageProps) {
     useFilterOptionStore();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
+    const searchText = e.target.value;
     const newfilterUrlList = myUrlListData.filter(
       (url) =>
         `https://${url.domain}/${url.slug}`.includes(searchText) ||
         url.originalUrl.includes(searchText),
     );
     setFilterUrlList(newfilterUrlList);
+    setDisplayUrlList(newfilterUrlList.slice(0, 7));
   };
 
   const handlePageChange = (pageNumber: number) => {

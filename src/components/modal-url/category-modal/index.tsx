@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useState } from 'react';
+import { use, useRef, useState } from 'react';
 
 import { categoryListData, domainListData } from '@/services/url.service';
 import { useFilterOptionStore } from '@/store/filter-option';
@@ -93,23 +93,23 @@ export default function CategoryModal() {
   const [chosenCategories, setChosenCategories] = useState<boolean[]>(
     categoryListData.map((item) => filterCategory.includes(item)),
   );
-  const [searchText, setSearchText] = useState('');
   const [curDomainList, setCurDomainList] = useState<string[]>([
     ...filterDomain,
   ]);
   const [curCategoryList, setCurCategoryList] = useState<string[]>([
     ...filterCategory,
   ]);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
+    const searchText = e.target.value;
     let filteredOptions: string[] = [];
-    if (e.target.value === '') {
+    if (searchText === '') {
       filteredOptions = isDomain ? domainListData : categoryListData;
     } else {
       const options = isDomain ? domainListData : categoryListData;
       filteredOptions = options.filter((option) =>
-        option.toLowerCase().includes(e.target.value.toLowerCase()),
+        option.toLowerCase().includes(searchText.toLowerCase()),
       );
     }
     setAllOptions(filteredOptions);
@@ -138,12 +138,11 @@ export default function CategoryModal() {
     setFilterDomain(curDomainList);
     setFilterCategory(curCategoryList);
     setShowCategoryModal(false);
-    setSearchText('');
   };
 
   const removeOption = (option: string, fromDomain: boolean) => {
     if (fromDomain) {
-      const index = domainListData.indexOf(option);
+      const index = allOptions.indexOf(option);
       const newChosenDomains = [...chosenDomains];
       newChosenDomains[index] = false;
       setChosenDomains(newChosenDomains);
@@ -151,7 +150,7 @@ export default function CategoryModal() {
       newFilterDomain = newFilterDomain.filter((item) => item !== option);
       setCurDomainList(newFilterDomain);
     } else {
-      const index = categoryListData.indexOf(option);
+      const index = allOptions.indexOf(option);
       const newChosenCategories = [...chosenCategories];
       newChosenCategories[index] = false;
       setChosenCategories(newChosenCategories);
@@ -197,6 +196,7 @@ export default function CategoryModal() {
                   onClick={() => {
                     setIsDomain(true);
                     setAllOptions(domainListData);
+                    if (inputRef.current) inputRef.current.value = '';
                   }}
                   className={clsx(
                     isDomain
@@ -210,6 +210,7 @@ export default function CategoryModal() {
                   onClick={() => {
                     setIsDomain(false);
                     setAllOptions(categoryListData);
+                    if (inputRef.current) inputRef.current.value = '';
                   }}
                   className={clsx(
                     !isDomain
@@ -236,8 +237,8 @@ export default function CategoryModal() {
                       ? 'Search by domain name'
                       : 'Search by category name'
                   }
+                  ref={inputRef}
                   onChange={handleSearch}
-                  value={searchText}
                 />
               </div>
             </div>

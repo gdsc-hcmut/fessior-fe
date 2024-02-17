@@ -84,7 +84,7 @@ function UrlItemXL(props: UrlItemProps) {
 
   return (
     <div className='relative flex flex-shrink-0 items-center rounded-lg bg-white px-5 py-3 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] 2xl:px-7 2xl:py-4 3xl:px-10 3xl:py-5'>
-      <div className='absolute left-0 top-0 h-full w-1 flex-[0] bg-primary' />
+      <div className='absolute left-0 top-0 h-full w-1 flex-[0] rounded-s-lg bg-primary' />
       <div className='mr-5 flex flex-[2] overflow-hidden 2xl:flex-[1.9] 3xl:flex-[1.5]'>
         <p className='w-[96%] truncate text-[14px] font-semibold text-primary 2xl:text-base'>
           https://{url.domain}/{url.slug}
