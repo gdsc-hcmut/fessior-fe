@@ -150,7 +150,10 @@ function UrlItemXL(props: UrlItemProps) {
           {url.enable ? 'Enable' : 'Disable'}
         </p>
       </div>
-      <UrlButton copyContent={`https://${url.domain}/${url.slug}`} />
+      <UrlButton
+        copyContent={`https://${url.domain}/${url.slug}`}
+        editedUrl={url}
+      />
     </div>
   );
 }
@@ -291,7 +294,10 @@ function UrlItemMD(props: UrlItemProps) {
           </div>
         </div>
       </div>
-      <UrlButton copyContent={`https://${url.domain}/${url.slug}`} />
+      <UrlButton
+        copyContent={`https://${url.domain}/${url.slug}`}
+        editedUrl={url}
+      />
     </div>
   );
 }

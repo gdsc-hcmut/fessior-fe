@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+import { MyUrl } from '@/types/url-type';
+
 type UrlModalStore = {
   isShow: {
     delete: boolean;
@@ -9,6 +11,8 @@ type UrlModalStore = {
   setShowEditModal: (value: boolean) => void;
   setShowDeleteModal: (value: boolean) => void;
   setShowCategoryModal: (value: boolean) => void;
+  editedUrl: MyUrl;
+  setEditedUrl: (url: MyUrl) => void;
 };
 
 export const useUrlModalStore = create<UrlModalStore>((set) => ({
@@ -16,6 +20,15 @@ export const useUrlModalStore = create<UrlModalStore>((set) => ({
     delete: false,
     edit: false,
     category: false,
+  },
+  editedUrl: {
+    originalUrl: '',
+    slug: '',
+    domain: '',
+    totalClicks: 0,
+    enable: false,
+    createdAt: '',
+    category: [],
   },
   setShowEditModal: (value) =>
     set((state) => ({
@@ -37,5 +50,9 @@ export const useUrlModalStore = create<UrlModalStore>((set) => ({
         ...state.isShow,
         category: value,
       },
+    })),
+  setEditedUrl: (url) =>
+    set((state) => ({
+      editedUrl: url,
     })),
 }));

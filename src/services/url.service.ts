@@ -17,30 +17,30 @@ export default urlService;
 export const myUrlListData: MyUrl[] = [
   {
     originalUrl: 'https://www.messenger.com/t/1000000',
-    slug: 'myLink',
+    slug: 'myLink1',
     domain: 'furl.one',
     totalClicks: 12,
     enable: true,
     createdAt: '22/12/2023',
-    category: ['Favorite', 'Recruit22_23', 'Testting123'],
+    category: ['testing', 'marketing', 'gic2023'],
   },
   {
     originalUrl: 'https://www.messenger.com/longlinksccccccc',
-    slug: 'myLink',
+    slug: 'myLin',
     domain: 'furl.one',
     totalClicks: 122,
     enable: true,
     createdAt: '22/02/2023',
-    category: ['Events', 'Favorite'],
+    category: ['event', 'favorite'],
   },
   {
     originalUrl: 'https://www.messenger.com/longlinksccccccc',
-    slug: 'myLink',
+    slug: 'myLink2',
     domain: 'furl.one',
     totalClicks: 23,
     enable: false,
     createdAt: '03/04/2023',
-    category: ['Favorite', 'Recruit22_23', 'Testting123'],
+    category: ['favorite', 'marketing', 'gic2023'],
   },
   {
     originalUrl: 'https://hahaha/t/1000000',
@@ -49,7 +49,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 3,
     enable: true,
     createdAt: '03/04/2022',
-    category: ['Events'],
+    category: ['event'],
   },
   {
     originalUrl: 'https://gdscgdscgdsc/myurl',
@@ -58,7 +58,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 35,
     enable: true,
     createdAt: '23/11/2023',
-    category: ['Favorite', 'Recruitment22_23'],
+    category: ['favorite', 'go for git'],
   },
   {
     originalUrl: 'https://www.messenger.com/longlinksccccccc',
@@ -67,7 +67,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 103,
     enable: false,
     createdAt: '30/11/2023',
-    category: ['Favorite'],
+    category: ['favorite'],
   },
   {
     originalUrl: 'https://www.messenger.com/t/1000000',
@@ -76,7 +76,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 87,
     enable: false,
     createdAt: '30/11/2023',
-    category: ['Favorite', 'Recruit22_23', 'Testting123'],
+    category: ['favorite', 'go for git', 'development'],
   },
   {
     originalUrl: 'https://www.messenger.com/t/1000000',
@@ -85,7 +85,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 12,
     enable: true,
     createdAt: '22/12/2023',
-    category: ['Favorite', 'Recruit22_23', 'Testting123'],
+    category: ['favorite', 'marketing', 'development'],
   },
   {
     originalUrl: 'https://www.messenger.com/longlinksccccccc',
@@ -94,7 +94,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 122,
     enable: true,
     createdAt: '22/02/2023',
-    category: ['Events', 'Favorite'],
+    category: ['event', 'favorite'],
   },
   {
     originalUrl: 'https://www.messenger.com/longlinksccccccc',
@@ -103,7 +103,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 23,
     enable: false,
     createdAt: '03/04/2023',
-    category: ['Favorite', 'Recruit22_23', 'Testting123'],
+    category: ['favorite', 'marketing', 'gic2023'],
   },
   {
     originalUrl: 'https://hahaha/t/1000000',
@@ -112,7 +112,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 3,
     enable: true,
     createdAt: '03/04/2022',
-    category: ['Events'],
+    category: ['event'],
   },
   {
     originalUrl: 'https://gdscgdscgdsc/myurl',
@@ -121,7 +121,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 35,
     enable: true,
     createdAt: '23/11/2023',
-    category: ['Favorite', 'Recruitment22_23'],
+    category: ['favorite', 'external relations'],
   },
   {
     originalUrl: 'https://www.messenger.com/longlinksccccccc',
@@ -130,7 +130,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 103,
     enable: false,
     createdAt: '30/11/2023',
-    category: ['Favorite'],
+    category: ['favorite'],
   },
   {
     originalUrl: 'https://www.messenger.com/t/1000000',
@@ -139,7 +139,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 87,
     enable: false,
     createdAt: '30/11/2023',
-    category: ['Favorite', 'Recruit22_23', 'Testting123'],
+    category: ['favorite', 'development', 'recruitment'],
   },
   {
     originalUrl: 'https://www.messenger.com/longlinksccccccc',
@@ -148,7 +148,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 103,
     enable: false,
     createdAt: '30/11/2023',
-    category: ['Favorite'],
+    category: ['favorite'],
   },
   {
     originalUrl: 'https://www.messenger.com/t/1000000',
@@ -157,7 +157,7 @@ export const myUrlListData: MyUrl[] = [
     totalClicks: 87,
     enable: false,
     createdAt: '30/11/2023',
-    category: ['Favorite', 'Recruit22_23', 'Testting123'],
+    category: ['favorite', 'recruitment', 'misc'],
   },
 ];
 
@@ -186,4 +186,5 @@ export const categoryListData: string[] = [
   'email',
   'testing',
   'recruitment',
+  'favorite',
 ];

@@ -2,16 +2,19 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 import { useUrlModalStore } from '@/store/url-modal';
+import { MyUrl } from '@/types/url-type';
 
 interface UrlButtonProps {
-  copyContent: any;
+  copyContent: string;
+  editedUrl: MyUrl;
 }
 
 export default function UrlButton(props: UrlButtonProps) {
   const [copied, setCopied] = useState(false);
-  const { copyContent } = props;
+  const { copyContent, editedUrl } = props;
 
-  const { setShowEditModal, setShowDeleteModal } = useUrlModalStore();
+  const { setShowEditModal, setShowDeleteModal, setEditedUrl } =
+    useUrlModalStore();
 
   const onCopy = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation();
@@ -44,7 +47,10 @@ export default function UrlButton(props: UrlButtonProps) {
         </span>
       </div>
       <button
-        onClick={() => setShowEditModal(true)}
+        onClick={() => {
+          setShowEditModal(true);
+          setEditedUrl(editedUrl);
+        }}
         className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'
       >
         <Image
