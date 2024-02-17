@@ -58,7 +58,7 @@ const Pagination = ({
   if ((pageRange?.length || 0) <= 1) return null;
 
   return (
-    <ul className='mt-10 flex items-center space-x-1 pb-[80px] md:pb-[54px]'>
+    <ul className='relative z-[5] mt-10 flex items-center space-x-1 pb-[80px] md:pb-[54px]'>
       <li className='flex h-fit w-fit items-center justify-center'>
         <button
           className={`rounded-full ${
