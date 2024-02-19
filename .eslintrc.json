@@ -30,6 +30,5 @@
       }
     ]
   },
-  "parser": "@babel/eslint-parser",
-  "ignorePatterns": ["styles/globals.css"]
+  "parser": "@babel/eslint-parser"
 }
