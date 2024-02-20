@@ -16,7 +16,7 @@ export const tools: Tool[] = [
   {
     name: 'URL Shortener',
     description:
-      'Link shortening service with free-of-charge advanced management features',
+      'Link shortening service with free-of-charge advanced management features.',
     iconFilenames: ['shortener.svg', 'shortener_1.svg'],
     secondaryIconClass: 'right-[-8%] top-[20%] w-[50%]',
     iconType: Icon.ACTIVE,
