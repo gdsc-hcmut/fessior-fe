@@ -3,15 +3,15 @@ import Link from 'next/link';
 
 type FooterResourceItemProps = {
   text: string;
-  link: string;
+  url: string;
   className?: string;
 };
 
 export function FooterResourceItem(props: FooterResourceItemProps) {
-  const { text, link, className } = props;
+  const { text, url, className } = props;
   return (
     <li className={clsx('mb-[12px]', className)}>
-      <Link className='hover:underline' href={link}>
+      <Link className='hover:underline' href={url}>
         {text}
       </Link>
     </li>
@@ -19,11 +19,17 @@ export function FooterResourceItem(props: FooterResourceItemProps) {
 }
 
 export default function FooterResourceItemList() {
+  const resourceItems = [
+    { text: 'About Us', url: '#' },
+    { text: 'Privacy Policy', url: '#' },
+    { text: 'FAQ', url: '#' },
+  ];
+
   return (
     <ul className='mt-[16px]'>
-      <FooterResourceItem text='About Us' link='#' />
-      <FooterResourceItem text='Privacy Policy' link='#' />
-      <FooterResourceItem text='FAQ' link='#' />
+      {resourceItems.map((item) => (
+        <FooterResourceItem key={item.text} {...item} />
+      ))}
     </ul>
   );
 }

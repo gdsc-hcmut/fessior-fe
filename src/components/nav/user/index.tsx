@@ -63,29 +63,22 @@ export default function User(props: UserProps) {
     showingOption ? Icon.ACTIVE : Icon.INACTIVE,
   );
 
+  const avatarSize =
+    screenSize === ScreenSize.SM
+      ? 52
+      : screenSize === ScreenSize.MD
+      ? 42
+      : screenSize === ScreenSize.LG
+      ? 52
+      : 0;
+
   return (
     <div ref={optionRef} onClick={handleUserClick} className={userClass}>
       <Image
         src={userAvatar}
         alt=''
-        width={
-          screenSize === ScreenSize.SM
-            ? 52
-            : screenSize === ScreenSize.MD
-            ? 42
-            : screenSize === ScreenSize.LG
-            ? 52
-            : 0
-        }
-        height={
-          screenSize === ScreenSize.SM
-            ? 52
-            : screenSize === ScreenSize.MD
-            ? 42
-            : screenSize === ScreenSize.LG
-            ? 52
-            : 0
-        }
+        width={avatarSize}
+        height={avatarSize}
         className='aspect-square h-[52px] w-auto rounded-full md:h-[42px] lg:h-[48px]'
       />
       <div className={usernameClass}>
