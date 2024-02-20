@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { Autoplay, Controller } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
@@ -9,27 +9,54 @@ import { tools } from '@/services/tool.service';
 import 'swiper/css/bundle';
 import HomeAvailableToolIndicator from '../home-available-tool-indicator';
 import {
-  ShortenerInfo,
-  QRGeneratorInfo,
-  CodeWithMeInfo,
-  CertificateInfo,
-  CalendarInfo,
-  QNAInfo,
+  ShortenerDescription,
+  ShortenerStatistics,
+  CalendarDescription,
+  CalendarStatistics,
+  CertificateDescription,
+  CertificateStatistics,
+  CodeWithMeDescription,
+  CodeWithMeStatistics,
+  QNADescription,
+  QNAStatistics,
+  QRGeneratorDescription,
+  QRGeneratorStatistics,
 } from '../home-available-tool-infos';
 import HomeAvailableToolItem from '../home-available-tool-item';
+import ToolInfoTemplate from '../tool-info-template';
 
 export default function HomeAvailableTools() {
   const [availableToolSelecting, setAvailableToolSelecting] = useState(0);
   const [toolSwiper, setToolSwiper] = useState<SwiperClass | null>(null);
   const [infoSwiper, setInfoSwiper] = useState<SwiperClass | null>(null);
 
-  const toolInfos: { [key in string]: JSX.Element } = {
-    'URL Shortener': <ShortenerInfo />,
-    'QR Generator': <QRGeneratorInfo />,
-    'GDSC Certificate': <CertificateInfo />,
-    'GDSC Calendar': <CalendarInfo />,
-    'Code with Me': <CodeWithMeInfo />,
-    'GDSC Q&A': <QNAInfo />,
+  const toolInfos: {
+    [key in string]: { description: ReactNode; statistics: ReactNode };
+  } = {
+    'URL Shortener': {
+      description: <ShortenerDescription />,
+      statistics: <ShortenerStatistics />,
+    },
+    'QR Generator': {
+      description: <QRGeneratorDescription />,
+      statistics: <QRGeneratorStatistics />,
+    },
+    'GDSC Certificate': {
+      description: <CertificateDescription />,
+      statistics: <CertificateStatistics />,
+    },
+    'GDSC Calendar': {
+      description: <CalendarDescription />,
+      statistics: <CalendarStatistics />,
+    },
+    'Code with Me': {
+      description: <CodeWithMeDescription />,
+      statistics: <CodeWithMeStatistics />,
+    },
+    'GDSC Q&A': {
+      description: <QNADescription />,
+      statistics: <QNAStatistics />,
+    },
   };
 
   const handleAvailableToolChange = (index: number) => {
@@ -40,7 +67,26 @@ export default function HomeAvailableTools() {
   const getToolInfos = () => {
     return tools.map((tool) => (
       <SwiperSlide className='h-auto pb-[40px]' key={tool.name}>
-        {toolInfos[tool.name]}
+        <ToolInfoTemplate
+          {...tool}
+          description={toolInfos[tool.name].description}
+          statistics={toolInfos[tool.name].statistics}
+        />
+      </SwiperSlide>
+    ));
+  };
+
+  const getToolList = () => {
+    return tools.map((tool, index) => (
+      <SwiperSlide key={tool.name}>
+        <HomeAvailableToolItem
+          index={index}
+          iconFilenames={tool.iconFilenames[0]}
+          name={tool.name}
+          active={index === availableToolSelecting}
+          className='mb-[20px] w-[80%] max-w-[300px] xl:w-auto xl:max-w-none'
+          onClick={(index) => handleAvailableToolChange(index)}
+        />
       </SwiperSlide>
     ));
   };
@@ -51,7 +97,7 @@ export default function HomeAvailableTools() {
     modules: [Autoplay, Controller],
     onSlideChange: () => setAvailableToolSelecting(infoSwiper?.activeIndex!),
     className: 'relative w-[100%]',
-    // autoHeight: true,
+    autoHeight: true,
     autoplay: { delay: 3000 },
   };
 
@@ -80,20 +126,7 @@ export default function HomeAvailableTools() {
         >
           Available Tools
         </h5>
-        <Swiper {...toolSwiperProps}>
-          {tools.map((tool, index) => (
-            <SwiperSlide key={tool.name}>
-              <HomeAvailableToolItem
-                index={index}
-                iconFilenames={tool.iconFilenames[0]}
-                name={tool.name}
-                active={index === availableToolSelecting}
-                className='mb-[20px] w-[80%] max-w-[300px] xl:w-auto xl:max-w-none'
-                onClick={(index) => handleAvailableToolChange(index)}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <Swiper {...toolSwiperProps}>{getToolList()}</Swiper>
         <HomeAvailableToolIndicator
           total={tools.length}
           activeIndex={availableToolSelecting}

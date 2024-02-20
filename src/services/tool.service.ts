@@ -1,12 +1,10 @@
-import Icon from '@/types/icon-enum';
-
 export type Tool = {
   name: string;
   description: string;
   iconFilenames: string[];
   secondaryIconClass: string;
   primaryIconClass?: string;
-  iconType: Icon;
+  decorImgSrc: string;
   imgAlt: string;
   active: boolean;
   url: string;
@@ -19,7 +17,7 @@ export const tools: Tool[] = [
       'Link shortening service with free-of-charge advanced management features.',
     iconFilenames: ['shortener.svg', 'shortener_1.svg'],
     secondaryIconClass: 'right-[-8%] top-[20%] w-[50%]',
-    iconType: Icon.ACTIVE,
+    decorImgSrc: '/images/home/side_shortener.svg',
     imgAlt: 'shortener',
     active: true,
     url: '/shorten',
@@ -30,7 +28,7 @@ export const tools: Tool[] = [
       'Customize, brand, and share information.\nCraft QR codes for your unique needs.',
     iconFilenames: ['qr.svg', 'qr_1.svg'],
     secondaryIconClass: 'right-[4px] top-0 w-[32%]',
-    iconType: Icon.INACTIVE,
+    decorImgSrc: '/images/home/side_shortener.svg',
     primaryIconClass: 'relative z-[1] h-auto w-[84%] text-red-500',
     imgAlt: 'qr',
     active: false,
@@ -42,7 +40,7 @@ export const tools: Tool[] = [
       'Easily create, edit, export, and share certificates on our user-friendly platform.',
     iconFilenames: ['cert.svg', 'cert_1.svg'],
     secondaryIconClass: 'top-[8px] right-[-8px] w-[32%]',
-    iconType: Icon.INACTIVE,
+    decorImgSrc: '/images/home/side_shortener.svg',
     imgAlt: 'cert',
     active: false,
     url: '',
@@ -53,7 +51,7 @@ export const tools: Tool[] = [
       'Effortlessly manage your calendar, create schedules, and oversee daily events.',
     iconFilenames: ['calendar.svg', 'calendar_1.svg'],
     secondaryIconClass: 'top-[4px] right-[-8px] w-[52%]',
-    iconType: Icon.INACTIVE,
+    decorImgSrc: '/images/home/side_shortener.svg',
     imgAlt: 'calendar',
     active: false,
     url: '',
@@ -62,10 +60,10 @@ export const tools: Tool[] = [
     name: 'Code with Me',
     description:
       'Code together in real-time on our collaborative code-sharing website.',
-    iconFilenames: ['codewme.svg', 'codewme_1.svg'],
+    iconFilenames: ['codewithme.svg', 'codewithme_1.svg'],
     secondaryIconClass: 'w-[28%] top-[4px] right-[-6px]',
-    iconType: Icon.INACTIVE,
-    imgAlt: 'codewme',
+    decorImgSrc: '/images/home/side_shortener.svg',
+    imgAlt: 'codewithme',
     active: false,
     url: '',
   },
@@ -75,7 +73,7 @@ export const tools: Tool[] = [
       'Get answers and career advice from tech-savvy consultants or school experts.',
     iconFilenames: ['qna.svg', 'qna_1.svg'],
     secondaryIconClass: 'top-[8px] right-[-4px] w-[32%]',
-    iconType: Icon.INACTIVE,
+    decorImgSrc: '/images/home/side_shortener.svg',
     imgAlt: 'qna',
     active: false,
     url: '',

@@ -3,15 +3,13 @@ import { ReactNode } from 'react';
 
 import Button from '@/components/button';
 
-import ToolStatistics from '../tool-statistics';
-
 type ToolInfoTemplateProps = {
   name: string;
   url: string;
   active?: boolean;
   decorImgSrc: string;
   description: ReactNode;
-  statistics?: ReactNode[];
+  statistics?: ReactNode;
 };
 
 export default function ToolInfoTemplate(props: ToolInfoTemplateProps) {
@@ -42,11 +40,7 @@ export default function ToolInfoTemplate(props: ToolInfoTemplateProps) {
         style={{ backgroundImage: `url('${decorImgSrc}')` }}
         className='flex aspect-square w-[100%] flex-col items-center justify-center bg-cover md:justify-end md:pb-[36px] xl:aspect-auto xl:w-auto xl:min-w-[400px]'
       >
-        {statistics && (
-          <div className='md:mx-[20px] md:min-w-[245px]'>
-            <ToolStatistics statistics={statistics} />
-          </div>
-        )}
+        {statistics}
       </div>
     </div>
   );

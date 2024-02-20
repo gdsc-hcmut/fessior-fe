@@ -1,46 +1,42 @@
-import Image from 'next/image';
+import ToolStatisticsTemplate from '../tool-statistics-template';
 
-import ToolInfoTemplate from '../tool-info-template';
-
-export function ShortenerInfo() {
+export function ShortenerDescription() {
   return (
-    <ToolInfoTemplate
-      name='URL Shortener'
-      active
-      decorImgSrc='/images/home/side_shortener.svg'
-      description={
-        <div>
-          <p className='mb-[8px] leading-[28px]'>
-            <b>URL Shortener</b> is one of the first community projects
-            developed by <b>Fessior Community</b> that serves the purpose of
-            simplifying complex URLs (links to web pages) into short or branded
-            links to enhance the brand identity of GDSC or partner
-            organizations.
-          </p>
-          <p className='leading-[28px]'>
-            In addition to the basic feature of URL shortening, users only need
-            to log in with their Google accounts to access{' '}
-            <b>advanced management features</b> completely free of charge. These
-            features include:
-          </p>
-          <ul className='list-inside list-disc'>
-            <li>
-              Shorten URLs with a <b>custom slug</b>.
-            </li>
-            <li>
-              <b>Branded links</b> for partner organizations.
-            </li>
-            <li>
-              Shorten links’ <b>statistics</b>: total clicks, clicks per day,
-              time of creation...
-            </li>
-            <li>
-              <b>Manage</b> your list of shortened URLs; filter, edit, delete,
-              and tag.
-            </li>
-          </ul>
-        </div>
-      }
+    <div>
+      <p className='mb-[8px] leading-[28px]'>
+        <b>URL Shortener</b> is one of the first community projects developed by{' '}
+        <b>Fessior Community</b> that serves the purpose of simplifying complex
+        URLs (links to web pages) into short or branded links to enhance the
+        brand identity of GDSC or partner organizations.
+      </p>
+      <p className='leading-[28px]'>
+        In addition to the basic feature of URL shortening, users only need to
+        log in with their Google accounts to access{' '}
+        <b>advanced management features</b> completely free of charge. These
+        features include:
+      </p>
+      <ul className='list-inside list-disc'>
+        <li>
+          Shorten URLs with a <b>custom slug</b>.
+        </li>
+        <li>
+          <b>Branded links</b> for partner organizations.
+        </li>
+        <li>
+          Shorten links’ <b>statistics</b>: total clicks, clicks per day, time
+          of creation...
+        </li>
+        <li>
+          <b>Manage</b> your list of shortened URLs; filter, edit, delete, and
+          tag.
+        </li>
+      </ul>
+    </div>
+  );
+}
+export function ShortenerStatistics() {
+  return (
+    <ToolStatisticsTemplate
       statistics={[
         <>
           More than <b>700</b> users
@@ -52,80 +48,145 @@ export function ShortenerInfo() {
           <b>3500</b> URLs generated
         </>,
       ]}
-      url='/shorten'
     />
   );
 }
 
-export function QRGeneratorInfo() {
+export function QRGeneratorDescription() {
   return (
-    <ToolInfoTemplate
-      name='QR Generator'
-      decorImgSrc='/images/home/side_shortener.svg'
-      description={
-        <div>
-          <p className='mb-[8px] leading-[28px]'>
-            Forget the struggles of typing complex web addresses on tiny
-            screens. Our powerful <b>QR Generator</b> simplifies everything!
-            Transform any website address, social media link, or URL into a
-            scannable QR code in seconds. With a quick scan, users unlock
-            instant access to your content, no more laborious typing or
-            memorizing required.
-          </p>
-          <p className='font-[700] leading-[28px]'>How it works:</p>
-          <ul className='list-inside list-disc'>
-            <li>Simply input the address you want to share</li>
-            <li>Pick from a variety of stylish and customizable options</li>
-            <li>Get your high-resolution QR code ready to use</li>
-            <li>
-              Share it on flyers, posters, business cards, social media, or even
-              product packaging
-            </li>
-            <li>
-              Watch your website traffic soar as people conveniently access your
-              content with a scan
-            </li>
-          </ul>
-        </div>
-      }
-      url=''
-    />
-  );
-}
-
-export function CertificateInfo() {
-  return null;
-}
-
-export function CalendarInfo() {
-  return null;
-}
-
-export function CodeWithMeInfo() {
-  return null;
-}
-
-export function QNAInfo() {
-  return (
-    <div className='mx-[20px] flex min-h-[100%] flex-grow flex-col overflow-hidden rounded-[8px] border-[0.5px] md:flex-row xl:mx-[40px]'>
-      <div className='flex flex-grow items-center justify-center p-[40px] xl:min-h-[480px]'>
-        <div className='flex flex-col items-center'>
-          <Image
-            src='/images/home/coming_soon.svg'
-            alt='coming-soon'
-            width={0}
-            height={0}
-            className='mb-[48px] h-auto w-[50%]'
-          />
-          <h4 className='text-[36px] font-[700] text-primary md:text-[40px] xl:text-[48px]'>
-            Coming Soon!
-          </h4>
-          <p className='md:text-[24px] xl:text-[28px]'>
-            The project is being developed
-          </p>
-        </div>
-      </div>
-      <div className="hidden aspect-square w-[30%] flex-col items-center justify-center bg-[url('/images/home/side_coming_soon.svg')] bg-cover md:flex md:justify-end md:pb-[36px] xl:aspect-auto xl:min-w-[400px]"></div>
+    <div>
+      <p className='mb-[8px] leading-[28px]'>
+        Forget the struggles of typing complex web addresses on tiny screens.
+        Our powerful <b>QR Generator</b> simplifies everything! Transform any
+        website address, social media link, or URL into a scannable QR code in
+        seconds. With a quick scan, users unlock instant access to your content,
+        no more laborious typing or memorizing required.
+      </p>
+      <p className='font-[700] leading-[28px]'>How it works:</p>
+      <ul className='mb-[8px] list-inside list-disc'>
+        <li>Simply input the address you want to share</li>
+        <li>Pick from a variety of stylish and customizable options</li>
+        <li>Get your high-resolution QR code ready to use</li>
+      </ul>
+      <p className='leading-[28px]'>
+        Share it on flyers, posters, business cards, social media, or even
+        product packaging. Watch your website traffic soar as people
+        conveniently access your content with a scan.
+      </p>
     </div>
   );
+}
+export function QRGeneratorStatistics() {
+  return null;
+}
+
+export function CertificateDescription() {
+  return (
+    <div>
+      <p className='mb-[8px] leading-[28px]'>
+        Proudly display your participation and achievements in{' '}
+        <b>Google Developer Student Clubs (GDSC)</b> with our official
+        certificate generator. This personalized recognition signifies your
+        dedication to learning and development within the GDSC community.
+      </p>
+      <p className='font-[700] leading-[28px]'>Features included:</p>
+      <ul className='mb-[8px] list-inside list-disc'>
+        <li>A variety of stylish templates</li>
+        <li>
+          Personalization with your name, program details, and completion date
+        </li>
+        <li>
+          Suitability for framing, adding to your portfolio, or showcasing on
+          your resume
+        </li>
+      </ul>
+      <p className='leading-[28px]'>
+        Share your accomplishment with pride and let the world know you&apos;re
+        a part of something special!
+      </p>
+    </div>
+  );
+}
+export function CertificateStatistics() {
+  return null;
+}
+
+export function CalendarDescription() {
+  return (
+    <div>
+      <p className='mb-[8px] leading-[28px]'>
+        <b>Never miss an exciting GDSC event again!</b> Dive into our
+        interactive <b>GDSC Calendar</b>, your comprehensive guide to workshops,
+        hackathons, talks, and more happening worldwide.
+      </p>
+      <p className='mb-[8px] leading-[28px]'>
+        Connect with fellow learners, expand your knowledge, and unlock new
+        opportunities - all within the vibrant GDSC community.
+      </p>
+      <p className='font-[700] leading-[28px]'>Core features include:</p>
+      <ul className='list-inside list-disc'>
+        <li>Event creation and management</li>
+        <li>Color coding and categories</li>
+        <li>Filter by location, date, or category</li>
+      </ul>
+    </div>
+  );
+}
+export function CalendarStatistics() {
+  return null;
+}
+
+export function CodeWithMeDescription() {
+  return (
+    <div>
+      <p className='mb-[8px] leading-[28px]'>
+        Break down the barriers of physical distance and unlock the power of
+        real-time collaboration with our innovative <b>Code with me</b>{' '}
+        platform. Invite your friends, classmates, or teammates to share your
+        code editor in a secure and seamless online environment.
+      </p>
+      <p className='mb-[8px] leading-[28px]'>
+        Ideal for <b>pair programming, group projects</b>, or even just getting
+        valuable insights on your code from different perspectives,
+        <b>Code with me</b> fosters effective communication, accelerates
+        problem-solving, and injects a dose of fun into the development process.
+      </p>
+      <p className='font-[700] leading-[28px]'>Core features include:</p>
+      <ul className='list-inside list-disc'>
+        <li>Simultaneous editing the codebase</li>
+        <li>Integrated live chat functionality</li>
+        <li>Whiteboard and annotation tools</li>
+      </ul>
+    </div>
+  );
+}
+export function CodeWithMeStatistics() {
+  return null;
+}
+
+export function QNADescription() {
+  return (
+    <div>
+      <p className='mb-[8px] leading-[28px]'>
+        Stuck on a coding problem or have a burning question about web
+        development? Don&apos;t fret! The <b>GDSC Q&A forum</b> is your one-stop
+        shop for answers and support.
+      </p>
+      <p className='mb-[8px] leading-[28px]'>
+        <b>Ask anything, big or small:</b> Whether you&apos;re facing a tricky
+        coding conundrum or curious about a specific GDSC program, post your
+        question and tap into the collective wisdom of the forum.
+      </p>
+      <p className='font-[700] leading-[28px]'>Core features include:</p>
+      <ul className='list-inside list-disc'>
+        <li>Post questions and get answers from community members</li>
+        <li>Browse existing threads to find solutions</li>
+        <li>Connect with experienced developers and GDSC members</li>
+        <li>Learn from diverse perspectives and share your knowledge</li>
+      </ul>
+    </div>
+  );
+}
+export function QNAStatistics() {
+  return null;
 }
