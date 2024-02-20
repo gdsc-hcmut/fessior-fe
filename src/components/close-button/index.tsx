@@ -11,7 +11,7 @@ export default function CloseButton(props: CloseButtonProps) {
   const { onClick, className, shape = 'round' } = props;
 
   const closeButtonClass = clsx(
-    'aspect-square bg-white p-[8px]',
+    'aspect-square bg-white p-[8px] hover:cursor-pointer',
     shape === 'round'
       ? 'rounded-full'
       : 'rounded-[8px] border-[1px] border-primary',

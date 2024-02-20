@@ -12,10 +12,19 @@ type SelectInputProps = {
   options: string[] | Organization[];
   onChange: (value: string | Organization) => void;
   className?: string;
+  fontSize?: number;
+  height?: number;
 };
 
 export default function SelectInput(props: SelectInputProps) {
-  const { value, options, onChange, className } = props;
+  const {
+    value,
+    options,
+    onChange,
+    className,
+    fontSize = 12,
+    height = 40,
+  } = props;
   const [isSelecting, setIsSelecting] = useState(false);
   const ref = useRef(null);
 
@@ -44,12 +53,13 @@ export default function SelectInput(props: SelectInputProps) {
       }}
       tabIndex={1}
       ref={ref}
-      className={clsx(
-        'relative cursor-pointer text-[12px] text-default-text',
-        className,
-      )}
+      style={{ fontSize: `${fontSize}px` }}
+      className={clsx('relative cursor-pointer text-default-text', className)}
     >
-      <div className='flex h-[40px] items-center justify-between rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] px-[8px] focus:border-[1px] focus:border-primary'>
+      <div
+        style={{ height: `${height}px` }}
+        className='flex items-center justify-between rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] px-[8px] focus:border-[1px] focus:border-primary'
+      >
         <p className='truncate'>{renderOption(value)}</p>
         <Image
           src={getIcon(

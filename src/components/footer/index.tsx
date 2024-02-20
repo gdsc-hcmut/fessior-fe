@@ -50,7 +50,7 @@ export default function Footer() {
             <FooterContactItemList />
           </div>
         </div>
-        <div className='absolute right-[-67px] top-[380px] h-[180px] w-[180px] md:right-[-80px] md:top-[0px] md:h-[160px] md:w-[160px] lg:right-[-126px] lg:top-[0px] lg:h-[240px] lg:w-[240px]'>
+        <div className='absolute right-[-67px] top-[380px] h-[180px] w-[180px] md:right-[-80px] md:top-[0px] md:h-[160px] md:w-[160px] xl:right-[-126px] xl:top-[0px] xl:h-[240px] xl:w-[240px]'>
           <Image
             className=''
             src='/images/logo_transparent_navy.svg'
