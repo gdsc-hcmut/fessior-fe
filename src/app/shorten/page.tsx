@@ -259,7 +259,7 @@ export default function Shorten() {
       {shortenedUrl && (
         <ModalShorten
           shortenedUrl={shortenedUrl}
-          onClickOutside={() => {
+          onDismiss={() => {
             setShortenedUrl(null);
             clearForm();
           }}
