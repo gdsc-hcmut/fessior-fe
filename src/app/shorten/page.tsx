@@ -9,9 +9,11 @@ import SelectInput from '@/components/select-input';
 import ShortenTools from '@/components/shorten-tools';
 import TextInput from '@/components/text-input';
 import AuthContext from '@/contexts/authContext';
+import useScreenSize from '@/hooks/useScreenSize';
 import meService from '@/libs/api/me';
 import urlService from '@/services/url.service';
 import Organization from '@/types/organization-type';
+import ScreenSize from '@/types/screen-size-enum';
 import Url from '@/types/url-type';
 
 export default function Shorten() {
@@ -26,6 +28,7 @@ export default function Shorten() {
   const [slug, setSlug] = useState('');
   const [shortenedUrl, setShortenedUrl] = useState<null | Url>(null);
   const [allowSubmit, setAllowSubmit] = useState(false);
+  const { screenSize, loaded } = useScreenSize();
 
   const { meProfile, isAuthStatusReady } = useContext(AuthContext);
 
@@ -92,10 +95,13 @@ export default function Shorten() {
     setSlug('');
   };
 
+  const inputFontSize = screenSize === ScreenSize.LG ? 16 : undefined;
+  const inputHeight = screenSize === ScreenSize.LG ? 48 : undefined;
+
   return (
     <>
       <div className='relative flex flex-col items-center overflow-hidden pt-[80px] leading-[1.2] text-primary md:pt-[90px] lg:pt-[108px]'>
-        <div className='md:max-w-[1000px] lg:flex lg:flex-col lg:items-center'>
+        <div className='px-[20px] md:max-w-[1000px] lg:flex lg:flex-col lg:items-center'>
           <div className='text-center'>
             <h1 className='mt-[86px] text-[40px] font-[700] leading-[65px] md:text-[48px] lg:text-[60px]'>
               <span className='hidden md:inline'>Fessior</span> URL Shortener
@@ -105,17 +111,17 @@ export default function Shorten() {
               Management Made Easy
             </p>
           </div>
-          <div className='relative mx-[20px] mb-[172px] items-start rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] lg:w-[90%]'>
-            {isAuthStatusReady ? (
+          <div className='relative mb-[172px] items-start rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[24px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] lg:w-[100%]'>
+            {isAuthStatusReady && loaded ? (
               <div className='items-start md:flex'>
                 <div className='md:flex-grow'>
                   <div>
-                    <h6 className='mb-[4px] font-[500] md:mb-[8px] md:text-[20px]'>
+                    <h6 className='mb-[8px] font-[500] md:mb-[8px] md:text-[20px] lg:text-[28px]'>
                       Your long URL
                     </h6>
-                    <div className='mb-[8px]'>
+                    <div className='mb-[8px] md:mb-[20px]'>
                       <TextInput
-                        fontSize={14}
+                        height={inputHeight}
                         iconSrc='icons/shorten/link.svg'
                         iconAlt='link'
                         placeholder='Input the URL you want to shorten'
@@ -123,18 +129,20 @@ export default function Shorten() {
                         onInput={setLongUrl}
                         onEnter={handleSubmit}
                         divider
+                        fontSize={inputFontSize}
                       />
                     </div>
                     {meProfile &&
                       organizationValue &&
                       organizationOptions &&
                       domainOptions && (
-                        <div className='inline-block md:flex'>
-                          <div className='mb-[8px] flex items-center justify-between md:mb-0 md:me-[20px] md:inline-flex'>
-                            <p className='inline text-[12px] font-[500] text-black md:text-[16px]'>
+                        <div className='inline-block md:flex md:max-w-[85%] md:justify-between lg:w-[85%]'>
+                          <div className='mb-[8px] flex items-center justify-between md:mb-0 md:me-[12px] md:inline-flex'>
+                            <p className='inline text-[12px] font-[500] text-black md:text-[16px] lg:text-[20px]'>
                               Organization
                             </p>
                             <SelectInput
+                              fontSize={inputFontSize}
                               value={organizationValue}
                               options={organizationOptions}
                               onChange={
@@ -142,14 +150,16 @@ export default function Shorten() {
                                   value: string | Organization,
                                 ) => void
                               }
-                              className='ms-[4px] w-[160px] md:ms-[8px]'
+                              className='ms-[4px] w-[200px] md:ms-[8px]'
+                              height={inputHeight}
                             />
                           </div>
                           <div className='flex items-center justify-between md:inline-flex'>
-                            <p className='inline text-[12px] font-[500] text-black md:text-[16px]'>
+                            <p className='inline text-[12px] font-[500] text-black md:text-[16px] lg:text-[20px]'>
                               Domain
                             </p>
                             <SelectInput
+                              fontSize={inputFontSize}
                               value={domainValue}
                               options={domainOptions}
                               onChange={
@@ -157,21 +167,23 @@ export default function Shorten() {
                                   value: string | Organization,
                                 ) => void
                               }
-                              className='ms-[4px] w-[160px] md:ms-[8px]'
+                              className='ms-[4px] w-[200px] md:ms-[8px]'
+                              height={inputHeight}
                             />
                           </div>
                         </div>
                       )}
                   </div>
                   {meProfile && (
-                    <div className='mt-[8px] md:mt-[16px]'>
-                      <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
-                        <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[100px] md:text-[20px]'>
+                    <div className='mt-[20px] lg:mt-[28px]'>
+                      <div className='mb-[20px] md:flex md:items-center md:justify-between lg:mb-[28px]'>
+                        <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[130px] md:text-[20px] lg:text-[28px]'>
                           Slug
                         </h6>
                         <div className='mb-[8px] md:mb-0 md:inline-block md:flex-grow'>
                           <TextInput
-                            fontSize={12}
+                            fontSize={inputFontSize}
+                            height={inputHeight}
                             iconSrc='icons/shorten/slug.svg'
                             iconAlt='slug'
                             placeholder='/Slug'
@@ -182,13 +194,14 @@ export default function Shorten() {
                           />
                         </div>
                       </div>
-                      <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
-                        <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[100px] md:text-[20px]'>
+                      <div className='mb-[8px] md:mb-[20px] md:flex md:items-center md:justify-between'>
+                        <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[130px] md:text-[20px] lg:text-[28px]'>
                           Category
                         </h6>
                         <div className='md:inline-block md:flex-grow'>
                           <TextInput
-                            fontSize={12}
+                            fontSize={inputFontSize}
+                            height={inputHeight}
                             iconSrc='icons/shorten/search.svg'
                             iconAlt='search'
                             placeholder='Add or create categories'
@@ -199,7 +212,7 @@ export default function Shorten() {
                         </div>
                       </div>
                       <div className='mb-[8px]'>
-                        <p className='me-[6px] inline text-[12px] font-[500] text-black md:text-[16px]'>
+                        <p className='me-[12px] inline text-[12px] font-[500] text-black md:text-[16px] lg:text-[20px]'>
                           Chosen categories
                         </p>
                         <div className='inline'>
@@ -211,7 +224,7 @@ export default function Shorten() {
                   )}
                 </div>
                 <Button
-                  className='mt-[12px] md:relative md:top-[32px] md:ms-[12px] md:mt-0'
+                  className='mt-[12px] md:relative md:top-[32px] md:ms-[12px] md:mt-0 md:text-[18px] lg:top-[46px]'
                   disabled={!allowSubmit}
                   onClick={handleSubmit}
                 >
@@ -224,7 +237,7 @@ export default function Shorten() {
             <div className='absolute left-[-15px] top-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-primary'></div>
             <div className='absolute bottom-[-15px] right-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-primary'></div>
           </div>
-          <div className='mx-[20px] text-center md:flex md:flex-col md:items-center'>
+          <div className='text-center md:flex md:flex-col md:items-center'>
             <h2 className='text-[36px] font-[700] leading-[65px]'>
               Fessior Tools
             </h2>
@@ -236,17 +249,17 @@ export default function Shorten() {
             <ShortenTools />
           </div>
         </div>
-        <div className='absolute right-[-10px] top-[100px] h-[40px] w-[40px] rounded-full bg-primary lg:top-[130px]'></div>
-        <div className='absolute left-[40px] top-[145px] h-[12px] w-[12px] rounded-full bg-primary md:left-[30px] md:h-[28px] md:w-[28px] lg:left-[100px] lg:h-[40px] lg:w-[40px]'></div>
-        <div className='absolute left-[-70px] top-[679px] h-[120px] w-[120px] rounded-full bg-primary'></div>
-        <div className='absolute bottom-[9px] right-[-30px] h-[80px] w-[80px] rounded-full bg-primary md:hidden'></div>
-        <div className='absolute bottom-[0px] right-[60px] h-[20px] w-[20px] rounded-full bg-primary md:hidden'></div>
+        <div className='absolute right-[-10px] top-[100px] z-[-10] h-[40px] w-[40px] rounded-full bg-primary lg:top-[130px]'></div>
+        <div className='absolute left-[40px] top-[145px] z-[-10] h-[12px] w-[12px] rounded-full bg-primary md:left-[30px] md:h-[28px] md:w-[28px] lg:left-[100px] lg:h-[40px] lg:w-[40px]'></div>
+        <div className='absolute left-[-70px] top-[580px] z-[-10] h-[120px] w-[120px] rounded-full bg-primary md:top-[679px]'></div>
+        <div className='absolute bottom-[9px] right-[-30px] z-[-10] h-[80px] w-[80px] rounded-full bg-primary md:hidden'></div>
+        <div className='absolute bottom-[0px] right-[60px] z-[-10] h-[20px] w-[20px] rounded-full bg-primary md:hidden'></div>
       </div>
       {/* MODAL */}
       {shortenedUrl && (
         <ModalShorten
           shortenedUrl={shortenedUrl}
-          onClickOutside={() => {
+          onDismiss={() => {
             setShortenedUrl(null);
             clearForm();
           }}
