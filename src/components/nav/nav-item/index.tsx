@@ -77,6 +77,11 @@ export default function NavItem(props: NavItem) {
     showingChildren ? 'h-[112px]' : 'h-0',
   );
 
+  const lgChildrenListClass = clsx(
+    'absolute left-0 mt-[8px] overflow-hidden whitespace-nowrap rounded-[8px] bg-white transition-all duration-500',
+    showingChildren ? 'h-[80px] border-[1px]' : 'h-0 border-white',
+  );
+
   const itemIcon = getIcon(
     '/icons/header',
     iconFilename,
@@ -97,12 +102,7 @@ export default function NavItem(props: NavItem) {
             {text}
           </li>
           {children && (
-            <ul
-              className={clsx(
-                'absolute left-0 mt-[8px] overflow-hidden whitespace-nowrap rounded-[8px] bg-white transition-all duration-500',
-                showingChildren ? 'h-[80px] border-[1px]' : 'h-0 border-white',
-              )}
-            >
+            <ul className={lgChildrenListClass}>
               {children?.map((item) => (
                 <li
                   key={item.text}

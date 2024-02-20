@@ -53,6 +53,13 @@ export default function Nav(props: NavProps) {
     />
   );
 
+  const mdNavListContainerClass = clsx(
+    isCollapsed
+      ? 'h-0 border-none py-0'
+      : 'h-[300px] border-t-[1px] bg-white py-[32px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]',
+    'absolute left-0 right-0 top-[72px] overflow-hidden px-[20px] transition-all duration-500',
+  );
+
   if (!isAuthStatusReady) return;
 
   if (!meProfile) {
@@ -118,14 +125,7 @@ export default function Nav(props: NavProps) {
           <User className='me-[28px]' border whiteTheme={isHome} />
           <div className='flex w-[32px] items-center'>{collapseButton}</div>
         </div>
-        <div
-          className={clsx(
-            isCollapsed
-              ? 'h-0 border-none py-0'
-              : 'h-[300px] border-t-[1px] bg-white py-[32px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]',
-            'absolute left-0 right-0 top-[72px] overflow-hidden px-[20px] transition-all duration-500',
-          )}
-        >
+        <div className={mdNavListContainerClass}>
           <div className='h-[236px]'>
             <NavList items={navItems} />
           </div>

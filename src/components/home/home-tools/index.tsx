@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Tool, tools } from '@/services/tool.service';
+import Icon from '@/types/icon-enum';
 import { getIcon } from '@/utils/common';
 
 type HomeToolItemProps = {
@@ -32,7 +33,11 @@ export function HomeToolItem(props: HomeToolItemProps) {
     <Link href={tool.url} className={toolItemClass}>
       <div className='relative me-[20px] flex aspect-square h-[36px] w-[36px] items-center lg:h-[72px] lg:w-auto'>
         <Image
-          src={getIcon('/icons/home', tool.iconFilenames[0], tool.iconType)}
+          src={getIcon(
+            '/icons/home',
+            tool.iconFilenames[0],
+            tool.active ? Icon.ACTIVE : Icon.INACTIVE,
+          )}
           alt={tool.imgAlt}
           width={0}
           height={0}
