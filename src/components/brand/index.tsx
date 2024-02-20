@@ -23,7 +23,7 @@ export default function Brand(props: BrandProps) {
     <Link href='/' className='flex items-center'>
       <Image
         src={logoSrc}
-        alt=''
+        alt='fessior-logo'
         width={0}
         height={0}
         className='me-[4px] h-[36px] w-auto md:me-[8px] md:h-[36px] lg:h-[40px]'

@@ -9,7 +9,7 @@ export default function Login() {
   return (
     <div className='flex h-screen flex-col'>
       <AuthHeader {...authHeaderContent[AuthType.LOGIN][0]} />
-      <div className='mt-[28px] flex flex-col px-[20px] pb-[30%]'>
+      <div className='flex flex-col px-[20px] pb-[40px] pt-[28px]'>
         <LoginCommon />
       </div>
     </div>

@@ -13,7 +13,10 @@ export function TextInputIcon(props: TextInputIconProps) {
   const { iconSrc, iconAlt, divider, onIconClick, position } = props;
 
   return (
-    <div onClick={onIconClick} className='items-centers relative flex'>
+    <div onClick={onIconClick} className='flex items-center'>
+      {divider && position === 'right' && (
+        <div className='h-[23px] w-[1px] bg-[#6969694d]'></div>
+      )}
       <Image
         src={iconSrc}
         alt={iconAlt ? iconAlt : ''}
@@ -26,14 +29,8 @@ export function TextInputIcon(props: TextInputIconProps) {
             'rounded-full p-[4px] hover:cursor-pointer hover:bg-[#ccc] active:bg-[#ccc]',
         )}
       />
-      {divider && (
-        <div
-          className={clsx(
-            'absolute h-[23px] w-[1px] bg-[#6969694d]',
-            position === 'left' && 'right-0',
-            position === 'right' && 'left-0',
-          )}
-        ></div>
+      {divider && position === 'left' && (
+        <div className='h-[23px] w-[1px] bg-[#6969694d]'></div>
       )}
     </div>
   );
@@ -53,6 +50,7 @@ type TextInputProps = {
   fontSize?: number;
   disabled?: boolean;
   className?: string;
+  height?: number;
 };
 
 export default function TextInput(props: TextInputProps) {
@@ -70,11 +68,13 @@ export default function TextInput(props: TextInputProps) {
     fontSize = 16,
     disabled,
     className,
+    height = 40,
   } = props;
   return (
     <div
+      style={{ height: `${height}px` }}
       className={clsx(
-        'flex h-[40px] w-[100%] items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border-[1px] focus-within:border-primary',
+        'flex w-[100%] items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border-[1px] focus-within:border-primary',
         disabled && 'bg-primary/[.2] text-primary',
         className,
       )}
@@ -96,7 +96,7 @@ export default function TextInput(props: TextInputProps) {
         onInput={(e) => {
           onInput(e.currentTarget.value);
         }}
-        className='mx-[4px] h-[100%] flex-grow px-[4px] outline-none placeholder:text-default-text'
+        className='mx-[4px] h-[100%] flex-grow px-[4px] outline-none placeholder:text-royal-300'
         style={{ fontSize: `${fontSize}px` }}
         placeholder={placeholder}
         type={type ? type : 'text'}

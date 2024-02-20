@@ -1,7 +1,8 @@
 import { clsx } from 'clsx';
+import { ReactNode } from 'react';
 
 type ButtonProps = {
-  children: string;
+  children: string | ReactNode;
   disabled?: boolean;
   onClick: () => void;
   className?: string;

@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from 'react';
 
 import Button from '@/components/button';
 import CategoryItem from '@/components/category-item';
-import Modal from '@/components/modal-shorten';
+import ModalShorten from '@/components/modal-shorten';
 import SelectInput from '@/components/select-input';
 import ShortenTools from '@/components/shorten-tools';
 import TextInput from '@/components/text-input';
@@ -27,7 +27,7 @@ export default function Shorten() {
   const [shortenedUrl, setShortenedUrl] = useState<null | Url>(null);
   const [allowSubmit, setAllowSubmit] = useState(false);
 
-  const { meProfile } = useContext(AuthContext);
+  const { meProfile, isAuthStatusReady } = useContext(AuthContext);
 
   useEffect(() => {
     if (!meProfile) return;
@@ -105,116 +105,122 @@ export default function Shorten() {
               Management Made Easy
             </p>
           </div>
-          <div className='relative mx-[20px] mb-[172px] items-start rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] md:flex lg:w-[70%] lg:max-w-[800px]'>
-            <div className='md:flex-grow'>
-              <div>
-                <h6 className='mb-[4px] font-[500] md:mb-[8px] md:text-[20px]'>
-                  Your long URL
-                </h6>
-                <div className='mb-[8px]'>
-                  <TextInput
-                    fontSize={12}
-                    iconSrc='icons/link.svg'
-                    iconAlt='link'
-                    placeholder='Input the URL you want to shorten'
-                    value={longUrl}
-                    onInput={setLongUrl}
-                    onEnter={handleSubmit}
-                    divider
-                  />
-                </div>
-                {meProfile &&
-                  organizationValue &&
-                  organizationOptions &&
-                  domainOptions && (
-                    <div className='inline-block md:flex'>
-                      <div className='mb-[8px] flex items-center justify-between md:mb-0 md:me-[20px] md:inline-flex'>
-                        <p className='inline text-[12px] font-[500] text-black md:text-[16px]'>
-                          Organization
-                        </p>
-                        <SelectInput
-                          value={organizationValue}
-                          options={organizationOptions}
-                          onChange={
-                            handleChange('organization') as (
-                              value: string | Organization,
-                            ) => void
-                          }
-                          className='ms-[4px] w-[160px] md:ms-[8px]'
-                        />
-                      </div>
-                      <div className='flex items-center justify-between md:inline-flex'>
-                        <p className='inline text-[12px] font-[500] text-black md:text-[16px]'>
-                          Domain
-                        </p>
-                        <SelectInput
-                          value={domainValue}
-                          options={domainOptions}
-                          onChange={
-                            handleChange('domain') as (
-                              value: string | Organization,
-                            ) => void
-                          }
-                          className='ms-[4px] w-[160px] md:ms-[8px]'
-                        />
-                      </div>
-                    </div>
-                  )}
-              </div>
-              {meProfile && (
-                <div className='mt-[8px] md:mt-[16px]'>
-                  <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
-                    <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[100px] md:text-[20px]'>
-                      Slug
+          <div className='relative mx-[20px] mb-[172px] items-start rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] lg:w-[90%]'>
+            {isAuthStatusReady ? (
+              <div className='items-start md:flex'>
+                <div className='md:flex-grow'>
+                  <div>
+                    <h6 className='mb-[4px] font-[500] md:mb-[8px] md:text-[20px]'>
+                      Your long URL
                     </h6>
-                    <div className='mb-[8px] md:mb-0 md:inline-block md:flex-grow'>
+                    <div className='mb-[8px]'>
                       <TextInput
-                        fontSize={12}
-                        iconSrc='icons/slug.svg'
-                        iconAlt='slug'
-                        placeholder='/Slug'
-                        value={slug}
-                        onInput={setSlug}
+                        fontSize={14}
+                        iconSrc='icons/shorten/link.svg'
+                        iconAlt='link'
+                        placeholder='Input the URL you want to shorten'
+                        value={longUrl}
+                        onInput={setLongUrl}
                         onEnter={handleSubmit}
                         divider
                       />
                     </div>
+                    {meProfile &&
+                      organizationValue &&
+                      organizationOptions &&
+                      domainOptions && (
+                        <div className='inline-block md:flex'>
+                          <div className='mb-[8px] flex items-center justify-between md:mb-0 md:me-[20px] md:inline-flex'>
+                            <p className='inline text-[12px] font-[500] text-black md:text-[16px]'>
+                              Organization
+                            </p>
+                            <SelectInput
+                              value={organizationValue}
+                              options={organizationOptions}
+                              onChange={
+                                handleChange('organization') as (
+                                  value: string | Organization,
+                                ) => void
+                              }
+                              className='ms-[4px] w-[160px] md:ms-[8px]'
+                            />
+                          </div>
+                          <div className='flex items-center justify-between md:inline-flex'>
+                            <p className='inline text-[12px] font-[500] text-black md:text-[16px]'>
+                              Domain
+                            </p>
+                            <SelectInput
+                              value={domainValue}
+                              options={domainOptions}
+                              onChange={
+                                handleChange('domain') as (
+                                  value: string | Organization,
+                                ) => void
+                              }
+                              className='ms-[4px] w-[160px] md:ms-[8px]'
+                            />
+                          </div>
+                        </div>
+                      )}
                   </div>
-                  <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
-                    <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[100px] md:text-[20px]'>
-                      Category
-                    </h6>
-                    <div className='md:inline-block md:flex-grow'>
-                      <TextInput
-                        fontSize={12}
-                        iconSrc='icons/search.svg'
-                        iconAlt='search'
-                        placeholder='Add or create categories'
-                        value={''}
-                        onInput={() => {}}
-                        divider
-                      />
+                  {meProfile && (
+                    <div className='mt-[8px] md:mt-[16px]'>
+                      <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
+                        <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[100px] md:text-[20px]'>
+                          Slug
+                        </h6>
+                        <div className='mb-[8px] md:mb-0 md:inline-block md:flex-grow'>
+                          <TextInput
+                            fontSize={12}
+                            iconSrc='icons/shorten/slug.svg'
+                            iconAlt='slug'
+                            placeholder='/Slug'
+                            value={slug}
+                            onInput={setSlug}
+                            onEnter={handleSubmit}
+                            divider
+                          />
+                        </div>
+                      </div>
+                      <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
+                        <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[100px] md:text-[20px]'>
+                          Category
+                        </h6>
+                        <div className='md:inline-block md:flex-grow'>
+                          <TextInput
+                            fontSize={12}
+                            iconSrc='icons/shorten/search.svg'
+                            iconAlt='search'
+                            placeholder='Add or create categories'
+                            value={''}
+                            onInput={() => {}}
+                            divider
+                          />
+                        </div>
+                      </div>
+                      <div className='mb-[8px]'>
+                        <p className='me-[6px] inline text-[12px] font-[500] text-black md:text-[16px]'>
+                          Chosen categories
+                        </p>
+                        <div className='inline'>
+                          <CategoryItem text='Event' />
+                          <CategoryItem text='Favorite' />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className='mb-[8px]'>
-                    <p className='me-[6px] inline text-[12px] font-[500] text-black md:text-[16px]'>
-                      Chosen categories
-                    </p>
-                    <div className='inline'>
-                      <CategoryItem text='Event' />
-                      <CategoryItem text='Favorite' />
-                    </div>
-                  </div>
+                  )}
                 </div>
-              )}
-            </div>
-            <Button
-              className='mt-[12px] md:ms-[12px] md:mt-[34px]'
-              disabled={!allowSubmit}
-              onClick={handleSubmit}
-            >
-              Shorten
-            </Button>
+                <Button
+                  className='mt-[12px] md:relative md:top-[32px] md:ms-[12px] md:mt-0'
+                  disabled={!allowSubmit}
+                  onClick={handleSubmit}
+                >
+                  Shorten
+                </Button>
+              </div>
+            ) : (
+              <div>Loading</div>
+            )}
             <div className='absolute left-[-15px] top-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-primary'></div>
             <div className='absolute bottom-[-15px] right-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-primary'></div>
           </div>
@@ -238,7 +244,7 @@ export default function Shorten() {
       </div>
       {/* MODAL */}
       {shortenedUrl && (
-        <Modal
+        <ModalShorten
           shortenedUrl={shortenedUrl}
           onClickOutside={() => {
             setShortenedUrl(null);
