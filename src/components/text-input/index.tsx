@@ -12,28 +12,27 @@ type TextInputIconProps = {
 export function TextInputIcon(props: TextInputIconProps) {
   const { iconSrc, iconAlt, divider, onIconClick, position } = props;
 
+  const textInputIconClass = clsx(
+    'mx-[8px] h-auto w-auto',
+    !divider && (position === 'left' ? 'ms-[12px]' : 'me-[12px]'),
+    onIconClick &&
+      'rounded-full p-[4px] hover:cursor-pointer hover:bg-[#ccc] active:bg-[#ccc]',
+  );
+
   return (
-    <div onClick={onIconClick} className='items-centers relative flex'>
+    <div onClick={onIconClick} className='flex h-[100%] items-center'>
+      {divider && position === 'right' && (
+        <div className='h-[60%] w-[1px] bg-[#6969694d]'></div>
+      )}
       <Image
         src={iconSrc}
         alt={iconAlt ? iconAlt : ''}
         width={0}
         height={0}
-        className={clsx(
-          'mx-[4px] h-auto w-auto',
-          !divider && (position === 'left' ? 'ms-[12px]' : 'me-[12px]'),
-          onIconClick &&
-            'rounded-full p-[4px] hover:cursor-pointer hover:bg-[#ccc] active:bg-[#ccc]',
-        )}
+        className={textInputIconClass}
       />
-      {divider && (
-        <div
-          className={clsx(
-            'absolute h-[23px] w-[1px] bg-[#6969694d]',
-            position === 'left' && 'right-0',
-            position === 'right' && 'left-0',
-          )}
-        ></div>
+      {divider && position === 'left' && (
+        <div className='h-[60%] w-[1px] bg-[#6969694d]'></div>
       )}
     </div>
   );
@@ -53,6 +52,7 @@ type TextInputProps = {
   fontSize?: number;
   disabled?: boolean;
   className?: string;
+  height?: number;
 };
 
 export default function TextInput(props: TextInputProps) {
@@ -67,18 +67,18 @@ export default function TextInput(props: TextInputProps) {
     onEnter,
     divider,
     onIconClick,
-    fontSize = 16,
+    fontSize = 12, //this change may affect QR-home page
     disabled,
     className,
+    height = 40,
   } = props;
+  const textInputClass = clsx(
+    'flex w-[100%] items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border-[1px] focus-within:border-primary',
+    disabled && 'bg-primary/[.2] text-primary',
+    className,
+  );
   return (
-    <div
-      className={clsx(
-        'flex h-[40px] w-[100%] items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border-[1px] focus-within:border-primary',
-        disabled && 'bg-primary/[.2] text-primary',
-        className,
-      )}
-    >
+    <div style={{ height: `${height}px` }} className={textInputClass}>
       {iconSrc && iconPosition === 'left' && (
         <TextInputIcon
           iconSrc={iconSrc}
@@ -96,7 +96,7 @@ export default function TextInput(props: TextInputProps) {
         onInput={(e) => {
           onInput(e.currentTarget.value);
         }}
-        className='mx-[4px] h-[100%] flex-grow px-[4px] outline-none placeholder:text-default-text'
+        className='mx-[8px] h-[100%] flex-grow px-[4px] outline-none placeholder:text-royal-300'
         style={{ fontSize: `${fontSize}px` }}
         placeholder={placeholder}
         type={type ? type : 'text'}

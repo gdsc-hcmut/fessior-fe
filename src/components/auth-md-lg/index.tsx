@@ -1,7 +1,6 @@
 'use client';
 
 import { clsx } from 'clsx';
-import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -15,6 +14,7 @@ import {
   SignUpCommon0,
   SignUpCommon1,
 } from '@/components/auth';
+import CloseButton from '@/components/close-button';
 import useAuthRouter from '@/hooks/useAuthRouter';
 import authHeaderContent from '@/libs/auth-header-content';
 import storage from '@/libs/local-storage';
@@ -145,21 +145,13 @@ export default function AuthModal() {
           }}
           className='flex-grow bg-cover bg-center'
         ></div>
-        <button
+        <CloseButton
           onClick={() => {
             storage.removeItem('token');
             authRouter();
           }}
-          className='absolute right-[16px] top-[16px] aspect-square w-[32px] rounded-full bg-white p-[8px]'
-        >
-          <Image
-            src='/icons/auth/close_royal.svg'
-            alt=''
-            width={0}
-            height={0}
-            className='aspect-square w-[100%]'
-          />
-        </button>
+          className='absolute right-[16px] top-[16px] w-[32x]'
+        />
       </div>
     </div>
   );

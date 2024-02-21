@@ -5,9 +5,10 @@ import { useState } from 'react';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
-import { HomeAvailableToolIndicator } from '@/components/home-available-tools';
 import { Project } from '@/services/project.service';
 import ScreenSize from '@/types/screen-size-enum';
+
+import HomeAvailableToolIndicator from '../home-available-tool-indicator';
 
 type HomeProjectItemProps = {
   name: string;
@@ -104,7 +105,7 @@ export default function HomeProjectCarousel(props: HomeProjectCarouselProps) {
         total={projects.length / visibleNumber}
         activeIndex={activeIndex}
         className='mb-[80px] self-center'
-        onClick={(page) => {
+        onClick={(page: number) => {
           swiper?.slideTo(page * visibleNumber);
         }}
       />
