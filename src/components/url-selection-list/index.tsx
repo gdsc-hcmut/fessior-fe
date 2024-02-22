@@ -39,7 +39,7 @@ export default function UrlSelectionList(props: UrlSelectionListProps) {
             <p className='whitespace-nowrap'>{item}</p>
             <button onClick={() => removeOption(item)}>
               <Image
-                src='/icons/header/close_white.svg'
+                src='/icons/url/close_white.svg'
                 alt='Close icon'
                 width={0}
                 height={0}

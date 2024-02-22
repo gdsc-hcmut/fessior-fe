@@ -9,10 +9,15 @@ import UrlButton from '../button/url-button';
 
 type MyUrlListProps = {
   myUrlList: MyUrl[];
+  isAlreadyShorten: boolean;
 };
 
 type UrlItemProps = {
   url: MyUrl;
+};
+
+type EmptyListProps = {
+  isAlreadyShorten: boolean;
 };
 
 function UrlItemXL(props: UrlItemProps) {
@@ -302,7 +307,9 @@ function UrlItemMD(props: UrlItemProps) {
     </div>
   );
 }
-function EmptyList() {
+function EmptyList(props: EmptyListProps) {
+  const { isAlreadyShorten } = props;
+
   return (
     <div className='mt-10 flex min-h-[70vh] flex-col items-center 3xl:mt-[60px]'>
       <Image
@@ -313,7 +320,9 @@ function EmptyList() {
         className='h-auto w-[200px] md:w-[280px] xl:w-[320px] 3xl:w-[364px]'
       />
       <p className='mt-5 text-xl font-semibold text-primary md:mt-6 xl:mt-8 xl:text-[28px]'>
-        You haven’t shorten a link
+        {isAlreadyShorten
+          ? 'We couldn\'t find any results'
+          : 'You haven’t shorten a link'}
       </p>
       <div className='mt-3 flex items-center space-x-2 space-y-0 max-[374px]:flex-col max-[374px]:space-y-2 xl:mt-2'>
         <Link
@@ -330,10 +339,10 @@ function EmptyList() {
   );
 }
 export default function MyUrlList(props: MyUrlListProps) {
-  const { myUrlList } = props;
+  const { myUrlList, isAlreadyShorten } = props;
 
   if (myUrlList.length === 0) {
-    return <EmptyList />;
+    return <EmptyList isAlreadyShorten={isAlreadyShorten} />;
   }
 
   return (

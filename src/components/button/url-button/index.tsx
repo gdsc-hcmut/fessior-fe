@@ -34,7 +34,7 @@ export default function UrlButton(props: UrlButtonProps) {
           className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'
         >
           <Image
-            src='/icons/content_copy.svg'
+            src='/icons/url/content_copy.svg'
             alt='Copy icon'
             width={0}
             height={0}

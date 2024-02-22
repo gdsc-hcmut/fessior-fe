@@ -65,7 +65,7 @@ function FilterSelection(props: FilterSelectionProps) {
             <p>{option}</p>
             <button onClick={() => removeOption(option, isDomain)}>
               <Image
-                src='/icons/header/close_white.svg'
+                src='/icons/url/close_white.svg'
                 alt='Close icon'
                 width={0}
                 height={0}
@@ -223,7 +223,7 @@ export default function CategoryModal() {
               </div>
               <div className='mb-[10px] flex w-[150px] items-center space-x-1 border-b-[0.5px] border-[#6D7EAE] py-1 max-[359px]:hidden'>
                 <Image
-                  src='/icons/search.svg'
+                  src='/icons/url/search.svg'
                   alt='Search icon'
                   width={0}
                   height={0}

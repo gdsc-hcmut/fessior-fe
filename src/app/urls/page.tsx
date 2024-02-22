@@ -129,7 +129,7 @@ function URLsPage(props: URLsPageProps) {
             <div className='flex justify-between'>
               <div className='flex w-[420px] items-center rounded-lg border-[0.5px] border-[#7E7E7E] py-2 pl-2 lg:w-[400px] xl:w-[30vw] xl:py-3 3xl:w-[25vw]'>
                 <Image
-                  src='/icons/search.svg'
+                  src='/icons/url/search.svg'
                   alt='Search icon'
                   width={0}
                   height={0}
@@ -301,7 +301,10 @@ function URLsPage(props: URLsPageProps) {
               </button>
             </div>
           </div>
-          <MyUrlList myUrlList={displayUrlList} />
+          <MyUrlList
+            myUrlList={displayUrlList}
+            isAlreadyShorten={myUrlListData.length !== 0}
+          />
           {filterUrlList.length > 0 && (
             <Pagination
               totalCount={filterUrlList.length}

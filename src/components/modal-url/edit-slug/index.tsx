@@ -145,7 +145,7 @@ export default function EditSlugModal() {
                   <p className='whitespace-nowrap'>{category}</p>
                   <button onClick={(e) => removeCategory(e, category)}>
                     <Image
-                      src='/icons/header/close_white.svg'
+                      src='/icons/url/close_white.svg'
                       alt='Close icon'
                       width={0}
                       height={0}
