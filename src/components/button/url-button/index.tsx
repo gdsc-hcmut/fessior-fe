@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { useUrlModalStore } from '@/store/url-modal';
 import { MyUrl } from '@/types/url-type';
 
-interface UrlButtonProps {
+type UrlButtonProps = {
   copyContent: string;
   editedUrl: MyUrl;
-}
+};
 
 export default function UrlButton(props: UrlButtonProps) {
   const [copied, setCopied] = useState(false);

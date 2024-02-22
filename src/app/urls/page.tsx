@@ -15,6 +15,7 @@ import UrlSelectionList from '@/components/url-selection-list';
 import { myUrlListData } from '@/services/url.service';
 import { useFilterOptionStore } from '@/store/filter-option';
 import { useUrlModalStore } from '@/store/url-modal';
+import SortOption from '@/types/sort-option-enum';
 import { MyUrl } from '@/types/url-type';
 
 type URLsPageProps = {
@@ -24,9 +25,11 @@ type URLsPageProps = {
 function URLsPage(props: URLsPageProps) {
   const { searchParams } = props;
   const [isSortCollapsed, setIsSortCollapsed] = useState<boolean>(true);
-  const [currentSortOption, setCurrentSortOption] = useState<string>('Latest');
-  const sortOption = ['Latest', 'Oldest', 'Most Clicked', 'Least Clicked'];
-  const swithSortOption = (option: string) => {
+  const [currentSortOption, setCurrentSortOption] = useState<SortOption>(
+    SortOption.LASTEST,
+  );
+  const sortOption = Object.values(SortOption);
+  const switchSortOption = (option: SortOption) => {
     setIsSortCollapsed(true);
     setCurrentSortOption(option);
   };
@@ -192,14 +195,14 @@ function URLsPage(props: URLsPageProps) {
                           className={clsx(
                             idx == 0 ||
                               (idx == 1 &&
-                                currentSortOption === 'Latest' &&
+                                currentSortOption === SortOption.LASTEST &&
                                 'pt-2'),
                             idx === sortOption.length - 1 && 'pb-2',
                             'w-full',
                           )}
                         >
                           <button
-                            onClick={() => swithSortOption(option)}
+                            onClick={() => switchSortOption(option)}
                             className='w-full text-start'
                           >
                             {option}
@@ -262,14 +265,14 @@ function URLsPage(props: URLsPageProps) {
                         className={clsx(
                           idx == 0 ||
                             (idx == 1 &&
-                              currentSortOption === 'Latest' &&
+                              currentSortOption === SortOption.LASTEST &&
                               'pt-2'),
                           idx === sortOption.length - 1 && 'pb-2',
                           'w-full',
                         )}
                       >
                         <button
-                          onClick={() => swithSortOption(option)}
+                          onClick={() => switchSortOption(option)}
                           className='w-full text-start'
                         >
                           {option}
