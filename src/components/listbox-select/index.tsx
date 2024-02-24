@@ -19,6 +19,7 @@ type DropDownProps = {
   largeFont?: 'medium' | 'bold' | 'regular';
   largePaddingLeft?: '4' | '8' | '16';
   largePaddingRight?: '2' | '4' | '6' | '16' | '8';
+  border?: 'none' | '1';
 };
 
 export default function DropDown(props: DropDownProps) {
@@ -39,6 +40,7 @@ export default function DropDown(props: DropDownProps) {
     largePaddingLeft,
     largePaddingRight,
     largeTextSize,
+    border,
   } = props;
   const [selected, setSelected] = useState(value);
   const currentDevice = typeOfDevice ? typeOfDevice : 'mobile';
@@ -49,6 +51,7 @@ export default function DropDown(props: DropDownProps) {
         <div className='relative w-full'>
           <Listbox.Button
             className={`relative w-full cursor-default rounded-lg border bg-white 
+            ${border === '1' ? 'border-[1px] border-primary' : ''}
             ${paddingLeft === '4' ? 'pl-[4px]' : ''}
             ${paddingLeft === '6' ? 'pl-[6px]' : ''}
             ${paddingLeft === '8' ? 'pl-[8px]' : ''}
