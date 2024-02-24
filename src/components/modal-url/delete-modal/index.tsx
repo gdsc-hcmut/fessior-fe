@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 import { useUrlModalStore } from '@/store/url-modal';
@@ -15,10 +15,20 @@ export default function DeleteLinkModal() {
     setShowDeleteModal(false);
   };
 
+  useEffect(() => {
+    function handleEscapeKey(event: KeyboardEvent) {
+      if (event.code === 'Escape') {
+        setShowDeleteModal(false);
+      }
+    }
+    document.addEventListener('keydown', handleEscapeKey);
+    return () => document.removeEventListener('keydown', handleEscapeKey);
+  }, []);
+
   return (
     <div
       onClick={() => setShowDeleteModal(false)}
-      className='fixed bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center bg-black/40'
+      className='fixed bottom-0 left-0 right-0 top-0 z-20 flex animate-fade items-center justify-center bg-black/40'
     >
       <div
         onClick={(e) => e.stopPropagation()}
