@@ -13,7 +13,6 @@ type DropDownProps = {
   mediumPaddingLeft?: '8' | '16';
   paddingRight: '2' | '4';
   mediumPaddingRight?: '0' | '2' | '4' | '6' | '12' | '20';
-
   largeHeight?: '24' | '32' | '36' | '60';
   largeTextSize?: '16' | '18' | '20';
   largeFont?: 'medium' | 'bold' | 'regular';
