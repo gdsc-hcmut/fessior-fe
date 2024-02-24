@@ -18,7 +18,7 @@ export default function Header() {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isHome, setIsHome] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const { screenSize } = useScreenSize();
+  const { screenSize, loaded } = useScreenSize();
   const pathname = usePathname();
 
   useEventListener('scroll', () => setScrollY(window.scrollY));
@@ -44,14 +44,19 @@ export default function Header() {
       'bg-white shadow-[0px_6px_15px_rgba(64,79,104,0.05)]',
   );
 
+  if (!loaded) return;
+
   return (
-    <div className={headerClass}>
-      <Brand theme={isHome ? 'white' : 'primary'} />
-      <Nav
-        isHome={isHome}
-        isCollapsed={isCollapsed}
-        setIsCollapsed={setIsCollapsed}
-      />
-    </div>
+    <>
+      <div></div>
+      <div className={headerClass}>
+        <Brand theme={isHome ? 'white' : 'primary'} />
+        <Nav
+          isHome={isHome}
+          isCollapsed={isCollapsed}
+          setIsCollapsed={setIsCollapsed}
+        />
+      </div>
+    </>
   );
 }

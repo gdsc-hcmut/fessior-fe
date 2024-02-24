@@ -182,7 +182,7 @@ export function AuthForm(props: AuthFormProps) {
           onClick={() => {
             authRouter(subActionAuthType);
           }}
-          className='mb-[20px] mt-[-4px] cursor-pointer self-end text-[12px] text-[#252641] underline lg:mb-[40px] lg:mt-0 lg:text-[16px]'
+          className='mb-[20px] mt-[-4px] cursor-pointer self-end text-[12px] text-default-text underline lg:mb-[40px] lg:mt-0 lg:text-[16px]'
         >
           {subActionText}
         </p>
@@ -464,7 +464,7 @@ export function ForgotPasswordCommon0({ nextStep }: { nextStep: () => void }) {
 
   useEffect(() => {
     setAuthErrorText(0, '');
-  }, [username]);
+  }, [username, setAuthErrorText]);
 
   return (
     <>
@@ -546,7 +546,7 @@ export function CheckEmailIcon({ className }: { className?: string }) {
     >
       <Image
         src='/icons/auth/check_email.svg'
-        alt=''
+        alt='check-email'
         width={0}
         height={0}
         className='h-[100%] w-auto'

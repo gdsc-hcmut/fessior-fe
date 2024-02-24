@@ -15,7 +15,7 @@ export default function useAuthRouter() {
         location.reload();
         return;
       }
-      router.replace(authType ? `/auth/${authType}` : '/');
+      router.push(authType ? `/auth/${authType}` : '/');
     };
   } else {
     return (authType?: string) => {
