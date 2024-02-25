@@ -16,6 +16,8 @@ type SidebarItemProps = {
     iconFilename: string;
     imgAlt: string;
     path: string;
+    iconActive: string;
+    iconInactive: string;
   };
 };
 
@@ -23,20 +25,16 @@ export function SidebarItem(props: SidebarItemProps) {
   const { item } = props;
   const pathname = usePathname();
   const isActive = pathname === item.path;
-  const [iconPath, setIconPath] = useState(
-    `/icons/sidebar/inactive/${item.iconFilename}`,
-  );
+  const [isIconActive, setIsIconActive] = useState(isActive);
 
-  const handleMouseEnter = (state: string) => {
-    return () => {
-      setIconPath(`/icons/sidebar/${state}/${item.iconFilename}`);
-      const optionName = document.getElementById(item.iconFilename);
-      if (optionName && state === 'active') {
-        optionName.style.color = 'white';
-      } else if (optionName && state === 'inactive' && !isActive) {
-        optionName.style.color = 'var(--primary)';
-      }
-    };
+  const handleMouseEnter = (state: boolean) => {
+    setIsIconActive(state);
+    const optionName = document.getElementById(item.iconFilename);
+    if (optionName && state === true) {
+      optionName.style.color = 'white';
+    } else if (optionName && state === false && !isActive) {
+      optionName.style.color = 'var(--primary)';
+    }
   };
 
   return (
@@ -47,16 +45,26 @@ export function SidebarItem(props: SidebarItemProps) {
         isActive && 'bg-primary',
         'flex h-10 items-center space-x-2 rounded-lg px-2 hover:bg-primary 2xl:h-[44px] 3xl:h-[48px]',
       )}
-      onMouseEnter={handleMouseEnter('active')}
-      onMouseLeave={handleMouseEnter('inactive')}
+      onMouseEnter={() => handleMouseEnter(true)}
+      onMouseLeave={() => handleMouseEnter(false)}
     >
-      <Image
-        src={isActive ? `/icons/sidebar/active/${item.iconFilename}` : iconPath}
-        alt={item.imgAlt}
-        width={0}
-        height={0}
-        className='h-5 w-auto 2xl:h-[24px]'
-      />
+      {isIconActive || isActive ? (
+        <Image
+          src={item.iconActive}
+          alt={item.imgAlt}
+          width={0}
+          height={0}
+          className='h-5 w-auto 2xl:h-[24px]'
+        />
+      ) : (
+        <Image
+          src={item.iconInactive}
+          alt={item.imgAlt}
+          width={0}
+          height={0}
+          className='h-5 w-auto 2xl:h-[24px]'
+        />
+      )}
       <p
         id={item.iconFilename}
         className={clsx(
@@ -82,13 +90,16 @@ export default function Sidebar(props: SidebarProps) {
       <aside
         onClick={() => hideSidebar()}
         className={clsx(
-          'fixed bottom-0 left-0 right-0 top-0 z-20 transform bg-black/40 transition-all duration-300',
-          isCollapsed ? 'translate-x-[-100%]' : 'translate-x-0',
+          'fixed bottom-0 left-0 right-0 top-0 z-20 bg-black/40',
+          isCollapsed ? 'scale-0' : 'animate-fade',
         )}
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className='flex h-full w-[72%] max-w-[280px] flex-col bg-white px-5 pt-7 min-[400px]:w-[60%]'
+          className={clsx(
+            'translation-all flex h-full w-[72%] max-w-[280px] transform flex-col bg-white px-5 pt-7 duration-300 min-[400px]:w-[60%]',
+            isCollapsed ? 'translate-x-[-100%]' : 'translate-x-0',
+          )}
         >
           <button
             onClick={() => hideSidebar()}
