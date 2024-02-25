@@ -16,8 +16,6 @@ type SidebarItemProps = {
     iconFilename: string;
     imgAlt: string;
     path: string;
-    iconActive: string;
-    iconInactive: string;
   };
 };
 
@@ -48,27 +46,32 @@ export function SidebarItem(props: SidebarItemProps) {
       onMouseEnter={() => handleMouseEnter(true)}
       onMouseLeave={() => handleMouseEnter(false)}
     >
-      {isIconActive || isActive ? (
+      <div>
         <Image
-          src={item.iconActive}
+          src={`icons/sidebar/active/${item.iconFilename}`}
           alt={item.imgAlt}
           width={0}
           height={0}
-          className='h-5 w-auto 2xl:h-[24px]'
+          className={clsx(
+            'h-5 w-auto 2xl:h-[24px]',
+            !isActive && !isIconActive && 'hidden',
+          )}
         />
-      ) : (
         <Image
-          src={item.iconInactive}
+          src={`icons/sidebar/inactive/${item.iconFilename}`}
           alt={item.imgAlt}
           width={0}
           height={0}
-          className='h-5 w-auto 2xl:h-[24px]'
+          className={clsx(
+            'h-5 w-auto 2xl:h-[24px]',
+            (isActive || isIconActive) && 'hidden',
+          )}
         />
-      )}
+      </div>
       <p
         id={item.iconFilename}
         className={clsx(
-          'font-medium 3xl:text-xl',
+          'font-medium 3xl:text-[18px]',
           isActive ? 'text-white' : 'text-primary',
         )}
       >
@@ -115,7 +118,7 @@ export default function Sidebar(props: SidebarProps) {
           </button>
           {sidebarItems.map((item, idx) => (
             <div key={idx} className='mb-5'>
-              <h3 className='mb-3 text-[18px] font-semibold text-primary lg:mb-2 2xl:mb-3 3xl:text-xl'>
+              <h3 className='mb-3 text-[18px] font-semibold text-primary lg:mb-2 2xl:mb-3'>
                 {item.name}
               </h3>
               <div className='flex flex-col space-y-2 lg:space-y-1 2xl:space-y-2'>
@@ -133,7 +136,7 @@ export default function Sidebar(props: SidebarProps) {
     <aside className='fixed left-0 top-[85.6px] hidden h-full w-[24vw] flex-col space-y-3 bg-white px-4 pt-10 shadow-[6px_6px_15px_0_rgba(64,79,104,0.05)] lg:flex xl:w-[18vw] 2xl:w-[17w] 2xl:space-y-5 2xl:px-7 3xl:w-[16vw]'>
       {sidebarItems.map((item, idx) => (
         <div key={idx}>
-          <h3 className='mb-2 text-[18px] font-semibold text-primary 2xl:mb-3 3xl:text-xl'>
+          <h3 className='mb-2 text-[18px] font-semibold text-primary 2xl:mb-3'>
             {item.name}
           </h3>
           <div className='flex flex-col space-y-1 2xl:space-y-2'>

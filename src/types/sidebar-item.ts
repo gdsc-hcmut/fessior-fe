@@ -5,7 +5,5 @@ export type SidebarItem = {
     iconFilename: string;
     imgAlt: string;
     path: string;
-    iconActive: string;
-    iconInactive: string;
   }[];
 };
