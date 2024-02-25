@@ -8,6 +8,7 @@ const config: Config = {
         md: '760px',
         lg: '960px',
         xl: '1300px',
+        '3xl': '1872px',
       },
       colors: {
         white: '#ffffff',

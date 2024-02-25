@@ -1,18 +1,37 @@
 'use client';
 
+import { stringify } from 'querystring';
+
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 import Button from '@/components/button';
 import CategoryItem from '@/components/category-item';
+import ModalShorten from '@/components/modal-shorten';
+import QRNavBar from '@/components/qr-navbar';
 import SelectInput from '@/components/select-input';
 import ShortenTools from '@/components/shorten-tools';
 import TextInput from '@/components/text-input';
+import AuthContext from '@/contexts/authContext';
+import useScreenSize from '@/hooks/useScreenSize';
+import meService from '@/libs/api/me';
+import urlService from '@/services/url.service';
+import Organization from '@/types/organization-type';
+import ScreenSize from '@/types/screen-size-enum';
+import Url from '@/types/url-type';
+
 
 export default function CreateQRWifiScreen() {
   const router = useRouter();
   function navToWebsite() {
     router.push('/qrcode/qr-url');
   }
+  const [inputQRName, setInputQRName] = useState('');
+  const [inputSSID, setInputSSID] = useState('');
+  const [inputCategory, setInputCategory] = useState('');
+  const [inputPassword, setInputPassword] = useState('');
+  const [inputEncryption, setInputEncryption] = useState('WPA/WPA2');
 
   return (
     <>
@@ -66,10 +85,10 @@ export default function CreateQRWifiScreen() {
                   iconSrc='/icons/label_outline.svg'
                   iconAlt='icon'
                   placeholder='Enter your QR name'
-                  value=''
+                  value={inputQRName}
                   divider={true}
                   iconPosition='left'
-                  onInput={() => {}}
+                  onInput={setInputQRName}
                   onEnter={() => {}}
                 />
               </div>
@@ -83,10 +102,10 @@ export default function CreateQRWifiScreen() {
                   iconSrc='/icons/label_outline.svg'
                   iconAlt='icon'
                   placeholder='Wifi SSID (Name)'
-                  value=''
+                  value={inputSSID}
                   divider={true}
                   iconPosition='left'
-                  onInput={() => {}}
+                  onInput={setInputSSID}
                   onEnter={() => {}}
                 />
               </div>
@@ -98,9 +117,13 @@ export default function CreateQRWifiScreen() {
                     Encryption
                   </p>
                   <SelectInput
-                    value='WPA/WPA2'
+                    value={inputEncryption}
                     options={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
-                    onChange={() => {}}
+                    onChange={(selectedOption: string | Organization) => {
+                      if (typeof selectedOption === 'string') {
+                        setInputEncryption(selectedOption);
+                      }
+                    }}
                     className='ms-[24px] w-[124px] md:ms-2'
                   />
                 </div>
@@ -115,9 +138,9 @@ export default function CreateQRWifiScreen() {
                   iconSrc='/icons/verified_user.svg'
                   iconAlt='search'
                   placeholder='Enter your password'
-                  value={''}
+                  value={inputPassword}
                   divider={true}
-                  onInput={() => {}}
+                  onInput={setInputPassword}
                 />
               </div>
             </div>
@@ -130,9 +153,9 @@ export default function CreateQRWifiScreen() {
                   iconSrc='/icons/search-20px.svg'
                   iconAlt='search'
                   placeholder='Add or create categories'
-                  value={''}
+                  value={inputCategory}
                   divider={true}
-                  onInput={() => {}}
+                  onInput={setInputCategory}
                 />
               </div>
             </div>

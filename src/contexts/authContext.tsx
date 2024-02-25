@@ -23,12 +23,14 @@ type AuthContextProps = {
     payload: { token: string } | { username: string; password: string },
   ) => Promise<any>;
   logout: () => Promise<void>;
+  isAuthStatusReady: boolean;
 };
 
 const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthContextProvider({ children }: { children: ReactNode }) {
   const [meProfile, setMeProfile] = useState<User | null>(null);
+  const [isAuthStatusReady, setIsAuthStatusReady] = useState(false);
 
   const getMeProfile = useCallback(async () => {
     try {
@@ -48,7 +50,12 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (storage.getItem('loggedIn')) getMeProfile();
+    (async () => {
+      if (storage.getItem('loggedIn')) {
+        await getMeProfile();
+      }
+      setIsAuthStatusReady(true);
+    })();
   }, [getMeProfile]);
 
   const login = useCallback(
@@ -88,8 +95,9 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
       meProfile,
       login,
       logout,
+      isAuthStatusReady,
     };
-  }, [login, logout, meProfile]);
+  }, [login, logout, meProfile, isAuthStatusReady]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
