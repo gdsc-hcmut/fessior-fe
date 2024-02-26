@@ -21,7 +21,7 @@ export const projects: Project[] = [
       'Elevate your translation experience with our Bahnar-to-Vietnamese translation website. Translate, save, and mark your favorite translations for easy access.',
     imgSrc: 'images/home/project_1.svg',
     imgAlt: 'Bahnar Translator',
-    url: '',
+    url: 'https://www.ura.hcmut.edu.vn/bahnar/nmt/',
   },
   {
     name: 'GDSC Idea Contest',

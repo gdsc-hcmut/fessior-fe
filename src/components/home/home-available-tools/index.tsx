@@ -117,7 +117,7 @@ export default function HomeAvailableTools() {
   };
 
   return (
-    <div className='mb-[80px] flex w-[100%] flex-col self-center overflow-hidden xl:mb-[200px] xl:flex-row xl:items-stretch xl:px-[calc(160px-(1920px-100vw)/3)]'>
+    <div className='mb-[80px] flex w-[100%] flex-col self-center overflow-hidden xl:flex-row xl:items-stretch xl:px-[calc(160px-(1920px-100vw)/3)]'>
       {/* ----------LEFT----------- */}
       <div className='px-[20px] xl:mx-[20px] xl:me-[60px] xl:flex xl:min-w-[287px] xl:flex-col xl:items-stretch xl:px-0'>
         <h5
