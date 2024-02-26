@@ -18,6 +18,10 @@ export default function NavItem(props: NavItem) {
   const { text, iconFilename, imgAlt, isLogout, path, children } = props;
 
   const [showingChildren, setShowingChildren] = useState(false);
+  const [smChildrenContainerHeight, setSmChildrenContainerHeight] =
+    useState('0px');
+  const [lgChildrenContainerHeight, setLgChildrenContainerHeight] =
+    useState('0px');
   const { screenSize, loaded } = useScreenSize();
   const childrenRef = useRef(null);
   const pathname = usePathname();
@@ -36,6 +40,16 @@ export default function NavItem(props: NavItem) {
       setShowingChildren(true);
     }
   }, [loaded, childrenActive, isLgScreen, isMdScreen]);
+
+  useEffect(() => {
+    if (!children) return;
+    setSmChildrenContainerHeight(
+      showingChildren ? `${56 * children.length}px` : '0px',
+    );
+    setLgChildrenContainerHeight(
+      showingChildren ? `${40 * children.length}px` : '0px',
+    );
+  }, [showingChildren]);
 
   useOnClickOutside(childrenRef, () => setShowingChildren(false));
 
@@ -57,8 +71,7 @@ export default function NavItem(props: NavItem) {
   );
 
   const smItemClass = clsx(
-    'relative flex flex-col md:max-w-[250px] md:ms-[20px]',
-    children ? '' : 'md:w-[100%]',
+    'relative flex flex-col md:max-w-[250px] md:w-[100%] md:me-[20px]',
   );
 
   const smItemTitleClass = clsx(
@@ -72,14 +85,9 @@ export default function NavItem(props: NavItem) {
     isLogout ? 'text-red' : active ? 'text-primary' : 'text-[#696969]',
   );
 
-  const childrenContainerClass = clsx(
-    'ms-[32px] overflow-hidden transition-[height] duration-500 md:transition-none',
-    showingChildren ? 'h-[112px]' : 'h-0',
-  );
-
   const lgChildrenListClass = clsx(
-    'absolute left-0 mt-[8px] overflow-hidden whitespace-nowrap rounded-[8px] bg-white transition-all duration-500',
-    showingChildren ? 'h-[80px] border-[1px]' : 'h-0 border-white',
+    'absolute left-0 mt-[0px] overflow-hidden whitespace-nowrap rounded-[8px] bg-white transition-all duration-500',
+    showingChildren ? 'border-[1px]' : 'border-white',
   );
 
   const itemIcon = getIcon(
@@ -97,12 +105,20 @@ export default function NavItem(props: NavItem) {
   if (screenSize === ScreenSize.LG) {
     return (
       !isLogout && (
-        <div ref={childrenRef} className='relative'>
+        <div
+          ref={childrenRef}
+          onMouseLeave={() => setShowingChildren(false)}
+          onMouseOver={() => setShowingChildren(true)}
+          className='relative'
+        >
           <li onClick={handleClick} className={lgItemTitleClass}>
             {text}
           </li>
           {children && (
-            <ul className={lgChildrenListClass}>
+            <ul
+              style={{ height: lgChildrenContainerHeight }}
+              className={lgChildrenListClass}
+            >
               {children?.map((item) => (
                 <li
                   key={item.text}
@@ -145,7 +161,10 @@ export default function NavItem(props: NavItem) {
         </div>
         <div className='relative'>
           {children && (
-            <div className={childrenContainerClass}>
+            <div
+              style={{ height: smChildrenContainerHeight }}
+              className='ms-[32px] overflow-hidden transition-[height] duration-500 md:ms-0 md:transition-none'
+            >
               <NavList items={children} />
             </div>
           )}

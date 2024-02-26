@@ -23,15 +23,9 @@ export const navItems: NavItem[] = [
         text: 'My URLs',
         iconFilename: 'statistics.svg',
         imgAlt: '',
-        path: '/statistics',
+        path: '/urls',
       },
     ],
-  },
-  {
-    text: 'My URLs',
-    iconFilename: 'organization.svg',
-    imgAlt: '',
-    path: '/urls',
   },
   {
     text: 'Tools',
