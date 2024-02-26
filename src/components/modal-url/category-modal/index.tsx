@@ -168,7 +168,7 @@ export default function CategoryModal() {
     }
     document.addEventListener('keydown', handleEscapeKey);
     return () => document.removeEventListener('keydown', handleEscapeKey);
-  }, []);
+  }, [setShowCategoryModal]);
 
   return (
     <div

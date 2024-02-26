@@ -74,7 +74,7 @@ export default function EditSlugModal() {
     }
     document.addEventListener('keydown', handleEscapeKey);
     return () => document.removeEventListener('keydown', handleEscapeKey);
-  }, []);
+  }, [setShowEditModal]);
 
   return (
     <div

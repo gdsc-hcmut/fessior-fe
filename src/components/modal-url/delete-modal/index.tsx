@@ -23,7 +23,7 @@ export default function DeleteLinkModal() {
     }
     document.addEventListener('keydown', handleEscapeKey);
     return () => document.removeEventListener('keydown', handleEscapeKey);
-  }, []);
+  }, [setShowDeleteModal]);
 
   return (
     <div
