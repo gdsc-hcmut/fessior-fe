@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useRef, useState, useEffect, useContext, useCallback } from 'react';
 
 import Button from '@/components/button';
-import TextInput from '@/components/text-input';
+import Input from '@/components/input';
 import AuthContext from '@/contexts/authContext';
 import useAuthRouter from '@/hooks/useAuthRouter';
 import useScreenSize from '@/hooks/useScreenSize';
@@ -135,13 +135,13 @@ export function AuthForm(props: AuthFormProps) {
       {initFields.map((field, index) => (
         <div key={field.label} className='mt-[4px]'>
           <h6 className='mb-[12px] font-[600] text-primary'>{field.label}</h6>
-          <TextInput
+          <Input
             className='mb-[4px] border-[1px] border-primary font-[500]'
             type={
               field.isPassword && !passwordVisible[index] ? 'password' : 'text'
             }
-            placeholder=''
-            value={field.currentValue}
+            fontSize={16}
+            textValue={field.currentValue}
             onInput={(input) => {
               field.onChange?.(input);
             }}
