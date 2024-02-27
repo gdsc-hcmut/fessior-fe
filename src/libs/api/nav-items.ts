@@ -34,12 +34,6 @@ export const navItems: NavItem[] = [
     path: '',
     children: [
       {
-        text: 'URL Shortener',
-        iconFilename: 'my_url.svg',
-        imgAlt: '',
-        path: '/shorten',
-      },
-      {
         text: 'QR Generator',
         iconFilename: 'statistics.svg',
         imgAlt: '',
