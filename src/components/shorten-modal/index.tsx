@@ -11,7 +11,7 @@ type ModalProps = {
   shortenedUrl: Url;
 };
 
-export default function ModalShorten(props: ModalProps) {
+export default function ShortenModal(props: ModalProps) {
   const { shortenedUrl, onDismiss } = props;
   const urlShown = `https://${shortenedUrl.domain}/${shortenedUrl.slug}`;
   return (
