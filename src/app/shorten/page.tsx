@@ -4,8 +4,8 @@ import { useState, useEffect, useContext } from 'react';
 
 import Button from '@/components/button';
 import CategoryItem from '@/components/category-item';
-import ModalShorten from '@/components/modal-shorten';
 import SelectInput from '@/components/select-input';
+import ShortenModal from '@/components/shorten-modal';
 import ShortenTools from '@/components/shorten-tools';
 import TextInput from '@/components/text-input';
 import AuthContext from '@/contexts/authContext';
@@ -257,7 +257,7 @@ export default function Shorten() {
       </div>
       {/* MODAL */}
       {shortenedUrl && (
-        <ModalShorten
+        <ShortenModal
           shortenedUrl={shortenedUrl}
           onDismiss={() => {
             setShortenedUrl(null);

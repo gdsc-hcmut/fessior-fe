@@ -16,6 +16,7 @@ import {
 } from '@/components/auth';
 import CloseButton from '@/components/close-button';
 import useAuthRouter from '@/hooks/useAuthRouter';
+import useEventListener from '@/hooks/useEventListener';
 import authHeaderContent from '@/libs/auth-header-content';
 import storage from '@/libs/local-storage';
 import AuthType from '@/types/auth-type-enum';
@@ -116,6 +117,10 @@ export default function AuthModal() {
   const authType = useSearchParams().get('auth');
   const authRouter = useAuthRouter();
   const [allowAuth, setAllowAuth] = useState<boolean | null>(null);
+
+  useEventListener('keydown', (e: any) => {
+    if (e.key === 'Escape') authRouter();
+  });
 
   useEffect(() => {
     const isMobile = !['windows', 'other'].includes(detectOS());
