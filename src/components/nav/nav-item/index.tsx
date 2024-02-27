@@ -49,7 +49,7 @@ export default function NavItem(props: NavItem) {
     setLgChildrenContainerHeight(
       showingChildren ? `${40 * children.length}px` : '0px',
     );
-  }, [showingChildren]);
+  }, [showingChildren, children]);
 
   useOnClickOutside(childrenRef, () => setShowingChildren(false));
 
