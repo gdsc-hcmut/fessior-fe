@@ -29,7 +29,7 @@ export default function AuthButton(props: AuthButtonProps) {
   return (
     <button
       onClick={() => {
-        authRouter(isLogin ? AuthType.LOGIN : AuthType.SIGN_UP);
+        authRouter(isLogin ? AuthType.LOGIN : AuthType.SIGN_UP_INFO);
       }}
       className={buttonClass}
     >

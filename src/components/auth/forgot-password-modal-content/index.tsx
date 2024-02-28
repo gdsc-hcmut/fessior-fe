@@ -3,7 +3,7 @@ import { useState } from 'react';
 import authHeaderContent from '@/libs/auth-header-content';
 import AuthType from '@/types/auth-type-enum';
 
-import { AuthModalHeading } from '../auth-modal-heading';
+import AuthModalHeading from '../auth-modal-heading';
 import {
   CheckEmailIcon,
   ForgotPasswordCommon0,
@@ -35,7 +35,7 @@ export default function ForgotPasswordModalContent() {
       {step === 1 && (
         <ForgotPasswordCommon1 nextStep={() => setStep(step + 1)} />
       )}
-      {step === 2 && <ForgotPasswordCommon2 />}
+      {step === 2 && <ForgotPasswordCommon2 firstStep={() => setStep(0)} />}
     </>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { AuthHeader } from '@/components/auth/auth-header';
+import AuthHeader from '@/components/auth/auth-header';
 import LoginCommon from '@/components/auth/login-common';
 import authHeaderContent from '@/libs/auth-header-content';
 import AuthType from '@/types/auth-type-enum';

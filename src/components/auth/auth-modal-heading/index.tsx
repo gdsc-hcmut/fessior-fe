@@ -1,16 +1,17 @@
 import { clsx } from 'clsx';
 
 import useAuthRouter from '@/hooks/useAuthRouter';
+import AuthType from '@/types/auth-type-enum';
 
 type AuthModalHeadingProps = {
   title: string;
   subtitle?: string;
   sublinkText?: string;
-  sublinkAuthType?: string;
+  sublinkAuthType?: AuthType;
   className?: string;
 };
 
-export function AuthModalHeading(props: AuthModalHeadingProps) {
+export default function AuthModalHeading(props: AuthModalHeadingProps) {
   const { title, subtitle, sublinkAuthType, sublinkText, className } = props;
 
   const authRouter = useAuthRouter();

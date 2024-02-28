@@ -9,6 +9,7 @@ import Brand from '@/components/brand';
 import Nav from '@/components/nav';
 import useEventListener from '@/hooks/useEventListener';
 import useScreenSize from '@/hooks/useScreenSize';
+import AuthType from '@/types/auth-type-enum';
 import ScreenSize from '@/types/screen-size-enum';
 
 const TRANS_HEADER_PAGES = ['/'];
@@ -59,7 +60,7 @@ export default function Header() {
           setIsCollapsed={setIsCollapsed}
         />
       </div>
-      {authType && <AuthModal authType={authType} />}
+      {authType && <AuthModal authType={authType as AuthType} />}
     </>
   );
 }

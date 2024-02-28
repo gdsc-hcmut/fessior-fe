@@ -64,7 +64,7 @@ export default function LoginCommon() {
         if (response.hasPassword) {
           authRouter();
         } else {
-          authRouter(AuthType.SIGN_UP);
+          authRouter(AuthType.SIGN_UP, true);
         }
       } catch (e: any) {
         console.log(e.message);

@@ -11,7 +11,12 @@ import { isValidUsername } from '@/utils/auth';
 
 import AuthForm from '../auth-form';
 
-export function ForgotPasswordCommon0({ nextStep }: { nextStep: () => void }) {
+type ForgotPasswordCommonProps = {
+  nextStep: () => void;
+};
+
+export function ForgotPasswordCommon0(props: ForgotPasswordCommonProps) {
+  const { nextStep } = props;
   const [username, setUsername] = useState('');
   const { inputErrorTexts, setInputErrorText } = useInputErrorText(1);
 
@@ -47,7 +52,8 @@ export function ForgotPasswordCommon0({ nextStep }: { nextStep: () => void }) {
   );
 }
 
-export function ForgotPasswordCommon1({ nextStep }: { nextStep: () => void }) {
+export function ForgotPasswordCommon1(props: ForgotPasswordCommonProps) {
+  const { nextStep } = props;
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -104,8 +110,13 @@ export function CheckEmailIcon({ className }: { className?: string }) {
   );
 }
 
+type ForgotPasswordCommon2Props = {
+  firstStep: () => void;
+};
+
 //Cho nay khong co duong ve?
-export function ForgotPasswordCommon2() {
+export function ForgotPasswordCommon2(props: ForgotPasswordCommon2Props) {
+  const { firstStep } = props;
   const { screenSize } = useScreenSize();
 
   return (
@@ -119,9 +130,9 @@ export function ForgotPasswordCommon2() {
         <p className='text-[14px] font-[500]'>
           Did not receive an email? <br />
           Check your spam folder or{' '}
-          <Link href='#' className='text-primary underline'>
+          <span onClick={firstStep} className='text-primary underline'>
             try another email address
-          </Link>
+          </span>
         </p>
       </div>
     </>

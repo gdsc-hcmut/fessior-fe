@@ -4,6 +4,7 @@ import Button from '@/components/button';
 import TextInput from '@/components/text-input';
 import useAuthRouter from '@/hooks/useAuthRouter';
 import AuthFormField from '@/types/auth-form-field-type';
+import AuthType from '@/types/auth-type-enum';
 
 import PasswordRequirements from '../password-requirements';
 
@@ -11,7 +12,7 @@ type AuthFormProps = {
   initFields: AuthFormField[];
   actionText: string;
   subActionText?: string;
-  subActionAuthType?: string;
+  subActionAuthType?: AuthType;
   onAction: () => void;
   errorTexts?: string[];
   actionAllowed?: boolean;

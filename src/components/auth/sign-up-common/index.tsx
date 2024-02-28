@@ -1,4 +1,3 @@
-import { CredentialResponse } from '@react-oauth/google';
 import { useContext, useState, useEffect } from 'react';
 
 import AuthContext from '@/contexts/authContext';
@@ -6,68 +5,17 @@ import useAuthRouter from '@/hooks/useAuthRouter';
 import useInputErrorText from '@/hooks/useInputErrorText';
 import { createPassword } from '@/libs/api/auth';
 import meService from '@/services/me.service';
+import AuthType from '@/types/auth-type-enum';
 import { validatePassword } from '@/utils/auth';
 
 import AuthForm from '../auth-form';
-import CustomGoogleLogin from '../custom-google-login';
 
-export function SignUpCommon0({ nextStep }: { nextStep: () => void }) {
-  const { login } = useContext(AuthContext);
-  const authRouter = useAuthRouter();
-
-  const handleSignUpWithGoogle = async (
-    credentialResponse: CredentialResponse,
-  ) => {
-    if (credentialResponse.credential) {
-      try {
-        const response = await login({
-          token: credentialResponse.credential,
-        });
-        if (response.hasPassword) {
-          authRouter();
-        } else {
-          nextStep();
-        }
-      } catch (e: any) {
-        console.log(e.message);
-      }
-    }
-  };
-
-  return (
-    <>
-      <p className='mb-[8px] font-[600]'>
-        Create an account in just a few steps!
-      </p>
-      <ul className='mb-[40px] list-inside list-disc lg:mb-[60px]'>
-        <li className='text-[14px] leading-relaxed'>
-          <span className='relative left-[-8px]'>
-            Log in with your Google account
-          </span>
-        </li>
-        <li className='text-[14px] leading-relaxed'>
-          <span className='relative left-[-8px]'>
-            Once logged in, your account email will be automatically set as your
-            username
-          </span>
-        </li>
-        <li className='text-[14px] leading-relaxed'>
-          <span className='relative left-[-8px]'>
-            Complete the process by entering the password you want to create
-          </span>
-        </li>
-      </ul>
-      <CustomGoogleLogin onSuccess={handleSignUpWithGoogle} />
-    </>
-  );
-}
-
-export function SignUpCommon1() {
+export default function SignUpCommon() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const { login, meProfile } = useContext(AuthContext);
-  const [email, setEmail] = useState(meProfile?.email);
+  const [email, setEmail] = useState(meProfile ? meProfile.email : null);
   const { inputErrorTexts, setInputErrorText } = useInputErrorText(3);
   const [isActionAllowed, setIsActionAllowed] = useState(false);
 
@@ -75,11 +23,16 @@ export function SignUpCommon1() {
 
   useEffect(() => {
     (async () => {
-      if (!meProfile?.email) {
-        setEmail((await meService.getMe()).email);
+      if (!email) {
+        try {
+          setEmail((await meService.getMe()).email);
+        } catch (e: any) {
+          console.log(e.message);
+          authRouter(AuthType.SIGN_UP_INFO);
+        }
       }
     })();
-  }, [meProfile?.email]);
+  }, [authRouter, email]);
 
   useEffect(() => {
     if (confirmPassword !== '' && password !== confirmPassword) {
@@ -102,7 +55,7 @@ export function SignUpCommon1() {
 
   return (
     <AuthForm
-      subActionAuthType=''
+      subActionAuthType={AuthType.BACK}
       subActionText='Change Google account'
       actionText='Sign Up'
       initFields={[
