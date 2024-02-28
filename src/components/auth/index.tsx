@@ -4,12 +4,13 @@ import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef, useState, useEffect, useContext, useCallback } from 'react';
+import { useRef, useState, useEffect, useContext } from 'react';
 
 import Button from '@/components/button';
 import TextInput from '@/components/text-input';
 import AuthContext from '@/contexts/authContext';
 import useAuthRouter from '@/hooks/useAuthRouter';
+import useInputErrorText from '@/hooks/useInputErrorText';
 import useScreenSize from '@/hooks/useScreenSize';
 import { createPassword, recoverPassword } from '@/libs/api/auth';
 import meService from '@/libs/api/me';
@@ -33,20 +34,6 @@ type AuthFormProps = {
   errorTexts?: string[];
   actionAllowed?: boolean;
   isLogin?: boolean;
-};
-
-const useAuthErrorText = (fieldNumber: number) => {
-  const [errorTexts, setErrorTexts] = useState(Array(fieldNumber).fill(''));
-
-  const setAuthErrorText = useCallback((index: number, newText: string) => {
-    setErrorTexts((errorTexts) =>
-      errorTexts.map((text, currentIndex) =>
-        currentIndex === index ? newText : text,
-      ),
-    );
-  }, []);
-
-  return { errorTexts, setAuthErrorText };
 };
 
 type PasswordRequirementsProps = {
@@ -227,7 +214,7 @@ export function CustomGoogleLogin({
 export function LoginCommon() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { errorTexts, setAuthErrorText } = useAuthErrorText(2);
+  const { inputErrorTexts, setInputErrorText } = useInputErrorText(2);
 
   const authRouter = useAuthRouter();
 
@@ -237,19 +224,19 @@ export function LoginCommon() {
     let isProblem = false;
 
     if (username === '') {
-      setAuthErrorText(0, 'Please enter your email');
+      setInputErrorText(0, 'Please enter your email');
       isProblem = true;
     } else if (
       !username.match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       )
     ) {
-      setAuthErrorText(0, 'Please enter a valid email');
+      setInputErrorText(0, 'Please enter a valid email');
       isProblem = true;
     }
 
     if (password === '') {
-      setAuthErrorText(1, 'Please enter your password');
+      setInputErrorText(1, 'Please enter your password');
       isProblem = true;
     }
 
@@ -259,17 +246,17 @@ export function LoginCommon() {
       await login({ username, password });
       authRouter();
     } catch (e: any) {
-      setAuthErrorText(1, e.response.data.message);
+      setInputErrorText(1, e.response.data.message);
     }
   };
 
   useEffect(() => {
-    if (username !== '') setAuthErrorText(0, '');
-  }, [username, setAuthErrorText]);
+    if (username !== '') setInputErrorText(0, '');
+  }, [username, setInputErrorText]);
 
   useEffect(() => {
-    if (password !== '') setAuthErrorText(1, '');
-  }, [password, setAuthErrorText]);
+    if (password !== '') setInputErrorText(1, '');
+  }, [password, setInputErrorText]);
 
   const handleLoginWithGoogle = async (
     credentialResponse: CredentialResponse,
@@ -323,7 +310,7 @@ export function LoginCommon() {
         ]}
         onAction={handleLoginWithUsername}
         actionText='Log In'
-        errorTexts={errorTexts}
+        errorTexts={inputErrorTexts}
       />
     </>
   );
@@ -386,7 +373,7 @@ export function SignUpCommon1() {
 
   const { login, meProfile } = useContext(AuthContext);
   const [email, setEmail] = useState(meProfile?.email);
-  const { errorTexts, setAuthErrorText } = useAuthErrorText(3);
+  const { inputErrorTexts, setInputErrorText } = useInputErrorText(3);
   const [isActionAllowed, setIsActionAllowed] = useState(false);
 
   const authRouter = useAuthRouter();
@@ -401,9 +388,9 @@ export function SignUpCommon1() {
 
   useEffect(() => {
     if (confirmPassword !== '' && password !== confirmPassword) {
-      setAuthErrorText(2, 'Password does not match');
+      setInputErrorText(2, 'Password does not match');
     } else {
-      setAuthErrorText(2, '');
+      setInputErrorText(2, '');
     }
 
     if (
@@ -414,7 +401,7 @@ export function SignUpCommon1() {
     } else {
       setIsActionAllowed(false);
     }
-  }, [password, confirmPassword, setAuthErrorText]);
+  }, [password, confirmPassword, setInputErrorText]);
 
   if (!email) return;
 
@@ -452,7 +439,7 @@ export function SignUpCommon1() {
           console.log('PASSWORD NOT GOOD');
         }
       }}
-      errorTexts={errorTexts}
+      errorTexts={inputErrorTexts}
       actionAllowed={isActionAllowed}
     />
   );
@@ -460,11 +447,11 @@ export function SignUpCommon1() {
 
 export function ForgotPasswordCommon0({ nextStep }: { nextStep: () => void }) {
   const [username, setUsername] = useState('');
-  const { errorTexts, setAuthErrorText } = useAuthErrorText(1);
+  const { inputErrorTexts, setInputErrorText } = useInputErrorText(1);
 
   useEffect(() => {
-    setAuthErrorText(0, '');
-  }, [username, setAuthErrorText]);
+    setInputErrorText(0, '');
+  }, [username, setInputErrorText]);
 
   return (
     <>
@@ -487,12 +474,12 @@ export function ForgotPasswordCommon0({ nextStep }: { nextStep: () => void }) {
               /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             )
           ) {
-            setAuthErrorText(0, 'Please enter a valid email');
+            setInputErrorText(0, 'Please enter a valid email');
             return;
           }
           nextStep();
         }}
-        errorTexts={errorTexts}
+        errorTexts={inputErrorTexts}
       />
     </>
   );

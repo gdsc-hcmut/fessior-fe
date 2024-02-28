@@ -1,7 +1,6 @@
 'use client';
 
 import { clsx } from 'clsx';
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import LoadingPage from '@/app/loading';
@@ -112,8 +111,13 @@ function ForgotPasswordModalContent() {
   );
 }
 
-export default function AuthModal() {
-  const authType = useSearchParams().get('auth');
+type AuthModalProps = {
+  authType: string;
+};
+
+export default function AuthModal(props: AuthModalProps) {
+  const { authType } = props;
+
   const authRouter = useAuthRouter();
   const [allowAuth, setAllowAuth] = useState<boolean | null>(null);
 
