@@ -4,7 +4,7 @@ import { clsx } from 'clsx';
 import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
-import AuthModal from '@/components/auth-md-lg';
+import AuthModal from '@/components/auth/auth-modal';
 import Brand from '@/components/brand';
 import Nav from '@/components/nav';
 import useEventListener from '@/hooks/useEventListener';

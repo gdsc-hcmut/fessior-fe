@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
-import { SignUpCommon0, SignUpCommon1 } from '@/components/auth';
-import { AuthHeader } from '@/components/auth-sm';
+import { AuthHeader } from '@/components/auth/auth-header';
+import { SignUpCommon0, SignUpCommon1 } from '@/components/auth/sign-up-common';
 import authHeaderContent from '@/libs/auth-header-content';
 import AuthType from '@/types/auth-type-enum';
 

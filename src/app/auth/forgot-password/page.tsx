@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 
+import { AuthHeader } from '@/components/auth/auth-header';
 import {
   ForgotPasswordCommon0,
   ForgotPasswordCommon1,
   ForgotPasswordCommon2,
-} from '@/components/auth';
-import { AuthHeader } from '@/components/auth-sm';
+} from '@/components/auth/forgot-password-common';
 import authHeaderContent from '@/libs/auth-header-content';
 import AuthType from '@/types/auth-type-enum';
 
