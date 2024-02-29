@@ -5,7 +5,7 @@ import Button from '../button';
 const QRNavBar = () => {
   return (
     <>
-      <div className='hidden lg:block'>
+      <div className='hidden xl:block'>
         <div className='flex flex-row items-center justify-start'>
           <svg
             width='24'

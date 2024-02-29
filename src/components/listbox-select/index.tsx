@@ -8,7 +8,7 @@ type DropDownProps = {
   heightOfDropDown: '28' | '24' | '40';
   textSize: '12' | '16';
   paddingLeft: '4' | '6' | '8' | '16';
-  mediumHeight?: '28' | '32' | '36' | '48' | '60';
+  mediumHeight?: '28' | '32' | '36' | '48' | '60' | '56';
   mediumTextSize?: '16' | '20' | '18';
   mediumPaddingLeft?: '8' | '16';
   paddingRight: '2' | '4';
@@ -19,6 +19,7 @@ type DropDownProps = {
   largePaddingLeft?: '4' | '8' | '16';
   largePaddingRight?: '2' | '4' | '6' | '16' | '8';
   border?: 'none' | '1';
+  mediumBorder?: 'none' | '1';
 };
 
 export default function DropDown(props: DropDownProps) {
@@ -40,6 +41,7 @@ export default function DropDown(props: DropDownProps) {
     largePaddingRight,
     largeTextSize,
     border,
+    mediumBorder,
   } = props;
   const [selected, setSelected] = useState(value);
   const currentDevice = typeOfDevice ? typeOfDevice : 'mobile';
@@ -51,15 +53,17 @@ export default function DropDown(props: DropDownProps) {
           <Listbox.Button
             className={`relative w-full cursor-default rounded-lg border bg-white 
             ${border === '1' ? 'border-[1px] border-primary' : ''}
+            
+            ${mediumBorder === '1' ? 'md:border-[1px] md:border-primary' : ''}
             ${paddingLeft === '4' ? 'pl-[4px]' : ''}
             ${paddingLeft === '6' ? 'pl-[6px]' : ''}
             ${paddingLeft === '8' ? 'pl-[8px]' : ''}
             ${paddingLeft === '16' ? 'pl-[16px]' : ''}
             ${mediumPaddingLeft === '8' ? 'md:pl-[8px]' : ''}
             ${mediumPaddingLeft === '16' ? 'md:pl-[16px]' : ''}
-            ${largePaddingLeft === '4' ? 'lg:pl-[4px]' : ''}
-            ${largePaddingLeft === '8' ? 'lg:pl-[8px]' : ''}
-            ${largePaddingLeft === '16' ? 'lg:pl-[16px]' : ''}
+            ${largePaddingLeft === '4' ? 'xl:pl-[4px]' : ''}
+            ${largePaddingLeft === '8' ? 'xl:pl-[8px]' : ''}
+            ${largePaddingLeft === '16' ? 'xl:pl-[16px]' : ''}
 
             
             ${paddingRight === '2' ? 'pr-[2px]' : ''}
@@ -70,19 +74,19 @@ export default function DropDown(props: DropDownProps) {
             ${mediumPaddingRight === '6' ? 'md:pr-[6px]' : ''}
             ${mediumPaddingRight === '12' ? 'md:pr-[12px]' : ''}
             ${mediumPaddingRight === '20' ? 'md:pr-[20px]' : ''}
-            ${largePaddingRight === '2' ? 'lg:pr-[2px]' : ''}
-            ${largePaddingRight === '4' ? 'lg:pr-[4px]' : ''}
-            ${largePaddingRight === '6' ? 'lg:pr-[6px]' : ''}
-            ${largePaddingRight === '8' ? 'lg:pr-[8px]' : ''}
-            ${largePaddingRight === '16' ? 'lg:pr-[16px]' : ''}
+            ${largePaddingRight === '2' ? 'xl:pr-[2px]' : ''}
+            ${largePaddingRight === '4' ? 'xl:pr-[4px]' : ''}
+            ${largePaddingRight === '6' ? 'xl:pr-[6px]' : ''}
+            ${largePaddingRight === '8' ? 'xl:pr-[8px]' : ''}
+            ${largePaddingRight === '16' ? 'xl:pr-[16px]' : ''}
              text-left ${textSize === '12' ? 'text-[12px]' : ''}
              ${textSize === '16' ? 'text-[16px]' : ''}
              ${mediumTextSize === '16' ? 'md:text-[16px]' : ''}
              ${mediumTextSize === '20' ? 'md:text-[20px]' : ''}
              ${mediumTextSize === '18' ? 'md:text-[18px]' : ''}
-             ${largeTextSize === '16' ? 'lg:text-[16px]' : ''}
-             ${largeTextSize === '18' ? 'lg:text-[18px]' : ''}
-             ${largeTextSize === '20' ? 'lg:text-[20px]' : ''}
+             ${largeTextSize === '16' ? 'xl:text-[16px]' : ''}
+             ${largeTextSize === '18' ? 'xl:text-[18px]' : ''}
+             ${largeTextSize === '20' ? 'xl:text-[20px]' : ''}
              focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300`}
           >
             <span className='block truncate'>
@@ -95,14 +99,15 @@ export default function DropDown(props: DropDownProps) {
                 ${mediumHeight === '32' ? 'md:h-[32px]' : ''}
                 ${mediumHeight === '36' ? 'md:h-[36px]' : ''}
                 ${mediumHeight === '48' ? 'md:h-[48px]' : ''}
+                ${mediumHeight === '56' ? 'md:h-[56px]' : ''} 
                 ${mediumHeight === '60' ? 'md:h-[60px]' : ''} 
-                ${largeHeight === '24' ? 'lg:h-[24px]' : ''}
-                ${largeHeight === '32' ? 'lg:h-[32px]' : ''}
-                ${largeHeight === '36' ? 'lg:h-[36px]' : ''}
-                ${largeHeight === '60' ? 'lg:h-[60px]' : ''}
-                ${largeFont === 'medium' ? 'lg:font-medium' : ''}
-                ${largeFont === 'bold' ? 'lg:font-bold' : ''}
-                ${largeFont === 'regular' ? 'lg:font-normal' : ''}
+                ${largeHeight === '24' ? 'xl:h-[24px]' : ''}
+                ${largeHeight === '32' ? 'xl:h-[32px]' : ''}
+                ${largeHeight === '36' ? 'xl:h-[36px]' : ''}
+                ${largeHeight === '60' ? 'xl:h-[60px]' : ''}
+                ${largeFont === 'medium' ? 'xl:font-medium' : ''}
+                ${largeFont === 'bold' ? 'xl:font-bold' : ''}
+                ${largeFont === 'regular' ? 'xl:font-normal' : ''}
                 flex items-center `}
               >
                 {selected}
@@ -118,11 +123,11 @@ export default function DropDown(props: DropDownProps) {
             ${mediumPaddingRight === '6' ? 'md:pr-[6px]' : ''}
             ${mediumPaddingRight === '12' ? 'md:pr-[12px]' : ''}
             ${mediumPaddingRight === '20' ? 'md:pr-[20px]' : ''}
-            ${largePaddingRight === '2' ? 'lg:pr-[2px]' : ''}
-            ${largePaddingRight === '4' ? 'lg:pr-[4px]' : ''}
-            ${largePaddingRight === '6' ? 'lg:pr-[6px]' : ''}
-            ${largePaddingRight === '8' ? 'lg:pr-[8px]' : ''}
-            ${largePaddingRight === '16' ? 'lg:pr-[16px]' : ''}
+            ${largePaddingRight === '2' ? 'xl:pr-[2px]' : ''}
+            ${largePaddingRight === '4' ? 'xl:pr-[4px]' : ''}
+            ${largePaddingRight === '6' ? 'xl:pr-[6px]' : ''}
+            ${largePaddingRight === '8' ? 'xl:pr-[8px]' : ''}
+            ${largePaddingRight === '16' ? 'xl:pr-[16px]' : ''}
             `}
             >
               <svg
@@ -156,9 +161,9 @@ export default function DropDown(props: DropDownProps) {
               ${mediumTextSize === '16' ? 'md:text-[16px]' : ''}
               ${mediumTextSize === '18' ? 'md:text-[18px]' : ''}
               ${mediumTextSize === '20' ? 'md:text-[20px]' : ''}
-              ${largeTextSize === '16' ? 'lg:text-[16px]' : ''}
-              ${largeTextSize === '18' ? 'lg:text-[18px]' : ''}
-              ${largeTextSize === '20' ? 'lg:text-[20px]' : ''}
+              ${largeTextSize === '16' ? 'xl:text-[16px]' : ''}
+              ${largeTextSize === '18' ? 'xl:text-[18px]' : ''}
+              ${largeTextSize === '20' ? 'xl:text-[20px]' : ''}
               `}
             >
               {options.map((option, optionIdx) => (
@@ -172,12 +177,12 @@ export default function DropDown(props: DropDownProps) {
                     ${paddingLeft === '16' ? 'pl-[16px]' : ''}
                     ${mediumPaddingLeft === '8' ? 'md:pl-[8px]' : ''}
                     ${mediumPaddingLeft === '16' ? 'md:pl-[16px]' : ''}
-                    ${largePaddingLeft === '4' ? 'lg:pl-[4px]' : ''}
-                    ${largePaddingLeft === '8' ? 'lg:pl-[8px]' : ''}
-                    ${largePaddingLeft === '16' ? 'lg:pl-[16px]' : ''}
-                    ${largeFont === 'medium' ? 'lg:font-medium' : ''}
-                ${largeFont === 'bold' ? 'lg:font-bold' : ''}
-                ${largeFont === 'regular' ? 'lg:font-normal' : ''}
+                    ${largePaddingLeft === '4' ? 'xl:pl-[4px]' : ''}
+                    ${largePaddingLeft === '8' ? 'xl:pl-[8px]' : ''}
+                    ${largePaddingLeft === '16' ? 'xl:pl-[16px]' : ''}
+                    ${largeFont === 'medium' ? 'xl:font-medium' : ''}
+                ${largeFont === 'bold' ? 'xl:font-bold' : ''}
+                ${largeFont === 'regular' ? 'xl:font-normal' : ''}
                     ${active ? 'text-primary' : 'text-[#252641]'}`
                   }
                   value={option}
@@ -201,12 +206,12 @@ export default function DropDown(props: DropDownProps) {
                         ${paddingLeft === '16' ? 'pl-[16px]' : ''}
                         ${mediumPaddingLeft === '8' ? 'md:pl-[8px]' : ''}
                         ${mediumPaddingLeft === '16' ? 'md:pl-[16px]' : ''}
-                        ${largePaddingLeft === '4' ? 'lg:pl-[4px]' : ''}
-                        ${largePaddingLeft === '8' ? 'lg:pl-[8px]' : ''}
-                        ${largePaddingLeft === '16' ? 'lg:pl-[16px]' : ''}
-                        ${largeFont === 'medium' ? 'lg:font-medium' : ''}
-                ${largeFont === 'bold' ? 'lg:font-bold' : ''}
-                ${largeFont === 'regular' ? 'lg:font-normal' : ''}
+                        ${largePaddingLeft === '4' ? 'xl:pl-[4px]' : ''}
+                        ${largePaddingLeft === '8' ? 'xl:pl-[8px]' : ''}
+                        ${largePaddingLeft === '16' ? 'xl:pl-[16px]' : ''}
+                        ${largeFont === 'medium' ? 'xl:font-medium' : ''}
+                        ${largeFont === 'bold' ? 'xl:font-bold' : ''}
+                        ${largeFont === 'regular' ? 'xl:font-normal' : ''}
                         text-amber-600`}
                         ></span>
                       ) : null}
