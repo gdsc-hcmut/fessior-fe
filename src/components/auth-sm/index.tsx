@@ -18,7 +18,7 @@ export function AuthHeader(props: AuthHeaderProps) {
   return (
     <div
       style={{ backgroundImage: `url(${background})` }}
-      className='relative flex max-h-[50%] flex-grow flex-col bg-cover p-[20px]'
+      className='relative flex max-h-[50%] min-h-[300px] flex-grow flex-col bg-cover p-[20px]'
     >
       <Brand theme='white' />
       <div className='flex flex-grow flex-col justify-center'>
@@ -39,7 +39,7 @@ export function AuthHeader(props: AuthHeaderProps) {
       </div>
       <Image
         src='/images/auth/decor.svg'
-        alt=''
+        alt='background'
         width={0}
         height={0}
         className='absolute bottom-0 left-0 right-0 h-auto w-[100%]'
