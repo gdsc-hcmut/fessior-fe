@@ -1,9 +1,10 @@
 'use client';
 
+import AOS from 'aos';
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Autoplay, Controller } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
@@ -13,6 +14,9 @@ import Icon from '@/types/icon-enum';
 import { getIcon } from '@/utils/common';
 
 import 'swiper/css/bundle';
+
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+// ..
 
 type HomeAvailableToolItemProps = {
   index: number;
@@ -241,10 +245,17 @@ export default function HomeAvailableTools() {
     controller: { control: infoSwiper },
   };
 
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
     <div className='mb-[80px] flex w-[100%] flex-col self-center overflow-hidden xl:mb-[200px] xl:flex-row xl:items-stretch xl:px-[calc(160px-(1920px-100vw)/3)]'>
       {/* ----------LEFT----------- */}
-      <div className='px-[20px] xl:mx-[20px] xl:me-[60px] xl:flex xl:min-w-[287px] xl:flex-col xl:items-stretch xl:px-0'>
+      <div
+        data-aos='fade-right'
+        className='px-[20px] xl:mx-[20px] xl:me-[60px] xl:flex xl:min-w-[287px] xl:flex-col xl:items-stretch xl:px-0'
+      >
         <h5
           onClick={() => toolSwiper?.slideNext()}
           className='text-[32px] font-[700] leading-[65px] text-primary xl:ms-[16px] xl:text-[28px]'
@@ -273,7 +284,9 @@ export default function HomeAvailableTools() {
         />
       </div>
       {/* ----------RIGHT----------- */}
-      <Swiper {...infoSwiperProps}>{getToolInfos()}</Swiper>
+      <div data-aos='fade-right' className='w-[100%] flex-grow xl:w-[70%]'>
+        <Swiper {...infoSwiperProps}>{getToolInfos()}</Swiper>
+      </div>
     </div>
   );
 }
