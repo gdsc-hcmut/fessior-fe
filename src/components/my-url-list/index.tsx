@@ -3,17 +3,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-import { MyUrl } from '@/types/url-type';
+import { MyUrl, MyUrlv1 } from '@/types/url-type';
 
 import UrlButton from '../button/url-button';
 
 type MyUrlListProps = {
-  myUrlList: MyUrl[];
+  myUrlList: MyUrlv1[];
   isAlreadyShorten: boolean;
 };
 
 type UrlItemProps = {
-  url: MyUrl;
+  url: MyUrlv1;
 };
 
 type EmptyListProps = {
@@ -55,38 +55,38 @@ function UrlItemXL(props: UrlItemProps) {
     return elementWidth;
   };
 
-  useEffect(() => {
-    const renderBoxes = () => {
-      let currentWidth = 0;
-      const newCategories = [];
-      let newHiddenCategories: string[] = [];
+  // useEffect(() => {
+  //   const renderBoxes = () => {
+  //     let currentWidth = 0;
+  //     const newCategories = [];
+  //     let newHiddenCategories: string[] = [];
 
-      for (let i = 0; i < url.category.length; i++) {
-        const boxWidth = calculateBoxWidth(url.category[i]);
-        if (
-          currentWidth + boxWidth <=
-          (width && width != 0
-            ? width * 0.86
-            : ref.current
-            ? ref.current.clientWidth * 0.86
-            : 0)
-        ) {
-          newCategories.push(url.category[i]);
-          currentWidth += boxWidth;
-        } else {
-          setIsDivFull(true);
-          newHiddenCategories = url.category.slice(i);
-          break;
-        }
-      }
+  //     for (let i = 0; i < url.category.length; i++) {
+  //       const boxWidth = calculateBoxWidth(url.category[i]);
+  //       if (
+  //         currentWidth + boxWidth <=
+  //         (width && width != 0
+  //           ? width * 0.86
+  //           : ref.current
+  //           ? ref.current.clientWidth * 0.86
+  //           : 0)
+  //       ) {
+  //         newCategories.push(url.category[i]);
+  //         currentWidth += boxWidth;
+  //       } else {
+  //         setIsDivFull(true);
+  //         newHiddenCategories = url.category.slice(i);
+  //         break;
+  //       }
+  //     }
 
-      setCategories(newCategories);
-      setHiddenCategories(newHiddenCategories);
-    };
+  //     setCategories(newCategories);
+  //     setHiddenCategories(newHiddenCategories);
+  //   };
 
-    setIsDivFull(false);
-    renderBoxes();
-  }, [width, url.category, isDivFull]);
+  //   setIsDivFull(false);
+  //   renderBoxes();
+  // }, [width, url.category, isDivFull]);
 
   return (
     <div className='relative flex flex-shrink-0 items-center rounded-lg bg-white px-5 py-3 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] 2xl:px-7 2xl:py-4 3xl:px-10 3xl:py-5'>
@@ -102,7 +102,7 @@ function UrlItemXL(props: UrlItemProps) {
         </p>
       </div>
       <p className='mr-5 flex flex-[1] text-[14px] 2xl:text-base'>
-        {url.totalClicks} {url.totalClicks > 0 ? 'clicks' : 'click'}
+        {url.clickCount} {url.clickCount > 0 ? 'clicks' : 'click'}
       </p>
       <p className='mr-5 flex flex-[1] text-[14px] font-semibold 2xl:text-base'>
         {url.createdAt}
@@ -149,11 +149,11 @@ function UrlItemXL(props: UrlItemProps) {
         <div
           className={clsx(
             'h-5 w-5 rounded-full',
-            url.enable ? 'bg-[#7BCFA9]' : 'bg-[#ED9D97]',
+            url.isActive ? 'bg-[#7BCFA9]' : 'bg-[#ED9D97]',
           )}
         />
         <p className='text-[14px] font-semibold 2xl:text-base'>
-          {url.enable ? 'Enable' : 'Disable'}
+          {url.isActive ? 'Enable' : 'Disable'}
         </p>
       </div>
       <UrlButton
@@ -197,35 +197,35 @@ function UrlItemMD(props: UrlItemProps) {
     return elementWidth;
   };
 
-  useEffect(() => {
-    const renderBoxes = () => {
-      let currentWidth = 0;
-      const newCategories = [];
+  // useEffect(() => {
+  //   const renderBoxes = () => {
+  //     let currentWidth = 0;
+  //     const newCategories = [];
 
-      for (let i = 0; i < url.category.length; i++) {
-        const boxWidth = calculateBoxWidth(url.category[i]);
-        if (
-          currentWidth + boxWidth <=
-          (width && width != 0
-            ? width * 0.8
-            : mobile_ref.current
-            ? mobile_ref.current.clientWidth * 0.8
-            : 0)
-        ) {
-          newCategories.push(url.category[i]);
-          currentWidth += boxWidth;
-        } else {
-          setIsDivFull(true);
-          break;
-        }
-      }
+  //     for (let i = 0; i < url.category.length; i++) {
+  //       const boxWidth = calculateBoxWidth(url.category[i]);
+  //       if (
+  //         currentWidth + boxWidth <=
+  //         (width && width != 0
+  //           ? width * 0.8
+  //           : mobile_ref.current
+  //           ? mobile_ref.current.clientWidth * 0.8
+  //           : 0)
+  //       ) {
+  //         newCategories.push(url.category[i]);
+  //         currentWidth += boxWidth;
+  //       } else {
+  //         setIsDivFull(true);
+  //         break;
+  //       }
+  //     }
 
-      setCategories(newCategories);
-    };
+  //     setCategories(newCategories);
+  //   };
 
-    setIsDivFull(false);
-    renderBoxes();
-  }, [width, url.category, isDivFull]);
+  //   setIsDivFull(false);
+  //   renderBoxes();
+  // }, [width, url.category, isDivFull]);
 
   return (
     <div className='relative flex w-full justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
@@ -235,7 +235,7 @@ function UrlItemMD(props: UrlItemProps) {
           <div
             className={clsx(
               'h-6 w-6 rounded-full',
-              url.enable ? 'bg-[#7BCFA9]' : 'bg-[#ED9D97]',
+              url.isActive ? 'bg-[#7BCFA9]' : 'bg-[#ED9D97]',
             )}
           />
           <p className='w-[50vw] truncate text-xl font-semibold text-primary'>
@@ -252,7 +252,7 @@ function UrlItemMD(props: UrlItemProps) {
               height={0}
               className='h-5 w-auto'
             />
-            <p className='font-semibold'>Total clicks: {url.totalClicks}</p>
+            <p className='font-semibold'>Total clicks: {url.clickCount}</p>
           </div>
           <div className='flex items-center space-x-1'>
             <Image
@@ -341,7 +341,7 @@ function EmptyList(props: EmptyListProps) {
 export default function MyUrlList(props: MyUrlListProps) {
   const { myUrlList, isAlreadyShorten } = props;
 
-  if (myUrlList.length === 0) {
+  if (!myUrlList || (myUrlList && myUrlList.length === 0)) {
     return <EmptyList isAlreadyShorten={isAlreadyShorten} />;
   }
 

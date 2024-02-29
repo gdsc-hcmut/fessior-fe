@@ -17,4 +17,19 @@ export type MyUrl = {
   category: string[];
 };
 
+export type MyUrlv1 = {
+  _id: string;
+  originalUrl: string;
+  slug: string;
+  domain: string;
+  organizationId: string;
+  createdBy: string;
+  updatedBy: string;
+  createdAt: string;
+  updatedAt: string;
+  isActive: boolean;
+  clickCount: number;
+  category?: string[];
+};
+
 export default Url;

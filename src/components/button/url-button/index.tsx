@@ -2,11 +2,11 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 import { useUrlModalStore } from '@/store/url-modal';
-import { MyUrl } from '@/types/url-type';
+import { MyUrl, MyUrlv1 } from '@/types/url-type';
 
 type UrlButtonProps = {
   copyContent: string;
-  editedUrl: MyUrl;
+  editedUrl: MyUrlv1;
 };
 
 export default function UrlButton(props: UrlButtonProps) {
@@ -47,7 +47,7 @@ export default function UrlButton(props: UrlButtonProps) {
       <button
         onClick={() => {
           setShowEditModal(true);
-          setEditedUrl(editedUrl);
+          // setEditedUrl(editedUrl);
         }}
         className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'
       >

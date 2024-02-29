@@ -1,5 +1,6 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
@@ -12,11 +13,12 @@ import MyUrlList from '@/components/my-url-list';
 import Pagination from '@/components/pagination';
 import Sidebar from '@/components/sidebar';
 import UrlSelectionList from '@/components/url-selection-list';
-import { myUrlListData } from '@/services/url.service';
+import urlService, { myUrlListData } from '@/services/url.service';
 import { useFilterOptionStore } from '@/store/filter-option';
+import { useUserProfileStore } from '@/store/me';
 import { useUrlModalStore } from '@/store/url-modal';
 import SortOption from '@/types/sort-option-enum';
-import { MyUrl } from '@/types/url-type';
+import { MyUrl, MyUrlv1 } from '@/types/url-type';
 
 type URLsPageProps = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -40,6 +42,7 @@ function URLsPage(props: URLsPageProps) {
   const [page, setPage] = useState<number>(1);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const [urlList, setUrlList] = useState<MyUrl[]>([...myUrlListData]);
+  const [urlListV1, setUrlListV1] = useState<MyUrlv1[]>([]);
   const [filterUrlList, setFilterUrlList] = useState<MyUrl[]>([...urlList]);
   const [displayUrlList, setDisplayUrlList] = useState<MyUrl[]>(
     filterUrlList.slice((page - 1) * 7, 7 * page),
@@ -48,6 +51,7 @@ function URLsPage(props: URLsPageProps) {
   const { isShow, setShowCategoryModal } = useUrlModalStore();
   const { filterCategory, filterDomain, setFilterDomain, setFilterCategory } =
     useFilterOptionStore();
+  const { curOrganizationId } = useUserProfileStore();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
@@ -66,6 +70,19 @@ function URLsPage(props: URLsPageProps) {
       filterUrlList.slice((pageNumber - 1) * 7, 7 * pageNumber),
     );
   };
+
+  const fetchUrlList = async () => {
+    const data = await urlService.getUrlListByOrganization(curOrganizationId);
+    setUrlListV1(data.urls);
+    return data;
+  };
+
+  const { isLoading } = useQuery({
+    queryKey: ['myUrls', curOrganizationId],
+    queryFn: fetchUrlList,
+    enabled: !!curOrganizationId,
+  });
+  console.log('data', urlListV1);
 
   return (
     <div
@@ -317,10 +334,12 @@ function URLsPage(props: URLsPageProps) {
               </button>
             </div>
           </div>
-          <MyUrlList
-            myUrlList={displayUrlList}
-            isAlreadyShorten={myUrlListData.length !== 0}
-          />
+          {!isLoading && (
+            <MyUrlList
+              myUrlList={urlListV1}
+              isAlreadyShorten={urlListV1.length !== 0}
+            />
+          )}
           {filterUrlList.length > 0 && (
             <Pagination
               totalCount={filterUrlList.length}

@@ -15,6 +15,7 @@ import {
 } from '@/libs/api/auth';
 import meService from '@/libs/api/me';
 import storage from '@/libs/local-storage';
+import { useUserProfileStore } from '@/store/me';
 import User from '@/types/user-type';
 
 type AuthContextProps = {
@@ -31,14 +32,19 @@ const AuthContext = createContext({} as AuthContextProps);
 export function AuthContextProvider({ children }: { children: ReactNode }) {
   const [meProfile, setMeProfile] = useState<User | null>(null);
   const [isAuthStatusReady, setIsAuthStatusReady] = useState(false);
+  const { setCurOrganizationId } = useUserProfileStore();
 
   const getMeProfile = useCallback(async () => {
     try {
       const profile = await meService.getMe();
+      const organizations = await meService.getOrganization();
 
       if (profile) {
         setMeProfile(profile);
         storage.setItem('loggedIn', true);
+        console.log(organizations);
+        if (organizations && organizations.length > 0)
+          setCurOrganizationId(organizations[0]._id);
       } else {
         setMeProfile(null);
         storage.removeItem('token');

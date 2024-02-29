@@ -10,7 +10,19 @@ const shorten = async (payload: Url) => {
   }
 };
 
-const urlService = { shorten };
+const getUrlListByOrganization = async (organizationId: string) => {
+  try {
+    return (
+      await api.get(
+        `/v1/api/organizations/${organizationId}/urls?page=1&limit=7&sort=clicks&order=desc`,
+      )
+    ).data.payload;
+  } catch (e: any) {
+    console.log(e.response.data.message);
+  }
+};
+
+const urlService = { shorten, getUrlListByOrganization };
 
 export default urlService;
 
