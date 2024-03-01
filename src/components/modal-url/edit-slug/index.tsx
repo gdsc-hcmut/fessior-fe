@@ -1,10 +1,12 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { categoryListData } from '@/services/url.service';
+import queryClient from '@/querier/client';
+import urlService, { categoryListData } from '@/services/url.service';
 import { useUrlModalStore } from '@/store/url-modal';
 
 export default function EditSlugModal() {
@@ -15,9 +17,9 @@ export default function EditSlugModal() {
   const [categoryList, setCategoryList] = useState<string[]>([
     ...categoryListData,
   ]);
-  const [chosenCategories, setChosenCategories] = useState<string[]>([
-    ...editedUrl.category,
-  ]);
+  const [chosenCategories, setChosenCategories] = useState<string[]>(
+    editedUrl.category ? [...editedUrl.category] : [],
+  );
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
@@ -56,15 +58,27 @@ export default function EditSlugModal() {
     return regexExp.test(slug);
   };
 
-  const onEdit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isValidSlug(slug)) {
-      setErrorMsg('Invalid slug');
-      return;
+  const handleUrlEdit = async () => {
+    try {
+      await urlService.eidtSlug({
+        urlId: editedUrl._id,
+        editPayload: {
+          slug,
+        },
+      });
+      toast.success('Link updated successfully');
+      setShowEditModal(false);
+      queryClient.invalidateQueries({
+        queryKey: ['myUrls'],
+      });
+    } catch (error) {
+      toast.error('Failed to update link');
     }
-    toast.success('Link updated successfully');
-    setShowEditModal(false);
   };
+
+  const onEdit = useMutation({
+    mutationFn: handleUrlEdit,
+  });
 
   useEffect(() => {
     function handleEscapeKey(event: KeyboardEvent) {
@@ -183,7 +197,14 @@ export default function EditSlugModal() {
             </button>
             <button
               type='submit'
-              onClick={onEdit}
+              onClick={(e) => {
+                e.preventDefault();
+                if (!isValidSlug(slug)) {
+                  setErrorMsg('Invalid slug');
+                  return;
+                }
+                onEdit.mutate();
+              }}
               className='rounded-lg bg-primary px-3 py-2 font-semibold text-white md:px-4'
             >
               Save

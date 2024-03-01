@@ -73,10 +73,37 @@ function URLsPage(props: URLsPageProps) {
     );
   };
 
+  const generateSortOption = () => {
+    if (currentSortOption === SortOption.LEAST_CLICKED) {
+      return {
+        sortBy: 'clicks',
+        order: 'asc',
+      };
+    } else if (currentSortOption === SortOption.MOST_CLICKED) {
+      return {
+        sortBy: 'clicks',
+        order: 'desc',
+      };
+    } else if (currentSortOption === SortOption.LASTEST) {
+      return {
+        sortBy: 'time',
+        order: 'desc',
+      };
+    } else {
+      return {
+        sortBy: 'time',
+        order: 'asc',
+      };
+    }
+  };
+
   const fetchUrlList = async () => {
+    const inputSortOption = generateSortOption();
     const data = await urlService.getUrlListByOrganization({
       organizationId: curOrganizationId,
       page,
+      sortBy: inputSortOption.sortBy,
+      order: inputSortOption.order,
     });
     const newData = data.urls.map((url: MyUrlv1) => {
       return {
@@ -90,7 +117,7 @@ function URLsPage(props: URLsPageProps) {
   };
 
   const { isLoading } = useQuery({
-    queryKey: ['myUrls', curOrganizationId, page],
+    queryKey: ['myUrls', curOrganizationId, page, currentSortOption],
     queryFn: fetchUrlList,
     enabled: !!curOrganizationId,
   });

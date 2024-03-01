@@ -35,6 +35,15 @@ export type MyUrlv1 = {
 export type getUrlListOption = {
   organizationId: string;
   page: number;
+  sortBy: string;
+  order: string;
+};
+
+export type deletUrlOption = {
+  urlId: string;
+  editPayload: {
+    slug: string;
+  };
 };
 
 export default Url;

@@ -1,4 +1,4 @@
-import Url, { MyUrl, getUrlListOption } from '@/types/url-type';
+import Url, { MyUrl, deletUrlOption, getUrlListOption } from '@/types/url-type';
 
 import api from './api';
 
@@ -14,8 +14,18 @@ const getUrlListByOrganization = async (payload: getUrlListOption) => {
   try {
     return (
       await api.get(
-        `/v1/api/organizations/${payload.organizationId}/urls?page=${payload.page}&limit=7&sort=time&order=desc`,
+        `/v1/api/organizations/${payload.organizationId}/urls?page=${payload.page}&limit=7&sort=${payload.sortBy}&order=${payload.order}`,
       )
+    ).data.payload;
+  } catch (e: any) {
+    console.log(e.response.data.message);
+  }
+};
+
+const eidtSlug = async (payload: deletUrlOption) => {
+  try {
+    return (
+      await api.patch(`/v1/api/urls/${payload.urlId}/slug`, payload.editPayload)
     ).data.payload;
   } catch (e: any) {
     console.log(e.response.data.message);
@@ -30,7 +40,12 @@ const deleteUrlById = async (urlId: string) => {
   }
 };
 
-const urlService = { shorten, getUrlListByOrganization, deleteUrlById };
+const urlService = {
+  shorten,
+  getUrlListByOrganization,
+  eidtSlug,
+  deleteUrlById,
+};
 
 export default urlService;
 
