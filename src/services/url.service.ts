@@ -1,4 +1,4 @@
-import Url, { MyUrl } from '@/types/url-type';
+import Url, { MyUrl, getUrlListOption } from '@/types/url-type';
 
 import api from './api';
 
@@ -10,11 +10,11 @@ const shorten = async (payload: Url) => {
   }
 };
 
-const getUrlListByOrganization = async (organizationId: string) => {
+const getUrlListByOrganization = async (payload: getUrlListOption) => {
   try {
     return (
       await api.get(
-        `/v1/api/organizations/${organizationId}/urls?page=1&limit=7&sort=clicks&order=desc`,
+        `/v1/api/organizations/${payload.organizationId}/urls?page=${payload.page}&limit=7&sort=time&order=desc`,
       )
     ).data.payload;
   } catch (e: any) {

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 
 import '../css/index.css';
+import Loading from '@/components/Loading';
 import CategoryModal from '@/components/modal-url/category-modal';
 import DeleteLinkModal from '@/components/modal-url/delete-modal';
 import EditSlugModal from '@/components/modal-url/edit-slug';
@@ -40,6 +41,7 @@ function URLsPage(props: URLsPageProps) {
     setCurrentSortOption(option);
   };
   const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const [urlList, setUrlList] = useState<MyUrl[]>([...myUrlListData]);
   const [urlListV1, setUrlListV1] = useState<MyUrlv1[]>([]);
@@ -72,13 +74,23 @@ function URLsPage(props: URLsPageProps) {
   };
 
   const fetchUrlList = async () => {
-    const data = await urlService.getUrlListByOrganization(curOrganizationId);
-    setUrlListV1(data.urls);
+    const data = await urlService.getUrlListByOrganization({
+      organizationId: curOrganizationId,
+      page,
+    });
+    const newData = data.urls.map((url: MyUrlv1) => {
+      return {
+        ...url,
+        category: [],
+      };
+    });
+    setTotalPages(data.totalPages);
+    setUrlListV1(newData);
     return data;
   };
 
   const { isLoading } = useQuery({
-    queryKey: ['myUrls', curOrganizationId],
+    queryKey: ['myUrls', curOrganizationId, page],
     queryFn: fetchUrlList,
     enabled: !!curOrganizationId,
   });
@@ -334,17 +346,18 @@ function URLsPage(props: URLsPageProps) {
               </button>
             </div>
           </div>
-          {!isLoading && (
+          {!isLoading ? (
             <MyUrlList
               myUrlList={urlListV1}
               isAlreadyShorten={urlListV1.length !== 0}
             />
+          ) : (
+            <Loading />
           )}
-          {filterUrlList.length > 0 && (
+          {filterUrlList.length > 0 && !isLoading && (
             <Pagination
-              totalCount={filterUrlList.length}
               currentPage={page}
-              pageSize={7}
+              totalPages={totalPages}
               onPageChange={handlePageChange}
             />
           )}

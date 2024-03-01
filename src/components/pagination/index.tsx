@@ -2,33 +2,22 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 type Props = {
-  totalCount: number;
-  pageSize?: number;
   currentPage: number;
+  totalPages: number;
   onPageChange: (currentPage: number) => void;
 };
 
-const Pagination = ({
-  totalCount,
-  pageSize = 10,
-  currentPage,
-  onPageChange,
-}: Props) => {
+const Pagination = ({ currentPage, totalPages, onPageChange }: Props) => {
   const [inputPage, setInputPage] = useState<number>(currentPage);
-  const totalPages = Math.ceil(totalCount / pageSize);
 
-  const generateDisplayPageRange = (
-    totalCount: number,
-    pageSize: number,
-    currentPage: number,
-  ) => {
+  const generateDisplayPageRange = (currentPage: number) => {
     const pageRange = [];
-    if (currentPage == 1) {
-      for (let i = currentPage; i <= totalPages && i <= currentPage + 5; i++) {
+    if (currentPage == 1 || currentPage == 2) {
+      for (let i = 1; i <= totalPages && pageRange.length < 5; i++) {
         pageRange.push(i);
       }
-    } else if (currentPage == totalPages) {
-      let startValue = currentPage - 5 > 0 ? currentPage - 5 : 1;
+    } else if (currentPage == totalPages || currentPage == totalPages - 1) {
+      let startValue = totalPages - 5 > 0 ? totalPages - 5 : 1;
       for (let i = startValue; i <= totalPages; i++) {
         pageRange.push(i);
       }
@@ -44,11 +33,7 @@ const Pagination = ({
     return pageRange;
   };
 
-  const pageRange: number[] = generateDisplayPageRange(
-    totalCount,
-    pageSize,
-    currentPage,
-  );
+  const pageRange: number[] = generateDisplayPageRange(currentPage);
 
   const submitPageChanage = (pageNumber: number) => {
     setInputPage(pageNumber);

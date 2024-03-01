@@ -32,4 +32,9 @@ export type MyUrlv1 = {
   category?: string[];
 };
 
+export type getUrlListOption = {
+  organizationId: string;
+  page: number;
+};
+
 export default Url;

@@ -28,6 +28,13 @@ function UrlItemXL(props: UrlItemProps) {
   const [isDivFull, setIsDivFull] = useState(false);
   const [width, setWidth] = useState<number | null>(0);
 
+  const createdAtObject = new Date(url.createdAt);
+  const formattedDate = createdAtObject.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+
   useLayoutEffect(() => {
     function updateSize() {
       if (ref.current) {
@@ -55,38 +62,39 @@ function UrlItemXL(props: UrlItemProps) {
     return elementWidth;
   };
 
-  // useEffect(() => {
-  //   const renderBoxes = () => {
-  //     let currentWidth = 0;
-  //     const newCategories = [];
-  //     let newHiddenCategories: string[] = [];
+  useEffect(() => {
+    const renderBoxes = () => {
+      let currentWidth = 0;
+      const curCategories = url.category ? [...url.category] : [];
+      const newCategories = [];
+      let newHiddenCategories: string[] = [];
 
-  //     for (let i = 0; i < url.category.length; i++) {
-  //       const boxWidth = calculateBoxWidth(url.category[i]);
-  //       if (
-  //         currentWidth + boxWidth <=
-  //         (width && width != 0
-  //           ? width * 0.86
-  //           : ref.current
-  //           ? ref.current.clientWidth * 0.86
-  //           : 0)
-  //       ) {
-  //         newCategories.push(url.category[i]);
-  //         currentWidth += boxWidth;
-  //       } else {
-  //         setIsDivFull(true);
-  //         newHiddenCategories = url.category.slice(i);
-  //         break;
-  //       }
-  //     }
+      for (let i = 0; i < curCategories.length; i++) {
+        const boxWidth = calculateBoxWidth(curCategories[i]);
+        if (
+          currentWidth + boxWidth <=
+          (width && width != 0
+            ? width * 0.86
+            : ref.current
+            ? ref.current.clientWidth * 0.86
+            : 0)
+        ) {
+          newCategories.push(curCategories[i]);
+          currentWidth += boxWidth;
+        } else {
+          setIsDivFull(true);
+          newHiddenCategories = curCategories.slice(i);
+          break;
+        }
+      }
 
-  //     setCategories(newCategories);
-  //     setHiddenCategories(newHiddenCategories);
-  //   };
+      setCategories(newCategories);
+      setHiddenCategories(newHiddenCategories);
+    };
 
-  //   setIsDivFull(false);
-  //   renderBoxes();
-  // }, [width, url.category, isDivFull]);
+    setIsDivFull(false);
+    renderBoxes();
+  }, [width, url.category, isDivFull]);
 
   return (
     <div className='relative flex flex-shrink-0 items-center rounded-lg bg-white px-5 py-3 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] 2xl:px-7 2xl:py-4 3xl:px-10 3xl:py-5'>
@@ -105,15 +113,27 @@ function UrlItemXL(props: UrlItemProps) {
         {url.clickCount} {url.clickCount > 0 ? 'clicks' : 'click'}
       </p>
       <p className='mr-5 flex flex-[1] text-[14px] font-semibold 2xl:text-base'>
-        {url.createdAt}
+        {formattedDate}
       </p>
       <div
         ref={ref}
         className='mr-5 flex flex-[1.8] space-x-1 2xl:space-x-2 3xl:flex-[2.2]'
       >
-        {categories.map((category) => (
+        {categories.length === 0 && (
+          <div className='spcae-x-1 flex items-center'>
+            <Image
+              src='/icons/url/tray.svg'
+              alt='No categories'
+              width={0}
+              height={0}
+              className='h-5 w-auto 2xl:h-6'
+            />
+            <p className='text-[14px] 2xl:text-base'>No chosen categories</p>
+          </div>
+        )}
+        {categories.map((category, idx) => (
           <div
-            key={category}
+            key={idx}
             className='rounded-lg bg-primary px-2 py-1 text-[14px] text-white 2xl:text-base 3xl:px-3 3xl:py-2'
           >
             {category}
@@ -170,6 +190,13 @@ function UrlItemMD(props: UrlItemProps) {
   const [isDivFull, setIsDivFull] = useState(false);
   const [width, setWidth] = useState<number | null>(0);
 
+  const createdAtObject = new Date(url.createdAt);
+  const formattedDate = createdAtObject.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+
   useLayoutEffect(() => {
     function updateSize() {
       if (mobile_ref.current) {
@@ -197,35 +224,36 @@ function UrlItemMD(props: UrlItemProps) {
     return elementWidth;
   };
 
-  // useEffect(() => {
-  //   const renderBoxes = () => {
-  //     let currentWidth = 0;
-  //     const newCategories = [];
+  useEffect(() => {
+    const renderBoxes = () => {
+      let currentWidth = 0;
+      const curCategories = url.category ? [...url.category] : [];
+      const newCategories = [];
 
-  //     for (let i = 0; i < url.category.length; i++) {
-  //       const boxWidth = calculateBoxWidth(url.category[i]);
-  //       if (
-  //         currentWidth + boxWidth <=
-  //         (width && width != 0
-  //           ? width * 0.8
-  //           : mobile_ref.current
-  //           ? mobile_ref.current.clientWidth * 0.8
-  //           : 0)
-  //       ) {
-  //         newCategories.push(url.category[i]);
-  //         currentWidth += boxWidth;
-  //       } else {
-  //         setIsDivFull(true);
-  //         break;
-  //       }
-  //     }
+      for (let i = 0; i < curCategories.length; i++) {
+        const boxWidth = calculateBoxWidth(curCategories[i]);
+        if (
+          currentWidth + boxWidth <=
+          (width && width != 0
+            ? width * 0.8
+            : mobile_ref.current
+            ? mobile_ref.current.clientWidth * 0.8
+            : 0)
+        ) {
+          newCategories.push(curCategories[i]);
+          currentWidth += boxWidth;
+        } else {
+          setIsDivFull(true);
+          break;
+        }
+      }
 
-  //     setCategories(newCategories);
-  //   };
+      setCategories(newCategories);
+    };
 
-  //   setIsDivFull(false);
-  //   renderBoxes();
-  // }, [width, url.category, isDivFull]);
+    setIsDivFull(false);
+    renderBoxes();
+  }, [width, url.category, isDivFull]);
 
   return (
     <div className='relative flex w-full justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
@@ -262,7 +290,7 @@ function UrlItemMD(props: UrlItemProps) {
               height={0}
               className='h-5 w-auto'
             />
-            <p className='font-semibold'>Created at: {url.createdAt}</p>
+            <p className='font-semibold'>Created at: {formattedDate}</p>
           </div>
         </div>
         <div className='mt-3 flex items-center space-x-1'>
@@ -278,9 +306,21 @@ function UrlItemMD(props: UrlItemProps) {
             ref={mobile_ref}
             className='ml-3 flex w-full items-center space-x-1'
           >
-            {categories.map((category) => (
+            {categories.length === 0 && (
+              <div className='spcae-x-1 flex items-center'>
+                <Image
+                  src='/icons/url/tray.svg'
+                  alt='No categories'
+                  width={0}
+                  height={0}
+                  className='h-6 w-auto'
+                />
+                <p className='font-medium'>No chosen categories</p>
+              </div>
+            )}
+            {categories.map((category, idx) => (
               <div
-                key={category}
+                key={idx}
                 className='rounded-lg bg-primary px-2 py-1 text-[12px] text-white'
               >
                 {category}
