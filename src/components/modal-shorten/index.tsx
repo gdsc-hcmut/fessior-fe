@@ -6,12 +6,12 @@ import Icon from '@/types/icon-enum';
 import Url from '@/types/url-type';
 import { getIcon } from '@/utils/common';
 
-type ModalProps = {
+type ModalShortenProps = {
   onDismiss: () => void;
   shortenedUrl: Url;
 };
 
-export default function ModalShorten(props: ModalProps) {
+export default function ModalShorten(props: ModalShortenProps) {
   const { shortenedUrl, onDismiss } = props;
   const urlShown = `https://${shortenedUrl.domain}/${shortenedUrl.slug}`;
   return (
