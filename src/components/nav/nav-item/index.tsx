@@ -94,6 +94,8 @@ export default function NavItem(props: NavItem) {
     showingChildren ? Icon.ACTIVE : Icon.INACTIVE,
   );
 
+  if (!loaded) return;
+
   if (screenSize === ScreenSize.LG) {
     return (
       !isLogout && (
