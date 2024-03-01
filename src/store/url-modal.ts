@@ -13,6 +13,8 @@ type UrlModalStore = {
   setShowCategoryModal: (value: boolean) => void;
   editedUrl: MyUrl;
   setEditedUrl: (url: MyUrl) => void;
+  deleteUrl: string;
+  setDeleteUrl: (urlId: string) => void;
 };
 
 export const useUrlModalStore = create<UrlModalStore>((set) => ({
@@ -30,6 +32,7 @@ export const useUrlModalStore = create<UrlModalStore>((set) => ({
     createdAt: '',
     category: [],
   },
+  deleteUrl: '',
   setShowEditModal: (value) =>
     set((state) => ({
       isShow: {
@@ -54,5 +57,9 @@ export const useUrlModalStore = create<UrlModalStore>((set) => ({
   setEditedUrl: (url) =>
     set((state) => ({
       editedUrl: url,
+    })),
+  setDeleteUrl: (urlId) =>
+    set((state) => ({
+      deleteUrl: urlId,
     })),
 }));

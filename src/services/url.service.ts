@@ -22,7 +22,15 @@ const getUrlListByOrganization = async (payload: getUrlListOption) => {
   }
 };
 
-const urlService = { shorten, getUrlListByOrganization };
+const deleteUrlById = async (urlId: string) => {
+  try {
+    return (await api.delete(`/v1/api/urls/${urlId}`)).data.payload;
+  } catch (e: any) {
+    console.log(e.response.data.message);
+  }
+};
+
+const urlService = { shorten, getUrlListByOrganization, deleteUrlById };
 
 export default urlService;
 

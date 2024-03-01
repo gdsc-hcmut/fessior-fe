@@ -1,19 +1,33 @@
 'use client';
 
+import { QueryClient, useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
+import queryClient from '@/querier/client';
+import urlService from '@/services/url.service';
 import { useUrlModalStore } from '@/store/url-modal';
 
 export default function DeleteLinkModal() {
-  const { setShowDeleteModal } = useUrlModalStore();
+  const { setShowDeleteModal, deleteUrl } = useUrlModalStore();
 
-  const onDelete = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success('Link deleted successfully');
-    setShowDeleteModal(false);
+  const handleUrlDelete = async () => {
+    try {
+      await urlService.deleteUrlById(deleteUrl);
+      toast.success('Link deleted successfully');
+      setShowDeleteModal(false);
+      queryClient.invalidateQueries({
+        queryKey: ['myUrls'],
+      });
+    } catch (error) {
+      toast.error('Failed to delete link');
+    }
   };
+
+  const onDelete = useMutation({
+    mutationFn: handleUrlDelete,
+  });
 
   useEffect(() => {
     function handleEscapeKey(event: KeyboardEvent) {
@@ -52,7 +66,10 @@ export default function DeleteLinkModal() {
               Cancel
             </button>
             <button
-              onClick={onDelete}
+              onClick={(e) => {
+                e.preventDefault();
+                onDelete.mutate();
+              }}
               type='submit'
               className='rounded-lg bg-red px-2 py-1 font-semibold text-white md:px-3 md:py-2'
             >

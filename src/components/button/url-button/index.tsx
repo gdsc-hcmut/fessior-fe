@@ -13,7 +13,7 @@ export default function UrlButton(props: UrlButtonProps) {
   const [copied, setCopied] = useState(false);
   const { copyContent, editedUrl } = props;
 
-  const { setShowEditModal, setShowDeleteModal, setEditedUrl } =
+  const { setShowEditModal, setShowDeleteModal, setEditedUrl, setDeleteUrl } =
     useUrlModalStore();
 
   const onCopy = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -60,7 +60,10 @@ export default function UrlButton(props: UrlButtonProps) {
         />
       </button>
       <button
-        onClick={() => setShowDeleteModal(true)}
+        onClick={() => {
+          setShowDeleteModal(true);
+          setDeleteUrl(editedUrl._id);
+        }}
         className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'
       >
         <Image

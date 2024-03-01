@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 type Props = {
   currentPage: number;
@@ -10,28 +10,31 @@ type Props = {
 const Pagination = ({ currentPage, totalPages, onPageChange }: Props) => {
   const [inputPage, setInputPage] = useState<number>(currentPage);
 
-  const generateDisplayPageRange = (currentPage: number) => {
-    const pageRange = [];
-    if (currentPage == 1 || currentPage == 2) {
-      for (let i = 1; i <= totalPages && pageRange.length < 5; i++) {
-        pageRange.push(i);
+  const generateDisplayPageRange = useCallback(
+    (currentPage: number) => {
+      const pageRange = [];
+      if (currentPage == 1 || currentPage == 2) {
+        for (let i = 1; i <= totalPages && pageRange.length < 5; i++) {
+          pageRange.push(i);
+        }
+      } else if (currentPage == totalPages || currentPage == totalPages - 1) {
+        let startValue = totalPages - 5 > 0 ? totalPages - 5 : 1;
+        for (let i = startValue; i <= totalPages; i++) {
+          pageRange.push(i);
+        }
+      } else {
+        for (
+          let i = currentPage - 2 > 0 ? currentPage - 2 : 1;
+          i <= currentPage + 2 && i <= totalPages;
+          i++
+        ) {
+          pageRange.push(i);
+        }
       }
-    } else if (currentPage == totalPages || currentPage == totalPages - 1) {
-      let startValue = totalPages - 5 > 0 ? totalPages - 5 : 1;
-      for (let i = startValue; i <= totalPages; i++) {
-        pageRange.push(i);
-      }
-    } else {
-      for (
-        let i = currentPage - 2 > 0 ? currentPage - 2 : 1;
-        i <= currentPage + 2 && i <= totalPages;
-        i++
-      ) {
-        pageRange.push(i);
-      }
-    }
-    return pageRange;
-  };
+      return pageRange;
+    },
+    [currentPage, totalPages],
+  );
 
   const pageRange: number[] = generateDisplayPageRange(currentPage);
 
