@@ -4,9 +4,13 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { use, useEffect, useRef, useState } from 'react';
 
-import { categoryListData, domainListData } from '@/services/url.service';
 import { useFilterOptionStore } from '@/store/filter-option';
 import { useUrlModalStore } from '@/store/url-modal';
+
+type CategoryModalProps = {
+  categoryListData: string[];
+  domainListData: string[];
+};
 
 type FilterSelectionProps = {
   isDomain: boolean;
@@ -79,7 +83,8 @@ function FilterSelection(props: FilterSelectionProps) {
   );
 }
 
-export default function CategoryModal() {
+export default function CategoryModal(props: CategoryModalProps) {
+  const { categoryListData, domainListData } = props;
   const { filterDomain, filterCategory, setFilterCategory, setFilterDomain } =
     useFilterOptionStore();
   const { setShowCategoryModal } = useUrlModalStore();

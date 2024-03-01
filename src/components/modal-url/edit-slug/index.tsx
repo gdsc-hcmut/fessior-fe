@@ -6,10 +6,15 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import queryClient from '@/querier/client';
-import urlService, { categoryListData } from '@/services/url.service';
+import urlService from '@/services/url.service';
 import { useUrlModalStore } from '@/store/url-modal';
 
-export default function EditSlugModal() {
+type EditSlugModalProps = {
+  categoryListData: string[];
+};
+
+export default function EditSlugModal(props: EditSlugModalProps) {
+  const { categoryListData } = props;
   const { setShowEditModal, editedUrl } = useUrlModalStore();
 
   const [slug, setSlug] = useState(editedUrl.slug);

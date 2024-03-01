@@ -1,6 +1,6 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import { useQueries, useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
@@ -14,10 +14,13 @@ import MyUrlList from '@/components/my-url-list';
 import Pagination from '@/components/pagination';
 import Sidebar from '@/components/sidebar';
 import UrlSelectionList from '@/components/url-selection-list';
+import meService from '@/services/me.service';
 import urlService, { myUrlListData } from '@/services/url.service';
 import { useFilterOptionStore } from '@/store/filter-option';
 import { useUserProfileStore } from '@/store/me';
 import { useUrlModalStore } from '@/store/url-modal';
+import Category from '@/types/category-type';
+import Organization from '@/types/organization-type';
 import SortOption from '@/types/sort-option-enum';
 import { MyUrl, MyUrlv1 } from '@/types/url-type';
 
@@ -43,12 +46,8 @@ function URLsPage(props: URLsPageProps) {
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
-  const [urlList, setUrlList] = useState<MyUrl[]>([...myUrlListData]);
   const [urlListV1, setUrlListV1] = useState<MyUrlv1[]>([]);
-  const [filterUrlList, setFilterUrlList] = useState<MyUrl[]>([...urlList]);
-  const [displayUrlList, setDisplayUrlList] = useState<MyUrl[]>(
-    filterUrlList.slice((page - 1) * 7, 7 * page),
-  );
+  const [displayUrlList, setDisplayUrlList] = useState<MyUrlv1[]>([]);
 
   const { isShow, setShowCategoryModal } = useUrlModalStore();
   const { filterCategory, filterDomain, setFilterDomain, setFilterCategory } =
@@ -57,20 +56,16 @@ function URLsPage(props: URLsPageProps) {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
-    const newfilterUrlList = myUrlListData.filter(
+    const newfilterUrlList = urlListV1.filter(
       (url) =>
         `https://${url.domain}/${url.slug}`.includes(searchText) ||
         url.originalUrl.includes(searchText),
     );
-    setFilterUrlList(newfilterUrlList);
-    setDisplayUrlList(newfilterUrlList.slice(0, 7));
+    setDisplayUrlList(newfilterUrlList);
   };
 
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
-    setDisplayUrlList(
-      filterUrlList.slice((pageNumber - 1) * 7, 7 * pageNumber),
-    );
   };
 
   const generateSortOption = () => {
@@ -113,15 +108,47 @@ function URLsPage(props: URLsPageProps) {
     });
     setTotalPages(data.totalPages);
     setUrlListV1(newData);
+    setDisplayUrlList(newData);
     return data;
   };
 
-  const { isLoading } = useQuery({
-    queryKey: ['myUrls', curOrganizationId, page, currentSortOption],
-    queryFn: fetchUrlList,
-    enabled: !!curOrganizationId,
+  const fetchDomainList = async () => {
+    const data = await meService.getOrganization();
+    const newData = data.filter(
+      (organization: Organization) => organization._id === curOrganizationId,
+    );
+    return newData[0].domains;
+  };
+
+  const fetchCategoryList = async () => {
+    const data = await meService.getCategoryByOrganization(curOrganizationId);
+    const newData = data.categories.map((category: Category) => category.name);
+    return newData;
+  };
+
+  const [urls, domains, categories] = useQueries({
+    queries: [
+      {
+        queryKey: ['myUrls', curOrganizationId, page, currentSortOption],
+        queryFn: fetchUrlList,
+        enabled: !!curOrganizationId,
+      },
+      {
+        queryKey: ['myDomains', curOrganizationId],
+        queryFn: fetchDomainList,
+        enabled: !!curOrganizationId,
+      },
+      {
+        queryKey: ['myCategories', curOrganizationId],
+        queryFn: fetchCategoryList,
+        enabled: !!curOrganizationId,
+      },
+    ],
   });
-  console.log('data', urlListV1);
+
+  const { data: domainList } = domains;
+  const { data: categoryList } = categories;
+  const { isLoading } = urls;
 
   return (
     <div
@@ -133,9 +160,14 @@ function URLsPage(props: URLsPageProps) {
         isCollapsed={isCollapsed}
         hideSidebar={() => setIsCollapsed(true)}
       />
-      {isShow.edit && <EditSlugModal />}
+      {isShow.edit && <EditSlugModal categoryListData={categoryList} />}
       {isShow.delete && <DeleteLinkModal />}
-      {isShow.category && <CategoryModal />}
+      {isShow.category && (
+        <CategoryModal
+          categoryListData={categoryList}
+          domainListData={domainList}
+        />
+      )}
       <div className='pt-[71.6px] lg:pl-[24vw] xl:pl-[18vw] xl:pt-[85.6px] 2xl:pl-[17vw] 3xl:pl-[16vw]'>
         <div className='relative px-5 pt-10 md:px-10 md:pt-[48px] xl:pt-10 2xl:px-[60px] 2xl:pt-[60px] 3xl:px-[80px]'>
           <div className='flex items-end justify-between'>
@@ -356,7 +388,7 @@ function URLsPage(props: URLsPageProps) {
             </div>
             <div className='mt-4 flex h-[42px] items-center'>
               <p className='whitespace-nowrap font-semibold text-primary'>
-                {filterUrlList.length} Results
+                22 Results
               </p>
               <div className='hidden xl:flex'>
                 <UrlSelectionList isDomain />
@@ -375,13 +407,13 @@ function URLsPage(props: URLsPageProps) {
           </div>
           {!isLoading ? (
             <MyUrlList
-              myUrlList={urlListV1}
+              myUrlList={displayUrlList}
               isAlreadyShorten={urlListV1.length !== 0}
             />
           ) : (
             <Loading />
           )}
-          {filterUrlList.length > 0 && !isLoading && (
+          {totalPages > 0 && !isLoading && (
             <Pagination
               currentPage={page}
               totalPages={totalPages}
