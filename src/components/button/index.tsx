@@ -9,7 +9,8 @@ type ButtonProps = {
   image?: string;
   imageOnHover?: string;
   imageAlt?: string;
-  imageSize?: number;
+  imageSizeWidth?: number;
+  imageSizeHeight?: number;
   onClick: () => void;
   className?: string;
   width?: 'fit' | 'full';
@@ -25,7 +26,8 @@ export default function Button(props: ButtonProps) {
     image,
     imageOnHover,
     imageAlt,
-    imageSize,
+    imageSizeWidth,
+    imageSizeHeight,
     className,
     width = 'fit',
     type = 'positive',
@@ -36,8 +38,8 @@ export default function Button(props: ButtonProps) {
     disabled
       ? 'bg-royal-300 text-white'
       : type === 'positive'
-      ? 'bg-primary text-white'
-      : 'border-[1px] border-primary bg-white text-primary hover:bg-primary hover:text-white',
+        ? 'bg-primary text-white'
+        : 'border-[1px] border-primary bg-white text-primary hover:bg-primary hover:text-white',
     'rounded-[8px] px-[16px] py-[8px] transition-all',
     className,
   );
@@ -49,13 +51,17 @@ export default function Button(props: ButtonProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {image && imageAlt && imageSize && imageOnHover ? (
+      {image &&
+      imageAlt &&
+      imageSizeWidth &&
+      imageSizeHeight &&
+      imageOnHover ? (
         <div className='transition-all'>
           <Image
             src={isHovered ? imageOnHover : image}
             alt={imageAlt}
-            width={imageSize}
-            height={imageSize}
+            width={imageSizeWidth}
+            height={imageSizeHeight}
             className='pr-2'
           />
         </div>

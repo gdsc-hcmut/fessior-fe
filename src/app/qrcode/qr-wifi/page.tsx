@@ -21,7 +21,6 @@ import Organization from '@/types/organization-type';
 import ScreenSize from '@/types/screen-size-enum';
 import Url from '@/types/url-type';
 
-
 export default function CreateQRWifiScreen() {
   const router = useRouter();
   function navToWebsite() {
@@ -51,7 +50,8 @@ export default function CreateQRWifiScreen() {
               image='/icons/link-qr.svg'
               imageOnHover='/icons/link-qr-choosen.svg'
               imageAlt='icons'
-              imageSize={40}
+              imageSizeWidth={40}
+              imageSizeHeight={40}
               onClick={() => {
                 navToWebsite();
               }}
@@ -65,7 +65,8 @@ export default function CreateQRWifiScreen() {
               image='/icons/wifi-white.svg'
               imageOnHover='/icons/wifi-white.svg'
               imageAlt='icons'
-              imageSize={40}
+              imageSizeWidth={40}
+              imageSizeHeight={40}
               width='full'
               type='positive'
               className='ml-6 flex items-center justify-center'

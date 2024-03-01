@@ -101,7 +101,8 @@ export default function CreateQRURLScreen() {
               image='/icons/link-qr-choosen.svg'
               imageOnHover='/icons/link-qr-choosen.svg'
               imageAlt='icons'
-              imageSize={40}
+              imageSizeWidth={40}
+              imageSizeHeight={40}
               onClick={() => consoleLog}
               className='flex items-center justify-center'
               width='full'
@@ -113,7 +114,8 @@ export default function CreateQRURLScreen() {
               image='/icons/wifi.svg'
               imageOnHover='/icons/wifi-white.svg'
               imageAlt='icons'
-              imageSize={40}
+              imageSizeWidth={40}
+              imageSizeHeight={40}
               width='full'
               type='neutral'
               className='ml-6 flex items-center justify-center'
