@@ -15,7 +15,7 @@ import urlService from '@/services/url.service';
 import Organization from '@/types/organization-type';
 import Url from '@/types/url-type';
 
-export default function Shorten() {
+export default function QRGenerate() {
   return (
     <>
       <div className='relative flex flex-col items-center overflow-hidden leading-[1.2] text-primary'>

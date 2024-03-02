@@ -5,6 +5,15 @@ import Button from '../button';
 const QRNavBar = () => {
   return (
     <>
+      <div className='mb-[35px] flex w-[100%] flex-col items-center xl:hidden'>
+        <p className='mb-[4px] text-center text-[16px] font-bold md:text-[26px]'>
+          Customize QR
+        </p>
+        <div className='relative w-[94%] md:w-[92%]'>
+          <div className='absolute h-[4px] w-[100%] rounded-full bg-[#D9D9D9] md:h-[8px]'></div>
+          <div className='absolute h-[4px] w-[75%] rounded-full bg-[#0B2878] md:h-[8px]'></div>
+        </div>
+      </div>
       <div className='hidden xl:block'>
         <div className='flex flex-row items-center justify-start'>
           <svg

@@ -7,7 +7,7 @@ export default function MiniQR() {
     <div>
       <div className='xl:hidden'>
         <div
-          className={`fixed right-[8px] top-[112px] z-50 hidden h-[222px] w-[224px]  ${
+          className={`fixed right-[20px] top-[112px] z-50 hidden h-[222px] w-[224px]  ${
             zoomMiniQR ? 'flex-col md:flex' : 'hidden'
           }`}
         >
@@ -17,7 +17,6 @@ export default function MiniQR() {
               setZoomMiniQR(!zoomMiniQR);
             }}
           >
-            {' '}
             <svg
               width='12'
               height='12'
