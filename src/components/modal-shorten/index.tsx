@@ -9,12 +9,12 @@ import Icon from '@/types/icon-enum';
 import Url from '@/types/url-type';
 import { getIcon } from '@/utils/common';
 
-type ModalProps = {
+type ModalShortenProps = {
   onDismiss: () => void;
   shortenedUrl: Url;
 };
 
-export default function ShortenModal(props: ModalProps) {
+export default function ModalShorten(props: ModalShortenProps) {
   const { shortenedUrl, onDismiss } = props;
   const [isCopied, setIsCopied] = useState(false);
   const [isCopyButtonHovering, setIsCopyButtonHovering] = useState(false);
