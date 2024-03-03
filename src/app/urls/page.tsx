@@ -48,21 +48,12 @@ function URLsPage(props: URLsPageProps) {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const [urlListV1, setUrlListV1] = useState<MyUrlv1[]>([]);
   const [displayUrlList, setDisplayUrlList] = useState<MyUrlv1[]>([]);
+  const [searchText, setSearchText] = useState<string>('');
 
   const { isShow, setShowCategoryModal } = useUrlModalStore();
   const { filterCategory, filterDomain, setFilterDomain, setFilterCategory } =
     useFilterOptionStore();
   const { curOrganizationId } = useUserProfileStore();
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchText = e.target.value;
-    const newfilterUrlList = urlListV1.filter(
-      (url) =>
-        `https://${url.domain}/${url.slug}`.includes(searchText) ||
-        url.originalUrl.includes(searchText),
-    );
-    setDisplayUrlList(newfilterUrlList);
-  };
 
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
@@ -112,6 +103,27 @@ function URLsPage(props: URLsPageProps) {
     return data;
   };
 
+  const searchUrlList = async () => {
+    const inputSortOption = generateSortOption();
+    const data = await urlService.searchUrlListByOrganization({
+      organizationId: curOrganizationId,
+      page,
+      sortBy: inputSortOption.sortBy,
+      order: inputSortOption.order,
+      searchText,
+    });
+    const newData = data.urls.map((url: MyUrlv1) => {
+      return {
+        ...url,
+        category: [],
+      };
+    });
+    setTotalPages(data.totalPages);
+    setUrlListV1(newData);
+    setDisplayUrlList(newData);
+    return data;
+  };
+
   const fetchDomainList = async () => {
     const data = await meService.getOrganization();
     const newData = data.filter(
@@ -126,12 +138,17 @@ function URLsPage(props: URLsPageProps) {
     return newData;
   };
 
-  const [urls, domains, categories] = useQueries({
+  const [urls, searchUrls, domains, categories] = useQueries({
     queries: [
       {
         queryKey: ['myUrls', curOrganizationId, page, currentSortOption],
         queryFn: fetchUrlList,
         enabled: !!curOrganizationId,
+      },
+      {
+        queryKey: ['searchMyUrls', curOrganizationId],
+        queryFn: searchUrlList,
+        enabled: false,
       },
       {
         queryKey: ['myDomains', curOrganizationId],
@@ -149,6 +166,7 @@ function URLsPage(props: URLsPageProps) {
   const { data: domainList } = domains;
   const { data: categoryList } = categories;
   const { isLoading } = urls;
+  const { isLoading: searchLoading, refetch } = searchUrls;
 
   return (
     <div
@@ -223,22 +241,30 @@ function URLsPage(props: URLsPageProps) {
           </div>
           <div className='mt-8'>
             <div className='flex justify-between'>
-              <div className='flex w-[420px] items-center rounded-lg border-[0.5px] border-[#7E7E7E] py-2 pl-2 lg:w-[400px] xl:w-[30vw] xl:py-3 3xl:w-[25vw]'>
-                <Image
-                  src='/icons/url/search.svg'
-                  alt='Search icon'
-                  width={0}
-                  height={0}
-                  className='h-4 w-auto xl:h-5'
-                />
-                <div className='ml-2 mr-3 h-full w-[1px] bg-[#696969]/30' />
+              <form className='flex w-[420px] items-center justify-between rounded-lg border-[0.5px] border-[#7E7E7E] pl-3 lg:w-[400px] xl:w-[30vw] 3xl:w-[25vw]'>
                 <input
-                  className='w-full pr-3 text-primary outline-none'
+                  className='w-full py-2 pr-3 text-primary outline-none xl:py-3'
                   id='my-urls-search-bar'
                   placeholder='Search by slug or long URL'
-                  onChange={handleSearch}
+                  onChange={(e) => setSearchText(e.target.value)}
                 />
-              </div>
+                <button
+                  type='submit'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    refetch();
+                  }}
+                  className='flex h-full w-10 items-center justify-center rounded-e-lg bg-primary px-2 xl:w-[48px]'
+                >
+                  <Image
+                    src='/icons/url/search_white.svg'
+                    alt='Search icon'
+                    width={0}
+                    height={0}
+                    className='h-4 w-auto xl:h-5'
+                  />
+                </button>
+              </form>
               <div className='relative hidden items-center md:flex'>
                 <button
                   onClick={() => setIsSortCollapsed(!isSortCollapsed)}
@@ -405,7 +431,7 @@ function URLsPage(props: URLsPageProps) {
               </button>
             </div>
           </div>
-          {!isLoading ? (
+          {!isLoading && !searchLoading ? (
             <MyUrlList
               myUrlList={displayUrlList}
               isAlreadyShorten={urlListV1.length !== 0}
@@ -413,7 +439,7 @@ function URLsPage(props: URLsPageProps) {
           ) : (
             <Loading />
           )}
-          {totalPages > 0 && !isLoading && (
+          {totalPages > 0 && !isLoading && !searchLoading && (
             <Pagination
               currentPage={page}
               totalPages={totalPages}

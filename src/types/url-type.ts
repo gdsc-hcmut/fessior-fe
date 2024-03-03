@@ -17,6 +17,12 @@ export type MyUrl = {
   category: string[];
 };
 
+type ClickInfo = {
+  clickedAt: string;
+  original: string;
+  ip: string;
+};
+
 export type MyUrlv1 = {
   _id: string;
   originalUrl: string;
@@ -28,7 +34,8 @@ export type MyUrlv1 = {
   createdAt: string;
   updatedAt: string;
   isActive: boolean;
-  clickCount: number;
+  clickCount?: number;
+  totalClicks?: ClickInfo[];
   category?: string[];
 };
 
@@ -37,6 +44,7 @@ export type getUrlListOption = {
   page: number;
   sortBy: string;
   order: string;
+  searchText?: string;
 };
 
 export type deletUrlOption = {

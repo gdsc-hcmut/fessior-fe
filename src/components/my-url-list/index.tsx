@@ -110,7 +110,12 @@ function UrlItemXL(props: UrlItemProps) {
         </p>
       </div>
       <p className='mr-5 flex flex-[1] text-[14px] 2xl:text-base'>
-        {url.clickCount} {url.clickCount > 0 ? 'clicks' : 'click'}
+        {url.clickCount ? url.clickCount : url.totalClicks?.length || 0}{' '}
+        {url.clickCount
+          ? url.clickCount
+          : (url.totalClicks?.length || 0) > 0
+          ? 'clicks'
+          : 'click'}
       </p>
       <p className='mr-5 flex flex-[1] text-[14px] font-semibold 2xl:text-base'>
         {formattedDate}
@@ -280,7 +285,10 @@ function UrlItemMD(props: UrlItemProps) {
               height={0}
               className='h-5 w-auto'
             />
-            <p className='font-semibold'>Total clicks: {url.clickCount}</p>
+            <p className='font-semibold'>
+              Total clicks:{' '}
+              {url.clickCount ? url.clickCount : url.totalClicks?.length || 0}
+            </p>
           </div>
           <div className='flex items-center space-x-1'>
             <Image

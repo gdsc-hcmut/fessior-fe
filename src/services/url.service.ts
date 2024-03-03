@@ -22,6 +22,18 @@ const getUrlListByOrganization = async (payload: getUrlListOption) => {
   }
 };
 
+const searchUrlListByOrganization = async (payload: getUrlListOption) => {
+  try {
+    return (
+      await api.get(
+        `/v1/api/organizations/${payload.organizationId}/urls/search?page=${payload.page}&limit=7&q=${payload.searchText}&sort=${payload.sortBy}&order=${payload.order}`,
+      )
+    ).data.payload;
+  } catch (e: any) {
+    console.log(e.response.data.message);
+  }
+};
+
 const eidtSlug = async (payload: deletUrlOption) => {
   try {
     return (
@@ -43,6 +55,7 @@ const deleteUrlById = async (urlId: string) => {
 const urlService = {
   shorten,
   getUrlListByOrganization,
+  searchUrlListByOrganization,
   eidtSlug,
   deleteUrlById,
 };
