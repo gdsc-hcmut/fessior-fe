@@ -1,13 +1,15 @@
 'use client';
 
 import { clsx } from 'clsx';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
+import AuthModal from '@/components/auth/auth-modal';
 import Brand from '@/components/brand';
 import Nav from '@/components/nav';
 import useEventListener from '@/hooks/useEventListener';
 import useScreenSize from '@/hooks/useScreenSize';
+import AuthType from '@/types/auth-type-enum';
 import ScreenSize from '@/types/screen-size-enum';
 
 const TRANS_HEADER_PAGES = ['/'];
@@ -20,6 +22,7 @@ export default function Header() {
   const [scrollY, setScrollY] = useState(0);
   const { screenSize, loaded } = useScreenSize();
   const pathname = usePathname();
+  const authType = useSearchParams().get('auth');
 
   useEventListener('scroll', () => setScrollY(window.scrollY));
 
@@ -57,6 +60,7 @@ export default function Header() {
           setIsCollapsed={setIsCollapsed}
         />
       </div>
+      {authType && <AuthModal authType={authType as AuthType} />}
     </>
   );
 }
