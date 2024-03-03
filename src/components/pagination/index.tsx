@@ -58,7 +58,7 @@ const Pagination = ({
   if ((pageRange?.length || 0) <= 1) return null;
 
   return (
-    <ul className='relative z-[5] mt-10 flex items-center space-x-1 pb-[80px] md:pb-[54px]'>
+    <ul className='relative z-[5] mt-10 flex items-center space-x-2 pb-[80px] md:pb-[54px]'>
       <li className='flex h-fit w-fit items-center justify-center'>
         <button
           className={`rounded-full ${
@@ -166,8 +166,8 @@ const Pagination = ({
           <p className='text-[12px] font-semibold md:text-base'>Go to page</p>
           <input
             type='number'
-            className='h-7 w-8 rounded-lg border-[1px] border-primary px-2 py-1 font-semibold 2xl:h-8 2xl:w-10'
-            value={inputPage}
+            className='number-input h-7 w-8 rounded-lg border-[1px] border-primary px-2 py-1 font-semibold 2xl:h-8 2xl:w-10'
+            value={inputPage || 1}
             max={totalPages}
             min={1}
             onChange={(e) => setInputPage(Number(e.target.value))}

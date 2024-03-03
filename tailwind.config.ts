@@ -19,6 +19,15 @@ const config: Config = {
         green: '#0f9d58',
         'royal-300': '#6D7EAE',
       },
+      animation: {
+        fade: 'fadeIn .2s ease-in-out',
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+      },
     },
   },
   content: [
