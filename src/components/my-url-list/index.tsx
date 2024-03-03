@@ -332,7 +332,7 @@ function EmptyList(props: EmptyListProps) {
           Shorten
         </Link>
         <p className='text-[12px] text-black md:text-base xl:text-xl'>
-          an URL now to start manage your customized links
+          an URL now to start managing your customized links
         </p>
       </div>
     </div>
