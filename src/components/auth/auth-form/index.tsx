@@ -1,13 +1,12 @@
 import { useState } from 'react';
 
 import Button from '@/components/button';
+import Input from '@/components/input';
 import useAuthRouter from '@/hooks/useAuthRouter';
 import AuthFormField from '@/types/auth-form-field-type';
 import AuthType from '@/types/auth-type-enum';
 
 import PasswordRequirements from '../password-requirements';
-
-import TextInput from '@/components/text-input';
 
 type AuthFormProps = {
   initFields: AuthFormField[];
@@ -41,13 +40,13 @@ export default function AuthForm(props: AuthFormProps) {
       {initFields.map((field, index) => (
         <div key={field.label} className='mt-[4px]'>
           <h6 className='mb-[12px] font-[600] text-primary'>{field.label}</h6>
-          <TextInput
+          <Input
             className='mb-[4px] border-[1px] border-primary font-[500]'
             type={
               field.isPassword && !passwordVisible[index] ? 'password' : 'text'
             }
             placeholder=''
-            value={field.currentValue}
+            textValue={field.currentValue}
             onInput={(input) => {
               field.onChange?.(input);
             }}
