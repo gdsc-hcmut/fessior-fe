@@ -97,7 +97,6 @@ export default function HomeAvailableTools() {
     modules: [Autoplay, Controller],
     onSlideChange: () => setAvailableToolSelecting(infoSwiper?.activeIndex!),
     className: 'relative w-[100%]',
-    autoHeight: true,
     autoplay: { delay: 3000 },
   };
 
@@ -117,7 +116,7 @@ export default function HomeAvailableTools() {
   };
 
   return (
-    <div className='mb-[80px] flex w-[100%] flex-col self-center overflow-hidden xl:mb-[200px] xl:flex-row xl:items-stretch xl:px-[calc(160px-(1920px-100vw)/3)]'>
+    <div className='mb-[80px] flex w-[100%] flex-col self-center overflow-hidden xl:mt-[60px] xl:flex-row xl:items-stretch xl:px-[calc(160px-(1920px-100vw)/3)]'>
       {/* ----------LEFT----------- */}
       <div
         data-aos='fade-right'
