@@ -97,7 +97,6 @@ export default function HomeAvailableTools() {
     modules: [Autoplay, Controller],
     onSlideChange: () => setAvailableToolSelecting(infoSwiper?.activeIndex!),
     className: 'relative w-[100%]',
-    autoHeight: true,
     autoplay: { delay: 3000 },
   };
 
