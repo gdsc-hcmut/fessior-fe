@@ -1,18 +1,17 @@
-'use client';
-
 import { useSearchParams } from 'next/navigation';
 
-import AuthHeader from '@/components/auth/auth-header';
-import SignUpCommon from '@/components/auth/sign-up-common';
 import authHeaderContent from '@/libs/auth-header-content';
 import AuthType from '@/types/auth-type-enum';
 
-export default function SignUp() {
+import AuthModalHeading from '../auth-modal-heading';
+import SignUpCommon from '../sign-up-common';
+
+export default function SignUpModalContent() {
   const isDirectedFromLogin = !!useSearchParams().get('from_login');
 
   return (
-    <div className='flex h-screen flex-col'>
-      <AuthHeader
+    <>
+      <AuthModalHeading
         {...authHeaderContent[AuthType.SIGN_UP][0]}
         subtitle={
           isDirectedFromLogin
@@ -25,9 +24,7 @@ export default function SignUp() {
             : authHeaderContent[AuthType.SIGN_UP][0].sublinkText
         }
       />
-      <div className='flex flex-grow flex-col items-stretch px-[20px] py-[28px]'>
-        <SignUpCommon />
-      </div>
-    </div>
+      <SignUpCommon />
+    </>
   );
 }
