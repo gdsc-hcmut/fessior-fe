@@ -39,7 +39,7 @@ export const sidebarItems: SidebarItem[] = [
     name: 'MANAGEMENT',
     children: [
       {
-        text: 'Organiazation',
+        text: 'Organization',
         iconFilename: 'organization.svg',
         imgAlt: '',
         path: '/organization',

@@ -29,7 +29,11 @@ function URLsPage(props: URLsPageProps) {
     SortOption.LASTEST,
   );
   const sortOption = Object.values(SortOption);
-  const switchSortOption = (option: SortOption) => {
+  const switchSortOption = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    option: SortOption,
+  ) => {
+    e.stopPropagation();
     setIsSortCollapsed(true);
     setCurrentSortOption(option);
   };
@@ -64,7 +68,11 @@ function URLsPage(props: URLsPageProps) {
   };
 
   return (
-    <div>
+    <div
+      onClick={() => {
+        if (!isSortCollapsed) setIsSortCollapsed(true);
+      }}
+    >
       <Sidebar
         isCollapsed={isCollapsed}
         hideSidebar={() => setIsCollapsed(true)}
@@ -183,7 +191,7 @@ function URLsPage(props: URLsPageProps) {
                 </div>
                 <ul
                   className={clsx(
-                    'absolute left-0 top-full z-10 flex w-[135px] flex-col items-start space-y-1 overflow-hidden rounded-lg bg-white pl-3 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] transition-[max-height,border] duration-500',
+                    'absolute left-0 top-full z-10 flex w-[135px] flex-col items-start space-y-1 overflow-hidden rounded-lg bg-white pl-3 shadow-[0_1px_4px_0_rgba(0,0,0,0.25)] transition-[max-height,border] duration-500',
                     isSortCollapsed ? 'max-h-0' : 'max-h-[100px]',
                   )}
                 >
@@ -193,16 +201,20 @@ function URLsPage(props: URLsPageProps) {
                         <li
                           key={idx}
                           className={clsx(
-                            idx == 0 ||
+                            (idx == 0 ||
                               (idx == 1 &&
-                                currentSortOption === SortOption.LASTEST &&
-                                'pt-2'),
-                            idx === sortOption.length - 1 && 'pb-2',
+                                currentSortOption === SortOption.LASTEST)) &&
+                              'pt-2',
+                            (idx === sortOption.length - 1 ||
+                              (idx == sortOption.length - 2 &&
+                                currentSortOption ===
+                                  SortOption.LEAST_CLICKED)) &&
+                              'pb-2',
                             'w-full',
                           )}
                         >
                           <button
-                            onClick={() => switchSortOption(option)}
+                            onClick={(e) => switchSortOption(e, option)}
                             className='w-full text-start'
                           >
                             {option}
@@ -263,16 +275,20 @@ function URLsPage(props: URLsPageProps) {
                       <li
                         key={idx}
                         className={clsx(
-                          idx == 0 ||
+                          (idx == 0 ||
                             (idx == 1 &&
-                              currentSortOption === SortOption.LASTEST &&
-                              'pt-2'),
-                          idx === sortOption.length - 1 && 'pb-2',
+                              currentSortOption === SortOption.LASTEST)) &&
+                            'pt-2',
+                          (idx === sortOption.length - 1 ||
+                            (idx == sortOption.length - 2 &&
+                              currentSortOption ===
+                                SortOption.LEAST_CLICKED)) &&
+                            'pb-2',
                           'w-full',
                         )}
                       >
                         <button
-                          onClick={() => switchSortOption(option)}
+                          onClick={(e) => switchSortOption(e, option)}
                           className='w-full text-start'
                         >
                           {option}

@@ -6,11 +6,11 @@ const authHeaderContent = {
       title: 'Log In',
       subtitle: 'Do not have an account?',
       background: '/images/auth/background_1.svg',
-      sublinkAuthType: AuthType.SIGN_UP,
+      sublinkAuthType: AuthType.SIGN_UP_INFO,
       sublinkText: 'Sign up',
     },
   ],
-  'sign-up': [
+  'sign-up-info': [
     {
       title: 'Create your account',
       subtitle: 'Already have an account?',
@@ -18,6 +18,8 @@ const authHeaderContent = {
       background: '/images/auth/background_2.svg',
       sublinkText: 'Log in',
     },
+  ],
+  'sign-up': [
     {
       title: 'Create your account',
       subtitle: 'Already have an account?',
