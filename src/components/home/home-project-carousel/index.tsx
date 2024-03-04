@@ -88,7 +88,11 @@ export default function HomeProjectCarousel(props: HomeProjectCarouselProps) {
   };
 
   return (
-    <div className={clsx('flex flex-col', className)}>
+    <div
+      data-aos='fade-up'
+      data-aos-delay='100'
+      className={clsx('flex flex-col', className)}
+    >
       <Swiper {...swiperProps}>
         {projects.map((project) => (
           <SwiperSlide className='pb-[40px]' key={project.name}>

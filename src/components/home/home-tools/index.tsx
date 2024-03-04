@@ -30,7 +30,7 @@ export function HomeToolItem(props: HomeToolItemProps) {
     tool.active ? 'text-primary' : 'text-royal-300',
   );
   return (
-    <Link href={tool.url} className={toolItemClass}>
+    <Link data-aos='zoom-in' href={tool.url} className={toolItemClass}>
       <div className='relative me-[20px] flex aspect-square h-[36px] w-[36px] items-center lg:h-[72px] lg:w-auto'>
         <Image
           src={getIcon(
