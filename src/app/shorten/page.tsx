@@ -28,7 +28,7 @@ export default function Shorten() {
   >(null);
   const [organizationValue, setOrganizationValue] =
     useState<null | Organization>(null);
-  const [domainValue, setDomainValue] = useState('');
+  const [domainValue, setDomainValue] = useState<null | string>(null);
   const [domainOptions, setDomainOptions] = useState<null | string[]>(null);
   const [categoryOptions, setCategoryOptions] = useState<null | Category[]>(
     null,
@@ -183,6 +183,17 @@ export default function Shorten() {
   const inputFontSize = screenSize === ScreenSize.LG ? undefined : 12;
   const inputHeight = screenSize === ScreenSize.LG ? 48 : undefined;
 
+  const isLoaded =
+    (isAuthStatusReady &&
+      meProfile &&
+      organizationValue &&
+      organizationOptions &&
+      categoryOptions &&
+      domainOptions &&
+      domainValue &&
+      loaded) ||
+    (isAuthStatusReady && !meProfile);
+
   return (
     <>
       <div className='relative flex flex-col items-center overflow-hidden pt-[80px] leading-[1.2] text-primary md:pt-[90px] lg:pt-[108px]'>
@@ -197,155 +208,154 @@ export default function Shorten() {
             </p>
           </div>
           <div className='relative mb-[172px] items-start rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[24px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] lg:w-[100%]'>
-            {isAuthStatusReady &&
-            loaded &&
-            organizationValue &&
-            organizationOptions &&
-            categoryOptions &&
-            domainOptions ? (
-              <div className='items-start md:flex'>
-                <div className='md:flex-grow'>
-                  <div>
-                    <h6 className='mb-[8px] font-[500] md:mb-[8px] md:text-[20px] lg:text-[28px]'>
-                      Your long URL
-                    </h6>
-                    <div className='mb-[8px] md:mb-[20px]'>
-                      <Input
-                        height={inputHeight}
-                        iconSrc='icons/shorten/link.svg'
-                        iconAlt='link'
-                        placeholder='Input the URL you want to shorten'
-                        textValue={longUrl}
-                        onInput={setLongUrl}
-                        onEnter={handleSubmit}
-                        divider
-                        fontSize={inputFontSize}
-                      />
-                    </div>
-                    <div className='inline-block md:flex md:max-w-[85%] md:justify-between lg:w-[85%]'>
-                      <div className='mb-[8px] flex items-center justify-between md:mb-0 md:me-[12px] md:inline-flex'>
-                        <p className='inline text-[12px] font-[500] text-black md:text-[16px] lg:text-[20px]'>
-                          Organization
-                        </p>
-                        <Input
-                          collapseIcon
-                          height={inputHeight}
-                          className='ms-[4px] w-[200px] md:ms-[8px]'
-                          fontSize={inputFontSize}
-                          textValue={organizationValue.shortName}
-                          dropdownOptions={organizationOptions}
-                          onDropdownSelect={
-                            handleChange(
-                              ShortenInputFieldEnum.ORGANIZATION,
-                            ) as (value: ShortenInputFieldType) => void
-                          }
-                        />
-                      </div>
-                      <div className='flex items-center justify-between md:inline-flex'>
-                        <p className='inline text-[12px] font-[500] text-black md:text-[16px] lg:text-[20px]'>
-                          Domain
-                        </p>
-                        <Input
-                          collapseIcon
-                          height={inputHeight}
-                          className='ms-[4px] w-[200px] md:ms-[8px]'
-                          fontSize={inputFontSize}
-                          textValue={domainValue}
-                          dropdownOptions={domainOptions}
-                          onDropdownSelect={
-                            handleChange(ShortenInputFieldEnum.DOMAIN) as (
-                              value: ShortenInputFieldType,
-                            ) => void
-                          }
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className='mt-[20px] lg:mt-[28px]'>
-                    <div className='mb-[20px] md:flex md:items-center md:justify-between lg:mb-[28px]'>
-                      <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[130px] md:text-[20px] lg:text-[28px]'>
-                        Slug
+            {isLoaded ? (
+              meProfile ? (
+                <div className='items-start md:flex'>
+                  <div className='md:flex-grow'>
+                    <div>
+                      <h6 className='mb-[8px] font-[500] md:mb-[8px] md:text-[20px] lg:text-[28px]'>
+                        Your long URL
                       </h6>
-                      <div className='mb-[8px] md:mb-0 md:inline-block md:flex-grow'>
+                      <div className='mb-[8px] md:mb-[20px]'>
                         <Input
-                          fontSize={inputFontSize}
                           height={inputHeight}
-                          iconSrc='icons/shorten/slug.svg'
-                          iconAlt='slug'
-                          placeholder='/Slug'
-                          textValue={slug}
-                          onInput={setSlug}
+                          iconSrc='icons/shorten/link.svg'
+                          iconAlt='link'
+                          placeholder='Input the URL you want to shorten'
+                          textValue={longUrl}
+                          onInput={setLongUrl}
                           onEnter={handleSubmit}
                           divider
-                        />
-                      </div>
-                    </div>
-                    <div className='mb-[8px] md:mb-[20px] md:flex md:items-center md:justify-between'>
-                      <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[130px] md:text-[20px] lg:text-[28px]'>
-                        Category
-                      </h6>
-                      <div className='md:inline-block md:flex-grow'>
-                        <Input
-                          dropdownOptions={categoryOptions}
-                          dropdownValues={categoryValues}
-                          onDropdownSelect={
-                            handleChange(ShortenInputFieldEnum.CATEGORY) as (
-                              value: ShortenInputFieldType,
-                            ) => void
-                          }
                           fontSize={inputFontSize}
-                          height={inputHeight}
-                          iconSrc='icons/shorten/search.svg'
-                          iconAlt='search'
-                          placeholder='Add or create categories'
-                          textValue={categorySearch}
-                          onInput={setCategorySearch}
-                          divider
-                          renderCustomDropdownItems={(
-                            options,
-                            onSelect,
-                            values,
-                            creatingValue,
-                          ) => (
-                            <CategoryDropdownItems
-                              onSelect={onSelect}
-                              options={options as Category[]}
-                              values={values as Category[]}
-                              creatingValue={creatingValue}
-                              onCreate={() => {
-                                if (!creatingValue) return;
-                                return handleCategoryCreate(creatingValue);
-                              }}
-                            />
-                          )}
                         />
+                      </div>
+                      <div className='inline-block md:flex md:max-w-[85%] md:justify-between lg:w-[85%]'>
+                        <div className='mb-[8px] flex items-center justify-between md:mb-0 md:me-[12px] md:inline-flex'>
+                          <p className='inline text-[12px] font-[500] text-black md:text-[16px] lg:text-[20px]'>
+                            Organization
+                          </p>
+                          <Input
+                            collapseIcon
+                            height={inputHeight}
+                            className='ms-[4px] w-[200px] md:ms-[8px]'
+                            fontSize={inputFontSize}
+                            textValue={organizationValue!.shortName}
+                            dropdownOptions={organizationOptions!}
+                            onDropdownSelect={
+                              handleChange(
+                                ShortenInputFieldEnum.ORGANIZATION,
+                              ) as (value: ShortenInputFieldType) => void
+                            }
+                          />
+                        </div>
+                        <div className='flex items-center justify-between md:inline-flex'>
+                          <p className='inline text-[12px] font-[500] text-black md:text-[16px] lg:text-[20px]'>
+                            Domain
+                          </p>
+                          <Input
+                            collapseIcon
+                            height={inputHeight}
+                            className='ms-[4px] w-[200px] md:ms-[8px]'
+                            fontSize={inputFontSize}
+                            textValue={domainValue!}
+                            dropdownOptions={domainOptions!}
+                            onDropdownSelect={
+                              handleChange(ShortenInputFieldEnum.DOMAIN) as (
+                                value: ShortenInputFieldType,
+                              ) => void
+                            }
+                          />
+                        </div>
                       </div>
                     </div>
-                    {categoryValues.length > 0 && (
-                      <div className='mb-[8px]'>
-                        <p className='me-[12px] inline text-[12px] font-[500] text-black md:text-[16px] lg:text-[20px]'>
-                          Chosen categories
-                        </p>
-                        <ShortenCategories
-                          handleChange={
-                            handleChange(ShortenInputFieldEnum.CATEGORY) as (
-                              category: Category,
-                            ) => void
-                          }
-                          categories={categoryValues}
-                        />
+                    <div className='mt-[20px] lg:mt-[28px]'>
+                      <div className='mb-[20px] md:flex md:items-center md:justify-between lg:mb-[28px]'>
+                        <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[130px] md:text-[20px] lg:text-[28px]'>
+                          Slug
+                        </h6>
+                        <div className='mb-[8px] md:mb-0 md:inline-block md:flex-grow'>
+                          <Input
+                            fontSize={inputFontSize}
+                            height={inputHeight}
+                            iconSrc='icons/shorten/slug.svg'
+                            iconAlt='slug'
+                            placeholder='/Slug'
+                            textValue={slug}
+                            onInput={setSlug}
+                            onEnter={handleSubmit}
+                            divider
+                          />
+                        </div>
                       </div>
-                    )}
+                      <div className='mb-[8px] md:mb-[20px] md:flex md:items-center md:justify-between'>
+                        <h6 className='mb-[4px] font-[500] md:mb-0 md:inline md:w-[130px] md:text-[20px] lg:text-[28px]'>
+                          Category
+                        </h6>
+                        <div className='md:inline-block md:flex-grow'>
+                          <Input
+                            dropdownOptions={categoryOptions!}
+                            dropdownValues={categoryValues}
+                            onDropdownSelect={
+                              handleChange(ShortenInputFieldEnum.CATEGORY) as (
+                                value: ShortenInputFieldType,
+                              ) => void
+                            }
+                            fontSize={inputFontSize}
+                            height={inputHeight}
+                            iconSrc='icons/shorten/search.svg'
+                            iconAlt='search'
+                            placeholder='Add or create categories'
+                            textValue={categorySearch}
+                            onInput={setCategorySearch}
+                            divider
+                            renderCustomDropdownItems={(
+                              options,
+                              onSelect,
+                              values,
+                              creatingValue,
+                            ) => (
+                              <CategoryDropdownItems
+                                onSelect={onSelect}
+                                options={options as Category[]}
+                                values={values as Category[]}
+                                creatingValue={creatingValue}
+                                onCreate={() => {
+                                  if (!creatingValue) return;
+                                  return handleCategoryCreate(creatingValue);
+                                }}
+                              />
+                            )}
+                          />
+                        </div>
+                      </div>
+                      {categoryValues.length > 0 && (
+                        <div className='mb-[8px]'>
+                          <p className='me-[12px] inline text-[12px] font-[500] text-black md:text-[16px] lg:text-[20px]'>
+                            Chosen categories
+                          </p>
+                          <ShortenCategories
+                            handleChange={
+                              handleChange(ShortenInputFieldEnum.CATEGORY) as (
+                                category: Category,
+                              ) => void
+                            }
+                            categories={categoryValues}
+                          />
+                        </div>
+                      )}
+                    </div>
                   </div>
+                  <Button
+                    className='mt-[12px] md:relative md:top-[32px] md:ms-[12px] md:mt-0 md:text-[18px] lg:top-[46px]'
+                    disabled={!allowSubmit}
+                    onClick={handleSubmit}
+                  >
+                    Shorten
+                  </Button>
                 </div>
-                <Button
-                  className='mt-[12px] md:relative md:top-[32px] md:ms-[12px] md:mt-0 md:text-[18px] lg:top-[46px]'
-                  disabled={!allowSubmit}
-                  onClick={handleSubmit}
-                >
-                  Shorten
-                </Button>
-              </div>
+              ) : (
+                <div>Please login to use this tool!</div>
+              )
             ) : (
               <div>Loading</div>
             )}
