@@ -30,7 +30,7 @@ export function HomeToolItem(props: HomeToolItemProps) {
     tool.active ? 'text-primary' : 'text-royal-300',
   );
   return (
-    <Link data-aos='zoom-in' href={tool.url} className={toolItemClass}>
+    <Link href={tool.url} className={toolItemClass}>
       <div className='relative me-[20px] flex aspect-square h-[36px] w-[36px] items-center lg:h-[72px] lg:w-auto'>
         <Image
           src={getIcon(
@@ -69,7 +69,10 @@ export function HomeToolItem(props: HomeToolItemProps) {
 
 export default function HomeTools() {
   return (
-    <div className='relative z-[2] flex flex-wrap items-stretch justify-between xl:mx-[20px] xl:w-[840px]'>
+    <div
+      data-aos='zoom-in'
+      className='relative z-[2] flex flex-wrap items-stretch justify-between xl:mx-[20px] xl:w-[840px]'
+    >
       {tools.map((tool) => (
         <HomeToolItem key={tool.name} tool={tool} />
       ))}
