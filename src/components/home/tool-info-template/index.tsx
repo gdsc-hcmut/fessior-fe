@@ -27,7 +27,7 @@ export default function ToolInfoTemplate(props: ToolInfoTemplateProps) {
         <Link href={url}>
           <Button
             disabled={!active}
-            type='neutral'
+            type='neutral-positive'
             onClick={() => {}}
             className='mb-[20px] mt-[12px] text-[20px] font-[700] leading-5'
           >
