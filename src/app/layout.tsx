@@ -3,7 +3,6 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { clsx } from 'clsx';
 import { Baloo_Chettan_2 } from 'next/font/google';
 
-import AuthModal from '@/components/auth-md-lg';
 import { AuthContextProvider } from '@/contexts/authContext';
 import queryClient from '@/querier/client';
 
@@ -33,7 +32,6 @@ export default function RootLayout(props: RootLayoutProps) {
               className={clsx(balooChettan2.className, 'text-default-text')}
             >
               {children}
-              <AuthModal />
             </body>
           </html>
         </QueryClientProvider>

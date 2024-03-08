@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation';
 
+import AuthType from '@/types/auth-type-enum';
 import { detectOS } from '@/utils/common';
 
 import useQueryParams from './useQueryParams';
@@ -10,22 +11,23 @@ export default function useAuthRouter() {
   const isMobile = !['windows', 'other'].includes(detectOS());
 
   if (isMobile) {
-    return (authType?: string) => {
-      if (authType === '') {
-        location.reload();
-        return;
-      }
-      router.push(authType ? `/auth/${authType}` : '/');
+    return (authType?: AuthType, isDirectedFromLogin?: boolean) => {
+      if (authType === AuthType.BACK) router.back();
+      router.push(
+        authType
+          ? `/auth/${authType}${isDirectedFromLogin ? '?from_login=true' : ''}`
+          : '/',
+      );
     };
   } else {
-    return (authType?: string) => {
-      if (authType === '') {
-        location.reload();
-        return;
-      }
+    return (authType?: AuthType, isDirectedFromLogin?: boolean) => {
+      if (authType === AuthType.BACK) router.back();
       authType
-        ? queryParams.setItem({ auth: authType })
-        : queryParams.removeItem('auth');
+        ? queryParams.setItem({
+            auth: authType,
+            from_login: isDirectedFromLogin ? 'true' : undefined,
+          })
+        : queryParams.removeItem('auth', 'from_login');
     };
   }
 }
