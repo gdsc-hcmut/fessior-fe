@@ -65,7 +65,7 @@ function UrlItemXL(props: UrlItemProps) {
   useEffect(() => {
     const renderBoxes = () => {
       let currentWidth = 0;
-      const curCategories = url.category ? [...url.category] : [];
+      const curCategories = url.categories ? [...url.categories] : [];
       const newCategories = [];
       let newHiddenCategories: string[] = [];
 
@@ -94,7 +94,7 @@ function UrlItemXL(props: UrlItemProps) {
 
     setIsDivFull(false);
     renderBoxes();
-  }, [width, url.category, isDivFull]);
+  }, [width, url.categories, isDivFull]);
 
   return (
     <div className='relative flex flex-shrink-0 items-center rounded-lg bg-white px-5 py-3 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] 2xl:px-7 2xl:py-4 3xl:px-10 3xl:py-5'>
@@ -111,9 +111,7 @@ function UrlItemXL(props: UrlItemProps) {
       </div>
       <p className='mr-5 flex flex-[1] text-[14px] 2xl:text-base'>
         {url.clickCount ? url.clickCount : url.totalClicks?.length || 0}{' '}
-        {url.clickCount
-          ? url.clickCount
-          : (url.totalClicks?.length || 0) > 0
+        {(url.clickCount ? url.clickCount : url.totalClicks?.length || 0) > 0
           ? 'clicks'
           : 'click'}
       </p>
@@ -125,7 +123,7 @@ function UrlItemXL(props: UrlItemProps) {
         className='mr-5 flex flex-[1.8] space-x-1 2xl:space-x-2 3xl:flex-[2.2]'
       >
         {categories.length === 0 && (
-          <div className='spcae-x-1 flex items-center'>
+          <div className='spcae-x-1 flex h-8 items-center'>
             <Image
               src='/icons/url/tray.svg'
               alt='No categories'
@@ -139,7 +137,7 @@ function UrlItemXL(props: UrlItemProps) {
         {categories.map((category, idx) => (
           <div
             key={idx}
-            className='rounded-lg bg-primary px-2 py-1 text-[14px] text-white 2xl:text-base 3xl:px-3 3xl:py-2'
+            className='rounded-lg bg-primary px-2 py-1 text-[14px] text-white 2xl:text-base 3xl:px-3'
           >
             {category}
           </div>
@@ -232,7 +230,7 @@ function UrlItemMD(props: UrlItemProps) {
   useEffect(() => {
     const renderBoxes = () => {
       let currentWidth = 0;
-      const curCategories = url.category ? [...url.category] : [];
+      const curCategories = url.categories ? [...url.categories] : [];
       const newCategories = [];
 
       for (let i = 0; i < curCategories.length; i++) {
@@ -258,7 +256,7 @@ function UrlItemMD(props: UrlItemProps) {
 
     setIsDivFull(false);
     renderBoxes();
-  }, [width, url.category, isDivFull]);
+  }, [width, url.categories, isDivFull]);
 
   return (
     <div className='relative flex w-full justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>

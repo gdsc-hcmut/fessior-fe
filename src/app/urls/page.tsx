@@ -45,6 +45,7 @@ function URLsPage(props: URLsPageProps) {
   };
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [totalUrls, setTotalUrls] = useState<number>(0);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const [urlListV1, setUrlListV1] = useState<MyUrlv1[]>([]);
   const [displayUrlList, setDisplayUrlList] = useState<MyUrlv1[]>([]);
@@ -100,6 +101,7 @@ function URLsPage(props: URLsPageProps) {
     setTotalPages(data.totalPages);
     setUrlListV1(newData);
     setDisplayUrlList(newData);
+    setTotalUrls(data.totalUrls || 0);
     return data;
   };
 
@@ -121,6 +123,7 @@ function URLsPage(props: URLsPageProps) {
     setTotalPages(data.totalPages);
     setUrlListV1(newData);
     setDisplayUrlList(newData);
+    setTotalUrls(data.totalUrls || 0);
     return data;
   };
 
@@ -414,7 +417,7 @@ function URLsPage(props: URLsPageProps) {
             </div>
             <div className='mt-4 flex h-[42px] items-center'>
               <p className='whitespace-nowrap font-semibold text-primary'>
-                22 Results
+                {totalUrls} Results
               </p>
               <div className='hidden xl:flex'>
                 <UrlSelectionList isDomain />

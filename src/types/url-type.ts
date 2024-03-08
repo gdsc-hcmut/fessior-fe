@@ -38,7 +38,7 @@ export type MyUrlv1 = {
   isActive: boolean;
   clickCount?: number;
   totalClicks?: ClickInfo[];
-  category?: string[];
+  categories: string[];
 };
 
 export type getUrlListOption = {
