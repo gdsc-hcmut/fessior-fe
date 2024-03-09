@@ -4,6 +4,7 @@ import { useState, useEffect, useContext } from 'react';
 
 import Button from '@/components/button';
 import CategoryItem from '@/components/category-item';
+import ModalAlert from '@/components/modal-alert';
 import ModalShorten from '@/components/modal-shorten';
 import SelectInput from '@/components/select-input';
 import ShortenTools from '@/components/shorten-tools';
@@ -12,6 +13,7 @@ import AuthContext from '@/contexts/authContext';
 import useScreenSize from '@/hooks/useScreenSize';
 import meService from '@/libs/api/me';
 import urlService from '@/services/url.service';
+import AlertLevel from '@/types/alert-level-enum';
 import Organization from '@/types/organization-type';
 import ScreenSize from '@/types/screen-size-enum';
 import Url from '@/types/url-type';
@@ -28,6 +30,8 @@ export default function Shorten() {
   const [slug, setSlug] = useState('');
   const [shortenedUrl, setShortenedUrl] = useState<null | Url>(null);
   const [allowSubmit, setAllowSubmit] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const { screenSize, loaded } = useScreenSize();
 
   const { meProfile, isAuthStatusReady } = useContext(AuthContext);
@@ -80,14 +84,19 @@ export default function Shorten() {
 
   const handleSubmit = async () => {
     if (allowSubmit)
-      setShortenedUrl(
-        await urlService.shorten({
-          originalUrl: longUrl,
-          slug: slug.length ? slug : null,
-          domain: domainValue,
-          organizationId: organizationValue?._id,
-        } as Url),
-      );
+      try {
+        setShortenedUrl(
+          await urlService.shorten({
+            originalUrl: longUrl,
+            slug: slug.length ? slug : null,
+            domain: domainValue,
+            organizationId: organizationValue?._id,
+          } as Url),
+        );
+      } catch (e: any) {
+        const message = e.response.data.message;
+        setErrorMessage(Array.isArray(message) ? message[0] : message);
+      }
   };
 
   const clearForm = () => {
@@ -255,7 +264,7 @@ export default function Shorten() {
         <div className='absolute bottom-[9px] right-[-30px] z-[-10] h-[80px] w-[80px] rounded-full bg-primary md:hidden'></div>
         <div className='absolute bottom-[0px] right-[60px] z-[-10] h-[20px] w-[20px] rounded-full bg-primary md:hidden'></div>
       </div>
-      {/* MODAL */}
+      {/* SHORTEN MODAL */}
       {shortenedUrl && (
         <ModalShorten
           shortenedUrl={shortenedUrl}
@@ -263,6 +272,22 @@ export default function Shorten() {
             setShortenedUrl(null);
             clearForm();
           }}
+        />
+      )}
+      {/* ERROR MODAL */}
+      {errorMessage !== '' && (
+        <ModalAlert
+          onDismiss={() => {
+            setErrorMessage('');
+          }}
+          title='Error!'
+          description={errorMessage}
+          primaryActionButtonText='Try Again'
+          onPrimaryAction={() => {
+            setErrorMessage('');
+            clearForm();
+          }}
+          type={AlertLevel.ERROR}
         />
       )}
     </>

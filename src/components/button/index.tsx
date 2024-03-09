@@ -25,8 +25,8 @@ export default function Button(props: ButtonProps) {
     disabled
       ? 'bg-royal-300 text-white'
       : type === 'positive'
-      ? 'bg-primary text-white'
-      : 'border-[1px] border-primary bg-white text-primary hover:bg-primary hover:text-white',
+      ? 'bg-primary text-white hover:bg-primary-darken active:bg-primary'
+      : 'border-[1px] border-primary bg-white text-primary hover:bg-primary hover:text-white active:bg-primary-darken',
     'rounded-[8px] px-[16px] py-[8px] transition-all',
     className,
   );
