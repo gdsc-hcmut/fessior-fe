@@ -4,6 +4,7 @@ import AOS from 'aos';
 import Image from 'next/image';
 import { useEffect } from 'react';
 
+import useEventListener from '@/hooks/useEventListener';
 import AlertLevel from '@/types/alert-level-enum';
 
 import Button from '../button';
@@ -36,6 +37,10 @@ export default function ModalAlert(props: ModalAlertProps) {
   useEffect(() => {
     AOS.init();
   }, []);
+
+  useEventListener('keydown', (e: any) => {
+    if (e.key === 'Escape') onDismiss();
+  });
 
   const getAlertIcon = () => {
     switch (type) {

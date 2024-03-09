@@ -2,16 +2,17 @@ import Image from 'next/image';
 
 import Brand from '@/components/brand';
 import useAuthRouter from '@/hooks/useAuthRouter';
+import AuthType from '@/types/auth-type-enum';
 
 type AuthHeaderProps = {
   title: string;
   subtitle?: string;
   background: string;
   sublinkText?: string;
-  sublinkAuthType?: string;
+  sublinkAuthType?: AuthType;
 };
 
-export function AuthHeader(props: AuthHeaderProps) {
+export default function AuthHeader(props: AuthHeaderProps) {
   const { title, subtitle, sublinkAuthType, sublinkText, background } = props;
   const authRouter = useAuthRouter();
 

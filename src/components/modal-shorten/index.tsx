@@ -1,7 +1,10 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
 
 import Button from '@/components/button';
 import CloseButton from '@/components/close-button';
+import useEventListener from '@/hooks/useEventListener';
 import Icon from '@/types/icon-enum';
 import Url from '@/types/url-type';
 import { getIcon } from '@/utils/common';
@@ -13,7 +16,14 @@ type ModalShortenProps = {
 
 export default function ModalShorten(props: ModalShortenProps) {
   const { shortenedUrl, onDismiss } = props;
+  const [isCopied, setIsCopied] = useState(false);
+  const [isCopyButtonHovering, setIsCopyButtonHovering] = useState(false);
   const urlShown = `https://${shortenedUrl.domain}/${shortenedUrl.slug}`;
+
+  useEventListener('keydown', (e: any) => {
+    if (e.key === 'Escape') onDismiss();
+  });
+
   return (
     <div
       onClick={onDismiss}
@@ -50,8 +60,11 @@ export default function ModalShorten(props: ModalShortenProps) {
               Link shortened!
             </h4>
             <p className='text-center text-primary'>
-              Access the “My URL” page to view statistics on your shortened
-              links
+              Access the{' '}
+              <Link className='underline' href='/urls'>
+                My URLs
+              </Link>{' '}
+              page to view statistics on your shortened links
             </p>
           </div>
           <div className='flex h-[40px] w-[100%] content-between'>
@@ -59,20 +72,26 @@ export default function ModalShorten(props: ModalShortenProps) {
               <p className='text-primary'>{urlShown}</p>
             </div>
             <Button
+              setIsHovering={setIsCopyButtonHovering}
+              type='neutral'
               onClick={() => {
                 navigator.clipboard.writeText(urlShown);
+                setIsCopied(true);
+                setTimeout(() => {
+                  setIsCopied(false);
+                }, 1000);
               }}
             >
               <Image
                 src={getIcon(
                   '/icons/shorten',
-                  'content_copy.svg',
-                  Icon.INACTIVE,
+                  isCopied ? 'tick.svg' : 'content_copy.svg',
+                  isCopyButtonHovering ? Icon.INACTIVE : Icon.ACTIVE,
                 )}
                 alt='copy'
                 height={0}
                 width={0}
-                className='h-auto w-auto fill-white'
+                className='h-auto w-[25px]'
               />
             </Button>
           </div>

@@ -2,12 +2,13 @@ import { clsx } from 'clsx';
 import { ReactNode } from 'react';
 
 type ButtonProps = {
-  children: string | ReactNode;
+  children: ReactNode;
   disabled?: boolean;
   onClick: () => void;
   className?: string;
   width?: 'fit' | 'full';
   type?: 'positive' | 'neutral';
+  setIsHovering?: (isHovering: boolean) => void;
 };
 
 export default function Button(props: ButtonProps) {
@@ -18,6 +19,7 @@ export default function Button(props: ButtonProps) {
     className,
     width = 'fit',
     type = 'positive',
+    setIsHovering,
   } = props;
 
   const buttonClass = clsx(
@@ -32,7 +34,17 @@ export default function Button(props: ButtonProps) {
   );
 
   return (
-    <button disabled={disabled} onClick={onClick} className={buttonClass}>
+    <button
+      onMouseEnter={() => {
+        if (setIsHovering) setIsHovering(true);
+      }}
+      onMouseLeave={() => {
+        if (setIsHovering) setIsHovering(false);
+      }}
+      disabled={disabled}
+      onClick={onClick}
+      className={buttonClass}
+    >
       {children}
     </button>
   );
