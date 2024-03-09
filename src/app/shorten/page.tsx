@@ -9,11 +9,13 @@ import ModalShorten from '@/components/modal-shorten';
 import ShortenCategories from '@/components/shorten-categories';
 import ShortenTools from '@/components/shorten-tools';
 import AuthContext from '@/contexts/authContext';
+import useAuthRouter from '@/hooks/useAuthRouter';
 import useScreenSize from '@/hooks/useScreenSize';
 import meService from '@/libs/api/me';
 import categoryService from '@/services/category.service';
 import organizationService from '@/services/organization.service';
 import urlService from '@/services/url.service';
+import AuthType from '@/types/auth-type-enum';
 import CategoryColor from '@/types/category-color-enum';
 import Category from '@/types/category-type';
 import Organization from '@/types/organization-type';
@@ -42,6 +44,8 @@ export default function Shorten() {
   const { screenSize, loaded } = useScreenSize();
 
   const { meProfile, isAuthStatusReady } = useContext(AuthContext);
+
+  const authRouter = useAuthRouter();
 
   useEffect(() => {
     if (!meProfile) return;
@@ -354,7 +358,20 @@ export default function Shorten() {
                   </Button>
                 </div>
               ) : (
-                <div>Please login to use this tool!</div>
+                <div className='flex items-center justify-center'>
+                  <div className='flex flex-col items-center justify-center py-[16px] md:flex-row'>
+                    <p className='mb-[16px] md:mb-0 md:me-[12px] md:text-[20px] lg:text-[24px]'>
+                      Let&apos;s make sharing links easier! Log in to use our
+                      URL Shortener.
+                    </p>
+                    <Button
+                      className='self-start'
+                      onClick={() => authRouter(AuthType.LOGIN)}
+                    >
+                      <span className='px-[4px] text-[20px]'>Log in</span>
+                    </Button>
+                  </div>
+                </div>
               )
             ) : (
               <div>Loading</div>
