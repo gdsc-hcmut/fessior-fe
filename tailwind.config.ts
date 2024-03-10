@@ -13,6 +13,7 @@ const config: Config = {
       colors: {
         white: '#ffffff',
         primary: '#0B2878',
+        'primary-darken': '#082060',
         'default-text': '#252641',
         disabled: '#6d7eae',
         red: '#db4437',
