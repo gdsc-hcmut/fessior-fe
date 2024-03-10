@@ -15,6 +15,7 @@ const config: Config = {
         primary: '#0B2878',
         'primary-darken': '#082060',
         'default-text': '#252641',
+        'primary-white': '#ebf0fd',
         disabled: '#6d7eae',
         red: '#db4437',
         green: '#0f9d58',

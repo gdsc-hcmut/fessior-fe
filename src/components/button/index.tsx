@@ -7,7 +7,7 @@ type ButtonProps = {
   onClick: () => void;
   className?: string;
   width?: 'fit' | 'full';
-  type?: 'positive' | 'neutral';
+  type?: 'positive' | 'neutral' | 'neutral-positive';
   setIsHovering?: (isHovering: boolean) => void;
 };
 
@@ -27,8 +27,11 @@ export default function Button(props: ButtonProps) {
     disabled
       ? 'bg-royal-300 text-white'
       : type === 'positive'
-      ? 'bg-primary text-white hover:bg-primary-darken active:bg-primary'
-      : 'border-[1px] border-primary bg-white text-primary hover:bg-primary hover:text-white active:bg-primary-darken',
+      ? 'bg-primary text-white hover:bg-primary-darken'
+      : type === 'neutral'
+      ? 'border-[1px] border-primary bg-white text-primary hover:bg-primary-white'
+      : type === 'neutral-positive' &&
+        'border-[1px] border-primary bg-white text-primary hover:bg-primary hover:text-white',
     'rounded-[8px] px-[16px] py-[8px] transition-all',
     className,
   );
