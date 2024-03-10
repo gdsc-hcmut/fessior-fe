@@ -144,7 +144,7 @@ function UrlItemXL(props: UrlItemProps) {
         ))}
         {isDivFull && (
           <div className='group relative overflow-visible'>
-            <div className='flex h-[29px] w-[29px] items-center justify-center rounded-lg bg-primary 2xl:h-8 2xl:w-8 3xl:h-10 3xl:w-10'>
+            <div className='flex h-[29px] w-[29px] items-center justify-center rounded-lg bg-primary 2xl:h-8 2xl:w-8'>
               <Image
                 src='/icons/url/more_horiz.svg'
                 alt='More icon'
