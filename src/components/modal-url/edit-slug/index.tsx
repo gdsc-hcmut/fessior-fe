@@ -23,7 +23,7 @@ export default function EditSlugModal(props: EditSlugModalProps) {
     ...categoryListData,
   ]);
   const [chosenCategories, setChosenCategories] = useState<string[]>(
-    editedUrl.category ? [...editedUrl.category] : [],
+    editedUrl.categories ? [...editedUrl.categories] : [],
   );
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {

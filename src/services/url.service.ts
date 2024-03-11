@@ -14,7 +14,7 @@ const getUrlListByOrganization = async (payload: getUrlListOption) => {
       )
     ).data.payload;
   } catch (e: any) {
-    console.log(e.response.data.message);
+    console.log('Error in getting url list');
   }
 };
 
@@ -26,7 +26,7 @@ const searchUrlListByOrganization = async (payload: getUrlListOption) => {
       )
     ).data.payload;
   } catch (e: any) {
-    console.log(e.response.data.message);
+    console.log('Error in searching url list');
   }
 };
 
@@ -36,7 +36,7 @@ const eidtSlug = async (payload: deletUrlOption) => {
       await api.patch(`/v1/api/urls/${payload.urlId}/slug`, payload.editPayload)
     ).data.payload;
   } catch (e: any) {
-    console.log(e.response.data.message);
+    console.log('Error in editing slug');
   }
 };
 
@@ -44,7 +44,7 @@ const deleteUrlById = async (urlId: string) => {
   try {
     return (await api.delete(`/v1/api/urls/${urlId}`)).data.payload;
   } catch (e: any) {
-    console.log(e.response.data.message);
+    console.log('Error in deleting url');
   }
 };
 

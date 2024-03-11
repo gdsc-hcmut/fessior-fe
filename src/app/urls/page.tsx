@@ -3,7 +3,8 @@
 import { useQueries, useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useRef, useState } from 'react';
 
 import '../css/index.css';
 import Loading from '@/components/Loading';
@@ -170,6 +171,13 @@ function URLsPage(props: URLsPageProps) {
   const { data: categoryList } = categories;
   const { isLoading } = urls;
   const { isLoading: searchLoading, refetch } = searchUrls;
+
+  const router = useRouter();
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      router.push('/');
+    }
+  }, []);
 
   return (
     <div
