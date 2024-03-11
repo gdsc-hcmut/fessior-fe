@@ -30,13 +30,7 @@ export function HomeProjectItem(props: HomeProjectItemProps) {
         'relative flex h-[500px] flex-col rounded-[20px] shadow-[0px_18.83px_47.08px_0px_rgba(47,50,125,0.10)] transition-all duration-200 hover:scale-105 md:h-[450px]',
       )}
     >
-      <Image
-        src={imgSrc}
-        alt={imgAlt}
-        width={1480}
-        height={800}
-        quality={100}
-      />
+      <img src={imgSrc} alt={imgAlt} className='w-[100%]' />
       <div className='flex flex-grow flex-col p-[20px]'>
         <div className='flex-grow'>
           <h6 className='mb-[12px] text-[28px] font-[500]'>{name}</h6>
@@ -84,7 +78,7 @@ export default function HomeProjectCarousel(props: HomeProjectCarouselProps) {
     },
     onSlideChange: handleSlideChange,
     modules: [Autoplay],
-    // autoplay: { delay: 3000 },
+    autoplay: { delay: 3000 },
   };
 
   return (
