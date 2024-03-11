@@ -73,7 +73,7 @@ export default function ModalShorten(props: ModalShortenProps) {
             </div>
             <Button
               setIsHovering={setIsCopyButtonHovering}
-              type='neutral'
+              type='neutral-positive'
               onClick={() => {
                 navigator.clipboard.writeText(urlShown);
                 setIsCopied(true);
