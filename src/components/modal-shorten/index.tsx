@@ -36,7 +36,7 @@ export default function ModalShorten(props: ModalShortenProps) {
         <div className='absolute bottom-0 left-0 right-0 top-0 z-10 flex flex-col items-center justify-between px-[20px] py-[40px] md:p-[40px]'>
           <div className='relative flex aspect-square h-[50%] items-center justify-center rounded-[8px] bg-white p-[10px] shadow-[0px_4px_12px_0px_rgba(11,40,120,0.16)]'>
             <Image
-              src='images/shorten/sample_qr.svg'
+              src='icons/shorten/sample_qr.svg'
               alt='qr'
               width={0}
               height={0}
@@ -98,14 +98,14 @@ export default function ModalShorten(props: ModalShortenProps) {
         </div>
         <div className='absolute bottom-[-64px] left-[-30px] h-[80%] w-[150%] rotate-[-6deg] bg-white'></div>
         <Image
-          src='/images/shorten/qr_decor.svg'
+          src='/icons/shorten/qr_decor.svg'
           alt='qr-decor'
           width={0}
           height={0}
           className='absolute left-[-20px] top-[52px] h-auto w-auto'
         />
         <Image
-          src='/images/shorten/qr_decor.svg'
+          src='/icons/shorten/qr_decor.svg'
           alt='qr-decor'
           width={0}
           height={0}
