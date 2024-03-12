@@ -245,6 +245,8 @@ export default function Shorten() {
                           onEnter={handleSubmit}
                           divider
                           fontSize={inputFontSize}
+                          tabIndex={1}
+                          autoFocus
                         />
                       </div>
                       <div className='inline-block md:flex md:max-w-[85%] md:justify-between lg:w-[85%]'>
@@ -302,6 +304,7 @@ export default function Shorten() {
                             onInput={setSlug}
                             onEnter={handleSubmit}
                             divider
+                            tabIndex={2}
                           />
                         </div>
                       </div>
@@ -343,6 +346,7 @@ export default function Shorten() {
                                 }}
                               />
                             )}
+                            tabIndex={3}
                           />
                         </div>
                       </div>
@@ -364,6 +368,7 @@ export default function Shorten() {
                     </div>
                   </div>
                   <Button
+                    tabIndex={4}
                     className='mt-[12px] md:relative md:top-[32px] md:ms-[12px] md:mt-0 md:text-[18px] lg:top-[46px]'
                     disabled={!allowSubmit}
                     onClick={handleSubmit}

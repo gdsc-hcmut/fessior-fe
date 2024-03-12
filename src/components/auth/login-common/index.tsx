@@ -1,9 +1,12 @@
 import { CredentialResponse } from '@react-oauth/google';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 
+import ModalAlert from '@/components/modal-alert';
 import AuthContext from '@/contexts/authContext';
+import AuthFormContext from '@/contexts/authFormContext';
 import useAuthRouter from '@/hooks/useAuthRouter';
 import useInputErrorText from '@/hooks/useInputErrorText';
+import AlertLevel from '@/types/alert-level-enum';
 import AuthType from '@/types/auth-type-enum';
 import { isValidUsername } from '@/utils/auth';
 
@@ -13,45 +16,45 @@ import CustomGoogleLogin from '../custom-google-login';
 export default function LoginCommon() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoginAllowed, setIsLoginAllowed] = useState(false);
+  const [loginErrorText, setLoginErrorText] = useState<string | null>(null);
+
+  const { login } = useContext(AuthContext);
+  const { setIsAuthErrorModalVisible } = useContext(AuthFormContext);
+
   const { inputErrorTexts, setInputErrorText } = useInputErrorText(2);
 
   const authRouter = useAuthRouter();
 
-  const { login } = useContext(AuthContext);
+  useEffect(() => {
+    setIsAuthErrorModalVisible(!!loginErrorText);
+  }, [loginErrorText]);
+
+  useEffect(() => {
+    if (username !== '' && password !== '') setIsLoginAllowed(true);
+    else setIsLoginAllowed(false);
+  }, [username, password]);
+
+  useEffect(() => {
+    setInputErrorText(0, '');
+  }, [username, setInputErrorText]);
 
   const handleLoginWithUsername = async () => {
-    let isProblem = false;
+    if (!isLoginAllowed) return;
 
-    if (username === '') {
-      setInputErrorText(0, 'Please enter your email');
-      isProblem = true;
-    } else if (!isValidUsername(username)) {
+    if (!isValidUsername(username)) {
       setInputErrorText(0, 'Please enter a valid email');
-      isProblem = true;
+      setIsLoginAllowed(false);
+      return;
     }
-
-    if (password === '') {
-      setInputErrorText(1, 'Please enter your password');
-      isProblem = true;
-    }
-
-    if (isProblem) return;
 
     try {
       await login({ username, password });
       authRouter();
     } catch (e: any) {
-      setInputErrorText(1, e.response.data.message);
+      setLoginErrorText(e.response.data.message);
     }
   };
-
-  useEffect(() => {
-    if (username !== '') setInputErrorText(0, '');
-  }, [username, setInputErrorText]);
-
-  useEffect(() => {
-    if (password !== '') setInputErrorText(1, '');
-  }, [password, setInputErrorText]);
 
   const handleLoginWithGoogle = async (
     credentialResponse: CredentialResponse,
@@ -70,6 +73,11 @@ export default function LoginCommon() {
         console.log(e.message);
       }
     }
+  };
+
+  const clearForm = () => {
+    setUsername('');
+    setPassword('');
   };
 
   return (
@@ -104,9 +112,24 @@ export default function LoginCommon() {
           },
         ]}
         onAction={handleLoginWithUsername}
+        actionAllowed={isLoginAllowed}
         actionText='Log In'
         errorTexts={inputErrorTexts}
       />
+      {/* ALERT MODAL */}
+      {loginErrorText && (
+        <ModalAlert
+          title='Log In'
+          description={`${loginErrorText}. Please try again.`}
+          onDismiss={() => setLoginErrorText(null)}
+          primaryActionButtonText='Try Again'
+          onPrimaryAction={() => {
+            clearForm();
+            setLoginErrorText(null);
+          }}
+          type={AlertLevel.ERROR}
+        />
+      )}
     </>
   );
 }

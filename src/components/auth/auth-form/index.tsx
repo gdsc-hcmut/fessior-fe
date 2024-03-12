@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Button from '@/components/button';
 import Input from '@/components/input';
 import useAuthRouter from '@/hooks/useAuthRouter';
+import useEventListener from '@/hooks/useEventListener';
 import AuthFormField from '@/types/auth-form-field-type';
 import AuthType from '@/types/auth-type-enum';
 
@@ -34,6 +35,10 @@ export default function AuthForm(props: AuthFormProps) {
     Array(initFields.length).fill(false),
   );
   const authRouter = useAuthRouter();
+
+  useEventListener('keydown', (e: any) => {
+    if (e.key === 'Enter') onAction();
+  });
 
   return (
     <div className='flex flex-col'>

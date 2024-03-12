@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import LoadingPage from '@/app/loading';
 import CloseButton from '@/components/close-button';
+import AuthFormContext from '@/contexts/authFormContext';
 import useAuthRouter from '@/hooks/useAuthRouter';
+import useEventListener from '@/hooks/useEventListener';
 import authHeaderContent from '@/libs/auth-header-content';
 import storage from '@/libs/local-storage';
 import AuthType from '@/types/auth-type-enum';
@@ -17,8 +19,9 @@ type AuthModalProps = {
 export default function AuthModal(props: AuthModalProps) {
   const { authType } = props;
 
-  const authRouter = useAuthRouter();
   const [allowAuth, setAllowAuth] = useState<boolean | null>(null);
+  const { isAuthErrorModalVisible } = useContext(AuthFormContext);
+  const authRouter = useAuthRouter();
 
   useEffect(() => {
     const isMobile = !['windows', 'other'].includes(detectOS());
@@ -31,6 +34,11 @@ export default function AuthModal(props: AuthModalProps) {
       setAllowAuth(true);
     }
   }, [authRouter]);
+
+  useEventListener('keydown', (e: any) => {
+    if (e.key === 'Escape' && !isAuthErrorModalVisible) authRouter();
+  });
+
   if (!authType) return null;
   if (allowAuth == null) return <LoadingPage />;
 
