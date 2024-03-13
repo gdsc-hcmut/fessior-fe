@@ -36,13 +36,14 @@ const authHeaderContent = {
       background: '/images/auth/background_3.png',
     },
     {
-      title: 'Reset your password',
-      subtitle: 'Create a new password for your account',
+      title: 'Verify your email',
+      subtitle:
+        'If we find a matching account, we will send you an verification code.',
       background: '/images/auth/background_3.png',
     },
     {
-      title: 'Check your email',
-      subtitle: 'Verify your account to reset password',
+      title: 'Reset your password',
+      subtitle: 'Create a new password for your account.',
       background: '/images/auth/background_3.png',
     },
   ],

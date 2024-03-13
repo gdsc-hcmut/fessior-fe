@@ -2,28 +2,30 @@ import { useContext, useState, useEffect } from 'react';
 
 import ModalAlert from '@/components/modal-alert';
 import AuthContext from '@/contexts/authContext';
-import AuthFormContext from '@/contexts/authFormContext';
+import useAuthPasswordForm from '@/hooks/useAuthPasswordForm';
 import useAuthRouter from '@/hooks/useAuthRouter';
-import useInputErrorText from '@/hooks/useInputErrorText';
 import { createPassword } from '@/libs/api/auth';
 import meService from '@/services/me.service';
 import AlertLevel from '@/types/alert-level-enum';
+import AuthFormFieldEnum from '@/types/auth-form-field-enum';
 import AuthType from '@/types/auth-type-enum';
-import { validatePassword } from '@/utils/auth';
 
 import AuthForm from '../auth-form';
 
 export default function SignUpCommon() {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [isSignUpAllowed, setIsSignUpAllowed] = useState(false);
-  const [signUpErrorText, setSignUpErrorText] = useState<string | null>(null);
-  const { setIsAuthErrorModalVisible } = useContext(AuthFormContext);
-
+  const {
+    password,
+    confirmPassword,
+    setPassword,
+    setConfirmPassword,
+    isActionAllowed,
+    modalErrorText,
+    setModalErrorText,
+    inputErrorTexts,
+    handleDifferentConfirmPassword,
+  } = useAuthPasswordForm();
   const { login, meProfile } = useContext(AuthContext);
   const [username, setUsername] = useState(meProfile ? meProfile.email : null);
-
-  const { inputErrorTexts, setInputErrorText } = useInputErrorText(3);
 
   const authRouter = useAuthRouter();
 
@@ -40,28 +42,11 @@ export default function SignUpCommon() {
     })();
   }, [authRouter, username]);
 
-  useEffect(() => {
-    if (!validatePassword(3, password).includes(false))
-      setIsSignUpAllowed(true);
-    else setIsSignUpAllowed(false);
-  }, [password, confirmPassword, setInputErrorText]);
-
-  useEffect(() => {
-    setInputErrorText(2, '');
-  }, [confirmPassword, setInputErrorText]);
-
-  useEffect(() => {
-    setIsAuthErrorModalVisible(!!signUpErrorText);
-  }, [signUpErrorText]);
-
   if (!username) return;
 
   const handleSignUp = async () => {
-    if (!isSignUpAllowed) return;
-
     if (password !== confirmPassword) {
-      setInputErrorText(2, 'Password does not match');
-      setIsSignUpAllowed(false);
+      handleDifferentConfirmPassword();
       return;
     }
 
@@ -70,7 +55,7 @@ export default function SignUpCommon() {
       await login({ username: username, password });
       authRouter();
     } catch (e: any) {
-      setSignUpErrorText(e.message);
+      setModalErrorText(e.message);
     }
   };
 
@@ -84,30 +69,30 @@ export default function SignUpCommon() {
           { label: 'Email', fixedValue: true, currentValue: username },
           {
             label: 'Password',
-            isPassword: true,
+            type: AuthFormFieldEnum.PASSWORD,
             currentValue: password,
             onChange: (input) => setPassword(input),
           },
           {
             label: 'Confirm your password',
-            isPassword: true,
+            type: AuthFormFieldEnum.PASSWORD,
             currentValue: confirmPassword,
             onChange: (input) => setConfirmPassword(input),
           },
         ]}
         onAction={handleSignUp}
         errorTexts={inputErrorTexts}
-        actionAllowed={isSignUpAllowed}
+        actionAllowed={isActionAllowed}
       />
       {/* ALERT MODAL */}
-      {signUpErrorText && (
+      {modalErrorText && (
         <ModalAlert
           title='Sign Up'
-          description={`${signUpErrorText}. Please try again.`}
-          onDismiss={() => setSignUpErrorText(null)}
+          description={`${modalErrorText}. Please try again.`}
+          onDismiss={() => setModalErrorText(null)}
           secondaryActionButtonText='Dismiss'
           onSecondaryAction={() => {
-            setSignUpErrorText(null);
+            setModalErrorText(null);
           }}
           type={AlertLevel.ERROR}
         />

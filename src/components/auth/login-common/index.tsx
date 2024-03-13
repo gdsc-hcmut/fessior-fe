@@ -1,5 +1,5 @@
 import { CredentialResponse } from '@react-oauth/google';
-import { useState, useContext, useEffect, useRef } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 import ModalAlert from '@/components/modal-alert';
 import AuthContext from '@/contexts/authContext';
@@ -7,6 +7,7 @@ import AuthFormContext from '@/contexts/authFormContext';
 import useAuthRouter from '@/hooks/useAuthRouter';
 import useInputErrorText from '@/hooks/useInputErrorText';
 import AlertLevel from '@/types/alert-level-enum';
+import AuthFormFieldEnum from '@/types/auth-form-field-enum';
 import AuthType from '@/types/auth-type-enum';
 import { isValidUsername } from '@/utils/auth';
 
@@ -28,7 +29,7 @@ export default function LoginCommon() {
 
   useEffect(() => {
     setIsAuthErrorModalVisible(!!loginErrorText);
-  }, [loginErrorText]);
+  }, [loginErrorText, setIsAuthErrorModalVisible]);
 
   useEffect(() => {
     if (username !== '' && password !== '') setIsLoginAllowed(true);
@@ -40,8 +41,6 @@ export default function LoginCommon() {
   }, [username, setInputErrorText]);
 
   const handleLoginWithUsername = async () => {
-    if (!isLoginAllowed) return;
-
     if (!isValidUsername(username)) {
       setInputErrorText(0, 'Please enter a valid email');
       setIsLoginAllowed(false);
@@ -104,7 +103,7 @@ export default function LoginCommon() {
           },
           {
             label: 'Password',
-            isPassword: true,
+            type: AuthFormFieldEnum.PASSWORD,
             currentValue: password,
             onChange: (input: string) => {
               setPassword(input);
