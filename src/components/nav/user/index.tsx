@@ -54,8 +54,8 @@ export default function User(props: UserProps) {
     meProfile && meProfile.picture
       ? meProfile.picture
       : whiteTheme
-      ? '/images/header/user_white.svg'
-      : '/images/header/user_royal.svg';
+      ? '/icons/header/user_white.svg'
+      : '/icons/header/user_royal.svg';
 
   const collapseIcon = getIcon(
     '/icons/header/',
