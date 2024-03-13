@@ -21,7 +21,7 @@ export default function SignUpCommon() {
   const { setIsAuthErrorModalVisible } = useContext(AuthFormContext);
 
   const { login, meProfile } = useContext(AuthContext);
-  const [email, setEmail] = useState(meProfile ? meProfile.email : null);
+  const [username, setUsername] = useState(meProfile ? meProfile.email : null);
 
   const { inputErrorTexts, setInputErrorText } = useInputErrorText(3);
 
@@ -29,16 +29,16 @@ export default function SignUpCommon() {
 
   useEffect(() => {
     (async () => {
-      if (!email) {
+      if (!username) {
         try {
-          setEmail((await meService.getMe()).email);
+          setUsername((await meService.getMe()).email);
         } catch (e: any) {
           console.log(e.message);
           authRouter(AuthType.SIGN_UP_INFO);
         }
       }
     })();
-  }, [authRouter, email]);
+  }, [authRouter, username]);
 
   useEffect(() => {
     if (!validatePassword(3, password).includes(false))
@@ -54,7 +54,7 @@ export default function SignUpCommon() {
     setIsAuthErrorModalVisible(!!signUpErrorText);
   }, [signUpErrorText]);
 
-  if (!email) return;
+  if (!username) return;
 
   const handleSignUp = async () => {
     if (!isSignUpAllowed) return;
@@ -67,7 +67,7 @@ export default function SignUpCommon() {
 
     try {
       await createPassword(password);
-      await login({ username: email, password });
+      await login({ username: username, password });
       authRouter();
     } catch (e: any) {
       setSignUpErrorText(e.message);
@@ -81,7 +81,7 @@ export default function SignUpCommon() {
         subActionText='Change Google account'
         actionText='Sign Up'
         initFields={[
-          { label: 'Email', fixedValue: true, currentValue: email },
+          { label: 'Email', fixedValue: true, currentValue: username },
           {
             label: 'Password',
             isPassword: true,
@@ -102,7 +102,7 @@ export default function SignUpCommon() {
       {/* ALERT MODAL */}
       {signUpErrorText && (
         <ModalAlert
-          title='Log In'
+          title='Sign Up'
           description={`${signUpErrorText}. Please try again.`}
           onDismiss={() => setSignUpErrorText(null)}
           secondaryActionButtonText='Dismiss'
