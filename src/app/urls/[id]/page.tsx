@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 
 import Sidebar from '@/components/sidebar';
 import UrlDetailsCard from '@/components/url-detail';
+import InfoCard from '@/components/url-detail/InfoCard';
+import QRCard from '@/components/url-detail/QRCard';
 import { MyUrlv1 } from '@/types/url-type';
 
 type URLDetailPageProps = {
@@ -101,7 +103,11 @@ function URLDetailPage(props: URLDetailPageProps) {
               />
             </button>
           </div>
-          <UrlDetailsCard url={demoInfo} />
+          <div className='flex-col space-y-4'>
+            <UrlDetailsCard url={demoInfo} />
+            <QRCard />
+            <InfoCard />
+          </div>
         </div>
       </div>
     </div>

@@ -48,7 +48,7 @@ export function SidebarItem(props: SidebarItemProps) {
     >
       <div>
         <Image
-          src={`icons/sidebar/active/${item.iconFilename}`}
+          src={`/icons/sidebar/active/${item.iconFilename}`}
           alt={item.imgAlt}
           width={0}
           height={0}
@@ -58,7 +58,7 @@ export function SidebarItem(props: SidebarItemProps) {
           )}
         />
         <Image
-          src={`icons/sidebar/inactive/${item.iconFilename}`}
+          src={`/icons/sidebar/inactive/${item.iconFilename}`}
           alt={item.imgAlt}
           width={0}
           height={0}
