@@ -27,7 +27,7 @@ export default function HomePage() {
       <Header />
       <div className='flex flex-col'>
         {/* ------------PART 1-------------- */}
-        <div className="xl:min-h-none mb-[80px] h-screen min-h-[800px] bg-[url('/images/home/background_1.svg')] bg-cover bg-fixed xl:mb-0">
+        <div className="xl:min-h-none mb-[80px] h-screen min-h-[800px] bg-[url('/images/home/background_1.png')] bg-cover bg-fixed xl:mb-0">
           <div className='relative h-[100%] bg-primary/[0.7] px-[20px] pt-[160px] xl:flex xl:flex-row xl:items-center xl:justify-between xl:px-[calc(160px-(1920px-100vw)/3)] xl:pt-0'>
             <div className='mb-[60px] text-white xl:mx-[20px] xl:mb-0 xl:max-w-[560px]'>
               <div data-aos='fade-down' data-aos-duration='1000'>
@@ -52,7 +52,7 @@ export default function HomePage() {
             <HomeTools />
             <div className='absolute bottom-[0] left-[0] z-[1] w-[100%]'>
               {/* <Image
-                src='/images/home/decor.svg'
+                src='/icons/home/decor.svg'
                 alt='decor'
                 width={0}
                 height={0}
@@ -105,7 +105,7 @@ export default function HomePage() {
         {/* -------------PART 2------------- */}
         <HomeAvailableTools />
         {/* ----------PART 3------------ */}
-        <div className="flex flex-col items-center justify-center bg-[url('/images/home/background_2.svg')] bg-cover bg-fixed px-[20px] pb-[60px] pt-[36px] md:flex-row md:justify-between md:pb-[36px] xl:h-[720px] xl:flex-row xl:justify-between xl:px-[calc(160px-(1920px-100vw)/3)]">
+        <div className="flex flex-col items-center justify-center bg-[url('/images/home/background_2.png')] bg-cover bg-fixed px-[20px] pb-[60px] pt-[36px] md:flex-row md:justify-between md:pb-[36px] xl:h-[720px] xl:flex-row xl:justify-between xl:px-[calc(160px-(1920px-100vw)/3)]">
           <div
             data-aos='fade-down'
             data-aos-delay='200'

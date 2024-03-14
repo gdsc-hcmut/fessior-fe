@@ -107,6 +107,7 @@ export default function Input(props: InputProps) {
   const inputClass = clsx(
     'mx-[8px] h-[100%] flex-grow px-[4px] outline-none placeholder:text-royal-300',
     disabled && 'bg-transparent',
+    !onInput && 'bg-white',
   );
 
   return (
