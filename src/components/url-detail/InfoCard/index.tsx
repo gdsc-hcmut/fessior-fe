@@ -44,7 +44,9 @@ function InfoCard() {
           />
         </div>
         <div className='flex flex-col items-end'>
-          <p className='font-bold text-[#0F9D58]'>Monday 1/1/2024 8:59:10 PM</p>
+          <p className='text-[14px] font-bold text-[#0F9D58] xs:text-base'>
+            Monday 1/1/2024 8:59:10 PM
+          </p>
           <p className='font-medium text-[#252641]'>Created on</p>
         </div>
       </div>

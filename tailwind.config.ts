@@ -4,7 +4,9 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
+        xs: '420px',
         sm: '480px',
+        tablet: '640px',
         md: '760px',
         lg: '960px',
         xl: '1300px',

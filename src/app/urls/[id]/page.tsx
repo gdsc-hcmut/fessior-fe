@@ -105,8 +105,10 @@ function URLDetailPage(props: URLDetailPageProps) {
           </div>
           <div className='flex-col space-y-4'>
             <UrlDetailsCard url={demoInfo} />
-            <QRCard />
-            <InfoCard />
+            <div className='flex flex-col space-y-4 tablet:flex-row tablet:space-x-2 tablet:space-y-0'>
+              <QRCard />
+              <InfoCard />
+            </div>
           </div>
         </div>
       </div>

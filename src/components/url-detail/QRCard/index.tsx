@@ -67,7 +67,7 @@ function QRCard() {
 
   return (
     <div className='flex w-full justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
-      <div className='h-[40vw] w-[40vw] rounded-lg bg-white p-2 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
+      <div className='h-[32vw] w-[32vw] rounded-lg bg-white p-2 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] xs:h-[40vw] xs:w-[40vw] tablet:h-[20vw] tablet:w-[20vw]'>
         <img
           src='/images/url/sampleQR.png'
           alt='qr'
@@ -78,20 +78,25 @@ function QRCard() {
       </div>
       <div className='flex flex-col justify-between'>
         <div className='flex flex-col'>
-          <p className='mb-3 text-xl font-semibold text-primary'>QR Code</p>
+          <p className='mb-3 font-semibold text-primary xs:text-xl'>QR Code</p>
           <div className='mb-2 flex space-x-3'>
             <div className='flex items-center space-x-2'>
               <button
                 onClick={() => setIsSVG(true)}
                 className={clsx(
-                  'flex h-4 w-4 items-center justify-center rounded-full',
+                  'flex h-3 w-3 items-center justify-center rounded-full xs:h-4 xs:w-4',
                   isSVG ? 'bg-[#D9D9D9]' : 'border-[1px] border-primary',
                 )}
                 id='svg'
               >
-                {isSVG && <div className='h-3 w-3 rounded-full bg-primary' />}
+                {isSVG && (
+                  <div className='h-2 w-2 rounded-full bg-primary xs:h-3 xs:w-3' />
+                )}
               </button>
-              <label htmlFor='svg' className='font-semibold text-primary'>
+              <label
+                htmlFor='svg'
+                className='text-xs font-semibold text-primary xs:text-base'
+              >
                 SVG
               </label>
             </div>
@@ -99,19 +104,24 @@ function QRCard() {
               <button
                 onClick={() => setIsSVG(false)}
                 className={clsx(
-                  'flex h-4 w-4 items-center justify-center rounded-full',
+                  'flex h-3 w-3 items-center justify-center rounded-full xs:h-4 xs:w-4',
                   !isSVG ? 'bg-[#D9D9D9]' : 'border-[1px] border-primary',
                 )}
                 id='png'
               >
-                {!isSVG && <div className='h-3 w-3 rounded-full bg-primary' />}
+                {!isSVG && (
+                  <div className='h-2 w-2 rounded-full bg-primary xs:h-3 xs:w-3' />
+                )}
               </button>
-              <label htmlFor='png' className='font-semibold text-primary'>
+              <label
+                htmlFor='png'
+                className='text-xs font-semibold text-primary xs:text-base'
+              >
                 PNG
               </label>
             </div>
           </div>
-          <div className='flex space-x-3'>
+          <div className='flex space-x-1'>
             <p className='font-medium text-primary'>Size</p>
             <div className='relative'>
               <button
@@ -147,7 +157,7 @@ function QRCard() {
             </div>
           </div>
         </div>
-        <div className='flex space-x-2'>
+        <div className='mt-2 flex space-x-2 xs:mt-0'>
           <button
             onClick={downloadQR}
             className='flex space-x-1 rounded-lg bg-primary px-2 py-1'
