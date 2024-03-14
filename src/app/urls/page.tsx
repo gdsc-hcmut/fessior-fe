@@ -442,7 +442,7 @@ function URLsPage(props: URLsPageProps) {
               </button>
             </div>
           </div>
-          {!isLoading && !searchLoading ? (
+          {!isLoading && !searchLoading && curOrganizationId ? (
             <MyUrlList
               myUrlList={displayUrlList}
               isAlreadyShorten={urlListV1.length !== 0}

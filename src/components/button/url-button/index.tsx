@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
@@ -7,11 +8,12 @@ import { MyUrl, MyUrlv1 } from '@/types/url-type';
 type UrlButtonProps = {
   copyContent: string;
   editedUrl: MyUrlv1;
+  isDetail: boolean;
 };
 
 export default function UrlButton(props: UrlButtonProps) {
   const [copied, setCopied] = useState(false);
-  const { copyContent, editedUrl } = props;
+  const { copyContent, editedUrl, isDetail } = props;
 
   const { setShowEditModal, setShowDeleteModal, setEditedUrl, setDeleteUrl } =
     useUrlModalStore();
@@ -27,7 +29,12 @@ export default function UrlButton(props: UrlButtonProps) {
   }, [copied]);
 
   return (
-    <div className='flex flex-col justify-end space-y-2 self-start xl:flex-[1] xl:flex-row xl:space-x-1 xl:space-y-0 3xl:space-x-2'>
+    <div
+      className={clsx(
+        isDetail ? 'space-x-2' : 'flex-col justify-end space-y-2',
+        'flex self-start xl:flex-[1] xl:flex-row xl:space-x-1 xl:space-y-0 3xl:space-x-2',
+      )}
+    >
       <button
         onClick={onCopy}
         className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'
@@ -59,6 +66,17 @@ export default function UrlButton(props: UrlButtonProps) {
           className='h-4 w-auto 3xl:h-5'
         />
       </button>
+      {isDetail && (
+        <button className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'>
+          <Image
+            src='/icons/url/power_primary.svg'
+            alt='Edit icon'
+            width={0}
+            height={0}
+            className='h-4 w-auto 3xl:h-5'
+          />
+        </button>
+      )}
       <button
         onClick={() => {
           setShowDeleteModal(true);

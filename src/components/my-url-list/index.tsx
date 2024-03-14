@@ -101,7 +101,7 @@ function UrlItemXL(props: UrlItemProps) {
       <div className='absolute left-0 top-0 h-full w-1 flex-[0] rounded-s-lg bg-primary' />
       <div className='mr-5 flex flex-[2] overflow-hidden 2xl:flex-[1.9] 3xl:flex-[1.5]'>
         <p className='w-[96%] truncate text-[14px] font-semibold text-primary 2xl:text-base'>
-          https://{url.domain}/{url.slug}
+          {url.domain}/{url.slug}
         </p>
       </div>
       <div className='mr-5 flex flex-[2.4] overflow-hidden 2xl:flex-[2.5]'>
@@ -182,6 +182,7 @@ function UrlItemXL(props: UrlItemProps) {
       <UrlButton
         copyContent={`https://${url.domain}/${url.slug}`}
         editedUrl={url}
+        isDetail={false}
       />
     </div>
   );
@@ -270,7 +271,7 @@ function UrlItemMD(props: UrlItemProps) {
             )}
           />
           <p className='w-[50vw] truncate text-xl font-semibold text-primary'>
-            https://{url.domain}/{url.slug}
+            {url.domain}/{url.slug}
           </p>
         </div>
         <p className='mt-5 w-[70vw] truncate lg:w-[60vw]'>{url.originalUrl}</p>
@@ -349,6 +350,7 @@ function UrlItemMD(props: UrlItemProps) {
       <UrlButton
         copyContent={`https://${url.domain}/${url.slug}`}
         editedUrl={url}
+        isDetail={false}
       />
     </div>
   );
@@ -359,7 +361,7 @@ function EmptyList(props: EmptyListProps) {
   return (
     <div className='mt-10 flex min-h-[70vh] flex-col items-center 3xl:mt-[60px]'>
       <Image
-        src='/images/url/empty_list.svg'
+        src='/icons/url/empty_list.svg'
         alt='Empty icon'
         width={0}
         height={0}

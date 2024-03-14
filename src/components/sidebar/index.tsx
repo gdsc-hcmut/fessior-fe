@@ -109,7 +109,7 @@ export default function Sidebar(props: SidebarProps) {
             className='flex h-7 w-7 items-center justify-center self-end rounded-lg border-[1px] border-primary'
           >
             <Image
-              src='icons/url/chevron_primary.svg'
+              src='/icons/url/chevron_primary.svg'
               alt='Close sidebar'
               width={0}
               height={0}
