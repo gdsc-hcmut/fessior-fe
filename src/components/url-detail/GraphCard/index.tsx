@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import {
   LineChart,
   Line,
@@ -13,6 +11,8 @@ import {
 } from 'recharts';
 
 import { ChartData } from '@/types/url-type';
+
+import DateRange from '../DateRange';
 
 type RenderLineChartProps = {
   data: ChartData[];
@@ -53,29 +53,6 @@ function RenderLineChart(props: RenderLineChartProps) {
   );
 }
 
-function DateRange() {
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
-    new Date(), // Today
-    new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000),
-  ]);
-  const [startDate, endDate] = dateRange;
-
-  const handleDateChange = (update: [Date | null, Date | null]) => {
-    setDateRange(update);
-  };
-  return (
-    <DatePicker
-      className='rounded-lg border-[1px] border-[#7E7E7E] px-2 py-1 text-xs'
-      selectsRange={true}
-      startDate={startDate}
-      endDate={endDate}
-      onChange={handleDateChange}
-      clearButtonClassName='after:!bg-primary'
-      isClearable={true}
-    />
-  );
-}
-
 function GraphCard() {
   //temporary to hide recharts current errors till they are fixed
   const error = console.error;
@@ -91,7 +68,7 @@ function GraphCard() {
           <DateRange />
         </div>
       </div>
-      <div className='mt-5 h-[200px] w-[70vw] self-center sm:h-[240px]'>
+      <div className='ml-[-28px] mt-5 h-[200px] w-[80vw] self-center sm:h-[240px]'>
         <RenderLineChart data={demoData} />
       </div>
     </div>

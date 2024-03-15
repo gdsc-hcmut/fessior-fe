@@ -62,4 +62,9 @@ export type ChartData = {
   count: number;
 };
 
+export type PieChartData = {
+  name: string;
+  value: number;
+};
+
 export default Url;
