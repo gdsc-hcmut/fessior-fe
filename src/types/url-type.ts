@@ -56,4 +56,10 @@ export type deletUrlOption = {
   };
 };
 
+export type ChartData = {
+  dateString: string;
+  clicks: number;
+  count: number;
+};
+
 export default Url;
