@@ -31,8 +31,10 @@ export default function UrlButton(props: UrlButtonProps) {
   return (
     <div
       className={clsx(
-        isDetail ? 'space-x-2' : 'flex-col justify-end space-y-2',
-        'flex self-start xl:flex-[1] xl:flex-row xl:space-x-1 xl:space-y-0 3xl:space-x-2',
+        isDetail
+          ? 'space-x-2 md:flex-col md:space-x-0 md:space-y-2'
+          : 'flex-col justify-end space-y-2 xl:flex-[1] xl:flex-row xl:space-x-1 xl:space-y-0 3xl:space-x-2',
+        'flex self-start',
       )}
     >
       <button

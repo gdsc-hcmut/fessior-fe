@@ -67,7 +67,7 @@ function QRCard() {
 
   return (
     <div className='flex w-full justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
-      <div className='h-[32vw] w-[32vw] rounded-lg bg-white p-2 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] xs:h-[40vw] xs:w-[40vw] tablet:h-[20vw] tablet:w-[20vw]'>
+      <div className='h-[32vw] w-[32vw] rounded-lg bg-white p-2 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] xs:h-[40vw] xs:w-[40vw] tablet:h-[20vw] tablet:w-[20vw] lg:h-[15vw] lg:w-[15vw] xl:h-[12vw] xl:w-[12vw]'>
         <img
           src='/images/url/sampleQR.png'
           alt='qr'
@@ -78,8 +78,10 @@ function QRCard() {
       </div>
       <div className='flex flex-col justify-between'>
         <div className='flex flex-col'>
-          <p className='mb-3 font-semibold text-primary xs:text-xl'>QR Code</p>
-          <div className='mb-2 flex space-x-3'>
+          <p className='mb-3 font-semibold text-primary xs:text-xl md:text-xl'>
+            QR Code
+          </p>
+          <div className='mb-2 flex space-x-3 md:space-x-2'>
             <div className='flex items-center space-x-2'>
               <button
                 onClick={() => setIsSVG(true)}

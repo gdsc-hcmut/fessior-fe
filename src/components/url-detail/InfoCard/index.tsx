@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 function InfoCard() {
   return (
-    <div className='flex w-full flex-col justify-between space-y-5 rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
+    <div className='flex w-full flex-col justify-between space-y-3 rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
       <div className='flex items-center justify-between'>
         <div className='flex h-10 w-10 items-center justify-center rounded-lg bg-[#db4437]/10'>
           <Image

@@ -48,20 +48,22 @@ function URLDetailPage(props: URLDetailPageProps) {
         <div className='relative px-5 pt-10 md:px-10 md:pt-[48px] xl:pt-10 2xl:px-[60px] 2xl:pt-[60px] 3xl:px-[80px]'>
           <Link
             href={'/urls'}
-            className='flex w-fit items-center space-x-1 rounded-[20px] border-[1px] border-primary px-3 py-1'
+            className='flex w-fit items-center space-x-1 rounded-[20px] border-[1px] border-primary px-3 py-1 lg:hidden'
           >
             <Image
               src='/icons/url/chevron_primary.svg'
               alt='Back Icon'
               width={0}
               height={0}
-              className='h-5 w-auto'
+              className='h-5 w-auto md:h-6'
             />
-            <p className='font-medium text-primary'>My URL</p>
+            <p className='font-medium text-primary md:text-xl'>My URL</p>
           </Link>
-          <div className='mb-5 mt-2 flex items-end justify-between'>
+          <div className='mb-5 mt-2 flex items-end justify-between md:mt-3 md:items-center'>
             <div className='flex w-full items-center justify-between md:w-fit 2xl:text-[48px] 3xl:text-[60px]'>
-              <h1 className='text-[40px] font-bold text-primary'>My URLs</h1>
+              <h1 className='text-[40px] font-bold text-primary'>
+                Link&apos;s details
+              </h1>
               <button
                 onClick={() => setIsCollapsed(false)}
                 className='flex h-10 w-10 items-center justify-center rounded-lg bg-primary md:hidden'
@@ -74,23 +76,6 @@ function URLDetailPage(props: URLDetailPageProps) {
                   className='h-7 w-auto'
                 />
               </button>
-            </div>
-            <div className='hidden items-center space-x-2 rounded-lg bg-primary/20 px-3 py-1 xl:flex 2xl:px-5 2xl:py-2'>
-              <div className='flex h-10 w-10 items-center justify-center rounded-full bg-white'>
-                <Image
-                  src='/icons/click.svg'
-                  alt='Click icon'
-                  width={0}
-                  height={0}
-                  className='h-6 w-auto'
-                />
-              </div>
-              <div className='flex flex-col'>
-                <p className='font-semibold text-primary 2xl:text-xl'>1120</p>
-                <p className='text-[14px] text-primary 2xl:text-base'>
-                  clicks on your links today
-                </p>
-              </div>
             </div>
             <button
               onClick={() => setIsCollapsed(false)}
@@ -105,14 +90,16 @@ function URLDetailPage(props: URLDetailPageProps) {
               />
             </button>
           </div>
-          <div className='flex-col space-y-4'>
+          <div className='flex flex-col space-y-4 md:space-y-5'>
             <UrlDetailsCard url={demoInfo} />
-            <div className='flex flex-col space-y-4 tablet:flex-row tablet:space-x-2 tablet:space-y-0'>
+            <div className='flex flex-col space-y-4 tablet:flex-row tablet:space-x-2 tablet:space-y-0 md:space-x-5 lg:space-x-5'>
               <QRCard />
               <InfoCard />
             </div>
-            <GraphCard />
-            <ClickStatisticCard />
+            <div className='flex flex-col space-y-4 md:space-y-5 xl:flex-row xl:space-x-5 xl:space-y-0'>
+              <GraphCard />
+              <ClickStatisticCard />
+            </div>
           </div>
         </div>
       </div>

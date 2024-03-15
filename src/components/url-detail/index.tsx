@@ -83,9 +83,9 @@ function UrlDetailsCard(props: UrlDetailProps) {
   }, [width, url.categories, isDivFull]);
 
   return (
-    <div className='relative w-full flex-col justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
+    <div className='relative flex w-full flex-col justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] md:flex-row'>
       <div className='absolute left-0 top-4 h-9 w-2 bg-primary' />
-      <div className='mb-7 flex flex-col'>
+      <div className='mb-7 flex flex-col md:mb-0'>
         <div className='flex items-center space-x-2'>
           <div
             className={clsx(
@@ -93,11 +93,13 @@ function UrlDetailsCard(props: UrlDetailProps) {
               url.isActive ? 'bg-[#7BCFA9]' : 'bg-[#ED9D97]',
             )}
           />
-          <p className='truncate text-xl font-semibold text-primary'>
+          <p className='truncate text-xl font-semibold text-primary md:w-[50vw]'>
             {url.domain}/{url.slug}
           </p>
         </div>
-        <p className='mt-5 truncate lg:w-[60vw]'>{url.originalUrl}</p>
+        <p className='mt-5 truncate md:mt-4 md:w-[70vw] lg:w-[60vw] xl:font-medium'>
+          {url.originalUrl}
+        </p>
         <div className='mt-5 flex flex-col items-start space-y-2 md:flex-row md:items-center md:space-x-6 md:space-y-0'>
           <div className='flex items-center space-x-1'>
             <Image
