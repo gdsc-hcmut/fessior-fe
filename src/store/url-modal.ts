@@ -7,10 +7,12 @@ type UrlModalStore = {
     delete: boolean;
     edit: boolean;
     category: boolean;
+    enable: boolean;
   };
   setShowEditModal: (value: boolean) => void;
   setShowDeleteModal: (value: boolean) => void;
   setShowCategoryModal: (value: boolean) => void;
+  setShowEnableModal: (value: boolean) => void;
   editedUrl: MyUrlv1;
   setEditedUrl: (url: MyUrlv1) => void;
   deleteUrl: string;
@@ -22,6 +24,7 @@ export const useUrlModalStore = create<UrlModalStore>((set) => ({
     delete: false,
     edit: false,
     category: false,
+    enable: false,
   },
   editedUrl: {
     _id: '',
@@ -35,7 +38,7 @@ export const useUrlModalStore = create<UrlModalStore>((set) => ({
     updatedAt: '',
     isActive: false,
     clickCount: 0,
-    category: [],
+    categories: [],
   },
   deleteUrl: '',
   setShowEditModal: (value) =>
@@ -57,6 +60,13 @@ export const useUrlModalStore = create<UrlModalStore>((set) => ({
       isShow: {
         ...state.isShow,
         category: value,
+      },
+    })),
+  setShowEnableModal: (value) =>
+    set((state) => ({
+      isShow: {
+        ...state.isShow,
+        enable: value,
       },
     })),
   setEditedUrl: (url) =>

@@ -3,12 +3,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
+import EnableLinkModal from '@/components/modal-url/enable-link-modal';
 import Sidebar from '@/components/sidebar';
 import UrlDetailsCard from '@/components/url-detail';
 import ClickStatisticCard from '@/components/url-detail/ClickStatisticCard';
 import GraphCard from '@/components/url-detail/GraphCard';
 import InfoCard from '@/components/url-detail/InfoCard';
 import QRCard from '@/components/url-detail/QRCard';
+import { useUrlModalStore } from '@/store/url-modal';
 import { MyUrlv1 } from '@/types/url-type';
 
 type URLDetailPageProps = {
@@ -37,6 +39,7 @@ function URLDetailPage(props: URLDetailPageProps) {
   } = props;
 
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const { isShow } = useUrlModalStore();
 
   return (
     <div>
@@ -44,6 +47,7 @@ function URLDetailPage(props: URLDetailPageProps) {
         isCollapsed={isCollapsed}
         hideSidebar={() => setIsCollapsed(true)}
       />
+      {isShow.enable && <EnableLinkModal isEnable={demoInfo.isActive} />}
       <div className='py-[80px] lg:pl-[24vw] xl:pl-[18vw] xl:pt-[85.6px] 2xl:pl-[17vw] 3xl:pl-[16vw]'>
         <div className='relative px-5 pt-10 md:px-10 md:pt-[48px] xl:pt-10 2xl:px-[60px] 2xl:pt-[60px] 3xl:px-[80px]'>
           <Link

@@ -15,8 +15,13 @@ export default function UrlButton(props: UrlButtonProps) {
   const [copied, setCopied] = useState(false);
   const { copyContent, editedUrl, isDetail } = props;
 
-  const { setShowEditModal, setShowDeleteModal, setEditedUrl, setDeleteUrl } =
-    useUrlModalStore();
+  const {
+    setShowEditModal,
+    setShowDeleteModal,
+    setEditedUrl,
+    setDeleteUrl,
+    setShowEnableModal,
+  } = useUrlModalStore();
 
   const onCopy = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation();
@@ -69,7 +74,10 @@ export default function UrlButton(props: UrlButtonProps) {
         />
       </button>
       {isDetail && (
-        <button className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'>
+        <button
+          onClick={() => setShowEnableModal(true)}
+          className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'
+        >
           <Image
             src='/icons/url/power_primary.svg'
             alt='Edit icon'
