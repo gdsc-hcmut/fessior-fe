@@ -164,8 +164,8 @@ function ClickStatisticCard() {
   };
 
   return (
-    <div className='relative z-[5] flex w-full flex-col items-center justify-between rounded-lg bg-white px-5 pb-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] xl:w-[56%]'>
-      <div className='flex w-full items-center justify-between'>
+    <div className='relative z-[5] flex w-full flex-col items-center justify-between rounded-lg bg-white px-5 pb-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] xl:w-[56%] 3xl:justify-start'>
+      <div className='flex w-full items-center justify-between 3xl:mb-7'>
         <div className='mb-6 flex space-x-6 self-start'>
           <button
             onClick={() => setIsDeviceClicks(true)}
@@ -174,10 +174,10 @@ function ClickStatisticCard() {
               isDeviceClicks && 'border-t-[1px] border-primary text-primary',
             )}
           >
-            <p className='hidden xs:block xl:hidden 2xl:block'>
+            <p className='hidden xs:block xl:hidden 3xl:block 3xl:text-xl'>
               Clicks from Devices
             </p>
-            <p className='xs:hidden xl:block 2xl:hidden'>Devices</p>
+            <p className='xs:hidden xl:block 2xl:text-xl 3xl:hidden'>Devices</p>
           </button>
           <button
             onClick={() => setIsDeviceClicks(false)}
@@ -186,10 +186,12 @@ function ClickStatisticCard() {
               !isDeviceClicks && 'border-t-[1px] border-primary text-primary',
             )}
           >
-            <p className='hidden xs:block xl:hidden 2xl:block'>
+            <p className='hidden xs:block xl:hidden 3xl:block 3xl:text-xl'>
               Clicks from Social Media
             </p>
-            <p className='xs:hidden xl:block 2xl:hidden'>Social Media</p>
+            <p className='xs:hidden xl:block 2xl:text-xl 3xl:hidden'>
+              Social Media
+            </p>
           </button>
         </div>
         <div className='hidden md:block'>

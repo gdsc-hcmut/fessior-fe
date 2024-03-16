@@ -90,7 +90,7 @@ function URLDetailPage(props: URLDetailPageProps) {
               />
             </button>
           </div>
-          <div className='flex flex-col space-y-4 md:space-y-5'>
+          <div className='flex flex-col space-y-4 md:space-y-5 3xl:space-y-8'>
             <div className='flex flex-col space-y-4 md:space-y-5 2xl:flex-row 2xl:space-x-5 2xl:space-y-0'>
               <UrlDetailsCard url={demoInfo} />
               <div className='flex flex-col space-y-4 tablet:flex-row tablet:space-x-2 tablet:space-y-0 md:space-x-5 lg:space-x-5'>

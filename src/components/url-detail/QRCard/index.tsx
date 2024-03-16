@@ -67,7 +67,7 @@ function QRCard() {
 
   return (
     <div className='flex w-full justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
-      <div className='h-[32vw] w-[32vw] rounded-lg bg-white p-2 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] xs:h-[40vw] xs:w-[40vw] tablet:h-[20vw] tablet:w-[20vw] lg:h-[15vw] lg:w-[15vw] xl:h-[12vw] xl:w-[12vw] 2xl:mr-4 2xl:h-[10vw] 2xl:w-[10vw]'>
+      <div className='h-[32vw] w-[32vw] rounded-lg bg-white p-2 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] xs:h-[40vw] xs:w-[40vw] tablet:h-[20vw] tablet:w-[20vw] lg:h-[15vw] lg:w-[15vw] xl:h-[12vw] xl:w-[12vw] 2xl:mr-4 2xl:h-[10vw] 2xl:w-[10vw] 3xl:mr-5'>
         <img
           src='/images/url/sampleQR.png'
           alt='qr'
@@ -169,9 +169,12 @@ function QRCard() {
               alt='Download icon'
               width={0}
               height={0}
-              className='h-5 w-auto'
+              className='h-5 w-auto 3xl:hidden'
             />
-            <p className='font-semibold text-white'>Save</p>
+            <p className='font-semibold text-white 3xl:hidden'>Save</p>
+            <p className='hidden whitespace-nowrap font-semibold text-white 3xl:block'>
+              Save QR Code
+            </p>
           </button>
           <button
             onClick={onCopy}

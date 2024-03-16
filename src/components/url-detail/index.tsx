@@ -93,7 +93,7 @@ function UrlDetailsCard(props: UrlDetailProps) {
               url.isActive ? 'bg-[#7BCFA9]' : 'bg-[#ED9D97]',
             )}
           />
-          <p className='truncate text-xl font-semibold text-primary md:w-[50vw] 2xl:w-[26vw]'>
+          <p className='truncate text-xl font-semibold text-primary md:w-[50vw] 2xl:w-[26vw] 3xl:text-2xl'>
             {url.domain}/{url.slug}
           </p>
         </div>

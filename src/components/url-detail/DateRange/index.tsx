@@ -14,7 +14,7 @@ function DateRange() {
   };
   return (
     <DatePicker
-      className='rounded-lg border-[1px] border-[#7E7E7E] px-2 py-1 text-xs'
+      className='rounded-lg border-[1px] border-[#7E7E7E] px-2 py-1 text-xs 2xl:text-base'
       selectsRange={true}
       startDate={startDate}
       endDate={endDate}

@@ -61,7 +61,7 @@ function GraphCard() {
     error(...args);
   };
   return (
-    <div className='flex w-full flex-col justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] xl:w-[44%]'>
+    <div className='flex w-full flex-col justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] xl:w-[44%] 2xl:w-[54%] 3xl:w-[60%]'>
       <div className='flex flex-col space-y-1 xs:flex-row xs:justify-between xs:space-y-0'>
         <p className='font-semibold text-primary xl:text-xl'>
           Engagements over time
@@ -70,7 +70,7 @@ function GraphCard() {
           <DateRange />
         </div>
       </div>
-      <div className='ml-[-28px] mt-5 h-[200px] w-[80vw] self-center sm:h-[240px] lg:w-[60vw] xl:w-[32vw]'>
+      <div className='ml-[-28px] mt-5 h-[200px] w-[80vw] self-center sm:h-[240px] lg:w-[60vw] xl:w-[32vw] 3xl:mt-10 3xl:h-[300px] 3xl:w-[36vw]'>
         <RenderLineChart data={demoData} />
       </div>
     </div>
