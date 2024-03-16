@@ -43,8 +43,8 @@ function InfoCard() {
             className='h-6 w-auto'
           />
         </div>
-        <div className='flex flex-col items-end'>
-          <p className='text-[14px] font-bold text-[#0F9D58] xs:text-base'>
+        <div className='flex flex-col items-end 2xl:ml-4'>
+          <p className='whitespace-nowrap text-[14px] font-bold text-[#0F9D58] xs:text-base'>
             Monday 1/1/2024 8:59:10 PM
           </p>
           <p className='font-medium text-[#252641]'>Created on</p>

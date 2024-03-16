@@ -48,7 +48,7 @@ function URLDetailPage(props: URLDetailPageProps) {
         <div className='relative px-5 pt-10 md:px-10 md:pt-[48px] xl:pt-10 2xl:px-[60px] 2xl:pt-[60px] 3xl:px-[80px]'>
           <Link
             href={'/urls'}
-            className='flex w-fit items-center space-x-1 rounded-[20px] border-[1px] border-primary px-3 py-1 lg:hidden'
+            className='flex w-fit items-center space-x-1 rounded-[20px] border-[1px] border-primary px-3 py-1 lg:hidden 2xl:flex'
           >
             <Image
               src='/icons/url/chevron_primary.svg'
@@ -91,10 +91,12 @@ function URLDetailPage(props: URLDetailPageProps) {
             </button>
           </div>
           <div className='flex flex-col space-y-4 md:space-y-5'>
-            <UrlDetailsCard url={demoInfo} />
-            <div className='flex flex-col space-y-4 tablet:flex-row tablet:space-x-2 tablet:space-y-0 md:space-x-5 lg:space-x-5'>
-              <QRCard />
-              <InfoCard />
+            <div className='flex flex-col space-y-4 md:space-y-5 2xl:flex-row 2xl:space-x-5 2xl:space-y-0'>
+              <UrlDetailsCard url={demoInfo} />
+              <div className='flex flex-col space-y-4 tablet:flex-row tablet:space-x-2 tablet:space-y-0 md:space-x-5 lg:space-x-5'>
+                <QRCard />
+                <InfoCard />
+              </div>
             </div>
             <div className='flex flex-col space-y-4 md:space-y-5 xl:flex-row xl:space-x-5 xl:space-y-0'>
               <GraphCard />

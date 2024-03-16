@@ -93,14 +93,14 @@ function UrlDetailsCard(props: UrlDetailProps) {
               url.isActive ? 'bg-[#7BCFA9]' : 'bg-[#ED9D97]',
             )}
           />
-          <p className='truncate text-xl font-semibold text-primary md:w-[50vw]'>
+          <p className='truncate text-xl font-semibold text-primary md:w-[50vw] 2xl:w-[26vw]'>
             {url.domain}/{url.slug}
           </p>
         </div>
-        <p className='mt-5 truncate md:mt-4 md:w-[70vw] lg:w-[60vw] xl:font-medium'>
+        <p className='mt-5 truncate md:mt-4 md:w-[70vw] lg:w-[60vw] xl:font-medium 2xl:w-[26vw]'>
           {url.originalUrl}
         </p>
-        <div className='mt-5 flex flex-col items-start space-y-2 md:flex-row md:items-center md:space-x-6 md:space-y-0'>
+        <div className='mt-5 flex flex-col items-start space-y-2 md:flex-row md:items-center md:space-x-6 md:space-y-0 2xl:mt-9'>
           <div className='flex items-center space-x-1'>
             <Image
               src='/icons/click.svg'

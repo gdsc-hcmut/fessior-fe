@@ -210,7 +210,7 @@ function ClickStatisticCard() {
             </div>
           </div>
         </div>
-        <div className='mt-4 flex w-full flex-col'>
+        <div className='mt-4 flex w-full flex-col 2xl:max-w-[280px]'>
           <p className='mb-2 font-medium text-primary'>
             {isDeviceClicks ? 'Devices' : 'Social Media'}
           </p>
@@ -224,7 +224,7 @@ function ClickStatisticCard() {
             />
             <input
               type='text'
-              className='w-full py-2 text-xs outline-none'
+              className='w-full rounded-e-lg py-2 text-xs outline-none'
               value={searchText}
               onChange={(e) => handleSearch(e.target.value)}
               placeholder='Search'
