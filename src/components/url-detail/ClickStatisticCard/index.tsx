@@ -12,98 +12,98 @@ import DateRange from '../DateRange';
 const demoSocialMedia = [
   {
     name: 'Facebook',
-    clicks: 23,
-    color: '#4285f4',
+    clicks: 24,
+    color: '#4267B2',
   },
   {
     name: 'Messenger',
-    clicks: 123,
-    color: '#0F9D58',
+    clicks: 451,
+    color: '#A334FA',
   },
   {
     name: 'Youtube',
-    clicks: 45,
-    color: '#db4437',
+    clicks: 44,
+    color: '#FF0000',
   },
   {
     name: 'Instagram',
-    clicks: 34,
-    color: '#fbbc04',
+    clicks: 58,
+    color: '#E1306C',
   },
   {
-    name: 'X',
-    clicks: 56,
-    color: '#F28500',
+    name: 'Discord',
+    clicks: 44,
+    color: '#7289da',
   },
 ];
 const demoDevice = [
   {
     name: 'Android',
-    clicks: 23,
-    color: '#4285f4',
+    clicks: 240,
+    color: '#78C257',
   },
   {
     name: 'iOS',
-    clicks: 123,
-    color: '#0F9D58',
+    clicks: 45,
+    color: '#555555',
   },
   {
     name: 'Windows',
-    clicks: 45,
-    color: '#db4437',
+    clicks: 139,
+    color: '#00A1F1',
   },
   {
     name: 'Mac',
-    clicks: 34,
-    color: '#fbbc04',
+    clicks: 98,
+    color: '#A2AAAD',
   },
   {
     name: 'Linux',
-    clicks: 56,
-    color: '#F28500',
+    clicks: 44,
+    color: '#ffcc33',
   },
 ];
 const piechartData1 = [
   {
-    name: 'Group A',
+    name: 'Android',
     value: 240,
   },
   {
-    name: 'Group B',
+    name: 'iOS',
     value: 45,
   },
   {
-    name: 'Group C',
+    name: 'Windows',
     value: 139,
   },
   {
-    name: 'Group D',
+    name: 'Mac',
     value: 98,
   },
   {
-    name: 'Group E',
+    name: 'Linux',
     value: 44,
   },
 ];
 const piechartData2 = [
   {
-    name: 'Group A',
+    name: 'Facebook',
     value: 24,
   },
   {
-    name: 'Group B',
+    name: 'Messenger',
     value: 451,
   },
   {
-    name: 'Group C',
+    name: 'Youtube',
     value: 13,
   },
   {
-    name: 'Group D',
+    name: 'Instagram',
     value: 58,
   },
   {
-    name: 'Group E',
+    name: 'Discord',
     value: 44,
   },
 ];
@@ -206,7 +206,15 @@ function ClickStatisticCard() {
             />
           </div>
           <div className='mt-5 flex flex-col items-center space-y-1 xs:flex-row xs:space-x-3 xs:space-y-0 md:mt-0'>
-            <p className='font-semibold text-primary'>231 Clicks</p>
+            <p className='font-semibold text-primary'>
+              {isDeviceClicks
+                ? deviceList.reduce((acc, curr) => acc + curr.clicks, 0)
+                : socialMeidaList.reduce(
+                    (acc, curr) => acc + curr.clicks,
+                    0,
+                  )}{' '}
+              Clicks
+            </p>
             <div className='md:hidden'>
               <DateRange />
             </div>

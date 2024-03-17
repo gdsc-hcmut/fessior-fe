@@ -25,6 +25,7 @@ export default function UrlButton(props: UrlButtonProps) {
 
   const onCopy = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation();
+    event.preventDefault();
     navigator.clipboard.writeText(copyContent);
     setCopied(true);
   };
@@ -59,7 +60,8 @@ export default function UrlButton(props: UrlButtonProps) {
         />
       </button>
       <button
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
           setShowEditModal(true);
           setEditedUrl(editedUrl);
         }}
@@ -88,7 +90,8 @@ export default function UrlButton(props: UrlButtonProps) {
         </button>
       )}
       <button
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
           setShowDeleteModal(true);
           setDeleteUrl(editedUrl._id);
         }}
