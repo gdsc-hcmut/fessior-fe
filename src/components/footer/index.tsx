@@ -14,11 +14,7 @@ export default function Footer() {
         <div className='mb-[40px] lg:mx-[24px] lg:w-[600px]'>
           <div className='mb-[16px] flex items-center'>
             <div className='relative h-[48px] w-[48px] md:h-[56px] md:w-[56px] lg:h-[56px] lg:w-[56px]'>
-              <Image
-                src='/images/logo_transparent_navy.svg'
-                alt='fessior-logo'
-                fill
-              />
+              <Image src='/icons/fessior_navy.svg' alt='fessior-logo' fill />
             </div>
             <h3 className='md-[32px] ms-[8px] text-[28px] font-[700] leading-[50.4px] tracking-[0.56px] text-primary'>
               Fessior Community
@@ -53,7 +49,7 @@ export default function Footer() {
         <div className='absolute right-[-67px] top-[380px] h-[180px] w-[180px] md:right-[-80px] md:top-[0px] md:h-[160px] md:w-[160px] xl:right-[-126px] xl:top-[0px] xl:h-[240px] xl:w-[240px]'>
           <Image
             className=''
-            src='/images/logo_transparent_navy.svg'
+            src='/icons/fessior_navy.svg'
             alt='fessior-logo'
             fill
           />

@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import { use, useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 
 import { categoryListData, domainListData } from '@/services/url.service';
 import { useFilterOptionStore } from '@/store/filter-option';
@@ -159,6 +159,16 @@ export default function CategoryModal() {
       setCurCategoryList(newFilterCategory);
     }
   };
+
+  useEffect(() => {
+    function handleEscapeKey(event: KeyboardEvent) {
+      if (event.code === 'Escape') {
+        setShowCategoryModal(false);
+      }
+    }
+    document.addEventListener('keydown', handleEscapeKey);
+    return () => document.removeEventListener('keydown', handleEscapeKey);
+  }, [setShowCategoryModal]);
 
   return (
     <div

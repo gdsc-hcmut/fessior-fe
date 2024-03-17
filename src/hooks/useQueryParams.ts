@@ -9,8 +9,12 @@ export default function useQueryParams() {
 
   const params = new URLSearchParams(searchParams.toString());
 
-  const setItem = (newItems: { [key: string]: string }) => {
-    Object.keys(newItems).forEach((key) => params.set(key, newItems[key]));
+  const setItem = (newItems: { [key: string]: string | undefined }) => {
+    Object.keys(newItems).forEach((key) => {
+      const newItem = newItems[key];
+      if (newItem) params.set(key, newItem);
+      else params.delete(key);
+    });
     router.push(pathname + '?' + params.toString());
   };
 

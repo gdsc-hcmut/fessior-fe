@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { categoryListData } from '@/services/url.service';
@@ -66,10 +66,20 @@ export default function EditSlugModal() {
     setShowEditModal(false);
   };
 
+  useEffect(() => {
+    function handleEscapeKey(event: KeyboardEvent) {
+      if (event.code === 'Escape') {
+        setShowEditModal(false);
+      }
+    }
+    document.addEventListener('keydown', handleEscapeKey);
+    return () => document.removeEventListener('keydown', handleEscapeKey);
+  }, [setShowEditModal]);
+
   return (
     <div
       onClick={() => setShowEditModal(false)}
-      className='fixed bottom-0 left-0 right-0 top-0 z-20 flex items-center justify-center bg-black/40'
+      className='fixed bottom-0 left-0 right-0 top-0 z-20 flex animate-fade items-center justify-center bg-black/40'
     >
       <div
         onClick={(e) => e.stopPropagation()}

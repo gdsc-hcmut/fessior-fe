@@ -54,8 +54,7 @@ export function HomeToolItem(props: HomeToolItemProps) {
       <div className='xl:flex-grow'>
         <h6 className={toolNameClass}>{tool.name}</h6>
         <p className='hidden text-[14px] leading-[24px] lg:block'>
-          Link shortening service with free-of-charge advanced management
-          features
+          {tool.description}
         </p>
       </div>
       {!tool.active && (
@@ -69,7 +68,10 @@ export function HomeToolItem(props: HomeToolItemProps) {
 
 export default function HomeTools() {
   return (
-    <div className='relative z-[2] flex flex-wrap items-stretch justify-between xl:mx-[20px] xl:w-[840px]'>
+    <div
+      data-aos='zoom-in'
+      className='relative z-[2] flex flex-wrap items-stretch justify-between xl:mx-[20px] xl:w-[840px]'
+    >
       {tools.map((tool) => (
         <HomeToolItem key={tool.name} tool={tool} />
       ))}

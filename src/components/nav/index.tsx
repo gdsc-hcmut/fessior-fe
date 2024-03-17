@@ -57,7 +57,7 @@ export default function Nav(props: NavProps) {
     isCollapsed
       ? 'h-0 border-none py-0'
       : 'h-[300px] border-t-[1px] bg-white py-[32px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]',
-    'absolute left-0 right-0 top-[72px] overflow-hidden px-[20px] transition-all duration-500',
+    'absolute left-0 right-0 top-[72px] overflow-y-hidden px-[20px] transition-all duration-500 scrollbar-hide',
   );
 
   if (!isAuthStatusReady) return;
@@ -122,7 +122,12 @@ export default function Nav(props: NavProps) {
     return (
       <div>
         <div className='flex h-[100%] items-center justify-between'>
-          <User className='me-[28px]' border whiteTheme={isHome} />
+          <User
+            className='me-[28px]'
+            isOptionDropdown
+            border
+            whiteTheme={isHome}
+          />
           <div className='flex w-[32px] items-center'>{collapseButton}</div>
         </div>
         <div className={mdNavListContainerClass}>
@@ -134,7 +139,10 @@ export default function Nav(props: NavProps) {
     );
   }
   return (
-    <div className='flex max-w-[800px] flex-grow items-center justify-end'>
+    <div
+      style={{ maxWidth: `${(navItems.length - 1) * 200}px` }}
+      className='flex flex-grow items-center justify-end'
+    >
       {!isHome && (
         <div className='flex flex-grow items-center'>
           <NavList items={navItems} />
@@ -142,7 +150,7 @@ export default function Nav(props: NavProps) {
       )}
       <User
         className='me-[12px] ms-[20px]'
-        optionDropdown
+        isOptionDropdown
         border
         whiteTheme={isHome}
       />

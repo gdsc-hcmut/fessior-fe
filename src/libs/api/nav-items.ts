@@ -23,15 +23,9 @@ export const navItems: NavItem[] = [
         text: 'My URLs',
         iconFilename: 'statistics.svg',
         imgAlt: '',
-        path: '/statistics',
+        path: '/urls',
       },
     ],
-  },
-  {
-    text: 'My URLs',
-    iconFilename: 'organization.svg',
-    imgAlt: '',
-    path: '/urls',
   },
   {
     text: 'Tools',
@@ -39,12 +33,6 @@ export const navItems: NavItem[] = [
     imgAlt: '',
     path: '',
     children: [
-      {
-        text: 'URL Shortener',
-        iconFilename: 'my_url.svg',
-        imgAlt: '',
-        path: '/shorten',
-      },
       {
         text: 'QR Generator',
         iconFilename: 'statistics.svg',
