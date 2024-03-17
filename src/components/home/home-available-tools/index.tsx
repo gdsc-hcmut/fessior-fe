@@ -25,6 +25,8 @@ import {
 import HomeAvailableToolItem from '../home-available-tool-item';
 import ToolInfoTemplate from '../tool-info-template';
 
+import '@/styles/home-available-tools.css';
+
 export default function HomeAvailableTools() {
   const [availableToolSelecting, setAvailableToolSelecting] = useState(0);
   const [toolSwiper, setToolSwiper] = useState<SwiperClass | null>(null);
@@ -84,7 +86,7 @@ export default function HomeAvailableTools() {
           iconFilenames={tool.iconFilenames[0]}
           name={tool.name}
           active={index === availableToolSelecting}
-          className='mb-[20px] w-[80%] max-w-[300px] xl:w-auto xl:max-w-none'
+          className='mb-[20px] w-[80%] max-w-[300px] lg:w-auto lg:max-w-none'
           onClick={(index) => handleAvailableToolChange(index)}
         />
       </SwiperSlide>
@@ -97,14 +99,13 @@ export default function HomeAvailableTools() {
     modules: [Autoplay, Controller],
     onSlideChange: () => setAvailableToolSelecting(infoSwiper?.activeIndex!),
     className: 'relative w-[100%]',
-    autoHeight: true,
-    autoplay: { delay: 3000 },
+    autoplay: { delay: 10000 },
   };
 
   const toolSwiperProps = {
     direction: 'horizontal' as 'horizontal' | 'vertical' | undefined,
     breakpoints: {
-      1300: {
+      960: {
         direction: 'vertical' as 'horizontal' | 'vertical' | undefined,
         slidesPerView: 6,
       },
@@ -117,12 +118,16 @@ export default function HomeAvailableTools() {
   };
 
   return (
-    <div className='mb-[80px] flex w-[100%] flex-col self-center overflow-hidden xl:mb-[200px] xl:flex-row xl:items-stretch xl:px-[calc(160px-(1920px-100vw)/3)]'>
+    <div className='mb-[80px] flex w-[100%] flex-col self-center overflow-hidden px-[20px] lg:mt-[60px] lg:flex-row lg:items-stretch lg:px-[calc(160px-(1920px-100vw)/3)]'>
       {/* ----------LEFT----------- */}
-      <div className='px-[20px] xl:mx-[20px] xl:me-[60px] xl:flex xl:min-w-[287px] xl:flex-col xl:items-stretch xl:px-0'>
+      <div
+        id='home-available-tools'
+        data-aos='fade-right'
+        className='lg:me-[20px] lg:flex lg:min-w-[320px] lg:flex-col xl:items-stretch'
+      >
         <h5
           onClick={() => toolSwiper?.slideNext()}
-          className='text-[32px] font-[700] leading-[65px] text-primary xl:ms-[16px] xl:text-[28px]'
+          className='text-[32px] font-[700] leading-[65px] text-primary lg:mb-[8px] lg:ms-[20px] lg:text-[28px]'
         >
           Available Tools
         </h5>
@@ -130,12 +135,14 @@ export default function HomeAvailableTools() {
         <HomeAvailableToolIndicator
           total={tools.length}
           activeIndex={availableToolSelecting}
-          className='mb-[40px] xl:hidden'
+          className='mb-[40px] lg:hidden'
           onClick={handleAvailableToolChange}
         />
       </div>
       {/* ----------RIGHT----------- */}
-      <Swiper {...infoSwiperProps}>{getToolInfos()}</Swiper>
+      <Swiper data-aos='fade-left' {...infoSwiperProps}>
+        {getToolInfos()}
+      </Swiper>
     </div>
   );
 }

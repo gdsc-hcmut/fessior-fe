@@ -1,19 +1,29 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
 
 import Button from '@/components/button';
 import CloseButton from '@/components/close-button';
+import useEventListener from '@/hooks/useEventListener';
 import Icon from '@/types/icon-enum';
 import Url from '@/types/url-type';
 import { getIcon } from '@/utils/common';
 
-type ModalProps = {
+type ModalShortenProps = {
   onDismiss: () => void;
   shortenedUrl: Url;
 };
 
-export default function ModalShorten(props: ModalProps) {
+export default function ModalShorten(props: ModalShortenProps) {
   const { shortenedUrl, onDismiss } = props;
+  const [isCopied, setIsCopied] = useState(false);
+  const [isCopyButtonHovering, setIsCopyButtonHovering] = useState(false);
   const urlShown = `https://${shortenedUrl.domain}/${shortenedUrl.slug}`;
+
+  useEventListener('keydown', (e: any) => {
+    if (e.key === 'Escape') onDismiss();
+  });
+
   return (
     <div
       onClick={onDismiss}
@@ -26,7 +36,7 @@ export default function ModalShorten(props: ModalProps) {
         <div className='absolute bottom-0 left-0 right-0 top-0 z-10 flex flex-col items-center justify-between px-[20px] py-[40px] md:p-[40px]'>
           <div className='relative flex aspect-square h-[50%] items-center justify-center rounded-[8px] bg-white p-[10px] shadow-[0px_4px_12px_0px_rgba(11,40,120,0.16)]'>
             <Image
-              src='images/shorten/sample_qr.svg'
+              src='icons/shorten/sample_qr.svg'
               alt='qr'
               width={0}
               height={0}
@@ -50,8 +60,11 @@ export default function ModalShorten(props: ModalProps) {
               Link shortened!
             </h4>
             <p className='text-center text-primary'>
-              Access the “My URL” page to view statistics on your shortened
-              links
+              Access the{' '}
+              <Link className='underline' href='/urls'>
+                My URLs
+              </Link>{' '}
+              page to view statistics on your shortened links
             </p>
           </div>
           <div className='flex h-[40px] w-[100%] content-between'>
@@ -59,34 +72,40 @@ export default function ModalShorten(props: ModalProps) {
               <p className='text-primary'>{urlShown}</p>
             </div>
             <Button
+              setIsHovering={setIsCopyButtonHovering}
+              type='neutral-positive'
               onClick={() => {
                 navigator.clipboard.writeText(urlShown);
+                setIsCopied(true);
+                setTimeout(() => {
+                  setIsCopied(false);
+                }, 1000);
               }}
             >
               <Image
                 src={getIcon(
                   '/icons/shorten',
-                  'content_copy.svg',
-                  Icon.INACTIVE,
+                  isCopied ? 'tick.svg' : 'content_copy.svg',
+                  isCopyButtonHovering ? Icon.INACTIVE : Icon.ACTIVE,
                 )}
                 alt='copy'
                 height={0}
                 width={0}
-                className='h-auto w-auto fill-white'
+                className='h-auto w-[25px]'
               />
             </Button>
           </div>
         </div>
         <div className='absolute bottom-[-64px] left-[-30px] h-[80%] w-[150%] rotate-[-6deg] bg-white'></div>
         <Image
-          src='/images/shorten/qr_decor.svg'
+          src='/icons/shorten/qr_decor.svg'
           alt='qr-decor'
           width={0}
           height={0}
           className='absolute left-[-20px] top-[52px] h-auto w-auto'
         />
         <Image
-          src='/images/shorten/qr_decor.svg'
+          src='/icons/shorten/qr_decor.svg'
           alt='qr-decor'
           width={0}
           height={0}

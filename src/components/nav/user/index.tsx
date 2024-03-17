@@ -13,11 +13,11 @@ type UserProps = {
   border?: boolean;
   className?: string;
   whiteTheme?: boolean;
-  optionDropdown?: boolean;
+  isOptionDropdown?: boolean;
 };
 
 export default function User(props: UserProps) {
-  const { border, className, whiteTheme, optionDropdown } = props;
+  const { border, className, whiteTheme, isOptionDropdown } = props;
 
   const [showingOption, setShowingOption] = useState(false);
   const { screenSize } = useScreenSize();
@@ -28,7 +28,7 @@ export default function User(props: UserProps) {
   useOnClickOutside(optionRef, () => setShowingOption(false));
 
   const handleUserClick = () => {
-    if (optionDropdown) setShowingOption(!showingOption);
+    if (isOptionDropdown) setShowingOption(!showingOption);
   };
 
   const userClass = clsx(
@@ -46,7 +46,7 @@ export default function User(props: UserProps) {
   );
 
   const optionClass = clsx(
-    'absolute left-0 top-[52px] mt-[8px] w-[172px] overflow-hidden whitespace-nowrap rounded-[8px] bg-white duration-500 transition-[max-height,border]',
+    'absolute z-10 left-0 top-[52px] mt-[8px] w-[172px] overflow-hidden whitespace-nowrap rounded-[8px] bg-white duration-500 transition-[max-height,border]',
     showingOption ? 'max-h-[88px] border-[1px]' : 'max-h-0 border-white',
   );
 
@@ -54,8 +54,8 @@ export default function User(props: UserProps) {
     meProfile && meProfile.picture
       ? meProfile.picture
       : whiteTheme
-        ? '/images/header/user_white.svg'
-        : '/images/header/user_royal.svg';
+        ? '/icons/header/user_white.svg'
+        : '/icons/header/user_royal.svg';
 
   const collapseIcon = getIcon(
     '/icons/header/',
@@ -88,7 +88,7 @@ export default function User(props: UserProps) {
         </h6>
       </div>
       <div className='flex-grow'></div>
-      {optionDropdown && (
+      {isOptionDropdown && (
         <>
           <Image
             src={collapseIcon}

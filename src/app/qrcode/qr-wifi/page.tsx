@@ -8,11 +8,10 @@ import { useState } from 'react';
 
 import Button from '@/components/button';
 import CategoryItem from '@/components/category-item';
+import Input from '@/components/input';
 import ModalShorten from '@/components/modal-shorten';
 import QRNavBar from '@/components/qr-navbar';
-import SelectInput from '@/components/select-input';
 import ShortenTools from '@/components/shorten-tools';
-import TextInput from '@/components/text-input';
 import AuthContext from '@/contexts/authContext';
 import useScreenSize from '@/hooks/useScreenSize';
 import meService from '@/libs/api/me';
@@ -31,6 +30,16 @@ export default function CreateQRWifiScreen() {
   const [inputCategory, setInputCategory] = useState('');
   const [inputPassword, setInputPassword] = useState('');
   const [inputEncryption, setInputEncryption] = useState('WPA/WPA2');
+  const eventCategory = {
+    _id: '1',
+    name: 'Event',
+    color: '#ff0000',
+  };
+  const favCategory = {
+    _id: '2',
+    name: 'Favourite',
+    color: '#ff0000',
+  };
 
   return (
     <>
@@ -82,11 +91,11 @@ export default function CreateQRWifiScreen() {
                 QR Name
               </h6>
               <div className='mb-[16px] md:ml-6 md:w-[90%]'>
-                <TextInput
+                <Input
                   iconSrc='/icons/label_outline.svg'
                   iconAlt='icon'
                   placeholder='Enter your QR name'
-                  value={inputQRName}
+                  textValue={inputQRName}
                   divider={true}
                   iconPosition='left'
                   onInput={setInputQRName}
@@ -99,11 +108,11 @@ export default function CreateQRWifiScreen() {
                 WiFi SSID
               </h6>
               <div className='mb-[16px] md:ml-[24px] md:w-[90%]'>
-                <TextInput
+                <Input
                   iconSrc='/icons/label_outline.svg'
                   iconAlt='icon'
                   placeholder='Wifi SSID (Name)'
-                  value={inputSSID}
+                  textValue={inputSSID}
                   divider={true}
                   iconPosition='left'
                   onInput={setInputSSID}
@@ -117,15 +126,14 @@ export default function CreateQRWifiScreen() {
                   <p className='inline text-[16px] font-[500] md:text-[20px]'>
                     Encryption
                   </p>
-                  <SelectInput
-                    value={inputEncryption}
-                    options={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
-                    onChange={(selectedOption: string | Organization) => {
-                      if (typeof selectedOption === 'string') {
-                        setInputEncryption(selectedOption);
-                      }
+                  <Input
+                    textValue={inputEncryption}
+                    dropdownOptions={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
+                    onDropdownSelect={(selectedOption: any) => {
+                      setInputEncryption(selectedOption);
                     }}
-                    className='ms-[24px] w-[124px] md:ms-2'
+                    collapseIcon={true}
+                    className='ms-[24px] w-[132px] md:ms-2'
                   />
                 </div>
               </div>
@@ -135,11 +143,11 @@ export default function CreateQRWifiScreen() {
                 Password
               </h6>
               <div className='md:ml-[20px] md:inline-block md:flex-grow'>
-                <TextInput
+                <Input
                   iconSrc='/icons/verified_user.svg'
                   iconAlt='search'
                   placeholder='Enter your password'
-                  value={inputPassword}
+                  textValue={inputPassword}
                   divider={true}
                   onInput={setInputPassword}
                 />
@@ -150,11 +158,11 @@ export default function CreateQRWifiScreen() {
                 Category
               </h6>
               <div className='md:ml-[24px] md:inline-block md:flex-grow'>
-                <TextInput
+                <Input
                   iconSrc='/icons/search-20px.svg'
                   iconAlt='search'
                   placeholder='Add or create categories'
-                  value={inputCategory}
+                  textValue={inputCategory}
                   divider={true}
                   onInput={setInputCategory}
                 />
@@ -165,8 +173,14 @@ export default function CreateQRWifiScreen() {
                 Chosen categories
               </p>
               <div className='inline space-x-2'>
-                <CategoryItem text='Events' />
-                <CategoryItem text='Favorite' />
+                <CategoryItem
+                  category={eventCategory}
+                  onClick={() => console.log('Event')}
+                />
+                <CategoryItem
+                  category={favCategory}
+                  onClick={() => console.log('Fav')}
+                />
               </div>
             </div>
             <div className='mx-auto mt-5 flex max-w-[288px] items-center justify-between space-x-4 md:max-w-[352px]'>

@@ -39,7 +39,7 @@ export default function AuthHeader(props: AuthHeaderProps) {
         </p>
       </div>
       <Image
-        src='/images/auth/decor.svg'
+        src='/icons/auth/decor.svg'
         alt='background'
         width={0}
         height={0}

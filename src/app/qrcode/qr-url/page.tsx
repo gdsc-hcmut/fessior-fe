@@ -5,11 +5,10 @@ import { useState, useEffect, useContext } from 'react';
 
 import Button from '@/components/button';
 import CategoryItem from '@/components/category-item';
+import Input from '@/components/input';
 import ModalShorten from '@/components/modal-shorten';
 import QRNavBar from '@/components/qr-navbar';
-import SelectInput from '@/components/select-input';
 import ShortenTools from '@/components/shorten-tools';
-import TextInput from '@/components/text-input';
 import AuthContext from '@/contexts/authContext';
 import useScreenSize from '@/hooks/useScreenSize';
 import meService from '@/libs/api/me';
@@ -80,6 +79,16 @@ export default function CreateQRURLScreen() {
     console.log(organizationValue);
     console.log(domainOptions);
   };
+  const eventCategory = {
+    _id: '1',
+    name: 'Event',
+    color: '#ff0000',
+  };
+  const favCategory = {
+    _id: '2',
+    name: 'Favourite',
+    color: '#ff0000',
+  };
 
   return (
     <>
@@ -132,11 +141,11 @@ export default function CreateQRURLScreen() {
                 QR Name
               </h6>
               <div className='mb-[16px] md:ml-6 md:w-[90%]'>
-                <TextInput
+                <Input
                   iconSrc='/icons/label_outline.svg'
                   iconAlt='icon'
                   placeholder='Enter your QR name'
-                  value={inputQRName}
+                  textValue={inputQRName}
                   divider={true}
                   iconPosition='left'
                   onInput={setInputQRName}
@@ -149,11 +158,11 @@ export default function CreateQRURLScreen() {
                 Your URL
               </h6>
               <div className='mb-[12px] md:mb-[20px] md:ml-6 md:w-[90%]'>
-                <TextInput
+                <Input
                   iconSrc='/icons/link-qr-20px.svg'
                   iconAlt='icon'
                   placeholder='Enter your URL'
-                  value={inputURL}
+                  textValue={inputURL}
                   iconPosition='left'
                   divider={true}
                   onInput={setInputURL}
@@ -170,30 +179,32 @@ export default function CreateQRURLScreen() {
                   <p className='inline  text-[12px] font-[500] text-black md:text-[16px]'>
                     Organization
                   </p>
-                  <SelectInput
-                    value={organizationOpt}
-                    options={['GDSC', 'CTCT', 'OISP']}
-                    onChange={(selectedOption: string | Organization) => {
-                      if (typeof selectedOption === 'string') {
-                        setOrganizationOpts(selectedOption);
-                      }
+                  <Input
+                    textValue={organizationOpt}
+                    dropdownOptions={['GDSC', 'CTCT', 'OISP']}
+                    onDropdownSelect={(selectedOption: any) => {
+                      setOrganizationOpts(selectedOption);
                     }}
-                    className='ms-[8px] w-[124px] md:ms-[13px]'
+                    collapseIcon={true}
+                    className='ms-[8px] w-[140px] md:ms-[13px]'
                   />
                 </div>
                 <div className='flex items-center justify-between md:mb-2 md:inline-flex lg:mb-5'>
                   <p className='inline text-[12px] font-[500] text-black md:text-[16px]'>
                     Domain
                   </p>
-                  <SelectInput
-                    value={domainOpt}
-                    options={['furl.one', 'bkoisp.info', 'gic.gdsc.app']}
-                    onChange={(selectedOption: string | Organization) => {
-                      if (typeof selectedOption === 'string') {
-                        setDomainOpts(selectedOption);
-                      }
+                  <Input
+                    textValue={domainOpt}
+                    dropdownOptions={[
+                      'furl.one',
+                      'bkoisp.info',
+                      'gic.gdsc.app',
+                    ]}
+                    onDropdownSelect={(selectedOption: any) => {
+                      setDomainOpts(selectedOption);
                     }}
-                    className='ms-[8px] w-[124px] md:ms-[13px]'
+                    collapseIcon={true}
+                    className='ms-[8px] w-[140px] md:ms-[13px]'
                   />
                 </div>
               </div>
@@ -204,11 +215,11 @@ export default function CreateQRURLScreen() {
                 Category
               </h6>
               <div className='md:ml-6 md:inline-block md:flex-grow'>
-                <TextInput
+                <Input
                   iconSrc='/icons/search-20px.svg'
                   iconAlt='search'
                   placeholder='Add or create categories'
-                  value={inputCategory}
+                  textValue={inputCategory}
                   divider={true}
                   onInput={setInputCategory}
                 />
@@ -219,8 +230,14 @@ export default function CreateQRURLScreen() {
                 Chosen categories
               </p>
               <div className='inline space-x-2'>
-                <CategoryItem text='Events' />
-                <CategoryItem text='Favorite' />
+                <CategoryItem
+                  category={eventCategory}
+                  onClick={() => console.log('event')}
+                />
+                <CategoryItem
+                  category={favCategory}
+                  onClick={() => console.log('Fav')}
+                />
               </div>
             </div>
             <div className='mx-auto mt-6 flex max-w-[288px] items-center justify-between space-x-4 md:max-w-[352px] md:space-x-8'>
