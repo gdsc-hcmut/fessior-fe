@@ -83,13 +83,16 @@ export default function CreateQRURLScreen() {
     _id: '1',
     name: 'Event',
     color: '#ff0000',
+    organization: 'org1',
+    urls: ['url1', 'url2'],
   };
   const favCategory = {
     _id: '2',
     name: 'Favourite',
     color: '#ff0000',
+    organization: 'org2',
+    urls: ['url1', 'url2'],
   };
-
   return (
     <>
       <div className='relative flex flex-col items-center overflow-hidden leading-[1.2] text-primary'>
