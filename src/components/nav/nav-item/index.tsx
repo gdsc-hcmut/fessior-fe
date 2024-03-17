@@ -14,7 +14,7 @@ import { getIcon } from '@/utils/common';
 
 import NavList from '../nav-list';
 
-export default function NavItem(props: NavItem) {
+export default function NavItems(props: NavItem) {
   const { text, iconFilename, imgAlt, isLogout, path, children } = props;
 
   const [showingChildren, setShowingChildren] = useState(false);
