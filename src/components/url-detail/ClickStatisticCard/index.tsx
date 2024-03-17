@@ -220,7 +220,7 @@ function ClickStatisticCard() {
             </div>
           </div>
         </div>
-        <div className='mt-4 flex w-full flex-col 2xl:max-w-[280px]'>
+        <div className='mt-4 flex w-full flex-col self-center sm:max-w-[400px] md:w-full 2xl:max-w-[280px]'>
           <p className='mb-2 font-medium text-primary'>
             {isDeviceClicks ? 'Devices' : 'Social Media'}
           </p>
