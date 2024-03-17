@@ -313,7 +313,7 @@ function EmptyList(props: EmptyListProps) {
   return (
     <div className='mt-10 flex min-h-[70vh] flex-col items-center 3xl:mt-[60px]'>
       <Image
-        src='/images/url/empty_list.svg'
+        src='/icons/url/empty_list.svg'
         alt='Empty icon'
         width={0}
         height={0}

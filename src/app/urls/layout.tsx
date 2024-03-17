@@ -19,14 +19,14 @@ function URLsLayout(props: URLsLayoutProps) {
       <ToastContainer />
       <div className='absolute bottom-[-1px] right-0'>
         <Image
-          src='/images/url/decor.svg'
+          src='/icons/url/decor.svg'
           alt='Decor image'
           width={0}
           height={0}
           className='hidden h-auto w-[70vw] md:block xl:w-[42vw]'
         />
         <Image
-          src='/images/url/decor_mobile.svg'
+          src='/icons/url/decor_mobile.svg'
           alt='Decor image'
           width={0}
           height={0}

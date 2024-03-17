@@ -192,7 +192,7 @@ export default function EditSlugModal() {
         </form>
         <div className='hidden w-[256px] items-center justify-center bg-primary/5 md:flex'>
           <Image
-            src='/images/url/edit_slug.svg'
+            src='/icons/url/edit_slug.svg'
             alt='Edit slug image'
             width={0}
             height={0}
