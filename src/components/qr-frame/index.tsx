@@ -78,6 +78,7 @@ export default function FramePart() {
                   mediumTextSize='16'
                   paddingRight='4'
                   mediumPaddingRight='20'
+                  mediumBorder='1'
                 />
               </div>
             </div>
@@ -122,6 +123,7 @@ export default function FramePart() {
                   mediumTextSize='20'
                   paddingRight='4'
                   mediumPaddingRight='20'
+                  mediumBorder='1'
                 />
               </div>
             </div>
@@ -157,6 +159,7 @@ export default function FramePart() {
                   mediumTextSize='20'
                   paddingRight='4'
                   mediumPaddingRight='0'
+                  mediumBorder='1'
                 />
               </div>
             </div>
@@ -188,6 +191,7 @@ export default function FramePart() {
                   mediumTextSize='20'
                   paddingRight='4'
                   mediumPaddingRight='0'
+                  mediumBorder='1'
                 />
               </div>
             </div>
@@ -222,6 +226,7 @@ export default function FramePart() {
                   mediumTextSize='20'
                   paddingRight='4'
                   mediumPaddingRight='0'
+                  mediumBorder='1'
                 />
               </div>
             </div>
@@ -253,6 +258,7 @@ export default function FramePart() {
                   mediumTextSize='20'
                   paddingRight='4'
                   mediumPaddingRight='0'
+                  mediumBorder='1'
                 />
               </div>
             </div>

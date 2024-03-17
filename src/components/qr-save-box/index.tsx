@@ -8,7 +8,7 @@ export default function QRSaveBox() {
   return (
     <div className='relative mt-[28px] hidden w-[472px] xl:flex xl:flex-col'>
       <div className='sticky top-[110px] flex w-[100%] flex-col items-center rounded-[8px] bg-white px-[20px] pb-[9px] pt-[20px] drop-shadow-[0_4px_47px_rgba(11,40,120,0.3)]'>
-        <div className='sticky top-2 aspect-square w-full rounded-[8px] bg-[#0B2878] px-[27px] py-[27px]'>
+        <div className=' aspect-square w-full rounded-[8px] bg-[#0B2878] px-[27px] py-[27px]'>
           <div className='h-full w-full rounded-[8px]'>
             <Image
               src='/images/qrcode/example-qr.png'
