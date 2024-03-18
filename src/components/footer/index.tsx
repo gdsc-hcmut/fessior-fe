@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
         {/* RIGHT */}
         <div className='w-500 me-[100px] flex max-w-[500px] flex-col justify-between md:flex-row lg:w-[30%] lg:min-w-[]'>
-          <div className='mx-[12px] mb-[20px]'>
+          <div className='mb-[20px] lg:mx-[12px]'>
             <h4 className='text-[24px] font-[700] leading-[43.2px] tracking-[0.48px] text-primary'>
               Resources
             </h4>
