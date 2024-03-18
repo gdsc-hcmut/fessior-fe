@@ -141,7 +141,9 @@ export default function HomePage() {
                   duration={1}
                   enableScrollSpy
                   useEasing={false}
-                />
+                >
+                  {({ countUpRef }) => <span ref={countUpRef} />}
+                </CountUp>
               </p>
               <p className='font-[500]'>Establishment</p>
             </div>
@@ -153,8 +155,10 @@ export default function HomePage() {
                   duration={1}
                   enableScrollSpy
                   useEasing={false}
-                />
-                +
+                  suffix='+'
+                >
+                  {({ countUpRef }) => <span ref={countUpRef} />}
+                </CountUp>
               </p>
               <p className='font-[500]'>Users</p>
             </div>
@@ -166,8 +170,10 @@ export default function HomePage() {
                   duration={1}
                   enableScrollSpy
                   useEasing={false}
-                />
-                +
+                  suffix='+'
+                >
+                  {({ countUpRef }) => <span ref={countUpRef} />}
+                </CountUp>
               </p>
               <p className='font-[500]'>Projects Developed</p>
             </div>
@@ -178,8 +184,10 @@ export default function HomePage() {
                   duration={1}
                   enableScrollSpy
                   useEasing={false}
-                />
-                +
+                  suffix='+'
+                >
+                  {({ countUpRef }) => <span ref={countUpRef} />}
+                </CountUp>
               </p>
               <p className='font-[500]'>External Partners</p>
             </div>
