@@ -16,20 +16,21 @@ const QRNavBar = () => {
       </div>
       <div className='hidden xl:block'>
         <div className='flex flex-row items-center justify-start'>
-          <svg
-            width='24'
-            height='20'
-            viewBox='0 0 24 20'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <path
-              d='M20 9.16536H7.83L13.42 4.50703L12 3.33203L4 9.9987L12 16.6654L13.41 15.4904L7.83 10.832H20V9.16536Z'
-              fill='#0B2878'
-            />
-          </svg>
-
-          <p className='text-[19px] text-primary'>Back</p>
+          <p className='flex flex-row text-[19px] text-primary hover:underline'>
+            <svg
+              width='24'
+              height='20'
+              viewBox='0 0 24 20'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                d='M20 9.16536H7.83L13.42 4.50703L12 3.33203L4 9.9987L12 16.6654L13.41 15.4904L7.83 10.832H20V9.16536Z'
+                fill='#0B2878'
+              />
+            </svg>
+            Back
+          </p>
         </div>
         <div className='w-full rounded-[8px] border border-[#7E7E7E] border-opacity-30 bg-white pb-[14px] pt-[20px] shadow-2xl'>
           <div className=' text-center text-[26px] font-bold text-primary'>

@@ -16,11 +16,11 @@ export default function FramePart() {
               Frame background
             </p>
           </div>
-          <div className='mt-[4px] flex h-[40px] w-[112px] flex-row items-center rounded-[8px] border pl-[10px] pr-[6px] md:h-[60px] md:w-[200px] md:pl-[12px] xl:h-[60px] xl:w-[240px] xl:pl-[16px] xl:pr-[6px]'>
+          <div className='mt-[4px] flex h-[40px] w-[112px] flex-row items-center rounded-[8px] border pl-[10px] pr-[6px] md:h-[60px] md:w-[200px] md:pl-[12px] lg:border lg:border-primary xl:h-[60px] xl:w-[240px] xl:pl-[16px] xl:pr-[6px]'>
             <p className='text-[14px] font-medium text-primary md:text-[16px] xl:text-[20px]'>
               #FFFFFF
             </p>
-            <div className='ml-auto h-[28px] w-[28px] rounded-[8px] border md:h-[48px] md:w-[48px]'></div>
+            <div className='ml-auto h-[28px] w-[28px] rounded-[8px] border md:h-[48px] md:w-[48px] lg:border lg:border-primary'></div>
           </div>
         </div>
         <div className='mt-[8px] inline-flex flex-row items-center md:ml-[52px] md:self-end '>
@@ -89,11 +89,11 @@ export default function FramePart() {
                   Text color
                 </p>
               </div>
-              <div className='mt-[4px] flex h-[28px] w-auto flex-row items-center rounded-[8px] border pl-[8px] pr-[4px] md:h-[60px] md:pl-[16px] md:pr-[6px]'>
-                <p className='text-[12px] md:text-[16px] md:font-medium'>
+              <div className='mt-[4px] flex h-[28px] w-auto flex-row items-center rounded-[8px] border pl-[8px] pr-[4px] md:h-[60px] md:pl-[16px] md:pr-[6px] lg:border lg:border-primary'>
+                <p className='text-[12px] md:text-[16px] md:font-medium '>
                   #FFFFFF
                 </p>
-                <div className='ml-auto h-[20px] w-[20px] rounded-[8px] border md:h-[48px] md:w-[48px]'></div>
+                <div className='ml-auto h-[20px] w-[20px] rounded-[8px] border md:h-[48px] md:w-[48px] lg:border lg:border-primary'></div>
               </div>
             </div>
             <div className='w-[52px] grow md:w-[124px]'>

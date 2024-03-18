@@ -6,8 +6,6 @@ import { useState, useEffect } from 'react';
 import CategoryItem from '@/components/category-item';
 import Modal from '@/components/modal-shorten';
 import QrHomeButton from '@/components/qr-home-button';
-import SelectInput from '@/components/select-input';
-import TextInput from '@/components/text-input';
 // import ToolItem from '@/components/tool-item';
 import meService from '@/services/me.service';
 import { tools } from '@/services/tool.service';

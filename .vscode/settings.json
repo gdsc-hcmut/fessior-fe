@@ -4,11 +4,13 @@
     "bkoisp",
     "bksp",
     "clsx",
+    "countup",
     "CTCT",
     "Fessior",
     "GDSC",
     "headlessui",
     "OISP",
-    "qrcode"
+    "qrcode",
+    "tailwindcss"
   ]
 }
