@@ -10,6 +10,8 @@ import useScreenSize from '@/hooks/useScreenSize';
 import { sidebarItems } from '@/libs/sidebar-content';
 import ScreenSize from '@/types/screen-size-enum';
 
+import Icon from '../icon';
+
 type SidebarItemProps = {
   item: {
     text: string;
