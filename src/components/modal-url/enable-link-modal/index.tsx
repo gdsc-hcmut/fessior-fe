@@ -15,7 +15,7 @@ type EnableLinkModalProps = {
 };
 
 export default function EnableLinkModal(props: EnableLinkModalProps) {
-  const { setShowEnableModal } = useUrlModalStore();
+  const { setShowEnableModal, setDemoEnable } = useUrlModalStore();
   const { isEnable } = props;
 
   //   const handleUrlDelete = async () => {
@@ -87,8 +87,13 @@ export default function EnableLinkModal(props: EnableLinkModalProps) {
               onClick={(e) => {
                 e.preventDefault();
                 // onDelete.mutate();
-                if (isEnable) toast.success('Link enabled successfully');
-                else toast.success('Link disabled successfully');
+                if (isEnable) {
+                  setDemoEnable(false);
+                  toast.success('Link disabled successfully');
+                } else {
+                  setDemoEnable(true);
+                  toast.success('Link enabled successfully');
+                }
                 setShowEnableModal(false);
               }}
               type='submit'

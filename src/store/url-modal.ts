@@ -17,6 +17,8 @@ type UrlModalStore = {
   setEditedUrl: (url: MyUrlv1) => void;
   deleteUrl: string;
   setDeleteUrl: (urlId: string) => void;
+  demoEnable: boolean;
+  setDemoEnable: (value: boolean) => void;
 };
 
 export const useUrlModalStore = create<UrlModalStore>((set) => ({
@@ -76,5 +78,10 @@ export const useUrlModalStore = create<UrlModalStore>((set) => ({
   setDeleteUrl: (urlId) =>
     set((state) => ({
       deleteUrl: urlId,
+    })),
+  demoEnable: true,
+  setDemoEnable: (value) =>
+    set((state) => ({
+      demoEnable: value,
     })),
 }));

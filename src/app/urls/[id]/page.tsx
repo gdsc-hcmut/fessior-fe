@@ -45,7 +45,7 @@ function URLDetailPage(props: URLDetailPageProps) {
   } = props;
 
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const { isShow } = useUrlModalStore();
+  const { isShow, demoEnable } = useUrlModalStore();
   const { curOrganizationId } = useUserProfileStore();
 
   const fetchCategoryList = async () => {
@@ -66,7 +66,7 @@ function URLDetailPage(props: URLDetailPageProps) {
         isCollapsed={isCollapsed}
         hideSidebar={() => setIsCollapsed(true)}
       />
-      {isShow.enable && <EnableLinkModal isEnable={demoInfo.isActive} />}
+      {isShow.enable && <EnableLinkModal isEnable={demoEnable} />}
       {isShow.edit && <EditSlugModal categoryListData={categoryList} />}
       {isShow.delete && <DeleteLinkModal />}
       <div className='py-[80px] lg:pl-[24vw] xl:pl-[18vw] xl:pt-[85.6px] 2xl:pl-[17vw] 3xl:pl-[16vw]'>

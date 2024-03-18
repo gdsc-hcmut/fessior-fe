@@ -15,13 +15,8 @@ export default function UrlButton(props: UrlButtonProps) {
   const [copied, setCopied] = useState(false);
   const { copyContent, editedUrl, isDetail } = props;
 
-  const {
-    setShowEditModal,
-    setShowDeleteModal,
-    setEditedUrl,
-    setDeleteUrl,
-    setShowEnableModal,
-  } = useUrlModalStore();
+  const { setShowEditModal, setShowDeleteModal, setEditedUrl, setDeleteUrl } =
+    useUrlModalStore();
 
   const onCopy = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation();
@@ -75,27 +70,13 @@ export default function UrlButton(props: UrlButtonProps) {
           className='h-4 w-auto 3xl:h-5'
         />
       </button>
-      {isDetail && (
-        <button
-          onClick={() => setShowEnableModal(true)}
-          className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'
-        >
-          <Image
-            src='/icons/url/power_primary.svg'
-            alt='Edit icon'
-            width={0}
-            height={0}
-            className='h-4 w-auto 3xl:h-5'
-          />
-        </button>
-      )}
       <button
         onClick={(e) => {
           e.preventDefault();
           setShowDeleteModal(true);
           setDeleteUrl(editedUrl._id);
         }}
-        className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'
+        className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-[#db4437] 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'
       >
         <Image
           src='/icons/url/delete.svg'
