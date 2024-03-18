@@ -35,6 +35,11 @@ export default function InputCode(props: InputCodeProps) {
     inputRefs.current[cursorPosition]!.focus();
   }, [cursorPosition]);
 
+  const handleMouseDown = (e: any) => {
+    e.preventDefault();
+    handleFocus();
+  };
+
   useEffect(() => {
     handleFocus();
   }, [cursorPosition, handleFocus]);
@@ -45,7 +50,7 @@ export default function InputCode(props: InputCodeProps) {
 
   const inputClass = (index: number) =>
     clsx(
-      'h-[100%] w-[52px] rounded-[8px] border-[1px] text-center text-[20px] focus:border-primary outline-none',
+      'h-[116%] caret-primary aspect-square rounded-[8px] border-[1px] text-center text-[24px] text-primary focus:border-primary outline-none',
       index <= cursorPosition && cursorPosition !== 0
         ? 'border-primary'
         : 'border-[#7e7e7e4d]',
@@ -56,7 +61,7 @@ export default function InputCode(props: InputCodeProps) {
       {[...Array(length)].map((_, index) => {
         return (
           <input
-            onFocus={handleFocus}
+            onMouseDown={handleMouseDown}
             key={index}
             type='text'
             value={value[index] ?? ''}
