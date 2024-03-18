@@ -5,10 +5,8 @@ import AuthContext from '@/contexts/authContext';
 import useAuthPasswordForm from '@/hooks/useAuthPasswordForm';
 import useAuthRouter from '@/hooks/useAuthRouter';
 import { createPassword } from '@/libs/api/auth';
-import meService from '@/services/me.service';
 import AlertLevel from '@/types/alert-level-enum';
 import AuthFormFieldEnum from '@/types/auth-form-field-enum';
-import AuthType from '@/types/auth-type-enum';
 
 import AuthForm from '../auth-form';
 
@@ -24,23 +22,16 @@ export default function SignUpCommon() {
     inputErrorTexts,
     handleDifferentConfirmPassword,
   } = useAuthPasswordForm();
-  const { login, meProfile } = useContext(AuthContext);
-  const [username, setUsername] = useState(meProfile ? meProfile.email : null);
+  const { meProfile, isAuthStatusReady } = useContext(AuthContext);
+  const [username, setUsername] = useState<string | null>(null);
 
   const authRouter = useAuthRouter();
 
   useEffect(() => {
-    (async () => {
-      if (!username) {
-        try {
-          setUsername((await meService.getMe()).email);
-        } catch (e: any) {
-          console.log(e.message);
-          authRouter(AuthType.SIGN_UP_INFO);
-        }
-      }
-    })();
-  }, [authRouter, username]);
+    if (isAuthStatusReady && meProfile) {
+      setUsername(meProfile.email);
+    }
+  }, [isAuthStatusReady, meProfile]);
 
   if (!username) return;
 
@@ -52,18 +43,15 @@ export default function SignUpCommon() {
 
     try {
       await createPassword(password);
-      await login({ username: username, password });
       authRouter();
     } catch (e: any) {
-      setModalErrorText(e.message);
+      setModalErrorText(e.response.data.message);
     }
   };
 
   return (
     <>
       <AuthForm
-        subActionAuthType={AuthType.BACK}
-        subActionText='Change Google account'
         actionText='Sign Up'
         initFields={[
           { label: 'Email', fixedValue: true, currentValue: username },
