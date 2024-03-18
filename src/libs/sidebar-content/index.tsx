@@ -1,3 +1,4 @@
+import Icon from '@/components/icon';
 import { SidebarItem } from '@/types/sidebar-item';
 
 export const sidebarItems: SidebarItem[] = [
@@ -6,14 +7,14 @@ export const sidebarItems: SidebarItem[] = [
     children: [
       {
         text: 'My URLs',
-        iconFilename: 'link_diag.svg',
-        imgAlt: '',
+        iconFile: Icon.LinkDiagIcon,
+        imgAlt: 'Link Icon',
         path: '/urls',
       },
       {
         text: 'Analytics Dashboard',
-        iconFilename: 'statistics.svg',
-        imgAlt: '',
+        iconFile: Icon.StatisticIcon,
+        imgAlt: 'Statistic Icon',
         path: '/url-analytics',
       },
     ],
@@ -23,14 +24,14 @@ export const sidebarItems: SidebarItem[] = [
     children: [
       {
         text: 'My Collection',
-        iconFilename: 'my_url.svg',
-        imgAlt: '',
+        iconFile: Icon.MyUrlIcon,
+        imgAlt: 'My Url Icon',
         path: '/collection',
       },
       {
         text: 'Analytics Dashboard',
-        iconFilename: 'timeline.svg',
-        imgAlt: '',
+        iconFile: Icon.TimelineIcon,
+        imgAlt: 'Timeline Icon',
         path: '/campaign-analytics',
       },
     ],
@@ -40,14 +41,14 @@ export const sidebarItems: SidebarItem[] = [
     children: [
       {
         text: 'Organization',
-        iconFilename: 'organization.svg',
-        imgAlt: '',
+        iconFile: Icon.OrganizationIcon,
+        imgAlt: 'Organization Icon',
         path: '/organization',
       },
       {
         text: 'Custom Domain',
-        iconFilename: 'domain.svg',
-        imgAlt: '',
+        iconFile: Icon.DomainIcon,
+        imgAlt: 'Domain Icon',
         path: '/custom-domain',
       },
     ],

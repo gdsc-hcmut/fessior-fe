@@ -4,18 +4,16 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { SVGProps, useState } from 'react';
 
 import useScreenSize from '@/hooks/useScreenSize';
 import { sidebarItems } from '@/libs/sidebar-content';
 import ScreenSize from '@/types/screen-size-enum';
 
-import Icon from '../icon';
-
 type SidebarItemProps = {
   item: {
     text: string;
-    iconFilename: string;
+    iconFile: React.FC<SVGProps<SVGSVGElement>>;
     imgAlt: string;
     path: string;
   };
@@ -29,7 +27,7 @@ export function SidebarItem(props: SidebarItemProps) {
 
   const handleMouseEnter = (state: boolean) => {
     setIsIconActive(state);
-    const optionName = document.getElementById(item.iconFilename);
+    const optionName = document.getElementById(item.imgAlt);
     if (optionName && state === true) {
       optionName.style.color = 'white';
     } else if (optionName && state === false && !isActive) {
@@ -49,29 +47,15 @@ export function SidebarItem(props: SidebarItemProps) {
       onMouseLeave={() => handleMouseEnter(false)}
     >
       <div>
-        <Image
-          src={`/icons/sidebar/active/${item.iconFilename}`}
-          alt={item.imgAlt}
-          width={0}
-          height={0}
+        <item.iconFile
           className={clsx(
             'h-5 w-auto 2xl:h-[24px]',
-            !isActive && !isIconActive && 'hidden',
-          )}
-        />
-        <Image
-          src={`/icons/sidebar/inactive/${item.iconFilename}`}
-          alt={item.imgAlt}
-          width={0}
-          height={0}
-          className={clsx(
-            'h-5 w-auto 2xl:h-[24px]',
-            (isActive || isIconActive) && 'hidden',
+            !isActive && !isIconActive ? 'fill-primary' : 'fill-white',
           )}
         />
       </div>
       <p
-        id={item.iconFilename}
+        id={item.imgAlt}
         className={clsx(
           'font-medium 3xl:text-[18px]',
           isActive ? 'text-white' : 'text-primary',
