@@ -56,6 +56,7 @@ export default function Header() {
         <Brand theme={isHome ? 'white' : 'primary'} />
         <Nav
           isHome={isHome}
+          pathname={pathname}
           isCollapsed={isCollapsed}
           setIsCollapsed={setIsCollapsed}
         />

@@ -1,5 +1,6 @@
 import { clsx } from 'clsx';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 
 import CloseButton from '@/components/close-button';
@@ -8,12 +9,15 @@ import useScreenSize from '@/hooks/useScreenSize';
 import { navItems } from '@/libs/api/nav-items';
 import ScreenSize from '@/types/screen-size-enum';
 
+import Button from '../button';
+
 import AuthButton from './auth-button';
 import NavList from './nav-list';
 import User from './user';
 
 type NavProps = {
   isHome?: boolean;
+  pathname?: string;
   isCollapsed: boolean;
   setIsCollapsed: (isCollapsed: boolean) => void;
 };
@@ -21,8 +25,9 @@ type NavProps = {
 export default function Nav(props: NavProps) {
   const { meProfile, isAuthStatusReady } = useContext(AuthContext);
 
-  const { isHome, isCollapsed, setIsCollapsed } = props;
+  const { isHome, pathname, isCollapsed, setIsCollapsed } = props;
   const { screenSize, loaded } = useScreenSize();
+  const router = useRouter();
 
   const collapseIcon = isHome
     ? '/icons/header/collapse_nav_white.svg'
@@ -148,6 +153,22 @@ export default function Nav(props: NavProps) {
           <NavList items={navItems} />
         </div>
       )}
+      <Button
+        className={clsx(pathname === '/shorten' ? '' : 'hidden')}
+        onClick={() => {
+          router.push('/urls');
+        }}
+      >
+        My URLs
+      </Button>
+      <Button
+        className={clsx(pathname === '/urls' ? '' : 'hidden')}
+        onClick={() => {
+          router.push('/shorten');
+        }}
+      >
+        Shorten now
+      </Button>
       <User
         className='me-[12px] ms-[20px]'
         isOptionDropdown
