@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 
 import Header from '@/components/header';
 import 'react-toastify/dist/ReactToastify.css';
+import '@/styles/toastify-overriding.css';
 
 type URLsLayoutProps = {
   children: React.ReactNode;
