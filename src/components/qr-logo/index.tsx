@@ -1,62 +1,42 @@
 import Image from 'next/image';
 
+import iconFacebook from '@/../../public/icons/qr/iconFacebook.svg';
+import iconGoogle from '@/../../public/icons/qr/iconGoogle.svg';
+import iconInstagram from '@/../../public/icons/qr/iconInstagram.svg';
+import iconNoneLogo from '@/../../public/icons/qr/iconNoneLogo.svg';
+import iconTwitter from '@/../../public/icons/qr/iconTwitter.svg';
+import iconYoutube from '@/../../public/icons/qr/iconYoutube.svg';
+
 export default function LogoPart() {
   return (
-    <div className='flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] bg-white px-[15px] pb-[16px] pt-[8px] xl:pl-[32px] xl:pt-[28px]'>
+    <div
+      id='logoPart'
+      className='flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] bg-white px-[15px] pb-[16px] pt-[8px] xl:pl-[32px] xl:pt-[28px]'
+    >
       <div className='mt-[8px] h-[20px] md:mt-[16px] md:h-[29px] xl:ml-[-6px] xl:mt-0 xl:h-[28px] '>
         <p className='text-center text-[16px] font-bold  md:text-left md:text-[20px] md:font-medium xl:text-[28px]'>
           Logo
         </p>
       </div>
       <div className='mt-[8px] flex flex-row flex-wrap gap-[10px] md:ml-[1px] md:gap-x-[20px] md:gap-y-[36px] xl:mt-[40px]'>
-        <div className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
-          <Image
-            src='/images/qrcode/logo/none.png'
-            alt='Pattern 1'
-            height='100'
-            width='100'
-          />
-        </div>
-        <div className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
-          <Image
-            src='/images/qrcode/logo/youtube.png'
-            alt='Pattern 1'
-            height='100'
-            width='100'
-          />
-        </div>
-        <div className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
-          <Image
-            src='/images/qrcode/logo/facebook.png'
-            alt='Pattern 1'
-            height='100'
-            width='100'
-          />
-        </div>
-        <div className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
-          <Image
-            src='/images/qrcode/logo/instagram.png'
-            alt='Pattern 1'
-            height='100'
-            width='100'
-          />
-        </div>
-        <div className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
-          <Image
-            src='/images/qrcode/logo/google.png'
-            alt='Pattern 1'
-            height='100'
-            width='100'
-          />
-        </div>
-        <div className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
-          <Image
-            src='/images/qrcode/logo/twitter.png'
-            alt='Pattern 1'
-            height='100'
-            width='100'
-          />
-        </div>
+        <button className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
+          <Image src={iconNoneLogo} alt='Pattern 1' height='100' width='100' />
+        </button>
+        <button className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
+          <Image src={iconYoutube} alt='Pattern 1' height='100' width='100' />
+        </button>
+        <button className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
+          <Image src={iconFacebook} alt='Pattern 1' height='100' width='100' />
+        </button>
+        <button className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
+          <Image src={iconInstagram} alt='Pattern 1' height='100' width='100' />
+        </button>
+        <button className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
+          <Image src={iconGoogle} alt='Pattern 1' height='100' width='100' />
+        </button>
+        <button className='h-[40px] w-[40px] md:h-[68px] md:w-[68px]'>
+          <Image src={iconTwitter} alt='Pattern 1' height='100' width='100' />
+        </button>
       </div>
       <div className='mt-[16px] rounded-[8px] xl:mt-[20px]'>
         <button className='flex w-[100%] flex-col items-center justify-center rounded-[8px] border border-primary py-[6px] md:bg-primary'>

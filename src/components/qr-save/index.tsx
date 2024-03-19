@@ -6,7 +6,10 @@ import DropDown from '@/components/listbox-select';
 export default function SavePart() {
   const [isViewSaveOptionExpand, setIsViewSaveOptionExpand] = useState(false);
   return (
-    <div className='flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] bg-white px-[35px] pb-[2px] pt-[28px] xl:hidden'>
+    <div
+      id='savePart'
+      className='flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] bg-white px-[35px] pb-[2px] pt-[28px] xl:hidden'
+    >
       <div className=' ml-auto mr-auto h-[200px] w-[200px] rounded-[8px] border border-primary p-[10px] md:h-[532px] md:w-[532px]'>
         <Image
           src='/images/qrcode/example-qr.png'

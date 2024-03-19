@@ -1,8 +1,28 @@
 'use client';
 
+import {
+  Link,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from 'react-scroll';
+
 import Button from '../button';
 
 const QRNavBar = () => {
+  const scrollToTop = () => {
+    scroll.scrollToTop();
+  };
+  const scrollToPart = (o: string, time: number, offValue?: number) => {
+    scroller.scrollTo(o, {
+      spy: true,
+      smooth: true,
+      offset: offValue || -85,
+      duration: time,
+    });
+  };
   return (
     <>
       <div className='mb-[35px] flex w-[100%] flex-col items-center xl:hidden'>
@@ -16,7 +36,10 @@ const QRNavBar = () => {
       </div>
       <div className='hidden xl:block'>
         <div className='flex flex-row items-center justify-start'>
-          <p className='flex flex-row text-[19px] text-primary hover:underline'>
+          <a
+            className='flex flex-row text-[19px] text-primary hover:underline'
+            href='/../qrcode'
+          >
             <svg
               width='24'
               height='20'
@@ -30,7 +53,7 @@ const QRNavBar = () => {
               />
             </svg>
             Back
-          </p>
+          </a>
         </div>
         <div className='w-full rounded-[8px] border border-[#7E7E7E] border-opacity-30 bg-white pb-[14px] pt-[20px] shadow-2xl'>
           <div className=' text-center text-[26px] font-bold text-primary'>
@@ -41,39 +64,47 @@ const QRNavBar = () => {
           </div>
           <div className='mx-auto mt-[18px] flex h-[40px] w-auto flex-row items-center justify-center gap-[18px] px-[12px]'>
             <Button
-              onClick={() => {}}
+              onClick={() => scrollToPart('informationPart', 500)}
               width='full'
-              type='positive'
-              className='flex h-[100%] w-[150px] max-w-[200px] grow items-center justify-center rounded-[8px] border bg-primary text-center text-[22px] font-medium text-white'
+              type='neutral-positive'
+              className='flex h-[100%] w-[150px] max-w-[200px] grow items-center justify-center rounded-[8px] border border-primary bg-white text-center text-[22px] font-medium text-primary hover:bg-primary hover:text-white'
             >
               Information
             </Button>
             <Button
-              onClick={() => {}}
+              onClick={() => scrollToPart('framePart', 800)}
               width='full'
-              type='neutral'
-              className='flex h-[100%] w-[150px] max-w-[200px] grow items-center justify-center rounded-[8px] border border-primary bg-white text-center text-[22px] font-medium text-primary'
+              type='neutral-positive'
+              className='flex h-[100%] w-[150px] max-w-[200px] grow items-center justify-center rounded-[8px] border border-primary bg-white text-center text-[22px] font-medium text-primary hover:bg-primary hover:text-white'
             >
               Frame
             </Button>
             <Button
-              onClick={() => {}}
+              onClick={() => scrollToPart('patternPart', 800)}
               width='full'
-              type='neutral'
-              className='flex h-[100%] w-[150px] max-w-[200px] grow items-center justify-center rounded-[8px] border border-primary bg-white text-center text-[22px] font-medium text-primary'
+              type='neutral-positive'
+              className='flex h-[100%] w-[150px] max-w-[200px] grow items-center justify-center rounded-[8px] border border-primary bg-white text-center text-[22px] font-medium text-primary hover:bg-primary hover:text-white'
             >
               Pattern
             </Button>
             <Button
-              onClick={() => {}}
+              onClick={() => scrollToPart('logoPart', 1000, -350)}
               width='full'
-              type='neutral'
-              className='flex h-[100%] w-[150px] max-w-[200px] grow items-center justify-center rounded-[8px] border border-primary bg-white text-center text-[22px] font-medium text-primary'
+              type='neutral-positive'
+              className='flex h-[100%] w-[150px] max-w-[200px] grow items-center justify-center rounded-[8px] border border-primary bg-white text-center text-[22px] font-medium text-primary hover:bg-primary hover:text-white'
             >
               Logo
             </Button>
           </div>
         </div>
+      </div>
+      <div>
+        <button
+          className='fixed bottom-0 right-0 z-50 h-[50px] w-[50px] bg-gray-50 opacity-[30%]'
+          onClick={scrollToTop}
+        >
+          TO TOP
+        </button>
       </div>
     </>
   );

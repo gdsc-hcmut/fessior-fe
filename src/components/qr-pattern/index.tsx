@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
+import patternExtraRound140 from '@/../../public/icons/qr/patternExtraRound140.svg';
+import patternSemiRound140 from '@/../../public/icons/qr/patternSemiRound140.svg';
+import patternSquare140 from '@/../../public/icons/qr/patternSquare140.svg';
 import DropDown from '@/components/listbox-select';
-import ToggleButton from '@/components/toggle-button';
-
 
 export default function PatternPart() {
   const [patternColorType, setPatternColorType] = useState('singleColor');
@@ -11,7 +12,10 @@ export default function PatternPart() {
     setPatternColorType(value);
   };
   return (
-    <div className='flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] bg-white pb-[16px] pl-[16px] pr-[16px] pt-[8px] xl:pl-[34px] xl:pt-[28px]'>
+    <div
+      id='patternPart'
+      className='flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] bg-white pb-[16px] pl-[16px] pr-[16px] pt-[8px] xl:pl-[34px] xl:pt-[28px]'
+    >
       <div className='mt-[8px] h-[20px] md:mt-[16px] md:h-[29px] xl:ml-[-6px] xl:mt-0 xl:h-[28px]'>
         <p className=' text-center text-[16px] font-bold  md:text-left md:text-[20px] md:font-medium xl:text-[28px]'>
           Pattern
@@ -19,70 +23,70 @@ export default function PatternPart() {
       </div>
 
       <div className='mt-[8px] flex flex-wrap items-center justify-start gap-[12px] md:ml-[4px] xl:mt-[40px] xl:gap-[24px]'>
-        <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
+        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
           <Image
-            src='/images/qrcode/pattern/example1.png'
+            src={patternSquare140}
             alt='Pattern 1'
             height='140'
             width='140'
           />
-        </div>
-        <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px] '>
+        </button>
+        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px] '>
           <Image
-            src='/images/qrcode/pattern/example2.png'
+            src={patternExtraRound140}
             alt='Pattern 1'
             height='140'
             width='140'
           />
-        </div>
-        <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
+        </button>
+        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
           <Image
-            src='/images/qrcode/pattern/example3.png'
+            src={patternSemiRound140}
             alt='Pattern 1'
             height='140'
             width='140'
           />
-        </div>
-        <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
+        </button>
+        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
           <Image
-            src='/images/qrcode/pattern/example1.png'
+            src={patternSquare140}
             alt='Pattern 1'
             height='140'
             width='140'
           />
-        </div>
-        <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
+        </button>
+        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
           <Image
-            src='/images/qrcode/pattern/example2.png'
+            src={patternExtraRound140}
             alt='Pattern 1'
             height='140'
             width='140'
           />
-        </div>
-        <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
+        </button>
+        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
           <Image
-            src='/images/qrcode/pattern/example3.png'
+            src={patternSemiRound140}
             alt='Pattern 1'
             height='140'
             width='140'
           />
-        </div>
-        <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
+        </button>
+        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
           <Image
-            src='/images/qrcode/pattern/example2.png'
+            src={patternExtraRound140}
             alt='Pattern 1'
             height='140'
             width='140'
           />
-        </div>
-        <div className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
+        </button>
+        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
           <Image
-            src='/images/qrcode/pattern/example3.png'
+            src={patternSemiRound140}
             alt='Pattern 1'
             height='140'
             width='140'
           />
-        </div>
+        </button>
       </div>
       <div className='mt-[8px] flex flex-col justify-center xl:mt-[20px]'>
         <div className='flex flex-row gap-[65px] md:ml-[4px]'>

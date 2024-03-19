@@ -51,7 +51,7 @@ export default function DropDown(props: DropDownProps) {
       <Listbox value={selected} onChange={setSelected}>
         <div className='relative w-full'>
           <Listbox.Button
-            className={`relative w-full cursor-default rounded-lg border bg-white 
+            className={`relative w-full cursor-pointer rounded-lg border bg-white 
             ${border === '1' ? 'border-[1px] border-primary' : ''}
             
             ${mediumBorder === '1' ? 'md:border-[1px] md:border-primary' : ''}

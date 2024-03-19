@@ -25,7 +25,7 @@ export default function QRSaveBox() {
               type='radio'
               value=''
               name='saveType'
-              className='mr-[8px] h-[20px] w-[20px]'
+              className='mr-[8px] h-[20px] w-[20px] hover:cursor-pointer'
             />
             <label htmlFor='saveSVG' className='text-[18px] font-bold'>
               SVG
@@ -37,7 +37,7 @@ export default function QRSaveBox() {
               type='radio'
               value=''
               name='saveType'
-              className='mr-[8px] h-[20px] w-[20px]'
+              className='mr-[8px] h-[20px] w-[20px] hover:cursor-pointer'
             />
             <label htmlFor='savePNG' className='text-[18px] font-bold'>
               PNG

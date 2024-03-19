@@ -11,6 +11,7 @@
     "headlessui",
     "OISP",
     "qrcode",
+    "scroller",
     "tailwindcss"
   ]
 }

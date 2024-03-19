@@ -13,7 +13,10 @@ type props = { typeOfQR: string };
 export default function InformationPart(props: props) {
   const { typeOfQR } = props;
   return (
-    <div className='flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] bg-white px-[16px] md:pr-[32px] xl:px-[36px] xl:pb-[20px]'>
+    <div
+      className='flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] bg-white px-[16px] md:pr-[32px] xl:px-[36px] xl:pb-[20px]'
+      id='informationPart'
+    >
       <div className='mt-[8px] h-[20px] md:mt-[16px] md:h-[29px] xl:ml-[-8px] xl:mt-[28px] xl:flex xl:h-[28px] xl:items-center'>
         <p className=' text-center text-[16px] font-bold  md:text-left md:text-[20px] md:font-medium xl:text-[28px]'>
           Information
@@ -177,7 +180,9 @@ export default function InformationPart(props: props) {
         </div>
       </div>
       <div
-        className={'mt-[8px] flex w-full flex-col md:mt-[20px] md:flex-row md:items-center xl:hidden'}
+        className={
+          'mt-[8px] flex w-full flex-col md:mt-[20px] md:flex-row md:items-center xl:hidden'
+        }
       >
         <div className='flex h-[24px] flex-col justify-center md:ml-[4px]'>
           <p className='text-[16px] font-medium md:w-[104px]'>Category</p>

@@ -3,7 +3,10 @@ import ToggleButton from '@/components/toggle-button';
 
 export default function FramePart() {
   return (
-    <div className=' flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] bg-white px-[16px] pb-[16px] xl:pl-[34px] xl:pt-[28px]'>
+    <div
+      id='framePart'
+      className=' flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] bg-white px-[16px] pb-[16px] xl:pl-[34px] xl:pt-[28px]'
+    >
       <div className='mt-[8px] h-[20px] md:mt-[16px] md:h-[29px] xl:ml-[-6px] xl:mt-0 xl:h-[28px]'>
         <p className=' text-center text-[16px] font-bold  md:text-left md:text-[20px] md:font-medium xl:text-[28px]'>
           Frame
@@ -16,11 +19,11 @@ export default function FramePart() {
               Frame background
             </p>
           </div>
-          <div className='mt-[4px] flex h-[40px] w-[112px] flex-row items-center rounded-[8px] border pl-[10px] pr-[6px] md:h-[60px] md:w-[200px] md:pl-[12px] lg:border lg:border-primary xl:h-[60px] xl:w-[240px] xl:pl-[16px] xl:pr-[6px]'>
+          <div className='mt-[4px] flex h-[40px] w-[112px] flex-row items-center rounded-[8px] border pl-[10px] pr-[6px] md:h-[60px] md:w-[200px] md:border md:border-primary md:pl-[12px] xl:h-[60px] xl:w-[240px] xl:pl-[16px] xl:pr-[6px]'>
             <p className='text-[14px] font-medium text-primary md:text-[16px] xl:text-[20px]'>
               #FFFFFF
             </p>
-            <div className='ml-auto h-[28px] w-[28px] rounded-[8px] border md:h-[48px] md:w-[48px] lg:border lg:border-primary'></div>
+            <div className='ml-auto h-[28px] w-[28px] rounded-[8px] border md:h-[48px] md:w-[48px] md:border md:border-primary'></div>
           </div>
         </div>
         <div className='mt-[8px] inline-flex flex-row items-center md:ml-[52px] md:self-end '>
@@ -45,7 +48,7 @@ export default function FramePart() {
               Additional text
             </p>
           </div>
-          <div className='relative mt-[4px] h-[40px] w-auto rounded-[8px] border-[0.5px] border-gray-300 md:ml-[4px] md:h-[60px]'>
+          <div className='relative mt-[4px] h-[40px] w-auto rounded-[8px] border-[0.5px] border-gray-300 md:ml-[4px] md:h-[60px] md:border md:border-primary'>
             <input
               type='text'
               className='h-full w-full rounded-[8px] pl-[12px] text-[12px] focus:outline-[1px] focus:outline-primary md:text-[16px] xl:pl-[16px] xl:text-[18px]'
@@ -89,11 +92,11 @@ export default function FramePart() {
                   Text color
                 </p>
               </div>
-              <div className='mt-[4px] flex h-[28px] w-auto flex-row items-center rounded-[8px] border pl-[8px] pr-[4px] md:h-[60px] md:pl-[16px] md:pr-[6px] lg:border lg:border-primary'>
+              <div className='mt-[4px] flex h-[28px] w-auto flex-row items-center rounded-[8px] border pl-[8px] pr-[4px] md:h-[60px] md:border md:border-primary md:pl-[16px] md:pr-[6px]'>
                 <p className='text-[12px] md:text-[16px] md:font-medium '>
                   #FFFFFF
                 </p>
-                <div className='ml-auto h-[20px] w-[20px] rounded-[8px] border md:h-[48px] md:w-[48px] lg:border lg:border-primary'></div>
+                <div className='ml-auto h-[20px] w-[20px] rounded-[8px] border md:h-[48px] md:w-[48px] md:border md:border-primary'></div>
               </div>
             </div>
             <div className='w-[52px] grow md:w-[124px]'>
