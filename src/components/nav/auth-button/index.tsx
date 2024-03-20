@@ -21,8 +21,8 @@ export default function AuthButton(props: AuthButtonProps) {
         ? 'text-white bg-primary border-white hover:bg-primary-darken'
         : 'text-primary bg-white border-primary hover:bg-primary-white'
       : isLogin
-        ? 'text-primary bg-white border-primary hover:bg-primary-white'
-        : 'text-white bg-primary border-primary hover:bg-primary-darken',
+      ? 'text-primary bg-white border-primary hover:bg-primary-white'
+      : 'text-white bg-primary border-primary hover:bg-primary-darken',
     className,
   );
 
