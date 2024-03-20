@@ -8,7 +8,6 @@ import Url from '@/types/url-type';
 
 import CopyButton from '../button/copy-button';
 import 'react-toastify/dist/ReactToastify.css';
-import '@/styles/toastify-overriding.css';
 
 type ModalShortenProps = {
   onDismiss: () => void;
