@@ -14,7 +14,7 @@ import { getIcon } from '@/utils/common';
 
 import NavList from '../nav-list';
 
-export default function NavItems(props: NavItem) {
+export default function NavItem(props: NavItem) {
   const { text, iconFilename, imgAlt, isLogout, path, children } = props;
 
   const [showingChildren, setShowingChildren] = useState(false);
@@ -81,7 +81,7 @@ export default function NavItems(props: NavItem) {
   );
 
   const itemTitleClass = clsx(
-    'ms-[16px] font-[500]',
+    'ms-[16px] font-[500] whitespace-nowrap',
     isLogout ? 'text-red' : active ? 'text-primary' : 'text-[#696969]',
   );
 

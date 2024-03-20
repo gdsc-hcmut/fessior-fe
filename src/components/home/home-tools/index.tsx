@@ -54,8 +54,7 @@ export function HomeToolItem(props: HomeToolItemProps) {
       <div className='xl:flex-grow'>
         <h6 className={toolNameClass}>{tool.name}</h6>
         <p className='hidden text-[14px] leading-[24px] lg:block'>
-          Link shortening service with free-of-charge advanced management
-          features
+          {tool.description}
         </p>
       </div>
       {!tool.active && (
