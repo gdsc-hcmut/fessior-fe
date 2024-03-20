@@ -181,7 +181,7 @@ export default function CreateQRWifiScreen() {
         >
           <div className='transition-all'>
             <Image
-              src={'/icons/link-qr.svg'}
+              src={'/icons/qrcode/link-qr.svg'}
               alt='link icon'
               width={40}
               height={40}
@@ -200,7 +200,7 @@ export default function CreateQRWifiScreen() {
         >
           <div className='transition-all'>
             <Image
-              src={'/icons/wifi-white.svg'}
+              src={'/icons/qrcode/wifi-white.svg'}
               alt='wifi icon'
               width={40}
               height={40}
@@ -218,7 +218,7 @@ export default function CreateQRWifiScreen() {
           </h6>
           <div className='mb-[16px] md:ml-6 md:w-[90%]'>
             <Input
-              iconSrc='/icons/label_outline.svg'
+              iconSrc='/icons/qrcode/label_outline.svg'
               iconAlt='icon'
               placeholder='Enter your QR name'
               textValue={inputQRName}
@@ -236,7 +236,7 @@ export default function CreateQRWifiScreen() {
           </h6>
           <div className='mb-[16px] md:ml-[24px] md:w-[90%]'>
             <Input
-              iconSrc='/icons/label_outline.svg'
+              iconSrc='/icons/qrcode/label_outline.svg'
               iconAlt='icon'
               placeholder='Wifi SSID (Name)'
               textValue={inputSSID}
@@ -273,7 +273,7 @@ export default function CreateQRWifiScreen() {
           </h6>
           <div className='md:ml-[20px] md:inline-block md:flex-grow'>
             <Input
-              iconSrc='/icons/verified_user.svg'
+              iconSrc='/icons/qrcode/verified_user.svg'
               iconAlt='search'
               placeholder='Enter your password'
               textValue={inputPassword}
@@ -299,7 +299,7 @@ export default function CreateQRWifiScreen() {
                 }
                 fontSize={inputFontSize}
                 height={inputHeight}
-                iconSrc='/icons/search-20px.svg'
+                iconSrc='/icons/qrcode/search-20px.svg'
                 iconAlt='search'
                 placeholder='Add or create categories'
                 textValue={categorySearch}
