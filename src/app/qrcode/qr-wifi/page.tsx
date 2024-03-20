@@ -1,34 +1,173 @@
 'use client';
+
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import Button from '@/components/button';
-import CategoryItem from '@/components/category-item';
+import CategoryDropdownItems from '@/components/category-dropdown-item';
 import Input from '@/components/input';
+import ShortenCategories from '@/components/shorten-categories';
 import ShortenTools from '@/components/shorten-tools';
+import AuthContext from '@/contexts/authContext';
+import useAuthRouter from '@/hooks/useAuthRouter';
+import useScreenSize from '@/hooks/useScreenSize';
+import meService from '@/libs/api/me';
+import categoryService from '@/services/category.service';
+import organizationService from '@/services/organization.service';
+import CategoryColor from '@/types/category-color-enum';
+import Category from '@/types/category-type';
+import Organization from '@/types/organization-type';
+import ScreenSize from '@/types/screen-size-enum';
+import ShortenInputFieldEnum from '@/types/shorten-input-field-enum';
+import ShortenInputFieldType from '@/types/shorten-input-field-type';
+import Url from '@/types/url-type';
 
 export default function CreateQRWifiScreen() {
   const router = useRouter();
   const [inputQRName, setInputQRName] = useState('');
   const [inputSSID, setInputSSID] = useState('');
-  const [inputCategory, setInputCategory] = useState('');
   const [inputPassword, setInputPassword] = useState('');
   const [inputEncryption, setInputEncryption] = useState('WPA/WPA2');
-  const eventCategory = {
-    _id: '1',
-    name: 'Event',
-    color: '#ff0000',
-    organization: 'org1',
-    urls: ['url1', 'url2'],
+  const [organizationOptions, setOrganizationOptions] = useState<
+    null | Organization[]
+  >(null);
+  const [organizationValue, setOrganizationValue] =
+    useState<null | Organization>(null);
+  const [domainValue, setDomainValue] = useState('');
+  const [domainOptions, setDomainOptions] = useState<null | string[]>(null);
+  const { meProfile, isAuthStatusReady } = useContext(AuthContext);
+  useState<null | Organization>(null);
+  const [categoryOptions, setCategoryOptions] = useState<null | Category[]>(
+    null,
+  );
+  const [categoryValues, setCategoryValues] = useState<Category[]>([]);
+  const [categorySearch, setCategorySearch] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const { screenSize, loaded } = useScreenSize();
+  const authRouter = useAuthRouter();
+  useEffect(() => {
+    if (!meProfile) return;
+
+    (async () => {
+      try {
+        const organizationOptionsInitial = await meService.getOrganization();
+        setOrganizationOptions(organizationOptionsInitial);
+        setDomainOptions(organizationOptionsInitial[0].domains);
+        setOrganizationValue(organizationOptionsInitial[0]);
+        setDomainValue(organizationOptionsInitial[0].domains[0]);
+        const categoryOptionsInitial = (
+          await organizationService.searchCategoryByOrganizationId(
+            organizationOptionsInitial[0]._id,
+          )
+        ).categories; // pagination is for another day
+        setCategoryOptions(categoryOptionsInitial);
+      } catch (e: any) {
+        console.log(e.message);
+      }
+    })();
+  }, [meProfile]);
+
+  useEffect(() => {
+    (async () => {
+      if (!organizationValue) return;
+
+      setDomainOptions(organizationValue.domains);
+      setDomainValue(organizationValue.domains[1]);
+      const categoryOptionsInitial = (
+        await organizationService.getCategoryByOrganizationId(
+          organizationValue._id,
+        )
+      ).categories as Category[]; // pagination is for another day
+      setCategoryOptions(categoryOptionsInitial);
+      setCategoryValues([]);
+    })();
+  }, [organizationValue]);
+
+  useEffect(() => {
+    (async () => {
+      if (!organizationValue) return;
+
+      setCategoryOptions(
+        (
+          await organizationService.searchCategoryByOrganizationId(
+            organizationValue._id,
+            categorySearch,
+          )
+        ).categories.filter(
+          (category: Category) =>
+            !categoryValues.find((value) => value._id === category._id),
+        ),
+      );
+    })();
+  }, [categorySearch, categoryValues, organizationValue]); // TODO: Use Reducer???
+
+  const handleChange = (shortenField: ShortenInputFieldEnum) => {
+    switch (shortenField) {
+      case ShortenInputFieldEnum.ORGANIZATION:
+        return (value: Organization) => {
+          setOrganizationValue(value);
+        };
+      case ShortenInputFieldEnum.DOMAIN:
+        return (value: string) => {
+          setDomainValue(value);
+        };
+      case ShortenInputFieldEnum.CATEGORY:
+        return (category: Category) => {
+          if (
+            categoryValues.find(
+              (categoryValue) => categoryValue._id === category._id,
+            )
+          ) {
+            setCategoryValues(
+              categoryValues!.filter(
+                (categoryValue) => categoryValue._id !== category._id,
+              ),
+            );
+            setCategoryOptions(categoryOptions!.concat(category));
+          } else {
+            setCategoryValues(categoryValues.concat(category));
+            setCategoryOptions(
+              categoryOptions!.filter((option) => option._id !== category._id),
+            );
+          }
+        };
+      default:
+        return () => {};
+    }
   };
-  const favCategory = {
-    _id: '2',
-    name: 'Favourite',
-    color: '#ff0000',
-    organization: 'org2',
-    urls: ['url1', 'url2'],
+
+  const handleCategoryCreate = async (categoryName: string) => {
+    if (!organizationValue) return;
+
+    try {
+      const response = await categoryService.createCategory({
+        name: categoryName,
+        color: CategoryColor.BLUE,
+        organization: organizationValue?._id,
+        urls: [] as Url['_id'][],
+      });
+
+      setCategoryValues(categoryValues.concat(response));
+    } catch (e: any) {
+      const message = e.response.data.message;
+      setErrorMessage(Array.isArray(message) ? message[0] : message);
+    }
   };
+  const inputFontSize = screenSize === ScreenSize.LG ? undefined : 12;
+  const inputHeight = screenSize === ScreenSize.LG ? 48 : undefined;
+
+  const isLoaded =
+    (isAuthStatusReady &&
+      meProfile &&
+      organizationValue &&
+      organizationOptions &&
+      categoryOptions &&
+      domainOptions &&
+      domainValue &&
+      loaded) ||
+    (isAuthStatusReady && !meProfile);
 
   return (
     <>
@@ -99,6 +238,7 @@ export default function CreateQRWifiScreen() {
                   iconPosition='left'
                   onInput={setInputQRName}
                   onEnter={() => {}}
+                  height={48}
                 />
               </div>
             </div>
@@ -116,6 +256,7 @@ export default function CreateQRWifiScreen() {
                   iconPosition='left'
                   onInput={setInputSSID}
                   onEnter={() => {}}
+                  height={48}
                 />
               </div>
             </div>
@@ -133,6 +274,7 @@ export default function CreateQRWifiScreen() {
                     }}
                     collapseIcon={true}
                     className='ms-[24px] w-[132px] md:ms-2'
+                    height={48}
                   />
                 </div>
               </div>
@@ -149,40 +291,69 @@ export default function CreateQRWifiScreen() {
                   textValue={inputPassword}
                   divider={true}
                   onInput={setInputPassword}
+                  height={48}
                 />
               </div>
             </div>
-            <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
-              <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>
-                Category
-              </h6>
-              <div className='md:ml-[24px] md:inline-block md:flex-grow'>
-                <Input
-                  iconSrc='/icons/search-20px.svg'
-                  iconAlt='search'
-                  placeholder='Add or create categories'
-                  textValue={inputCategory}
-                  divider={true}
-                  onInput={setInputCategory}
+            {meProfile && isLoaded && (
+              <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
+                <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>
+                  Category
+                </h6>
+                <div className='md:ml-[25px] md:inline-block md:flex-grow'>
+                  <Input
+                    dropdownOptions={categoryOptions!}
+                    dropdownValues={categoryValues}
+                    onDropdownSelect={
+                      handleChange(ShortenInputFieldEnum.CATEGORY) as (
+                        value: ShortenInputFieldType,
+                      ) => void
+                    }
+                    fontSize={inputFontSize}
+                    height={inputHeight}
+                    iconSrc='/icons/search-20px.svg'
+                    iconAlt='search'
+                    placeholder='Add or create categories'
+                    textValue={categorySearch}
+                    onInput={setCategorySearch}
+                    divider
+                    renderCustomDropdownItems={(
+                      options,
+                      onSelect,
+                      values,
+                      creatingValue,
+                    ) => (
+                      <CategoryDropdownItems
+                        onSelect={onSelect}
+                        options={options as Category[]}
+                        values={values as Category[]}
+                        creatingValue={creatingValue}
+                        onCreate={() => {
+                          if (!creatingValue) return;
+                          return handleCategoryCreate(creatingValue);
+                        }}
+                      />
+                    )}
+                  />
+                </div>
+              </div>
+            )}
+            {categoryValues.length > 0 && (
+              <div className='mb-[8px]'>
+                <p className='me-[12px] inline text-[12px] font-[500] text-black md:text-[16px] lg:text-[20px]'>
+                  Chosen categories
+                </p>
+                <ShortenCategories
+                  handleChange={
+                    handleChange(ShortenInputFieldEnum.CATEGORY) as (
+                      category: Category,
+                    ) => void
+                  }
+                  categories={categoryValues}
                 />
               </div>
-            </div>
-            <div className='mb-0'>
-              <p className='me-[16px] inline text-[12px] font-[500] text-black md:text-[16px]'>
-                Chosen categories
-              </p>
-              <div className='inline space-x-2'>
-                <CategoryItem
-                  category={eventCategory}
-                  onClick={() => console.log('Event')}
-                />
-                <CategoryItem
-                  category={favCategory}
-                  onClick={() => console.log('Fav')}
-                />
-              </div>
-            </div>
-            <div className='mx-auto mt-5 flex max-w-[288px] items-center justify-between space-x-4 md:max-w-[352px]'>
+            )}
+            <div className='mx-auto mt-2 flex max-w-[288px] items-center justify-between space-x-4 md:max-w-[352px]'>
               <Button
                 type='positive'
                 className='h-[40px] w-[136px] md:w-[160px]'
