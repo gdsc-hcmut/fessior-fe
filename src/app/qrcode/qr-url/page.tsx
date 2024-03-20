@@ -6,22 +6,13 @@ import { useState, useEffect, useContext } from 'react';
 import Button from '@/components/button';
 import CategoryItem from '@/components/category-item';
 import Input from '@/components/input';
-import ModalShorten from '@/components/modal-shorten';
-import QRNavBar from '@/components/qr-navbar';
 import ShortenTools from '@/components/shorten-tools';
 import AuthContext from '@/contexts/authContext';
-import useScreenSize from '@/hooks/useScreenSize';
 import meService from '@/libs/api/me';
-import urlService from '@/services/url.service';
 import Organization from '@/types/organization-type';
-import ScreenSize from '@/types/screen-size-enum';
-import Url from '@/types/url-type';
 
-export default function CreateQRURLScreen() {
+export default function QRURLScreen() {
   const router = useRouter();
-  function navToWifi() {
-    router.push('/qrcode/qr-wifi');
-  }
   const [inputQRName, setInputQRName] = useState('');
   const [inputURL, setInputURL] = useState('');
   const [inputCategory, setInputCategory] = useState('');
@@ -99,19 +90,17 @@ export default function CreateQRURLScreen() {
         <div className='md:max-w-[1000px] lg:flex lg:flex-col lg:items-center'>
           <div className='text-center'>
             <h1 className='mt-[80px] text-[36px] font-[700] leading-[65px] md:mt-[168px] md:text-[48px] lg:text-[60px]'>
-              <span className=' md:inline'>Fessior</span> QR Generator
+              <span>Fessior</span> QR Generator
             </h1>
             <p className='hidden leading-[24px] md:block md:text-[20px] lg:mb-0 lg:mt-3 lg:text-[24px]'>
-              Convenience, efficiency, and versatility:{' '}
-              <br className='md:hidden' /> QR Code Management Made Easy
+              Convenience, efficiency, and versatility: <br /> QR Code
+              Management Made Easy
             </p>
           </div>
-          {/* {isAuthStatusReady ? ( */}
-          {/* <> */}
           <div className='mx-auto my-5 flex w-[100%] max-w-[360px] text-[16px] font-[500] md:my-6 md:max-w-[416px] md:text-[20px]'>
             <Button
-              image='/icons/link-qr-choosen.svg'
-              imageOnHover='/icons/link-qr-choosen.svg'
+              image='/icons/link-qr-chosen.svg'
+              imageOnHover='/icons/link-qr-chosen.svg'
               imageAlt='icons'
               imageSizeWidth={40}
               imageSizeHeight={40}
@@ -132,13 +121,13 @@ export default function CreateQRURLScreen() {
               type='neutral'
               className='ml-6 flex items-center justify-center'
               onClick={() => {
-                navToWifi();
+                router.push('/qrcode/qr-wifi');
               }}
             >
               <Link href='/qrcode/wifi'>Wi-fi</Link>
             </Button>
           </div>
-          <div className='relative mx-auto mb-[172px]  w-[90%] rounded-[8px] border-[3px] border-solid border-primary bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow md:flex-col md:border-[0.5px] md:border-[#7e7e7e4d] lg:w-[100%] lg:max-w-[856px] lg:p-[24px]'>
+          <div className='relative mx-auto mb-[172px] w-[90%] rounded-[8px] border-[3px] border-solid border-primary bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow md:flex-col md:border-[0.5px] md:border-[#7e7e7e4d] lg:w-[100%] lg:max-w-[856px] lg:p-[24px]'>
             <div className='container md:inline-flex'>
               <h6 className='mb-[4px] flex-shrink-0 text-[16px] font-[500] md:mb-[8px] md:mt-[6px] md:text-[20px]'>
                 QR Name
@@ -146,7 +135,7 @@ export default function CreateQRURLScreen() {
               <div className='mb-[16px] md:ml-6 md:w-[90%]'>
                 <Input
                   iconSrc='/icons/label_outline.svg'
-                  iconAlt='icon'
+                  iconAlt='label outline icon'
                   placeholder='Enter your QR name'
                   textValue={inputQRName}
                   divider={true}
@@ -163,7 +152,7 @@ export default function CreateQRURLScreen() {
               <div className='mb-[12px] md:mb-[20px] md:ml-6 md:w-[90%]'>
                 <Input
                   iconSrc='/icons/link-qr-20px.svg'
-                  iconAlt='icon'
+                  iconAlt='link icon'
                   placeholder='Enter your URL'
                   textValue={inputURL}
                   iconPosition='left'
@@ -174,9 +163,6 @@ export default function CreateQRURLScreen() {
               </div>
             </div>
             <div>
-              {/* { meProfile && organizationValue &&
-              organizationOptions &&
-              domainOptions && ( */}
               <div className='inline-block md:mb-[8px] md:flex md:flex-grow lg:mb-0'>
                 <div className='mb-[8px] flex items-center justify-between md:me-[20px] md:inline-flex lg:mb-5'>
                   <p className='inline  text-[12px] font-[500] text-black md:text-[16px]'>
@@ -211,7 +197,6 @@ export default function CreateQRURLScreen() {
                   />
                 </div>
               </div>
-              {/* )} */}
             </div>
             <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
               <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>
@@ -220,7 +205,7 @@ export default function CreateQRURLScreen() {
               <div className='md:ml-6 md:inline-block md:flex-grow'>
                 <Input
                   iconSrc='/icons/search-20px.svg'
-                  iconAlt='search'
+                  iconAlt='search icon'
                   placeholder='Add or create categories'
                   textValue={inputCategory}
                   divider={true}
@@ -245,7 +230,6 @@ export default function CreateQRURLScreen() {
             </div>
             <div className='mx-auto mt-6 flex max-w-[288px] items-center justify-between space-x-4 md:max-w-[352px] md:space-x-8'>
               <Button
-                width='full'
                 type='positive'
                 className='h-[40px] w-[136px] md:w-[160px]'
                 onClick={() => {}}
@@ -264,9 +248,6 @@ export default function CreateQRURLScreen() {
             <div className='absolute left-[-15px] top-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-primary'></div>
             <div className='absolute bottom-[-15px] right-[-15px] z-[-1] h-[80px] w-[120px] rounded-[8px] bg-primary'></div>
           </div>
-          {/* </>) : (
-              <div>Loading</div>
-            )} */}
           <div className='mx-[20px] text-center md:flex md:flex-col md:items-center'>
             <h2 className='text-[36px] font-[700] leading-[65px]'>
               Fessior Tools

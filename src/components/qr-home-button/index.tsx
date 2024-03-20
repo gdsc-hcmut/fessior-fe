@@ -1,13 +1,13 @@
 import Image from 'next/image';
-import React from 'react';
 
-interface QrHomeButtonProps {
+type QrHomeButtonProps = {
   type: string;
   image: string;
   content: string;
-}
+};
 
-const QrHomeButton = ({ type, image, content }: QrHomeButtonProps) => {
+export default function QrHomeButton(props: QrHomeButtonProps) {
+  const { type, image, content } = props;
   return (
     <button
       className=' md:pr-45 ld:pr-37 flex w-full rounded-lg border-[0.5px] border-solid border-black bg-white pl-4
@@ -26,6 +26,4 @@ const QrHomeButton = ({ type, image, content }: QrHomeButtonProps) => {
       </div>
     </button>
   );
-};
-
-export default QrHomeButton;
+}
