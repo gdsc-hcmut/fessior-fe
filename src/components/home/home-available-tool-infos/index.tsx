@@ -147,7 +147,7 @@ export function CodeWithMeDescription() {
       </p>
       <p className='mb-[8px] leading-[28px]'>
         Ideal for <b>pair programming, group projects</b>, or even just getting
-        valuable insights on your code from different perspectives,{' '}
+        valuable insights on your code from different perspectives,
         <b>Code with me</b> fosters effective communication, accelerates
         problem-solving, and injects a dose of fun into the development process.
       </p>

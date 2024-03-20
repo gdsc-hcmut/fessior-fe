@@ -81,7 +81,7 @@ export default function NavItems(props: NavItem) {
   );
 
   const itemTitleClass = clsx(
-    'ms-[16px] font-[500] whitespace-nowrap',
+    'ms-[16px] font-[500]',
     isLogout ? 'text-red' : active ? 'text-primary' : 'text-[#696969]',
   );
 

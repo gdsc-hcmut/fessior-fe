@@ -18,7 +18,7 @@ export default function HomeAvailableToolItem(
 ) {
   const { name, index, iconFilenames, className, onClick, active } = props;
   const ToolItemClass = clsx(
-    'mb-[16px] h-[60px] items-center justify-between rounded-[8px] px-[16px] hover:cursor-pointer hover:shadow-[0px_4px_47.08px_0px_rgba(11,40,120,0.10)] lg:flex',
+    'mb-[16px] h-[60px] items-center justify-between rounded-[8px] px-[16px] hover:cursor-pointer hover:shadow-[0px_4px_47.08px_0px_rgba(11,40,120,0.10)] xl:flex',
     active
       ? 'flex shadow-[0px_4px_47.08px_0px_rgba(11,40,120,0.10)]'
       : 'hidden',
