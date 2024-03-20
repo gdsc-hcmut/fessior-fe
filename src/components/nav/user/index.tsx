@@ -54,8 +54,8 @@ export default function User(props: UserProps) {
     meProfile && meProfile.picture
       ? meProfile.picture
       : whiteTheme
-        ? '/icons/header/user_white.svg'
-        : '/icons/header/user_royal.svg';
+      ? '/icons/header/user_white.svg'
+      : '/icons/header/user_royal.svg';
 
   const collapseIcon = getIcon(
     '/icons/header/',
@@ -67,10 +67,10 @@ export default function User(props: UserProps) {
     screenSize === ScreenSize.SM
       ? 52
       : screenSize === ScreenSize.MD
-        ? 42
-        : screenSize === ScreenSize.LG
-          ? 52
-          : 0;
+      ? 42
+      : screenSize === ScreenSize.LG
+      ? 52
+      : 0;
 
   return (
     <div ref={optionRef} onClick={handleUserClick} className={userClass}>
