@@ -1,30 +1,15 @@
 'use client';
-
-import { stringify } from 'querystring';
-
-import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import Button from '@/components/button';
 import CategoryItem from '@/components/category-item';
 import Input from '@/components/input';
-import ModalShorten from '@/components/modal-shorten';
-import QRNavBar from '@/components/qr-navbar';
 import ShortenTools from '@/components/shorten-tools';
-import AuthContext from '@/contexts/authContext';
-import useScreenSize from '@/hooks/useScreenSize';
-import meService from '@/libs/api/me';
-import urlService from '@/services/url.service';
-import Organization from '@/types/organization-type';
-import ScreenSize from '@/types/screen-size-enum';
-import Url from '@/types/url-type';
 
 export default function CreateQRWifiScreen() {
   const router = useRouter();
-  function navToWebsite() {
-    router.push('/qrcode/qr-url');
-  }
   const [inputQRName, setInputQRName] = useState('');
   const [inputSSID, setInputSSID] = useState('');
   const [inputCategory, setInputCategory] = useState('');
@@ -60,31 +45,41 @@ export default function CreateQRWifiScreen() {
           </div>
           <div className='mx-auto my-5 flex w-[100%] max-w-[360px] justify-between text-[16px] font-[500] md:my-6 md:max-w-[416px] md:text-[20px]'>
             <Button
-              image='/icons/link-qr.svg'
-              imageOnHover='/icons/link-qr-choosen.svg'
-              imageAlt='icons'
-              imageSizeWidth={40}
-              imageSizeHeight={40}
               onClick={() => {
-                navToWebsite();
+                router.push('/qrcode/qr-url');
               }}
               className='flex items-center justify-center'
               width='full'
               type='neutral'
             >
+              <div className='transition-all'>
+                <Image
+                  src={'/icons/link-qr.svg'}
+                  alt='link icon'
+                  width={40}
+                  height={40}
+                  className='pr-2'
+                />
+              </div>
               Website URL
             </Button>
             <Button
-              image='/icons/wifi-white.svg'
-              imageOnHover='/icons/wifi-white.svg'
-              imageAlt='icons'
-              imageSizeWidth={40}
-              imageSizeHeight={40}
               width='full'
               type='positive'
               className='ml-6 flex items-center justify-center'
-              onClick={() => {}}
+              onClick={() => {
+                router.push('/qrcode/qr-wifi');
+              }}
             >
+              <div className='transition-all'>
+                <Image
+                  src={'/icons/wifi-white.svg'}
+                  alt='wifi icon'
+                  width={40}
+                  height={40}
+                  className='pr-2'
+                />
+              </div>
               Wi-fi
             </Button>
           </div>
@@ -189,7 +184,6 @@ export default function CreateQRWifiScreen() {
             </div>
             <div className='mx-auto mt-5 flex max-w-[288px] items-center justify-between space-x-4 md:max-w-[352px]'>
               <Button
-                width='full'
                 type='positive'
                 className='h-[40px] w-[136px] md:w-[160px]'
                 onClick={() => {}}
@@ -197,7 +191,6 @@ export default function CreateQRWifiScreen() {
                 Create Now
               </Button>
               <Button
-                width='full'
                 type='neutral'
                 className='h-[40px] w-[136px] md:w-[160px]'
                 onClick={() => {}}

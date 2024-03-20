@@ -1,16 +1,9 @@
-'use client';
 import { clsx } from 'clsx';
-import Image from 'next/image';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 type ButtonProps = {
   children: ReactNode;
   disabled?: boolean;
-  image?: string;
-  imageOnHover?: string;
-  imageAlt?: string;
-  imageSizeWidth?: number;
-  imageSizeHeight?: number;
   onClick: () => void;
   className?: string;
   width?: 'fit' | 'full';
@@ -19,16 +12,10 @@ type ButtonProps = {
 };
 
 export default function Button(props: ButtonProps) {
-  const [isHovered, setIsHovered] = useState(false);
   const {
     children,
     disabled,
     onClick,
-    image,
-    imageOnHover,
-    imageAlt,
-    imageSizeWidth,
-    imageSizeHeight,
     className,
     width = 'fit',
     type = 'positive',
@@ -48,6 +35,7 @@ export default function Button(props: ButtonProps) {
     'rounded-[8px] px-[16px] py-[8px] transition-all',
     className,
   );
+
   return (
     <button
       onMouseEnter={() => {
@@ -60,21 +48,6 @@ export default function Button(props: ButtonProps) {
       onClick={onClick}
       className={buttonClass}
     >
-      {image &&
-      imageAlt &&
-      imageSizeWidth &&
-      imageSizeHeight &&
-      imageOnHover ? (
-        <div className='transition-all'>
-          <Image
-            src={isHovered ? imageOnHover : image}
-            alt={imageAlt}
-            width={imageSizeWidth}
-            height={imageSizeHeight}
-            className='pr-2'
-          />
-        </div>
-      ) : null}
       {children}
     </button>
   );

@@ -1,5 +1,5 @@
 'use client';
-import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, useContext } from 'react';
 
@@ -93,30 +93,29 @@ export default function QRURLScreen() {
               <span>Fessior</span> QR Generator
             </h1>
             <p className='hidden leading-[24px] md:block md:text-[20px] lg:mb-0 lg:mt-3 lg:text-[24px]'>
-              Convenience, efficiency, and versatility: <br /> QR Code
-              Management Made Easy
+              Convenience, efficiency, and versatility:{' '}
+              <br className='md:hidden' /> QR Code Management Made Easy
             </p>
           </div>
           <div className='mx-auto my-5 flex w-[100%] max-w-[360px] text-[16px] font-[500] md:my-6 md:max-w-[416px] md:text-[20px]'>
             <Button
-              image='/icons/link-qr-chosen.svg'
-              imageOnHover='/icons/link-qr-chosen.svg'
-              imageAlt='icons'
-              imageSizeWidth={40}
-              imageSizeHeight={40}
               onClick={() => consoleLog}
               className='flex items-center justify-center'
               width='full'
               type='positive'
             >
+              <div className='transition-all'>
+                <Image
+                  src={'/icons/link-qr-chosen.svg'}
+                  alt='link icon'
+                  width={40}
+                  height={40}
+                  className='pr-2'
+                />
+              </div>
               Website URL
             </Button>
             <Button
-              image='/icons/wifi.svg'
-              imageOnHover='/icons/wifi-white.svg'
-              imageAlt='icons'
-              imageSizeWidth={40}
-              imageSizeHeight={40}
               width='full'
               type='neutral'
               className='ml-6 flex items-center justify-center'
@@ -124,7 +123,16 @@ export default function QRURLScreen() {
                 router.push('/qrcode/qr-wifi');
               }}
             >
-              <Link href='/qrcode/wifi'>Wi-fi</Link>
+              <div className='transition-all'>
+                <Image
+                  src={'/icons/wifi.svg'}
+                  alt='wifi icon'
+                  width={40}
+                  height={40}
+                  className='pr-2'
+                />
+              </div>
+              Wi-fi
             </Button>
           </div>
           <div className='relative mx-auto mb-[172px] w-[90%] rounded-[8px] border-[3px] border-solid border-primary bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow md:flex-col md:border-[0.5px] md:border-[#7e7e7e4d] lg:w-[100%] lg:max-w-[856px] lg:p-[24px]'>
@@ -237,7 +245,6 @@ export default function QRURLScreen() {
                 Create Now
               </Button>
               <Button
-                width='full'
                 type='neutral'
                 className='h-[40px] w-[136px] md:w-[160px]'
                 onClick={() => {}}
