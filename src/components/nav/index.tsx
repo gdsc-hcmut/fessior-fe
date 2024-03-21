@@ -65,6 +65,9 @@ export default function Nav(props: NavProps) {
     'absolute left-0 right-0 top-[72px] overflow-y-hidden px-[20px] transition-all duration-500 scrollbar-hide',
   );
 
+  const pathIsShortenClass = clsx(pathname === '/shorten' ? '' : 'hidden');
+  const pathIsUrlClass = clsx(pathname === '/urls' ? '' : 'hidden');
+
   if (!isAuthStatusReady) return;
 
   if (!meProfile) {
@@ -154,7 +157,7 @@ export default function Nav(props: NavProps) {
         </div>
       )}
       <Button
-        className={clsx(pathname === '/shorten' ? '' : 'hidden')}
+        className={pathIsShortenClass}
         onClick={() => {
           router.push('/urls');
         }}
@@ -162,7 +165,7 @@ export default function Nav(props: NavProps) {
         My URLs
       </Button>
       <Button
-        className={clsx(pathname === '/urls' ? '' : 'hidden')}
+        className={pathIsUrlClass}
         onClick={() => {
           router.push('/shorten');
         }}
