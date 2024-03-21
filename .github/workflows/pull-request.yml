@@ -52,8 +52,8 @@ jobs:
       - name: Add quotes
         id: add-quotes
         run: |
-          echo '{ALL_CHANGED_FILES}={"${{ steps.changed-files.outputs.all_changed_files }}" | sed "s/ /' '/g"}' >> "$GITHUB_OUTPUT"
-          echo "${{ steps.changed-files.outputs.all_changed_files }}" | sed "s/ /' '/g"
+          echo 'ALL_CHANGED_FILES="'${{ steps.changed-files.outputs.all_changed_files }}'" | sed "s/ /' '/g"' >> "$GITHUB_OUTPUT"
+          echo "'${{ steps.changed-files.outputs.all_changed_files }}'" | sed "s/ /' '/g"
         shell: bash
 
       - name: Lint check
