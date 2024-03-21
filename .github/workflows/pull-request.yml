@@ -49,9 +49,16 @@ jobs:
           fi
         continue-on-error: true
 
+      - name: Add quotes
+        id: add-quotes
+        run: |
+          ALL_CHANGED_FILES='$(echo "${{ steps.changed-files.outputs.all_changed_files }}" | sed "s/ /' '/g")'
+          echo ALL_CHANGED_FILES
+        shell: bash
+
       - name: Lint check
         run: |
-          yarn eslint '${{ steps.changed-files.outputs.all_changed_files	 }} | sed "s/ /' '/g"' --ignore-pattern '*.json'
+          yarn eslint ${{ steps.add-quotes.outputs.ALL_CHANGED_FILES }} --ignore-pattern '*.json'
 
       - name: Install dependencies
         run: yarn --frozen-lockfile
