@@ -15,5 +15,3 @@ CODEOWNERS
 test.js
 !.eslintrc.js
 global.scss
-*.css
-*.json
