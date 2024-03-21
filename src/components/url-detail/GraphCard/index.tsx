@@ -69,7 +69,7 @@ function GraphCard() {
   ]);
   const handleChangeDateRange = (update: [Date | null, Date | null]) => {
     setCurDateRange(update);
-    if (isSync) setDateRange(update);
+    setDateRange(update);
   };
 
   return (
@@ -80,7 +80,7 @@ function GraphCard() {
         </p>
         <div className='datepicker'>
           <DateRange
-            dateRange={isSync ? dateRange : curDateRange}
+            dateRange={isSync && dateRange[0] ? dateRange : curDateRange}
             setDateRange={handleChangeDateRange}
           />
         </div>

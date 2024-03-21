@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { useUrlModalStore } from '@/store/url-modal';
 import { MyUrl, MyUrlv1 } from '@/types/url-type';
@@ -22,6 +23,7 @@ export default function UrlButton(props: UrlButtonProps) {
     event.stopPropagation();
     event.preventDefault();
     navigator.clipboard.writeText(copyContent);
+    toast.success('Link copied');
     setCopied(true);
   };
 

@@ -169,7 +169,7 @@ function ClickStatisticCard() {
 
   const handleChangeDateRange = (update: [Date | null, Date | null]) => {
     setCurDateRange(update);
-    if (isSync) setDateRange(update);
+    setDateRange(update);
   };
 
   const handleSearch = (text: string) => {
@@ -222,7 +222,7 @@ function ClickStatisticCard() {
         </div>
         <div className='hidden md:block'>
           <DateRange
-            dateRange={isSync ? dateRange : curDateRange}
+            dateRange={isSync && dateRange[0] ? dateRange : curDateRange}
             setDateRange={handleChangeDateRange}
           />
         </div>
@@ -246,7 +246,7 @@ function ClickStatisticCard() {
             </p>
             <div className='md:hidden'>
               <DateRange
-                dateRange={isSync ? dateRange : curDateRange}
+                dateRange={isSync && dateRange[0] ? dateRange : curDateRange}
                 setDateRange={handleChangeDateRange}
               />
             </div>
