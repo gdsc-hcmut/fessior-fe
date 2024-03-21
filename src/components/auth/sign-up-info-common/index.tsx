@@ -19,8 +19,7 @@ export default function SignUpInfoCommon() {
         const response = await login({
           token: credentialResponse.credential,
         });
-        if (true) {
-          //TODO: response.isFirstTimeLogin is not defined
+        if (response.isFirstLogin) {
           authRouter(AuthType.SIGN_UP);
         } else {
           authRouter();
