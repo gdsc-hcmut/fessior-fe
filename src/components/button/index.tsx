@@ -9,6 +9,7 @@ type ButtonProps = {
   width?: 'fit' | 'full';
   type?: 'positive' | 'neutral' | 'neutral-positive';
   setIsHovering?: (isHovering: boolean) => void;
+  tabIndex?: number;
 };
 
 export default function Button(props: ButtonProps) {
@@ -20,6 +21,7 @@ export default function Button(props: ButtonProps) {
     width = 'fit',
     type = 'positive',
     setIsHovering,
+    tabIndex = 0,
   } = props;
 
   const buttonClass = clsx(
@@ -38,6 +40,7 @@ export default function Button(props: ButtonProps) {
 
   return (
     <button
+      tabIndex={tabIndex}
       onMouseEnter={() => {
         if (setIsHovering) setIsHovering(true);
       }}

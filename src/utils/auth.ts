@@ -1,10 +1,16 @@
-export function validatePassword(
-  requirementQuantity: number,
-  password: string,
-) {
-  const validations = Array(requirementQuantity).fill(true);
+export const REQUIREMENT_NUMBER = 3;
+export const VERIFICATION_CODE_LENGTH = 4;
 
-  if (password.length < 6 || password.length >= 16) {
+export const passwordRequirements = [
+  'Be between 8 and 16 characters',
+  'Contain at least one lowercase and one uppercase character',
+  'Contain at least one number and one special character',
+];
+
+export function validatePassword(password: string) {
+  const validations = Array(REQUIREMENT_NUMBER).fill(true);
+
+  if (password.length < 8 || password.length > 16) {
     validations[0] = false;
   }
   if (!(password.match(/[A-Z]/g) && password.match(/[a-z]/g))) {

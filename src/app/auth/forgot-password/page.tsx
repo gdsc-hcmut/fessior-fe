@@ -12,20 +12,37 @@ import authHeaderContent from '@/libs/auth-header-content';
 import AuthType from '@/types/auth-type-enum';
 
 export default function ForgotPassword() {
-  const [authStep, setAuthStep] = useState(0);
+  const [step, setStep] = useState(0);
+  const [username, setUsername] = useState('');
 
   return (
     <div className='flex h-screen flex-col'>
-      <AuthHeader {...authHeaderContent[AuthType.FORGOT_PASSWORD][authStep]} />
+      <AuthHeader {...authHeaderContent[AuthType.FORGOT_PASSWORD][step]} />
       <div className='flex flex-grow flex-col items-stretch px-[20px] py-[28px]'>
-        {authStep === 0 && (
-          <ForgotPasswordCommon0 nextStep={() => setAuthStep(authStep + 1)} />
+        {step === 0 && (
+          <ForgotPasswordCommon0
+            username={username}
+            setUsername={setUsername}
+            nextStep={() => setStep(step + 1)}
+          />
         )}
-        {authStep === 1 && (
-          <ForgotPasswordCommon1 nextStep={() => setAuthStep(authStep + 1)} />
+        {step === 1 && (
+          <ForgotPasswordCommon1
+            setUsername={setUsername}
+            firstStep={() => {
+              setStep(0);
+              setUsername('');
+            }}
+            nextStep={() => setStep(step + 1)}
+            username={username}
+          />
         )}
-        {authStep === 2 && (
-          <ForgotPasswordCommon2 firstStep={() => setAuthStep(0)} />
+        {step === 2 && (
+          <ForgotPasswordCommon2
+            username={username}
+            setUsername={setUsername}
+            nextStep={() => setStep(step + 1)}
+          />
         )}
       </div>
     </div>
