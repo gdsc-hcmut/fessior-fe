@@ -28,6 +28,7 @@ export default function UrlButton(props: UrlButtonProps) {
 
   return (
     <div className='flex flex-col justify-end space-y-2 self-start xl:flex-[1] xl:flex-row xl:space-x-1 xl:space-y-0 3xl:space-x-2'>
+      {/* TODO: Apply new ../copy-button component */}
       <button
         onClick={onCopy}
         className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'
