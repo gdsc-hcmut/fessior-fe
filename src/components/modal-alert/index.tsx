@@ -83,12 +83,12 @@ export default function ModalAlert(props: ModalAlertProps) {
                 <p className='text-[18px]'>{primaryActionButtonText}</p>
               </Button>
             )}
+            {primaryActionButtonText &&
+              onPrimaryAction &&
+              secondaryActionButtonText &&
+              onSecondaryAction && <div className='w-[16px]'></div>}
             {secondaryActionButtonText && onSecondaryAction && (
-              <Button
-                onClick={onSecondaryAction}
-                className='ms-[24px]'
-                type='neutral'
-              >
+              <Button onClick={onSecondaryAction} type='neutral'>
                 <p className='text-[18px]'>{secondaryActionButtonText}</p>
               </Button>
             )}
