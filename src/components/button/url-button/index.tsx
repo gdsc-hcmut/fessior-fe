@@ -26,7 +26,7 @@ export default function UrlButton(props: UrlButtonProps) {
   };
 
   useEffect(() => {
-    if (copied) setTimeout(() => setCopied(false), 1500);
+    if (copied) setTimeout(() => setCopied(false), 3000);
   }, [copied]);
 
   return (
@@ -40,12 +40,15 @@ export default function UrlButton(props: UrlButtonProps) {
     >
       <button
         onClick={onCopy}
-        className='flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8'
+        className={clsx(
+          'flex h-6 w-6 items-center justify-center rounded-lg border-[1px] border-primary 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8',
+          copied ? 'bg-primary' : 'bg-white',
+        )}
       >
         <Image
           src={
             copied
-              ? '/icons/url/check_royal.svg'
+              ? '/icons/shorten/inactive/tick.svg'
               : '/icons/url/content_copy.svg'
           }
           alt='Copy icon'

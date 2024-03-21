@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 
 import useScreenSize from '@/hooks/useScreenSize';
+import { useDateRangeStore } from '@/store/date-range';
 import ScreenSize from '@/types/screen-size-enum';
 import { PieChartData } from '@/types/url-type';
 
@@ -160,6 +161,17 @@ function ClickStatisticCard() {
   const [deviceList, setDeviceList] = useState(demoDevice);
   const [searchText, setSearchText] = useState('');
 
+  const { isSync, dateRange, setDateRange } = useDateRangeStore();
+  const [curDateRange, setCurDateRange] = useState<[Date | null, Date | null]>([
+    new Date(), // Today
+    new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000),
+  ]);
+
+  const handleChangeDateRange = (update: [Date | null, Date | null]) => {
+    setCurDateRange(update);
+    if (isSync) setDateRange(update);
+  };
+
   const handleSearch = (text: string) => {
     setSearchText(text);
     if (isDeviceClicks) {
@@ -209,7 +221,10 @@ function ClickStatisticCard() {
           </button>
         </div>
         <div className='hidden md:block'>
-          <DateRange />
+          <DateRange
+            dateRange={isSync ? dateRange : curDateRange}
+            setDateRange={handleChangeDateRange}
+          />
         </div>
       </div>
       <div className='flex w-full flex-col md:flex-row'>
@@ -230,7 +245,10 @@ function ClickStatisticCard() {
               Clicks
             </p>
             <div className='md:hidden'>
-              <DateRange />
+              <DateRange
+                dateRange={isSync ? dateRange : curDateRange}
+                setDateRange={handleChangeDateRange}
+              />
             </div>
           </div>
         </div>

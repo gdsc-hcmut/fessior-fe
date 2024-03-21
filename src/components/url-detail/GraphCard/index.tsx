@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
+import { useDateRangeStore } from '@/store/date-range';
 import { ChartData } from '@/types/url-type';
 
 import DateRange from '../DateRange';
@@ -60,6 +61,17 @@ function GraphCard() {
     if (/defaultProps/.test(args[0])) return;
     error(...args);
   };
+
+  const { isSync, setIsSync, dateRange, setDateRange } = useDateRangeStore();
+  const [curDateRange, setCurDateRange] = useState<[Date | null, Date | null]>([
+    new Date(), // Today
+    new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000),
+  ]);
+  const handleChangeDateRange = (update: [Date | null, Date | null]) => {
+    setCurDateRange(update);
+    if (isSync) setDateRange(update);
+  };
+
   return (
     <div className='flex w-full flex-col justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] xl:w-[44%] 2xl:w-[54%] 3xl:w-[60%]'>
       <div className='flex flex-col space-y-1 xs:flex-row xs:justify-between xs:space-y-0'>
@@ -67,10 +79,26 @@ function GraphCard() {
           Engagements over time
         </p>
         <div className='datepicker'>
-          <DateRange />
+          <DateRange
+            dateRange={isSync ? dateRange : curDateRange}
+            setDateRange={handleChangeDateRange}
+          />
         </div>
       </div>
-      <div className='ml-[-28px] mt-5 h-[200px] w-[80vw] self-center sm:h-[240px] lg:w-[60vw] xl:w-[32vw] 3xl:mt-10 3xl:h-[300px] 3xl:w-[36vw]'>
+      <div className='mt-1 flex items-center space-x-1 sm:mt-0'>
+        <label className='inline-flex cursor-pointer items-center'>
+          <input
+            type='checkbox'
+            value=''
+            className='peer sr-only'
+            checked={isSync}
+            onChange={() => setIsSync(!isSync)}
+          />
+          <div className="peer relative h-4 w-8 rounded-full bg-white pl-1 text-white after:absolute after:start-[4px] after:top-[2px] after:h-3 after:w-3 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#0F9D58] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 rtl:peer-checked:after:-translate-x-full dark:bg-[#db4437]" />
+        </label>
+        <p className='font-medium'>Apply filter to both charts</p>
+      </div>
+      <div className='ml-[-48px] mt-5 h-[200px] w-[80vw] self-center sm:h-[240px] tablet:ml-[-28px] lg:w-[60vw] xl:w-[32vw] 3xl:mt-8 3xl:h-[300px] 3xl:w-[36vw]'>
         <RenderLineChart data={demoData} />
       </div>
     </div>

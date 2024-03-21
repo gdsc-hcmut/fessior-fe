@@ -2,11 +2,13 @@ import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-function DateRange() {
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
-    new Date(), // Today
-    new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000),
-  ]);
+type DateRangeProps = {
+  dateRange: [Date | null, Date | null];
+  setDateRange: (value: [Date | null, Date | null]) => void;
+};
+
+function DateRange(props: DateRangeProps) {
+  const { dateRange, setDateRange } = props;
   const [startDate, endDate] = dateRange;
 
   const handleDateChange = (update: [Date | null, Date | null]) => {
