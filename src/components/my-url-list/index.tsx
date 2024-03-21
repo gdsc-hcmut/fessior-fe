@@ -68,8 +68,8 @@ function UrlItemXL(props: UrlItemProps) {
           (width && width != 0
             ? width * 0.86
             : ref.current
-              ? ref.current.clientWidth * 0.86
-              : 0)
+            ? ref.current.clientWidth * 0.86
+            : 0)
         ) {
           newCategories.push(url.category[i]);
           currentWidth += boxWidth;
@@ -209,8 +209,8 @@ function UrlItemMD(props: UrlItemProps) {
           (width && width != 0
             ? width * 0.8
             : mobile_ref.current
-              ? mobile_ref.current.clientWidth * 0.8
-              : 0)
+            ? mobile_ref.current.clientWidth * 0.8
+            : 0)
         ) {
           newCategories.push(url.category[i]);
           currentWidth += boxWidth;
