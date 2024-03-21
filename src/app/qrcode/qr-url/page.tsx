@@ -190,7 +190,7 @@ export default function QRURLScreen() {
         >
           <div className='transition-all'>
             <Image
-              src={'/icons/qrcode/active/link-qr-chosen.svg'}
+              src={'/icons/qrcode/active/link_qr_chosen.svg'}
               alt='link icon'
               width={40}
               height={40}
@@ -244,7 +244,7 @@ export default function QRURLScreen() {
           </h6>
           <div className='mb-[12px] md:mb-[20px] md:ml-6 md:w-[90%]'>
             <Input
-              iconSrc='/icons/qrcode/inactive/link-qr.svg'
+              iconSrc='/icons/qrcode/inactive/link_qr.svg'
               iconAlt='link icon'
               placeholder='Enter your URL'
               textValue={inputURL}

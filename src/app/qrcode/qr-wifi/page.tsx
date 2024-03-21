@@ -181,7 +181,7 @@ export default function CreateQRWifiScreen() {
         >
           <div className='transition-all'>
             <Image
-              src={'/icons/qrcode/inactive/link-qr.svg'}
+              src={'/icons/qrcode/inactive/link_qr.svg'}
               alt='link icon'
               width={40}
               height={40}
@@ -200,7 +200,7 @@ export default function CreateQRWifiScreen() {
         >
           <div className='transition-all'>
             <Image
-              src={'/icons/qrcode/active/wifi-chosen.svg'}
+              src={'/icons/qrcode/active/wifi_chosen.svg'}
               alt='wifi icon'
               width={40}
               height={40}
