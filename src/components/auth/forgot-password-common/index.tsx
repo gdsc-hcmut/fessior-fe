@@ -1,27 +1,32 @@
-import clsx from 'clsx';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
+import ModalAlert from '@/components/modal-alert';
+import useAuthPasswordForm from '@/hooks/useAuthPasswordForm';
+import useAuthRouter from '@/hooks/useAuthRouter';
 import useInputErrorText from '@/hooks/useInputErrorText';
-import useScreenSize from '@/hooks/useScreenSize';
 import { recoverPassword } from '@/libs/api/auth';
-import ScreenSize from '@/types/screen-size-enum';
-import { isValidUsername } from '@/utils/auth';
+import AlertLevel from '@/types/alert-level-enum';
+import AuthFormFieldEnum from '@/types/auth-form-field-enum';
+import AuthType from '@/types/auth-type-enum';
+import { VERIFICATION_CODE_LENGTH, isValidUsername } from '@/utils/auth';
 
 import AuthForm from '../auth-form';
 
 type ForgotPasswordCommonProps = {
+  firstStep?: () => void;
   nextStep: () => void;
+  username: string;
+  setUsername: (username: string) => void;
 };
 
 export function ForgotPasswordCommon0(props: ForgotPasswordCommonProps) {
-  const { nextStep } = props;
-  const [username, setUsername] = useState('');
+  const { nextStep, username, setUsername } = props;
+  const [isNextStepAllowed, setIsNextStepAllowed] = useState(false);
   const { inputErrorTexts, setInputErrorText } = useInputErrorText(1);
 
   useEffect(() => {
     setInputErrorText(0, '');
+    if (username !== '') setIsNextStepAllowed(true);
   }, [username, setInputErrorText]);
 
   return (
@@ -31,7 +36,8 @@ export function ForgotPasswordCommon0(props: ForgotPasswordCommonProps) {
         with instructions to reset your password.
       </p>
       <AuthForm
-        actionText='Reset Password'
+        actionAllowed={isNextStepAllowed}
+        actionText='Continue'
         initFields={[
           {
             label: 'Email',
@@ -42,6 +48,7 @@ export function ForgotPasswordCommon0(props: ForgotPasswordCommonProps) {
         onAction={async () => {
           if (!isValidUsername(username)) {
             setInputErrorText(0, 'Please enter a valid email');
+            setIsNextStepAllowed(false);
             return;
           }
           nextStep();
@@ -53,88 +60,149 @@ export function ForgotPasswordCommon0(props: ForgotPasswordCommonProps) {
 }
 
 export function ForgotPasswordCommon1(props: ForgotPasswordCommonProps) {
-  const { nextStep } = props;
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const { username, nextStep, firstStep } = props;
+  const [verificationCode, setVerificationCode] = useState('');
+  const [verificationCodeError, setVerificationCodeError] = useState<
+    string | null
+  >(null);
 
-  return (
-    <AuthForm
-      actionText='Reset Password'
-      initFields={[
-        {
-          label: 'Password',
-          isPassword: true,
-          currentValue: password,
-          onChange: (input) => setPassword(input),
-        },
-        {
-          label: 'Confirm your new password',
-          isPassword: true,
-          currentValue: confirmPassword,
-          onChange: (input) => setConfirmPassword(input),
-        },
-      ]}
-      onAction={async () => {
-        const validation = password === confirmPassword;
-        if (validation) {
-          try {
-            await recoverPassword();
-            nextStep();
-          } catch (e: any) {
-            console.log(e.message);
-          }
-        } else {
-          console.log('PASSWORD NOT GOOD');
-        }
-      }}
-    />
-  );
-}
+  const handleVerifyCode = () => {
+    const isError = false; //TODO: apply api later
 
-export function CheckEmailIcon({ className }: { className?: string }) {
-  return (
-    <div
-      className={clsx(
-        'aspect-square w-[52px] rounded-[8px] border-[0.5px] border-primary p-[6px] shadow-[0px_4px_12px_0px_rgba(11,40,120,0.16)]',
-        className,
-      )}
-    >
-      <Image
-        src='/icons/auth/check_email.svg'
-        alt='check-email'
-        width={0}
-        height={0}
-        className='h-[100%] w-auto'
-      />
-    </div>
-  );
-}
+    if (isError) {
+      setVerificationCodeError('Invalid verification code');
+      return;
+    }
 
-type ForgotPasswordCommon2Props = {
-  firstStep: () => void;
-};
+    nextStep();
+  };
 
-//Cho nay khong co duong ve?
-export function ForgotPasswordCommon2(props: ForgotPasswordCommon2Props) {
-  const { firstStep } = props;
-  const { screenSize } = useScreenSize();
+  const clearForm = () => {
+    setVerificationCode('');
+  };
 
   return (
     <>
-      {screenSize === ScreenSize.SM && <CheckEmailIcon className='mb-[12px]' />}
-      <p className='mb-[20px] font-[500] text-primary md:text-[14px] lg:text-[16px]'>
-        If we find a matching account, we will send you an email with password
-        recovery instructions.
-      </p>
-      <div>
-        <p className='text-[14px] font-[500]'>
-          Did not receive an email? <br />
-          Check your spam folder or{' '}
-          <span onClick={firstStep} className='text-primary underline'>
-            try another email address
-          </span>
-        </p>
-      </div>
+      <AuthForm
+        actionText='Reset Your Password'
+        initFields={[
+          {
+            label: 'Email',
+            currentValue: username,
+            fixedValue: true,
+          },
+          {
+            label: 'Verification code',
+            type: AuthFormFieldEnum.VERIFICATION_CODE,
+            currentValue: verificationCode,
+            onChange: (input) => setVerificationCode(input),
+          },
+        ]}
+        subActionText='Change your email'
+        onSubAction={firstStep}
+        onAction={handleVerifyCode}
+        actionAllowed={verificationCode.length === VERIFICATION_CODE_LENGTH}
+      />
+      {/* ALERT MODAL */}
+      {verificationCodeError && (
+        <ModalAlert
+          title='Verification'
+          description={`${verificationCodeError}. Please try again.`}
+          onDismiss={() => setVerificationCodeError(null)}
+          primaryActionButtonText='Try Again'
+          onPrimaryAction={() => {
+            clearForm();
+            setVerificationCodeError(null);
+          }}
+          type={AlertLevel.ERROR}
+        />
+      )}
+    </>
+  );
+}
+
+export function ForgotPasswordCommon2(props: ForgotPasswordCommonProps) {
+  const { username } = props;
+  const [modalSuccessText, setModalSuccessText] = useState<string | null>(null);
+  const authRouter = useAuthRouter();
+  const {
+    password,
+    confirmPassword,
+    setPassword,
+    setConfirmPassword,
+    isActionAllowed,
+    modalErrorText,
+    setModalErrorText,
+    inputErrorTexts,
+    handleDifferentConfirmPassword,
+  } = useAuthPasswordForm();
+
+  const handleResetPassword = async () => {
+    if (password !== confirmPassword) {
+      handleDifferentConfirmPassword();
+      return;
+    }
+
+    try {
+      await recoverPassword();
+      setModalSuccessText('Your password has been successfully reset.');
+    } catch (e: any) {
+      setModalErrorText(e.message);
+    }
+  };
+
+  return (
+    <>
+      <AuthForm
+        actionText='Reset Password'
+        initFields={[
+          {
+            label: 'Email',
+            currentValue: username,
+            fixedValue: true,
+          },
+          {
+            label: 'Password',
+            type: AuthFormFieldEnum.PASSWORD,
+            currentValue: password,
+            onChange: (input) => setPassword(input),
+          },
+          {
+            label: 'Confirm your new password',
+            type: AuthFormFieldEnum.PASSWORD,
+            currentValue: confirmPassword,
+            onChange: (input) => setConfirmPassword(input),
+          },
+        ]}
+        errorTexts={inputErrorTexts}
+        onAction={handleResetPassword}
+        actionAllowed={isActionAllowed}
+      />
+      {/* ALERT MODAL */}
+      {modalErrorText && (
+        <ModalAlert
+          title='Reset Password'
+          description={`${modalErrorText}. Please try again.`}
+          onDismiss={() => setModalErrorText(null)}
+          secondaryActionButtonText='Dismiss'
+          onSecondaryAction={() => {
+            setModalErrorText(null);
+          }}
+          type={AlertLevel.ERROR}
+        />
+      )}
+      {modalSuccessText && (
+        <ModalAlert
+          title='Reset Password'
+          description={modalSuccessText}
+          onDismiss={() => authRouter(AuthType.LOGIN)}
+          primaryActionButtonText='Back to Log In'
+          onPrimaryAction={() => {
+            authRouter(AuthType.LOGIN);
+          }}
+          type={AlertLevel.SUCCESS}
+        />
+      )}
     </>
   );
 }

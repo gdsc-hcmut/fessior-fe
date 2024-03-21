@@ -9,18 +9,21 @@ export default function useQueryParams() {
 
   const params = new URLSearchParams(searchParams.toString());
 
-  const setItem = (newItems: { [key: string]: string | undefined }) => {
+  const setItem = (
+    newItems: { [key: string]: string | undefined },
+    newPath?: string,
+  ) => {
     Object.keys(newItems).forEach((key) => {
       const newItem = newItems[key];
       if (newItem) params.set(key, newItem);
       else params.delete(key);
     });
-    router.push(pathname + '?' + params.toString());
+    router.push((newPath ?? pathname) + '?' + params.toString());
   };
 
-  const removeItem = (...args: string[]) => {
-    args.forEach((key) => params.delete(key));
-    router.push(pathname + '?' + params.toString());
+  const removeItem = (items: string[], newPath?: string) => {
+    items.forEach((key) => params.delete(key));
+    router.push((newPath ?? pathname) + '?' + params.toString());
   };
 
   return { setItem, removeItem };

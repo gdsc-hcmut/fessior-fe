@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
-import LoadingPage from '@/app/loading';
 import CloseButton from '@/components/close-button';
+import AuthContext from '@/contexts/authContext';
+import AuthFormContext from '@/contexts/authFormContext';
 import useAuthRouter from '@/hooks/useAuthRouter';
+import useEventListener from '@/hooks/useEventListener';
 import authHeaderContent from '@/libs/auth-header-content';
-import storage from '@/libs/local-storage';
 import AuthType from '@/types/auth-type-enum';
 import { detectOS } from '@/utils/common';
 
@@ -16,23 +17,32 @@ type AuthModalProps = {
 
 export default function AuthModal(props: AuthModalProps) {
   const { authType } = props;
-
+  const [isAuthAllowed, setIsAuthAllowed] = useState(false);
+  const { isAuthErrorModalVisible } = useContext(AuthFormContext);
+  const { isLoggedIn, isAuthStatusReady } = useContext(AuthContext);
   const authRouter = useAuthRouter();
-  const [allowAuth, setAllowAuth] = useState<boolean | null>(null);
 
   useEffect(() => {
     const isMobile = !['windows', 'other'].includes(detectOS());
+    if (isMobile) authRouter(authType);
 
-    if (isMobile) return;
-
-    if (storage.getItem('loggedIn')) {
-      authRouter();
-    } else {
-      setAllowAuth(true);
+    if (authType === AuthType.SIGN_UP) {
+      setIsAuthAllowed(true);
+      return;
     }
-  }, [authRouter]);
-  if (!authType) return null;
-  if (allowAuth == null) return <LoadingPage />;
+
+    if (isAuthStatusReady) {
+      if (isLoggedIn) {
+        authRouter();
+      } else setIsAuthAllowed(true);
+    }
+  }, [authRouter, isAuthStatusReady, isLoggedIn, authType]);
+
+  useEventListener('keydown', (e: any) => {
+    if (e.key === 'Escape' && !isAuthErrorModalVisible) authRouter();
+  });
+
+  if (!authType || !isAuthAllowed) return null;
 
   return (
     <div className='fixed bottom-0 left-0 right-0 top-0 z-10 flex items-center justify-center bg-black/[0.3]'>
@@ -48,7 +58,6 @@ export default function AuthModal(props: AuthModalProps) {
         ></div>
         <CloseButton
           onClick={() => {
-            storage.removeItem('token');
             authRouter();
           }}
           className='absolute right-[16px] top-[16px] w-[32x]'

@@ -47,12 +47,12 @@ export default function Shorten() {
 
   const { screenSize, loaded } = useScreenSize();
 
-  const { meProfile, isAuthStatusReady } = useContext(AuthContext);
+  const { isLoggedIn, isAuthStatusReady } = useContext(AuthContext);
 
   const authRouter = useAuthRouter();
 
   useEffect(() => {
-    if (!meProfile) return;
+    if (!isLoggedIn) return;
 
     (async () => {
       try {
@@ -71,7 +71,7 @@ export default function Shorten() {
         console.log(e.message);
       }
     })();
-  }, [meProfile]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     (async () => {
@@ -203,14 +203,14 @@ export default function Shorten() {
 
   const isLoaded =
     (isAuthStatusReady &&
-      meProfile &&
+      isLoggedIn &&
       organizationValue &&
       organizationOptions &&
       categoryOptions &&
       domainOptions &&
       domainValue &&
       loaded) ||
-    (isAuthStatusReady && !meProfile);
+    (isAuthStatusReady && !isLoggedIn);
 
   return (
     <>
@@ -227,7 +227,7 @@ export default function Shorten() {
           </div>
           <div className='relative mb-[172px] items-start rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[24px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] lg:w-[100%]'>
             {isLoaded ? (
-              meProfile ? (
+              isLoggedIn ? (
                 <div className='items-start md:flex'>
                   <div className='md:flex-grow'>
                     <div>
@@ -245,6 +245,8 @@ export default function Shorten() {
                           onEnter={handleSubmit}
                           divider
                           fontSize={inputFontSize}
+                          tabIndex={1}
+                          autoFocus
                         />
                       </div>
                       <div className='inline-block md:flex md:max-w-[85%] md:justify-between lg:w-[85%]'>
@@ -302,6 +304,7 @@ export default function Shorten() {
                             onInput={setSlug}
                             onEnter={handleSubmit}
                             divider
+                            tabIndex={2}
                           />
                         </div>
                       </div>
@@ -343,6 +346,7 @@ export default function Shorten() {
                                 }}
                               />
                             )}
+                            tabIndex={3}
                           />
                         </div>
                       </div>
@@ -364,6 +368,7 @@ export default function Shorten() {
                     </div>
                   </div>
                   <Button
+                    tabIndex={4}
                     className='mt-[12px] md:relative md:top-[32px] md:ms-[12px] md:mt-0 md:text-[18px] lg:top-[46px]'
                     disabled={!allowSubmit}
                     onClick={handleSubmit}

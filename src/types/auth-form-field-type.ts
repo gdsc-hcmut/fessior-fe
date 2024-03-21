@@ -1,9 +1,11 @@
-type AuthFormField = {
+import AuthFormFieldEnum from './auth-form-field-enum';
+
+type AuthFormFieldType = {
   label: string;
-  isPassword?: boolean;
+  type?: AuthFormFieldEnum;
   fixedValue?: boolean;
   currentValue: string;
   onChange?: (input: string) => void;
 };
 
-export default AuthFormField;
+export default AuthFormFieldType;

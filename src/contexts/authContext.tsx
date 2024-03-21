@@ -24,38 +24,37 @@ type AuthContextProps = {
   ) => Promise<any>;
   logout: () => Promise<void>;
   isAuthStatusReady: boolean;
+  isLoggedIn: boolean;
 };
 
 const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthContextProvider({ children }: { children: ReactNode }) {
   const [meProfile, setMeProfile] = useState<User | null>(null);
+  const isLoggedIn = useMemo(() => !!meProfile, [meProfile]);
   const [isAuthStatusReady, setIsAuthStatusReady] = useState(false);
 
   const getMeProfile = useCallback(async () => {
     try {
       const profile = await meService.getMe();
 
-      if (profile) {
-        setMeProfile(profile);
-        storage.setItem('loggedIn', true);
-      } else {
-        setMeProfile(null);
-        storage.removeItem('token');
-        storage.removeItem('loggedIn');
-      }
+      if (profile) setMeProfile(profile);
     } catch (e: any) {
+      setMeProfile(null);
+      storage.removeItem('token');
       console.log(e.message);
     }
   }, []);
 
   useEffect(() => {
-    (async () => {
-      if (storage.getItem('loggedIn')) {
+    if (storage.getItem('token')) {
+      (async () => {
         await getMeProfile();
-      }
-      setIsAuthStatusReady(true);
-    })();
+        setIsAuthStatusReady(true);
+      })();
+      return;
+    }
+    setIsAuthStatusReady(true);
   }, [getMeProfile]);
 
   const login = useCallback(
@@ -64,11 +63,11 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
     ) => {
       const response = await serviceLogin(payload);
 
-      if (response.token) storage.setItem('token', response.token);
-
-      if (response.hasPassword) {
+      if (response.token) {
+        storage.setItem('token', response.token);
         getMeProfile();
       }
+
       return response;
     },
     [getMeProfile],
@@ -77,17 +76,15 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
   const logout = useCallback(async () => {
     const token = storage.getItem('token') as string;
 
-    if (!token) return;
-
-    try {
-      await serviceLogout({ token });
-    } catch (e: any) {
-      console.log(e.response.data.message);
-    }
+    if (token)
+      try {
+        await serviceLogout({ token });
+      } catch (e: any) {
+        console.log(e.response.data.message);
+      }
 
     setMeProfile(null);
     storage.removeItem('token');
-    storage.removeItem('loggedIn');
   }, []);
 
   const value = useMemo(() => {
@@ -96,8 +93,9 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
       login,
       logout,
       isAuthStatusReady,
+      isLoggedIn,
     };
-  }, [login, logout, meProfile, isAuthStatusReady]);
+  }, [login, logout, meProfile, isAuthStatusReady, isLoggedIn]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

@@ -36,6 +36,8 @@ type InputProps = {
     onCreate?: () => void,
   ) => ReactNode;
   collapseIcon?: boolean;
+  tabIndex?: number;
+  autoFocus?: boolean;
 };
 
 export default function Input(props: InputProps) {
@@ -59,6 +61,8 @@ export default function Input(props: InputProps) {
     renderCustomDropdownItems,
     onDropdownSelect,
     collapseIcon,
+    tabIndex,
+    autoFocus,
   } = props;
 
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -140,6 +144,8 @@ export default function Input(props: InputProps) {
         type={type ? type : 'text'}
         disabled={disabled || !onInput}
         size={1}
+        tabIndex={tabIndex}
+        autoFocus={autoFocus}
       />
       {
         !disabled && !onInput && (

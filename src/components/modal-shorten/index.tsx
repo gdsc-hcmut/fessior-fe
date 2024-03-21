@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
-import Button from '@/components/button';
 import CloseButton from '@/components/close-button';
 import useEventListener from '@/hooks/useEventListener';
-import Icon from '@/types/icon-enum';
 import Url from '@/types/url-type';
-import { getIcon } from '@/utils/common';
+
+import CopyButton from '../button/copy-button';
+import 'react-toastify/dist/ReactToastify.css';
 
 type ModalShortenProps = {
   onDismiss: () => void;
@@ -16,8 +16,6 @@ type ModalShortenProps = {
 
 export default function ModalShorten(props: ModalShortenProps) {
   const { shortenedUrl, onDismiss } = props;
-  const [isCopied, setIsCopied] = useState(false);
-  const [isCopyButtonHovering, setIsCopyButtonHovering] = useState(false);
   const urlShown = `https://${shortenedUrl.domain}/${shortenedUrl.slug}`;
 
   useEventListener('keydown', (e: any) => {
@@ -71,29 +69,12 @@ export default function ModalShorten(props: ModalShortenProps) {
             <div className='me-[4px] flex flex-grow items-center overflow-hidden overflow-x-auto rounded-[8px] border-[0.5px] border-solid border-primary p-[8px]'>
               <p className='text-primary'>{urlShown}</p>
             </div>
-            <Button
-              setIsHovering={setIsCopyButtonHovering}
-              type='neutral-positive'
+            <CopyButton
               onClick={() => {
                 navigator.clipboard.writeText(urlShown);
-                setIsCopied(true);
-                setTimeout(() => {
-                  setIsCopied(false);
-                }, 1000);
+                toast.success('Copied to clipboard');
               }}
-            >
-              <Image
-                src={getIcon(
-                  '/icons/shorten',
-                  isCopied ? 'tick.svg' : 'content_copy.svg',
-                  isCopyButtonHovering ? Icon.INACTIVE : Icon.ACTIVE,
-                )}
-                alt='copy'
-                height={0}
-                width={0}
-                className='h-auto w-[25px]'
-              />
-            </Button>
+            />
           </div>
         </div>
         <div className='absolute bottom-[-64px] left-[-30px] h-[80%] w-[150%] rotate-[-6deg] bg-white'></div>
@@ -116,6 +97,7 @@ export default function ModalShorten(props: ModalShortenProps) {
           onClick={onDismiss}
         />
       </div>
+      <ToastContainer />
     </div>
   );
 }
