@@ -51,7 +51,7 @@ jobs:
 
       - name: Lint check
         run: |
-          yarn eslint ${{ steps.changed-files.outputs.all_changed_files	 }} --ignore-pattern '*.json'
+          yarn eslint '${{ steps.changed-files.outputs.all_changed_files	 }} | sed "s/ /' '/g"' --ignore-pattern '*.json'
 
       - name: Install dependencies
         run: yarn --frozen-lockfile
