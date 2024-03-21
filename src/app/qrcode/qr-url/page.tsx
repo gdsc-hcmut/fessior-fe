@@ -190,7 +190,7 @@ export default function QRURLScreen() {
         >
           <div className='transition-all'>
             <Image
-              src={'/icons/qrcode/link-qr-chosen.svg'}
+              src={'/icons/qrcode/active/link-qr-chosen.svg'}
               alt='link icon'
               width={40}
               height={40}
@@ -209,7 +209,7 @@ export default function QRURLScreen() {
         >
           <div className='transition-all'>
             <Image
-              src={'/icons/qrcode/wifi.svg'}
+              src={'/icons/qrcode/inactive/wifi.svg'}
               alt='wifi icon'
               width={40}
               height={40}
@@ -244,7 +244,7 @@ export default function QRURLScreen() {
           </h6>
           <div className='mb-[12px] md:mb-[20px] md:ml-6 md:w-[90%]'>
             <Input
-              iconSrc='/icons/qrcode/link-qr-20px.svg'
+              iconSrc='/icons/qrcode/inactive/link-qr.svg'
               iconAlt='link icon'
               placeholder='Enter your URL'
               textValue={inputURL}
@@ -312,8 +312,8 @@ export default function QRURLScreen() {
                 }
                 fontSize={inputFontSize}
                 height={inputHeight}
-                iconSrc='/icons/qrcode/search-20px.svg'
-                iconAlt='search'
+                iconSrc='/icons/qrcode/search.svg'
+                iconAlt='search icon'
                 placeholder='Add or create categories'
                 textValue={categorySearch}
                 onInput={setCategorySearch}

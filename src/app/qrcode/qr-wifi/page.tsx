@@ -181,7 +181,7 @@ export default function CreateQRWifiScreen() {
         >
           <div className='transition-all'>
             <Image
-              src={'/icons/qrcode/link-qr.svg'}
+              src={'/icons/qrcode/inactive/link-qr.svg'}
               alt='link icon'
               width={40}
               height={40}
@@ -200,7 +200,7 @@ export default function CreateQRWifiScreen() {
         >
           <div className='transition-all'>
             <Image
-              src={'/icons/qrcode/wifi-white.svg'}
+              src={'/icons/qrcode/active/wifi-chosen.svg'}
               alt='wifi icon'
               width={40}
               height={40}
@@ -273,8 +273,8 @@ export default function CreateQRWifiScreen() {
           </h6>
           <div className='md:ml-[20px] md:inline-block md:flex-grow'>
             <Input
-              iconSrc='/icons/qrcode/verified_user.svg'
-              iconAlt='search'
+              iconSrc='/icons/qrcode/password.svg'
+              iconAlt='password icon'
               placeholder='Enter your password'
               textValue={inputPassword}
               divider={true}
@@ -299,8 +299,8 @@ export default function CreateQRWifiScreen() {
                 }
                 fontSize={inputFontSize}
                 height={inputHeight}
-                iconSrc='/icons/qrcode/search-20px.svg'
-                iconAlt='search'
+                iconSrc='/icons/qrcode/search.svg'
+                iconAlt='search icon'
                 placeholder='Add or create categories'
                 textValue={categorySearch}
                 onInput={setCategorySearch}
