@@ -149,7 +149,7 @@ export default function EditSlugModal(props: EditSlugModalProps) {
           </div>
           <div className='mt-2 flex w-[280px] flex-col space-y-1 md:w-[320px]'>
             <p className='w-fit font-medium'>Chosen categories</p>
-            <div className='show-scrollbar flex max-h-8 w-[280px] space-x-1 overflow-x-scroll pb-1 md:w-[320px] md:space-x-2'>
+            <div className='show-scrollbar flex max-h-[84px] w-[280px] flex-wrap gap-x-1 gap-y-1 overflow-y-scroll pb-1 md:w-[320px] md:gap-x-2'>
               {chosenCategories.length === 0 && (
                 <div className='flex items-center space-x-1'>
                   <div className='flex h-6 w-6 items-center justify-center rounded-full bg-primary/20'>
@@ -169,7 +169,7 @@ export default function EditSlugModal(props: EditSlugModalProps) {
               {chosenCategories.map((category, index) => (
                 <div
                   key={index}
-                  className='flex items-center space-x-1 rounded-lg bg-primary px-1 py-1 text-xs text-white md:px-3'
+                  className='flex w-fit items-center space-x-1 rounded-lg bg-primary px-1 py-1 text-xs text-white md:px-3'
                 >
                   <p className='whitespace-nowrap'>{category}</p>
                   <button onClick={(e) => removeCategory(e, category)}>

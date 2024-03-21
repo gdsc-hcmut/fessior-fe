@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 
 import useScreenSize from '@/hooks/useScreenSize';
 import ScreenSize from '@/types/screen-size-enum';
@@ -67,44 +67,54 @@ const piechartData1 = [
   {
     name: 'Android',
     value: 240,
+    color: '#78C257',
   },
   {
     name: 'iOS',
     value: 45,
+    color: '#555555',
   },
   {
     name: 'Windows',
     value: 139,
+    color: '#00A1F1',
   },
   {
     name: 'Mac',
     value: 98,
+    color: '#A2AAAD',
   },
   {
     name: 'Linux',
     value: 44,
+    color: '#ffcc33',
   },
 ];
 const piechartData2 = [
   {
     name: 'Facebook',
     value: 24,
+    color: '#4267B2',
   },
   {
     name: 'Messenger',
     value: 451,
+    color: '#A334FA',
   },
   {
     name: 'Youtube',
-    value: 13,
+    value: 44,
+    color: '#FF0000',
   },
   {
     name: 'Instagram',
     value: 58,
+    color: '#E1306C',
   },
   {
     name: 'Discord',
     value: 44,
+    color: '#7289da',
   },
 ];
 
@@ -134,7 +144,11 @@ function ShowPieChart(props: PiechartProps) {
           fill='#0B2878'
           className='text-base'
           label
-        />
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={entry.color} />
+          ))}
+        </Pie>
       </PieChart>
     </ResponsiveContainer>
   );

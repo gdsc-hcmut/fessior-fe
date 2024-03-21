@@ -1,15 +1,15 @@
 import clsx from 'clsx';
 import Image from 'next/image';
+import { QRCodeCanvas, QRCodeSVG } from 'qrcode.react';
 import { useEffect, useRef, useState } from 'react';
 // import sampleQR from '../../../../public/images/url/sampleQR.png';
 
 function QRCard() {
   const [isSVG, setIsSVG] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(true);
   const [currentSize, setCurrentSize] = useState(100);
   const [copied, setCopied] = useState(false);
 
-  const sizeList = [100, 200, 500, 1000];
+  const sizeList = [200, 500, 1000];
   const ref = useRef<HTMLImageElement>(null);
 
   const copyToClipboard = async (pngBlob: Blob) => {
@@ -52,7 +52,6 @@ function QRCard() {
 
   const onChangeSize = (size: number) => {
     setCurrentSize(size);
-    setIsCollapsed(true);
   };
 
   const onCopy = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -67,13 +66,24 @@ function QRCard() {
 
   return (
     <div className='flex w-full justify-between rounded-lg bg-white px-5 py-5 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)]'>
-      <div className='h-[32vw] w-[32vw] rounded-lg bg-white p-2 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] xs:h-[40vw] xs:w-[40vw] tablet:h-[20vw] tablet:w-[20vw] lg:h-[15vw] lg:w-[15vw] xl:h-[12vw] xl:w-[12vw] 2xl:mr-4 2xl:h-[10vw] 2xl:w-[10vw] 3xl:mr-5'>
-        <img
+      <div
+        id='qr-container'
+        className='h-[32vw] w-[32vw] rounded-lg bg-white p-2 shadow-[0_2px_4px_0_rgba(11,40,120,0.25)] xs:h-[40vw] xs:w-[40vw] tablet:h-[20vw] tablet:w-[20vw] lg:h-[15vw] lg:w-[15vw] xl:h-[12vw] xl:w-[12vw] 2xl:mr-4 2xl:h-[10vw] 2xl:w-[10vw] 3xl:mr-5'
+      >
+        {/* <img
           src='/images/url/sampleQR.png'
           alt='qr'
           className='h-auto w-full'
           id='qrcode'
           ref={ref}
+        /> */}
+        <QRCodeSVG
+          id='qrcode'
+          style={{
+            width: '100%',
+            height: 'auto',
+          }}
+          value='https://furl.one/example'
         />
       </div>
       <div className='flex flex-col justify-between'>
@@ -123,46 +133,32 @@ function QRCard() {
               </label>
             </div>
           </div>
-          <div className='flex space-x-1'>
-            <p className='font-medium text-primary'>Size</p>
-            <div className='relative'>
-              <button
-                onClick={() => setIsCollapsed(!isCollapsed)}
-                className='flex w-[88px] items-center justify-center space-x-2 rounded-lg border-[1px] border-[#252641] px-2'
-              >
-                <p>{currentSize}px</p>
-                <Image
-                  src='/icons/url/collapse_grey.svg'
-                  alt='Collapse icon'
-                  width={0}
-                  height={0}
-                  className={clsx(
-                    'h-auto w-3',
-                    !isCollapsed && 'rotate-180 transform',
-                  )}
-                />
-              </button>
-              <div
-                className={clsx(
-                  'absolute top-7 z-[5] flex w-[88px] flex-col space-y-1 rounded-lg border-[1px] border-[#252641] bg-white py-1 pl-2',
-                  isCollapsed ? 'scale-0' : 'animate-fade',
-                )}
-              >
-                {sizeList
-                  .filter((size) => size != currentSize)
-                  .map((size, idx) => (
-                    <button onClick={() => onChangeSize(size)} key={idx}>
-                      {size}px
-                    </button>
-                  ))}
+          <div className='flex'>
+            <p className='mr-2 font-medium text-primary'>Size</p>
+            <div className='group relative mr-1'>
+              <input
+                type='number'
+                value={currentSize}
+                min={0}
+                max={2000}
+                onChange={(e) => setCurrentSize(+e.target.value)}
+                className='number-input flex w-[60px] items-center justify-center space-x-2 rounded-lg border-[1px] border-[#252641] px-2'
+              />
+              <div className='absolute top-7 z-[5] flex w-[60px] scale-0 animate-fade flex-col space-y-1 rounded-lg border-[1px] border-[#252641] bg-white py-1 group-focus-within:scale-100'>
+                {sizeList.map((size, idx) => (
+                  <button onClick={() => onChangeSize(size)} key={idx}>
+                    {size}
+                  </button>
+                ))}
               </div>
             </div>
+            <p>px</p>
           </div>
         </div>
         <div className='mt-2 flex space-x-2 xs:mt-0'>
           <button
             onClick={downloadQR}
-            className='flex space-x-1 rounded-lg bg-primary px-2 py-1'
+            className='flex space-x-1 rounded-lg border-[1px] border-primary bg-white px-2 py-1'
           >
             <Image
               src='/icons/shorten/download.svg'
@@ -171,20 +167,20 @@ function QRCard() {
               height={0}
               className='h-5 w-auto 3xl:hidden'
             />
-            <p className='font-semibold text-white 3xl:hidden'>Save</p>
-            <p className='hidden whitespace-nowrap font-semibold text-white 3xl:block'>
+            <p className='text-primmary font-semibold 3xl:hidden'>Save</p>
+            <p className='hidden whitespace-nowrap font-semibold text-primary 3xl:block'>
               Save QR Code
             </p>
           </button>
           <button
             onClick={onCopy}
-            className='flex h-8 w-8 items-center justify-center rounded-lg bg-primary'
+            className='flex h-8 w-8 items-center justify-center rounded-lg border-[1px] border-primary bg-white'
           >
             <Image
               src={
                 copied
-                  ? '/icons/shorten/inactive/tick.svg'
-                  : '/icons/shorten/inactive/content_copy.svg'
+                  ? '/icons/shorten/active/tick.svg'
+                  : '/icons/shorten/active/content_copy.svg'
               }
               alt='Copy icon'
               width={0}

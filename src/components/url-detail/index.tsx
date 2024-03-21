@@ -90,23 +90,15 @@ function UrlDetailsCard(props: UrlDetailProps) {
       <div className='absolute left-0 top-4 h-9 w-2 bg-primary' />
       <div className='mb-7 flex flex-col md:mb-0'>
         <div className='flex items-center space-x-2'>
-          {/* <div
-            className={clsx(
-              'h-6 w-6 rounded-full',
-              url.isActive ? 'bg-[#7BCFA9]' : 'bg-[#ED9D97]',
-            )}
-          /> */}
           <label className='inline-flex cursor-pointer items-center'>
             <input
               type='checkbox'
               value=''
               className='peer sr-only'
               checked={demoEnable}
+              onChange={() => setShowEnableModal(true)}
             />
-            <button
-              onClick={() => setShowEnableModal(true)}
-              className="peer relative h-6 w-11 rounded-full bg-white pl-1 text-white after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#0F9D58] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 rtl:peer-checked:after:-translate-x-full dark:bg-[#db4437]"
-            />
+            <div className="peer relative h-6 w-11 rounded-full bg-white pl-1 text-white after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#0F9D58] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 rtl:peer-checked:after:-translate-x-full dark:bg-[#db4437]" />
           </label>
           <p className='truncate text-xl font-semibold text-primary md:w-[50vw] 2xl:w-[26vw] 3xl:text-2xl'>
             {url.domain}/{url.slug}

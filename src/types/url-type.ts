@@ -65,6 +65,7 @@ export type ChartData = {
 export type PieChartData = {
   name: string;
   value: number;
+  color?: string;
 };
 
 export default Url;
