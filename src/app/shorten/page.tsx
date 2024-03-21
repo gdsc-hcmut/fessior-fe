@@ -47,12 +47,12 @@ export default function Shorten() {
 
   const { screenSize, loaded } = useScreenSize();
 
-  const { meProfile, isAuthStatusReady } = useContext(AuthContext);
+  const { isLoggedIn, isAuthStatusReady } = useContext(AuthContext);
 
   const authRouter = useAuthRouter();
 
   useEffect(() => {
-    if (!meProfile) return;
+    if (!isLoggedIn) return;
 
     (async () => {
       try {
@@ -71,7 +71,7 @@ export default function Shorten() {
         console.log(e.message);
       }
     })();
-  }, [meProfile]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     (async () => {
@@ -203,14 +203,14 @@ export default function Shorten() {
 
   const isLoaded =
     (isAuthStatusReady &&
-      meProfile &&
+      isLoggedIn &&
       organizationValue &&
       organizationOptions &&
       categoryOptions &&
       domainOptions &&
       domainValue &&
       loaded) ||
-    (isAuthStatusReady && !meProfile);
+    (isAuthStatusReady && !isLoggedIn);
 
   return (
     <>
@@ -227,7 +227,7 @@ export default function Shorten() {
           </div>
           <div className='relative mb-[172px] items-start rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[24px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] lg:w-[100%]'>
             {isLoaded ? (
-              meProfile ? (
+              isLoggedIn ? (
                 <div className='items-start md:flex'>
                   <div className='md:flex-grow'>
                     <div>

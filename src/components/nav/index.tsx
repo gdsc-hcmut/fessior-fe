@@ -19,7 +19,7 @@ type NavProps = {
 };
 
 export default function Nav(props: NavProps) {
-  const { meProfile, isAuthStatusReady } = useContext(AuthContext);
+  const { isLoggedIn, isAuthStatusReady } = useContext(AuthContext);
 
   const { isHome, isCollapsed, setIsCollapsed } = props;
   const { screenSize, loaded } = useScreenSize();
@@ -62,7 +62,7 @@ export default function Nav(props: NavProps) {
 
   if (!isAuthStatusReady) return;
 
-  if (!meProfile) {
+  if (!isLoggedIn) {
     if (screenSize === ScreenSize.SM)
       return (
         <div>
