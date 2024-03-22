@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import CloseButton from '@/components/close-button';
 import useEventListener from '@/hooks/useEventListener';
 import Url from '@/types/url-type';
 
 import CopyButton from '../button/copy-button';
+import CustomToastContainer from '../custom-toast-container';
 import 'react-toastify/dist/ReactToastify.css';
 
 type ModalShortenProps = {
@@ -97,7 +98,7 @@ export default function ModalShorten(props: ModalShortenProps) {
           onClick={onDismiss}
         />
       </div>
-      <ToastContainer />
+      <CustomToastContainer />
     </div>
   );
 }
