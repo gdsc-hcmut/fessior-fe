@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import AuthModal from '@/components/auth/auth-modal';
 import Brand from '@/components/brand';
 import Nav from '@/components/nav';
+import { AuthFormContextProvider } from '@/contexts/authFormContext';
 import useEventListener from '@/hooks/useEventListener';
 import useScreenSize from '@/hooks/useScreenSize';
 import AuthType from '@/types/auth-type-enum';
@@ -60,7 +61,11 @@ export default function Header() {
           setIsCollapsed={setIsCollapsed}
         />
       </div>
-      {authType && <AuthModal authType={authType as AuthType} />}
+      {authType && (
+        <AuthFormContextProvider>
+          <AuthModal authType={authType as AuthType} />
+        </AuthFormContextProvider>
+      )}
     </>
   );
 }

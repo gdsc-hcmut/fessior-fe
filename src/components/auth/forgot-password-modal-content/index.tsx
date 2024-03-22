@@ -5,7 +5,6 @@ import AuthType from '@/types/auth-type-enum';
 
 import AuthModalHeading from '../auth-modal-heading';
 import {
-  CheckEmailIcon,
   ForgotPasswordCommon0,
   ForgotPasswordCommon1,
   ForgotPasswordCommon2,
@@ -13,29 +12,37 @@ import {
 
 export default function ForgotPasswordModalContent() {
   const [step, setStep] = useState(0);
+  const [username, setUsername] = useState('');
   return (
     <>
-      {step === 2 ? (
-        <div className='flex items-center md:mb-[24px] lg:mb-[28px]'>
-          <CheckEmailIcon />
-          <AuthModalHeading
-            {...authHeaderContent[AuthType.FORGOT_PASSWORD][2]}
-            subtitle=''
-            className='ms-[8px] inline-flex flex-col justify-center'
-          />
-        </div>
-      ) : (
-        <AuthModalHeading
-          {...authHeaderContent[AuthType.FORGOT_PASSWORD][step]}
+      <AuthModalHeading
+        {...authHeaderContent[AuthType.FORGOT_PASSWORD][step]}
+      />
+      {step === 0 && (
+        <ForgotPasswordCommon0
+          username={username}
+          setUsername={setUsername}
+          nextStep={() => setStep(step + 1)}
         />
       )}
-      {step === 0 && (
-        <ForgotPasswordCommon0 nextStep={() => setStep(step + 1)} />
-      )}
       {step === 1 && (
-        <ForgotPasswordCommon1 nextStep={() => setStep(step + 1)} />
+        <ForgotPasswordCommon1
+          setUsername={setUsername}
+          firstStep={() => {
+            setStep(0);
+            setUsername('');
+          }}
+          nextStep={() => setStep(step + 1)}
+          username={username}
+        />
       )}
-      {step === 2 && <ForgotPasswordCommon2 firstStep={() => setStep(0)} />}
+      {step === 2 && (
+        <ForgotPasswordCommon2
+          username={username}
+          setUsername={setUsername}
+          nextStep={() => setStep(step + 1)}
+        />
+      )}
     </>
   );
 }
