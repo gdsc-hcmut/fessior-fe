@@ -16,11 +16,13 @@ import categoryService from '@/services/category.service';
 import organizationService from '@/services/organization.service';
 import CategoryColor from '@/types/category-color-enum';
 import Category from '@/types/category-type';
+import Icon from '@/types/icon-enum';
 import Organization from '@/types/organization-type';
 import ScreenSize from '@/types/screen-size-enum';
 import ShortenInputFieldEnum from '@/types/shorten-input-field-enum';
 import ShortenInputFieldType from '@/types/shorten-input-field-type';
 import Url from '@/types/url-type';
+import { getIcon } from '@/utils/common';
 
 export default function QRURLScreen() {
   const router = useRouter();
@@ -41,11 +43,9 @@ export default function QRURLScreen() {
   const [categoryValues, setCategoryValues] = useState<Category[]>([]);
   const [longUrl, setLongUrl] = useState('');
   const [categorySearch, setCategorySearch] = useState('');
-  const [shortenedUrl, setShortenedUrl] = useState<null | Url>(null);
   const [allowSubmit, setAllowSubmit] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const { screenSize, loaded } = useScreenSize();
-  const [isLogin, setLogin] = useState(Boolean(meProfile));
   const authRouter = useAuthRouter();
 
   useEffect(() => {
@@ -190,7 +190,11 @@ export default function QRURLScreen() {
         >
           <div className='transition-all'>
             <Image
-              src={'/icons/qrcode/active/link_qr_chosen.svg'}
+              src={getIcon(
+                '/icons/qrcode',
+                'link_qr.svg',
+                true ? Icon.ACTIVE : Icon.INACTIVE,
+              )}
               alt='link icon'
               width={40}
               height={40}
@@ -209,7 +213,11 @@ export default function QRURLScreen() {
         >
           <div className='transition-all'>
             <Image
-              src={'/icons/qrcode/inactive/wifi.svg'}
+              src={getIcon(
+                '/icons/qrcode',
+                'wifi.svg',
+                false ? Icon.ACTIVE : Icon.INACTIVE,
+              )}
               alt='wifi icon'
               width={40}
               height={40}
