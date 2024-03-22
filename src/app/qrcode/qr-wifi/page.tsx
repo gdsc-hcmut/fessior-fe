@@ -48,6 +48,20 @@ export default function CreateQRWifiScreen() {
 
   const { screenSize, loaded } = useScreenSize();
   const authRouter = useAuthRouter();
+
+  const WifiInfo = {
+    inputQRName,
+    inputSSID,
+    inputPassword,
+    inputEncryption,
+    organizationValue,
+    domainValue,
+    meProfile,
+    categoryValues,
+  };
+  const logWifiInfo = () => {
+    console.log(WifiInfo);
+  };
   useEffect(() => {
     if (!meProfile) return;
 
@@ -176,6 +190,7 @@ export default function CreateQRWifiScreen() {
         <Button
           onClick={() => {
             router.push('/qrcode/qr-url');
+            logWifiInfo();
           }}
           className='flex items-center justify-center'
           width='full'
@@ -202,6 +217,7 @@ export default function CreateQRWifiScreen() {
           className='ml-6 flex items-center justify-center'
           onClick={() => {
             router.push('/qrcode/qr-wifi');
+            logWifiInfo();
           }}
         >
           <div className='transition-all'>
@@ -235,7 +251,9 @@ export default function CreateQRWifiScreen() {
               divider={true}
               iconPosition='left'
               onInput={setInputQRName}
-              onEnter={() => {}}
+              onEnter={() => {
+                logWifiInfo();
+              }}
               height={48}
             />
           </div>
@@ -253,7 +271,9 @@ export default function CreateQRWifiScreen() {
               divider={true}
               iconPosition='left'
               onInput={setInputSSID}
-              onEnter={() => {}}
+              onEnter={() => {
+                logWifiInfo();
+              }}
               height={48}
             />
           </div>
@@ -290,6 +310,9 @@ export default function CreateQRWifiScreen() {
               divider={true}
               onInput={setInputPassword}
               height={48}
+              onEnter={() => {
+                logWifiInfo();
+              }}
             />
           </div>
         </div>
@@ -355,14 +378,18 @@ export default function CreateQRWifiScreen() {
           <Button
             type='positive'
             className='h-[40px] w-[136px] md:w-[160px]'
-            onClick={() => {}}
+            onClick={() => {
+              logWifiInfo();
+            }}
           >
             Create Now
           </Button>
           <Button
             type='neutral'
             className='h-[40px] w-[136px] md:w-[160px]'
-            onClick={() => {}}
+            onClick={() => {
+              logWifiInfo();
+            }}
           >
             Customize QR
           </Button>

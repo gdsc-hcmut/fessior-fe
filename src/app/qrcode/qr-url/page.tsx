@@ -48,6 +48,17 @@ export default function QRURLScreen() {
   const { screenSize, loaded } = useScreenSize();
   const authRouter = useAuthRouter();
 
+  const UrlInfo = {
+    inputQRName,
+    inputURL,
+    organizationValue,
+    domainValue,
+    meProfile,
+    categoryValues,
+  };
+  const logUrlInfo = () => {
+    console.log(UrlInfo);
+  };
   useEffect(() => {
     if (!meProfile) return;
 
@@ -183,7 +194,9 @@ export default function QRURLScreen() {
     <>
       <div className='mx-auto my-5 flex w-[100%] max-w-[360px] text-[16px] font-[500] md:my-6 md:max-w-[416px] md:text-[20px]'>
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            logUrlInfo();
+          }}
           className='flex items-center justify-center'
           width='full'
           type='positive'
@@ -209,6 +222,7 @@ export default function QRURLScreen() {
           className='ml-6 flex items-center justify-center'
           onClick={() => {
             router.push('/qrcode/qr-wifi');
+            logUrlInfo();
           }}
         >
           <div className='transition-all'>
@@ -241,7 +255,9 @@ export default function QRURLScreen() {
               divider={true}
               iconPosition='left'
               onInput={setInputQRName}
-              onEnter={() => {}}
+              onEnter={() => {
+                logUrlInfo();
+              }}
               height={48}
             />
           </div>
@@ -259,7 +275,9 @@ export default function QRURLScreen() {
               iconPosition='left'
               divider={true}
               onInput={setInputURL}
-              onEnter={() => {}}
+              onEnter={() => {
+                logUrlInfo();
+              }}
               height={48}
             />
           </div>
@@ -366,14 +384,18 @@ export default function QRURLScreen() {
           <Button
             type='positive'
             className='h-[40px] w-[136px] md:w-[160px]'
-            onClick={() => {}}
+            onClick={() => {
+              logUrlInfo();
+            }}
           >
             Create Now
           </Button>
           <Button
             type='neutral'
             className='h-[40px] w-[136px] md:w-[160px]'
-            onClick={() => {}}
+            onClick={() => {
+              logUrlInfo();
+            }}
           >
             Customize QR
           </Button>
