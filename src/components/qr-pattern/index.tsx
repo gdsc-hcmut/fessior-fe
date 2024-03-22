@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import patternExtraRound140 from '@/../../public/icons/qr/patternExtraRound140.svg';
-import patternSemiRound140 from '@/../../public/icons/qr/patternSemiRound140.svg';
-import patternSquare140 from '@/../../public/icons/qr/patternSquare140.svg';
+import patternExtraRound from '@/../../public/icons/qr/patternExtraRound.svg';
+import patternSemiRound from '@/../../public/icons/qr/patternSemiRound.svg';
+import patternSquare from '@/../../public/icons/qr/patternSquare.svg';
 import DropDown from '@/components/listbox-select';
 
 export default function PatternPart() {
@@ -24,16 +24,11 @@ export default function PatternPart() {
 
       <div className='mt-[8px] flex flex-wrap items-center justify-start gap-[12px] md:ml-[4px] xl:mt-[40px] xl:gap-[24px]'>
         <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
-          <Image
-            src={patternSquare140}
-            alt='Pattern 1'
-            height='140'
-            width='140'
-          />
+          <Image src={patternSquare} alt='Pattern 1' height='140' width='140' />
         </button>
         <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px] '>
           <Image
-            src={patternExtraRound140}
+            src={patternExtraRound}
             alt='Pattern 1'
             height='140'
             width='140'
@@ -41,7 +36,18 @@ export default function PatternPart() {
         </button>
         <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
           <Image
-            src={patternSemiRound140}
+            src={patternSemiRound}
+            alt='Pattern 1'
+            height='140'
+            width='140'
+          />
+        </button>
+        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
+          <Image src={patternSquare} alt='Pattern 1' height='140' width='140' />
+        </button>
+        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
+          <Image
+            src={patternExtraRound}
             alt='Pattern 1'
             height='140'
             width='140'
@@ -49,7 +55,7 @@ export default function PatternPart() {
         </button>
         <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
           <Image
-            src={patternSquare140}
+            src={patternSemiRound}
             alt='Pattern 1'
             height='140'
             width='140'
@@ -57,7 +63,7 @@ export default function PatternPart() {
         </button>
         <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
           <Image
-            src={patternExtraRound140}
+            src={patternExtraRound}
             alt='Pattern 1'
             height='140'
             width='140'
@@ -65,23 +71,7 @@ export default function PatternPart() {
         </button>
         <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
           <Image
-            src={patternSemiRound140}
-            alt='Pattern 1'
-            height='140'
-            width='140'
-          />
-        </button>
-        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
-          <Image
-            src={patternExtraRound140}
-            alt='Pattern 1'
-            height='140'
-            width='140'
-          />
-        </button>
-        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
-          <Image
-            src={patternSemiRound140}
+            src={patternSemiRound}
             alt='Pattern 1'
             height='140'
             width='140'

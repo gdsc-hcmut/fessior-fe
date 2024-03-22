@@ -1,11 +1,7 @@
-import iconLink20 from '@/../public/icons/qr/iconLink20.svg';
-import iconLink24 from '@/../public/icons/qr/iconLink24.svg';
-import iconSearch20 from '@/../public/icons/qr/iconSearch20.svg';
-import iconSearch24 from '@/../public/icons/qr/iconSearch24.svg';
-import iconShield20 from '@/../public/icons/qr/iconShield20.svg';
-import iconShield24 from '@/../public/icons/qr/iconShield24.svg';
-import iconTag20 from '@/../public/icons/qr/iconTag20.svg';
-import iconTag24 from '@/../public/icons/qr/iconTag24.svg';
+import iconLink from '@/../public/icons/qr/iconLink.svg';
+import iconSearch from '@/../public/icons/qr/iconSearch.svg';
+import iconShield from '@/../public/icons/qr/iconShield.svg';
+import iconTag from '@/../public/icons/qr/iconTag.svg';
 import DropDown from '@/components/listbox-select';
 import TextInputIcon from '@/components/text-input-icons';
 
@@ -35,8 +31,7 @@ export default function InformationPart(props: props) {
 
         <div className='mt-[4px] h-[40px] w-full md:ml-[33px] md:mt-0 md:h-[48px] xl:ml-[8px] xl:h-[60px]'>
           <TextInputIcon
-            iconSrc={iconSearch20}
-            mediumIconSrc={iconSearch24}
+            iconSrc={iconSearch}
             placeholder='Add or create new categories'
           />
         </div>
@@ -49,11 +44,7 @@ export default function InformationPart(props: props) {
         </div>
 
         <div className='mt-[4px] h-[40px] w-full md:ml-[33px] md:mt-0 md:h-[48px] xl:ml-[8px] xl:h-[60px]'>
-          <TextInputIcon
-            iconSrc={iconTag20}
-            mediumIconSrc={iconTag24}
-            placeholder='Enter your QR name'
-          />
+          <TextInputIcon iconSrc={iconTag} placeholder='Enter your QR name' />
         </div>
       </div>
       <div className={`${typeOfQR === 'url' ? '' : 'hidden'}`}>
@@ -65,11 +56,7 @@ export default function InformationPart(props: props) {
           </div>
 
           <div className='mt-[4px] h-[40px] w-full md:ml-[33px] md:mt-0 md:h-[48px] xl:ml-[8px] xl:h-[60px]'>
-            <TextInputIcon
-              iconSrc={iconLink20}
-              mediumIconSrc={iconLink24}
-              placeholder='Enter your URL'
-            />
+            <TextInputIcon iconSrc={iconLink} placeholder='Enter your URL' />
           </div>
         </div>
         <div className='mr-[52px] mt-[10px] flex w-auto flex-col md:ml-[4px] md:mr-[0px] md:mt-[20px] md:flex-row md:items-center xl:mb-[28px] xl:ml-[0px] xl:mt-[20px] xl:w-full'>
@@ -139,8 +126,7 @@ export default function InformationPart(props: props) {
 
           <div className='mt-[4px] h-[40px] w-full md:ml-[33px] md:mt-0 md:h-[48px] xl:h-[60px]'>
             <TextInputIcon
-              iconSrc={iconTag20}
-              mediumIconSrc={iconTag24}
+              iconSrc={iconTag}
               placeholder='Enter your wifi SSID (name)'
             />
           </div>
@@ -172,8 +158,7 @@ export default function InformationPart(props: props) {
 
           <div className='mt-[4px] h-[40px] w-full md:ml-[33px] md:mt-0 md:h-[48px] xl:h-[60px] '>
             <TextInputIcon
-              iconSrc={iconShield20}
-              mediumIconSrc={iconShield24}
+              iconSrc={iconShield}
               placeholder='Enter your password'
             />
           </div>
@@ -190,8 +175,7 @@ export default function InformationPart(props: props) {
 
         <div className='mt-[4px] h-[40px] w-full md:ml-[33px] md:mt-0 md:h-[48px]'>
           <TextInputIcon
-            iconSrc={iconSearch20}
-            mediumIconSrc={iconSearch24}
+            iconSrc={iconSearch}
             placeholder='Add or create categories'
           />
         </div>
