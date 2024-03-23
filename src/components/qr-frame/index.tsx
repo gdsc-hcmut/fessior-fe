@@ -1,3 +1,4 @@
+'use client';
 import DropDown from '@/components/listbox-select';
 import ToggleButton from '@/components/toggle-button';
 

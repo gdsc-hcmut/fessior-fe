@@ -1,3 +1,4 @@
+'use client';
 import iconLink from '@/../public/icons/qr/iconLink.svg';
 import iconSearch from '@/../public/icons/qr/iconSearch.svg';
 import iconShield from '@/../public/icons/qr/iconShield.svg';

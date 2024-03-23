@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 
 import iconFacebook from '@/../../public/icons/qr/iconFacebook.svg';
