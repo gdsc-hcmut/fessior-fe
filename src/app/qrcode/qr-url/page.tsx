@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useState, useEffect, useContext } from 'react';
 
 import Button from '@/components/button';
@@ -16,16 +14,13 @@ import categoryService from '@/services/category.service';
 import organizationService from '@/services/organization.service';
 import CategoryColor from '@/types/category-color-enum';
 import Category from '@/types/category-type';
-import Icon from '@/types/icon-enum';
 import Organization from '@/types/organization-type';
 import ScreenSize from '@/types/screen-size-enum';
 import ShortenInputFieldEnum from '@/types/shorten-input-field-enum';
 import ShortenInputFieldType from '@/types/shorten-input-field-type';
 import Url from '@/types/url-type';
-import { getIcon } from '@/utils/common';
 
 export default function QRURLScreen() {
-  const router = useRouter();
   const [inputQRName, setInputQRName] = useState('');
   const [inputURL, setInputURL] = useState('');
   const [organizationOptions, setOrganizationOptions] = useState<
@@ -35,17 +30,16 @@ export default function QRURLScreen() {
     useState<null | Organization>(null);
   const [domainValue, setDomainValue] = useState('');
   const [domainOptions, setDomainOptions] = useState<null | string[]>(null);
-  const { meProfile, isAuthStatusReady } = useContext(AuthContext);
   useState<null | Organization>(null);
   const [categoryOptions, setCategoryOptions] = useState<null | Category[]>(
     null,
   );
   const [categoryValues, setCategoryValues] = useState<Category[]>([]);
-  const [longUrl, setLongUrl] = useState('');
   const [categorySearch, setCategorySearch] = useState('');
-  const [allowSubmit, setAllowSubmit] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const { screenSize, loaded } = useScreenSize();
+  const { isLoggedIn, isAuthStatusReady } = useContext(AuthContext);
+
   const authRouter = useAuthRouter();
 
   const UrlInfo = {
@@ -53,14 +47,13 @@ export default function QRURLScreen() {
     inputURL,
     organizationValue,
     domainValue,
-    meProfile,
     categoryValues,
   };
   const logUrlInfo = () => {
     console.log(UrlInfo);
   };
   useEffect(() => {
-    if (!meProfile) return;
+    if (!isLoggedIn) return;
 
     (async () => {
       try {
@@ -79,7 +72,7 @@ export default function QRURLScreen() {
         console.log(e.message);
       }
     })();
-  }, [meProfile]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     (async () => {
@@ -96,14 +89,6 @@ export default function QRURLScreen() {
       setCategoryValues([]);
     })();
   }, [organizationValue]);
-
-  useEffect(() => {
-    if (longUrl.length > 0) {
-      setAllowSubmit(true);
-    } else {
-      setAllowSubmit(false);
-    }
-  }, [longUrl]);
 
   useEffect(() => {
     (async () => {
@@ -181,66 +166,17 @@ export default function QRURLScreen() {
 
   const isLoaded =
     (isAuthStatusReady &&
-      meProfile &&
+      isLoggedIn &&
       organizationValue &&
       organizationOptions &&
       categoryOptions &&
       domainOptions &&
       domainValue &&
       loaded) ||
-    (isAuthStatusReady && !meProfile);
+    (isAuthStatusReady && !isLoggedIn);
 
   return (
     <>
-      <div className='mx-auto my-5 flex w-[100%] max-w-[360px] text-[16px] font-[500] md:my-6 md:max-w-[416px] md:text-[20px]'>
-        <Button
-          onClick={() => {
-            logUrlInfo();
-          }}
-          className='flex items-center justify-center'
-          width='full'
-          type='positive'
-        >
-          <div className='transition-all'>
-            <Image
-              src={getIcon(
-                '/icons/qrcode',
-                'link_qr.svg',
-                true ? Icon.ACTIVE : Icon.INACTIVE,
-              )}
-              alt='link icon'
-              width={40}
-              height={40}
-              className='pr-2'
-            />
-          </div>
-          Website URL
-        </Button>
-        <Button
-          width='full'
-          type='neutral'
-          className='ml-6 flex items-center justify-center'
-          onClick={() => {
-            router.push('/qrcode/qr-wifi');
-            logUrlInfo();
-          }}
-        >
-          <div className='transition-all'>
-            <Image
-              src={getIcon(
-                '/icons/qrcode',
-                'wifi.svg',
-                false ? Icon.ACTIVE : Icon.INACTIVE,
-              )}
-              alt='wifi icon'
-              width={40}
-              height={40}
-              className='pr-2'
-            />
-          </div>
-          Wi-fi
-        </Button>
-      </div>
       <div className='relative mx-auto mb-[172px] w-[90%] rounded-[8px] border-[3px] border-solid border-primary bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow md:flex-col md:border-[0.5px] md:border-[#7e7e7e4d] lg:w-[100%] lg:max-w-[856px] lg:p-[24px]'>
         <div className='container md:inline-flex'>
           <h6 className='mb-[4px] flex-shrink-0 text-[16px] font-[500] md:mb-[8px] md:mt-[6px] md:text-[20px]'>
@@ -248,8 +184,9 @@ export default function QRURLScreen() {
           </h6>
           <div className='mb-[16px] md:ml-6 md:w-[90%]'>
             <Input
+              fontSize={inputFontSize}
               iconSrc='/icons/qrcode/label_outline.svg'
-              iconAlt='label outline icon'
+              iconAlt='label-outline-icon'
               placeholder='Enter your QR name'
               textValue={inputQRName}
               divider={true}
@@ -258,7 +195,7 @@ export default function QRURLScreen() {
               onEnter={() => {
                 logUrlInfo();
               }}
-              height={48}
+              height={inputHeight}
             />
           </div>
         </div>
@@ -268,8 +205,9 @@ export default function QRURLScreen() {
           </h6>
           <div className='mb-[12px] md:mb-[20px] md:ml-6 md:w-[90%]'>
             <Input
+              fontSize={inputFontSize}
               iconSrc='/icons/qrcode/inactive/link_qr.svg'
-              iconAlt='link icon'
+              iconAlt='link-icon'
               placeholder='Enter your URL'
               textValue={inputURL}
               iconPosition='left'
@@ -278,14 +216,14 @@ export default function QRURLScreen() {
               onEnter={() => {
                 logUrlInfo();
               }}
-              height={48}
+              height={inputHeight}
             />
           </div>
         </div>
-        {isLoaded && meProfile && (
+        {isLoaded && isLoggedIn && (
           <div className='inline-block md:mb-[8px] md:flex md:flex-grow lg:mb-0'>
             <div className='mb-[8px] flex items-center justify-between md:me-[20px] md:inline-flex lg:mb-5'>
-              <p className='inline  pr-[6px] text-[12px] font-[500] text-black md:text-[16px]'>
+              <p className='inline  pr-[6px] text-[16px] font-[500] text-black md:text-[20px]'>
                 Organization
               </p>
               <Input
@@ -303,7 +241,7 @@ export default function QRURLScreen() {
               />
             </div>
             <div className='flex items-center justify-between md:mb-2 md:inline-flex lg:mb-5'>
-              <p className='inline text-[12px] font-[500] text-black md:text-[16px]'>
+              <p className='inline text-[16px] font-[500] text-black md:text-[20px]'>
                 Domain
               </p>
               <Input
@@ -322,7 +260,7 @@ export default function QRURLScreen() {
             </div>
           </div>
         )}
-        {meProfile && isLoaded && (
+        {isLoggedIn && isLoaded && (
           <div className='mb-[0px] md:mb-[16px] md:flex md:items-center md:justify-between'>
             <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>
               Category
@@ -339,7 +277,7 @@ export default function QRURLScreen() {
                 fontSize={inputFontSize}
                 height={inputHeight}
                 iconSrc='/icons/qrcode/search.svg'
-                iconAlt='search icon'
+                iconAlt='search-icon'
                 placeholder='Add or create categories'
                 textValue={categorySearch}
                 onInput={setCategorySearch}

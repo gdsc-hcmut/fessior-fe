@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useState, useEffect, useContext } from 'react';
 
 import Button from '@/components/button';
@@ -25,7 +24,6 @@ import Url from '@/types/url-type';
 import { getIcon } from '@/utils/common';
 
 export default function CreateQRWifiScreen() {
-  const router = useRouter();
   const [inputQRName, setInputQRName] = useState('');
   const [inputSSID, setInputSSID] = useState('');
   const [inputPassword, setInputPassword] = useState('');
@@ -37,7 +35,7 @@ export default function CreateQRWifiScreen() {
     useState<null | Organization>(null);
   const [domainValue, setDomainValue] = useState('');
   const [domainOptions, setDomainOptions] = useState<null | string[]>(null);
-  const { meProfile, isAuthStatusReady } = useContext(AuthContext);
+  const { isLoggedIn, isAuthStatusReady } = useContext(AuthContext);
   useState<null | Organization>(null);
   const [categoryOptions, setCategoryOptions] = useState<null | Category[]>(
     null,
@@ -45,6 +43,7 @@ export default function CreateQRWifiScreen() {
   const [categoryValues, setCategoryValues] = useState<Category[]>([]);
   const [categorySearch, setCategorySearch] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const { screenSize, loaded } = useScreenSize();
   const authRouter = useAuthRouter();
@@ -56,14 +55,13 @@ export default function CreateQRWifiScreen() {
     inputEncryption,
     organizationValue,
     domainValue,
-    meProfile,
     categoryValues,
   };
   const logWifiInfo = () => {
     console.log(WifiInfo);
   };
   useEffect(() => {
-    if (!meProfile) return;
+    if (!isLoggedIn) return;
 
     (async () => {
       try {
@@ -82,7 +80,7 @@ export default function CreateQRWifiScreen() {
         console.log(e.message);
       }
     })();
-  }, [meProfile]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     (async () => {
@@ -175,68 +173,17 @@ export default function CreateQRWifiScreen() {
 
   const isLoaded =
     (isAuthStatusReady &&
-      meProfile &&
+      isLoggedIn &&
       organizationValue &&
       organizationOptions &&
       categoryOptions &&
       domainOptions &&
       domainValue &&
       loaded) ||
-    (isAuthStatusReady && !meProfile);
+    (isAuthStatusReady && !isLoggedIn);
 
   return (
     <>
-      <div className='mx-auto my-5 flex w-[100%] max-w-[360px] justify-between text-[16px] font-[500] md:my-6 md:max-w-[416px] md:text-[20px]'>
-        <Button
-          onClick={() => {
-            router.push('/qrcode/qr-url');
-            logWifiInfo();
-          }}
-          className='flex items-center justify-center'
-          width='full'
-          type='neutral'
-        >
-          <div className='transition-all'>
-            <Image
-              src={getIcon(
-                '/icons/qrcode',
-                'link_qr.svg',
-                false ? Icon.ACTIVE : Icon.INACTIVE,
-              )}
-              alt='link icon'
-              width={40}
-              height={40}
-              className='pr-2'
-            />
-          </div>
-          Website URL
-        </Button>
-        <Button
-          width='full'
-          type='positive'
-          className='ml-6 flex items-center justify-center'
-          onClick={() => {
-            router.push('/qrcode/qr-wifi');
-            logWifiInfo();
-          }}
-        >
-          <div className='transition-all'>
-            <Image
-              src={getIcon(
-                '/icons/qrcode',
-                'wifi.svg',
-                true ? Icon.ACTIVE : Icon.INACTIVE,
-              )}
-              alt='wifi icon'
-              width={40}
-              height={40}
-              className='pr-2'
-            />
-          </div>
-          Wi-fi
-        </Button>
-      </div>
-
       <div className='relative mx-auto mb-[172px]  w-[90%] rounded-[8px] border-[3px] border-solid border-primary bg-white p-[16px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] sm:max-w-[480px] md:flex md:w-[85%] md:max-w-[760px] md:flex-grow md:flex-col md:border-[0.5px] md:border-[#7e7e7e4d] lg:w-[100%] lg:max-w-[856px] lg:p-[24px]'>
         <div className='container md:inline-flex'>
           <h6 className='mb-[4px] flex-shrink-0 text-[16px] font-[500] md:mb-[8px] md:mt-[6px] md:text-[20px]'>
@@ -244,8 +191,9 @@ export default function CreateQRWifiScreen() {
           </h6>
           <div className='mb-[16px] md:ml-6 md:w-[90%]'>
             <Input
+              fontSize={inputFontSize}
               iconSrc='/icons/qrcode/label_outline.svg'
-              iconAlt='icon'
+              iconAlt='label-outline-icon'
               placeholder='Enter your QR name'
               textValue={inputQRName}
               divider={true}
@@ -254,7 +202,7 @@ export default function CreateQRWifiScreen() {
               onEnter={() => {
                 logWifiInfo();
               }}
-              height={48}
+              height={inputHeight}
             />
           </div>
         </div>
@@ -264,8 +212,9 @@ export default function CreateQRWifiScreen() {
           </h6>
           <div className='mb-[16px] md:ml-[24px] md:w-[90%]'>
             <Input
+              fontSize={inputFontSize}
               iconSrc='/icons/qrcode/label_outline.svg'
-              iconAlt='icon'
+              iconAlt='label-outline-icon'
               placeholder='Wifi SSID (Name)'
               textValue={inputSSID}
               divider={true}
@@ -274,7 +223,7 @@ export default function CreateQRWifiScreen() {
               onEnter={() => {
                 logWifiInfo();
               }}
-              height={48}
+              height={inputHeight}
             />
           </div>
         </div>
@@ -285,6 +234,7 @@ export default function CreateQRWifiScreen() {
                 Encryption
               </p>
               <Input
+                fontSize={inputFontSize}
                 textValue={inputEncryption}
                 dropdownOptions={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
                 onDropdownSelect={(selectedOption: any) => {
@@ -292,31 +242,69 @@ export default function CreateQRWifiScreen() {
                 }}
                 collapseIcon={true}
                 className='ms-[24px] w-[132px] md:ms-2'
-                height={48}
+                height={inputHeight}
               />
             </div>
+            {isLoaded && isLoggedIn && (
+              <div className=' mb-4 ml-8 flex items-center justify-between md:mb-[8px] md:me-[20px] md:inline-flex'>
+                <p className='inline text-[12px] font-[500] text-black md:text-[16px]'>
+                  Organization
+                </p>
+                <Input
+                  collapseIcon
+                  height={inputHeight}
+                  className='ms-[4px] w-[200px] md:ms-[8px]'
+                  fontSize={inputFontSize}
+                  textValue={organizationValue!.shortName}
+                  dropdownOptions={organizationOptions!}
+                  onDropdownSelect={
+                    handleChange(ShortenInputFieldEnum.ORGANIZATION) as (
+                      value: ShortenInputFieldType,
+                    ) => void
+                  }
+                />
+              </div>
+            )}
           </div>
         </div>
         <div className='mb-[16px] md:flex md:items-center md:justify-between'>
           <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>
             Password
           </h6>
-          <div className='md:ml-[20px] md:inline-block md:flex-grow'>
+          <div className='relative flex items-center md:ml-[20px] md:flex-grow'>
             <Input
+              fontSize={inputFontSize}
+              type={passwordVisible ? 'text' : 'password'}
               iconSrc='/icons/qrcode/password.svg'
-              iconAlt='password icon'
+              iconAlt='password-icon'
               placeholder='Enter your password'
               textValue={inputPassword}
               divider={true}
               onInput={setInputPassword}
-              height={48}
+              height={inputHeight}
               onEnter={() => {
                 logWifiInfo();
               }}
+              className='pr-8'
             />
+            <button
+              className='absolute right-2 inline-block rounded-full hover:bg-gray-300'
+              onClick={() => setPasswordVisible(!passwordVisible)}
+            >
+              <Image
+                src={getIcon(
+                  '/icons/qrcode',
+                  'password_visible.svg',
+                  passwordVisible ? Icon.ACTIVE : Icon.INACTIVE,
+                )}
+                alt='password-visible-icon'
+                width={20}
+                height={20}
+              />
+            </button>
           </div>
         </div>
-        {meProfile && isLoaded && (
+        {isLoggedIn && isLoaded && (
           <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
             <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>
               Category
@@ -333,7 +321,7 @@ export default function CreateQRWifiScreen() {
                 fontSize={inputFontSize}
                 height={inputHeight}
                 iconSrc='/icons/qrcode/search.svg'
-                iconAlt='search icon'
+                iconAlt='search-icon'
                 placeholder='Add or create categories'
                 textValue={categorySearch}
                 onInput={setCategorySearch}

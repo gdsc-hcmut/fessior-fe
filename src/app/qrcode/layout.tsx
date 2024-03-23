@@ -1,8 +1,16 @@
+'use client';
+import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
+import { useState, useEffect } from 'react';
 
+import Button from '@/components/button';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import ShortenTools from '@/components/shorten-tools';
+import Icon from '@/types/icon-enum';
+import { getIcon } from '@/utils/common';
+
 
 type QrCodeLayoutProps = {
   children: React.ReactNode;
@@ -10,7 +18,12 @@ type QrCodeLayoutProps = {
 
 export default function QrCodeLayout(props: QrCodeLayoutProps) {
   const { children } = props;
-
+  const router = useRouter();
+  const currentPathname = usePathname();
+  const [isWifi, setIsWifi] = useState(currentPathname === '/qrcode/qr-wifi');
+  useEffect(() => {
+    setIsWifi(currentPathname === '/qrcode/qr-wifi');
+  }, [currentPathname]);
   return (
     <section>
       <Header />
@@ -24,6 +37,58 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
               Convenience, efficiency, and versatility:{' '}
               <br className='md:hidden' /> QR Code Management Made Easy
             </p>
+          </div>
+          <div className='mx-auto my-5 flex w-[100%] max-w-[360px] text-[16px] font-[500] md:my-6 md:max-w-[416px] md:text-[20px]'>
+            <Button
+              onClick={() => {
+                router.push('/qrcode/qr-url');
+                setIsWifi(false);
+                // logUrlInfo();
+              }}
+              className='flex items-center justify-center'
+              width='full'
+              type={!isWifi ? 'positive' : 'neutral'}
+            >
+              <div className='transition-all'>
+                <Image
+                  src={getIcon(
+                    '/icons/qrcode',
+                    'link_qr.svg',
+                    !isWifi ? Icon.ACTIVE : Icon.INACTIVE,
+                  )}
+                  alt='link-icon'
+                  width={40}
+                  height={40}
+                  className='pr-2'
+                />
+              </div>
+              Website URL
+            </Button>
+            <Button
+              width='full'
+              type={isWifi ? 'positive' : 'neutral'}
+              className='ml-6 flex items-center justify-center'
+              onClick={() => {
+                router.push('/qrcode/qr-wifi');
+                setIsWifi(true);
+                // logUrlInfo();
+              }}
+            >
+              <div className='transition-all'>
+                <Image
+                  src={getIcon(
+                    '/icons/qrcode',
+                    'wifi.svg',
+                    isWifi ? Icon.ACTIVE : Icon.INACTIVE,
+                  )}
+                  alt='wifi-icon'
+                  width={40}
+                  height={40}
+                  className='pr-2'
+                />
+              </div>
+              Wi-fi
+            </Button>
           </div>
           {children}
           <div className='mx-[20px] text-center md:flex md:flex-col md:items-center'>
