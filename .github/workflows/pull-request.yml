@@ -49,9 +49,15 @@ jobs:
           fi
         continue-on-error: true
 
+      - name: Add quotes
+        id: add-quotes
+        run: |
+          echo changed_files_with_quotes="'${{ steps.changed-files.outputs.all_changed_files }}'" | sed "s/ /' '/g" >> "$GITHUB_OUTPUT"
+        shell: bash
+
       - name: Lint check
         run: |
-          yarn eslint ${{ steps.changed-files.outputs.all_changed_files	 }} --ignore-pattern '*.json'
+          yarn eslint ${{ steps.add-quotes.outputs.changed_files_with_quotes }}
 
       - name: Install dependencies
         run: yarn --frozen-lockfile

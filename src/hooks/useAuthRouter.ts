@@ -20,14 +20,21 @@ export default function useAuthRouter() {
       );
     };
   } else {
-    return (authType?: AuthType, isDirectedFromLogin?: boolean) => {
+    return (
+      authType?: AuthType,
+      isDirectedFromLogin?: boolean,
+      newPath?: string,
+    ) => {
       if (authType === AuthType.BACK) router.back();
       authType
-        ? queryParams.setItem({
-            auth: authType,
-            from_login: isDirectedFromLogin ? 'true' : undefined,
-          })
-        : queryParams.removeItem('auth', 'from_login');
+        ? queryParams.setItem(
+            {
+              auth: authType,
+              from_login: isDirectedFromLogin ? 'true' : undefined,
+            },
+            newPath,
+          )
+        : queryParams.removeItem(['auth', 'from_login'], newPath);
     };
   }
 }

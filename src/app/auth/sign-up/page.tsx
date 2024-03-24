@@ -16,7 +16,7 @@ export default function SignUp() {
         {...authHeaderContent[AuthType.SIGN_UP][0]}
         subtitle={
           isDirectedFromLogin
-            ? 'Set a password for your initial login with Google'
+            ? 'Set a password for your initial login with Google.'
             : authHeaderContent[AuthType.SIGN_UP][0].subtitle
         }
         sublinkText={

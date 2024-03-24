@@ -1,11 +1,12 @@
 'use client';
 
 import { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import Button from '@/components/button';
 import CategoryDropdownItems from '@/components/category-dropdown-item';
+import CustomToastContainer from '@/components/custom-toast-container';
 import Input from '@/components/input';
-import ModalAlert from '@/components/modal-alert';
 import ModalShorten from '@/components/modal-shorten';
 import ShortenCategories from '@/components/shorten-categories';
 import ShortenTools from '@/components/shorten-tools';
@@ -16,7 +17,6 @@ import meService from '@/libs/api/me';
 import categoryService from '@/services/category.service';
 import organizationService from '@/services/organization.service';
 import urlService from '@/services/url.service';
-import AlertLevel from '@/types/alert-level-enum';
 import AuthType from '@/types/auth-type-enum';
 import CategoryColor from '@/types/category-color-enum';
 import Category from '@/types/category-type';
@@ -43,16 +43,15 @@ export default function Shorten() {
   const [categorySearch, setCategorySearch] = useState('');
   const [shortenedUrl, setShortenedUrl] = useState<null | Url>(null);
   const [allowSubmit, setAllowSubmit] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
 
   const { screenSize, loaded } = useScreenSize();
 
-  const { meProfile, isAuthStatusReady } = useContext(AuthContext);
+  const { isLoggedIn, isAuthStatusReady } = useContext(AuthContext);
 
   const authRouter = useAuthRouter();
 
   useEffect(() => {
-    if (!meProfile) return;
+    if (!isLoggedIn) return;
 
     (async () => {
       try {
@@ -68,10 +67,10 @@ export default function Shorten() {
         ).categories; // pagination is for another day
         setCategoryOptions(categoryOptionsInitial);
       } catch (e: any) {
-        console.log(e.message);
+        console.log(e.response.data.message); // TODO: Change this to use ModalAlert
       }
     })();
-  }, [meProfile]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     (async () => {
@@ -168,7 +167,7 @@ export default function Shorten() {
       });
     } catch (e: any) {
       const message = e.response.data.message;
-      setErrorMessage(Array.isArray(message) ? message[0] : message);
+      toast.error(Array.isArray(message) ? message[0] : message);
     }
   };
 
@@ -186,7 +185,7 @@ export default function Shorten() {
       setCategoryValues(categoryValues.concat(response));
     } catch (e: any) {
       const message = e.response.data.message;
-      setErrorMessage(Array.isArray(message) ? message[0] : message);
+      toast.error(Array.isArray(message) ? message[0] : message);
     }
   };
 
@@ -203,14 +202,14 @@ export default function Shorten() {
 
   const isLoaded =
     (isAuthStatusReady &&
-      meProfile &&
+      isLoggedIn &&
       organizationValue &&
       organizationOptions &&
       categoryOptions &&
       domainOptions &&
       domainValue &&
       loaded) ||
-    (isAuthStatusReady && !meProfile);
+    (isAuthStatusReady && !isLoggedIn);
 
   return (
     <>
@@ -227,7 +226,7 @@ export default function Shorten() {
           </div>
           <div className='relative mb-[172px] items-start rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[24px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] lg:w-[100%]'>
             {isLoaded ? (
-              meProfile ? (
+              isLoggedIn ? (
                 <div className='items-start md:flex'>
                   <div className='md:flex-grow'>
                     <div>
@@ -245,6 +244,8 @@ export default function Shorten() {
                           onEnter={handleSubmit}
                           divider
                           fontSize={inputFontSize}
+                          tabIndex={1}
+                          autoFocus
                         />
                       </div>
                       <div className='inline-block md:flex md:max-w-[85%] md:justify-between lg:w-[85%]'>
@@ -302,6 +303,7 @@ export default function Shorten() {
                             onInput={setSlug}
                             onEnter={handleSubmit}
                             divider
+                            tabIndex={2}
                           />
                         </div>
                       </div>
@@ -343,6 +345,7 @@ export default function Shorten() {
                                 }}
                               />
                             )}
+                            tabIndex={3}
                           />
                         </div>
                       </div>
@@ -364,6 +367,7 @@ export default function Shorten() {
                     </div>
                   </div>
                   <Button
+                    tabIndex={4}
                     className='mt-[12px] md:relative md:top-[32px] md:ms-[12px] md:mt-0 md:text-[18px] lg:top-[46px]'
                     disabled={!allowSubmit}
                     onClick={handleSubmit}
@@ -421,22 +425,8 @@ export default function Shorten() {
           }}
         />
       )}
-      {/* ERROR MODAL */}
-      {errorMessage !== '' && (
-        <ModalAlert
-          onDismiss={() => {
-            setErrorMessage('');
-          }}
-          title='Error!'
-          description={errorMessage}
-          primaryActionButtonText='Try Again'
-          onPrimaryAction={() => {
-            setErrorMessage('');
-            clearForm();
-          }}
-          type={AlertLevel.ERROR}
-        />
-      )}
+      {/* TOAST */}
+      <CustomToastContainer />
     </>
   );
 }
