@@ -18,7 +18,7 @@ export default function DefaultDropdownItems(props: DefaultDropdownItemsProps) {
         onSelect(option);
       }}
       tabIndex={1}
-      className='flex h-[40px] cursor-pointer items-center px-[8px] transition-all hover:bg-primary hover:text-white focus:bg-primary'
+      className='flex h-[40px] cursor-pointer items-center px-[8px] transition-all hover:bg-royal-300/[.1] focus:bg-royal-300/[.1]'
     >
       <p className='truncate'>{getOptionText(option)}</p>
     </div>
