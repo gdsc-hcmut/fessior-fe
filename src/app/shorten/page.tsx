@@ -1,11 +1,12 @@
 'use client';
 
 import { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import Button from '@/components/button';
 import CategoryDropdownItems from '@/components/category-dropdown-item';
+import CustomToastContainer from '@/components/custom-toast-container';
 import Input from '@/components/input';
-import ModalAlert from '@/components/modal-alert';
 import ModalShorten from '@/components/modal-shorten';
 import ShortenCategories from '@/components/shorten-categories';
 import ShortenTools from '@/components/shorten-tools';
@@ -16,7 +17,6 @@ import meService from '@/libs/api/me';
 import categoryService from '@/services/category.service';
 import organizationService from '@/services/organization.service';
 import urlService from '@/services/url.service';
-import AlertLevel from '@/types/alert-level-enum';
 import AuthType from '@/types/auth-type-enum';
 import CategoryColor from '@/types/category-color-enum';
 import Category from '@/types/category-type';
@@ -43,7 +43,6 @@ export default function Shorten() {
   const [categorySearch, setCategorySearch] = useState('');
   const [shortenedUrl, setShortenedUrl] = useState<null | Url>(null);
   const [allowSubmit, setAllowSubmit] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
 
   const { screenSize, loaded } = useScreenSize();
 
@@ -68,7 +67,7 @@ export default function Shorten() {
         ).categories; // pagination is for another day
         setCategoryOptions(categoryOptionsInitial);
       } catch (e: any) {
-        console.log(e.message);
+        console.log(e.response.data.message); // TODO: Change this to use ModalAlert
       }
     })();
   }, [isLoggedIn]);
@@ -168,7 +167,7 @@ export default function Shorten() {
       });
     } catch (e: any) {
       const message = e.response.data.message;
-      setErrorMessage(Array.isArray(message) ? message[0] : message);
+      toast.error(Array.isArray(message) ? message[0] : message);
     }
   };
 
@@ -186,7 +185,7 @@ export default function Shorten() {
       setCategoryValues(categoryValues.concat(response));
     } catch (e: any) {
       const message = e.response.data.message;
-      setErrorMessage(Array.isArray(message) ? message[0] : message);
+      toast.error(Array.isArray(message) ? message[0] : message);
     }
   };
 
@@ -428,22 +427,8 @@ export default function Shorten() {
           }}
         />
       )}
-      {/* ERROR MODAL */}
-      {errorMessage !== '' && (
-        <ModalAlert
-          onDismiss={() => {
-            setErrorMessage('');
-          }}
-          title='Error!'
-          description={errorMessage}
-          primaryActionButtonText='Try Again'
-          onPrimaryAction={() => {
-            setErrorMessage('');
-            clearForm();
-          }}
-          type={AlertLevel.ERROR}
-        />
-      )}
+      {/* TOAST */}
+      <CustomToastContainer />
     </>
   );
 }
