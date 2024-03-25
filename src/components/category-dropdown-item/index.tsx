@@ -66,7 +66,7 @@ export default function CategoryDropdownItems(
           className='flex h-[40px] cursor-pointer items-center px-[16px] transition-all hover:bg-royal-300/[.1]'
         >
           <p className='me-[8px] truncate'>Create</p>
-          <div className='rounded-[8px] border-[1px] border-primary md:px-[12px] md:py-[4px]'>
+          <div className='rounded-[8px] border-[1px] border-primary px-[12px] py-[4px]'>
             {creatingValue}
           </div>
         </div>
