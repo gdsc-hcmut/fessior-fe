@@ -295,7 +295,7 @@ export default function CreateQRWifiScreen() {
                 src={getIcon(
                   '/icons/qrcode',
                   'password_visible.svg',
-                  passwordVisible ? Icon.ACTIVE : Icon.INACTIVE,
+                  !passwordVisible ? Icon.ACTIVE : Icon.INACTIVE,
                 )}
                 alt='password-visible-icon'
                 width={20}
