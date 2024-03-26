@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import { DotType } from 'qr-code-styling';
 import { useState } from 'react';
 
 import patternExtraRound from '@/../../public/icons/qr/patternExtraRound.svg';
@@ -12,6 +13,8 @@ export default function PatternPart() {
   const handleRadioButton = (value: string) => {
     setPatternColorType(value);
   };
+  const [dotsType, setDotsType] = useState<DotType>('square');
+
   return (
     <div
       id='patternPart'
@@ -24,58 +27,115 @@ export default function PatternPart() {
       </div>
 
       <div className='mt-[8px] flex flex-wrap items-center justify-start gap-[12px] md:ml-[4px] xl:mt-[40px] xl:gap-[24px]'>
-        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
-          <Image src={patternSquare} alt='Pattern 1' height='140' width='140' />
+        <button
+          className={`h-[64px] w-[64px] md:h-[140px] md:w-[140px]
+          ${
+            dotsType === 'square'
+              ? 'rounded-[8px] border-[3px] border-primary'
+              : 'rounded-[8px] border-[1px] border-[6D7EAE]'
+          } 
+        
+        
+        `}
+        >
+          <Image
+            src={patternSquare}
+            alt='Pattern 1'
+            height='140'
+            width='140'
+            onClick={() => setDotsType('square')}
+          />
         </button>
-        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px] '>
+        <button
+          className={`h-[64px] w-[64px] md:h-[140px] md:w-[140px]
+          ${
+            dotsType === 'dots'
+              ? 'rounded-[8px] border-[3px] border-primary'
+              : 'rounded-[8px] border-[1px] border-[6D7EAE]'
+          } 
+        
+        
+        `}
+        >
           <Image
             src={patternExtraRound}
             alt='Pattern 1'
             height='140'
             width='140'
+            onClick={() => setDotsType('dots')}
           />
         </button>
-        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
+        <button
+          className={`h-[64px] w-[64px] md:h-[140px] md:w-[140px]
+          ${
+            dotsType === 'rounded'
+              ? 'rounded-[8px] border-[3px] border-primary'
+              : 'rounded-[8px] border-[1px] border-[6D7EAE]'
+          }`}
+        >
           <Image
             src={patternSemiRound}
             alt='Pattern 1'
             height='140'
             width='140'
+            onClick={() => setDotsType('rounded')}
           />
         </button>
-        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
-          <Image src={patternSquare} alt='Pattern 1' height='140' width='140' />
+        <button
+          className={`h-[64px] w-[64px] md:h-[140px] md:w-[140px]
+          ${
+            dotsType === 'extra-rounded'
+              ? 'rounded-[8px] border-[3px] border-primary'
+              : 'rounded-[8px] border-[1px] border-[6D7EAE]'
+          } 
+        
+        
+        `}
+        >
+          <Image
+            src={patternSquare}
+            alt='Pattern 1'
+            height='140'
+            width='140'
+            onClick={() => setDotsType('extra-rounded')}
+          />
         </button>
-        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
+        <button
+          className={`h-[64px] w-[64px] md:h-[140px] md:w-[140px]
+          ${
+            dotsType === 'classy'
+              ? 'rounded-[8px] border-[3px] border-primary'
+              : 'rounded-[8px] border-[1px] border-[6D7EAE]'
+          } 
+        
+        
+        `}
+        >
           <Image
             src={patternExtraRound}
             alt='Pattern 1'
             height='140'
             width='140'
+            onClick={() => setDotsType('classy')}
           />
         </button>
-        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
+        <button
+          className={`h-[64px] w-[64px] md:h-[140px] md:w-[140px]
+          ${
+            dotsType === 'classy-rounded'
+              ? 'rounded-[8px] border-[3px] border-primary'
+              : 'rounded-[8px] border-[1px] border-[6D7EAE]'
+          } 
+        
+        
+        `}
+        >
           <Image
             src={patternSemiRound}
             alt='Pattern 1'
             height='140'
             width='140'
-          />
-        </button>
-        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
-          <Image
-            src={patternExtraRound}
-            alt='Pattern 1'
-            height='140'
-            width='140'
-          />
-        </button>
-        <button className='h-[64px] w-[64px] md:h-[140px] md:w-[140px]'>
-          <Image
-            src={patternSemiRound}
-            alt='Pattern 1'
-            height='140'
-            width='140'
+            onClick={() => setDotsType('classy-rounded')}
           />
         </button>
       </div>
@@ -90,6 +150,7 @@ export default function PatternPart() {
               name='patternColor'
               className='h-[16px] w-[16px]'
               onChange={() => handleRadioButton('singleColor')}
+              defaultChecked={true}
             />
             <label
               htmlFor='singleColor'

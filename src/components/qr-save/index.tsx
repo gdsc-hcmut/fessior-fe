@@ -33,6 +33,7 @@ export default function SavePart() {
             value=''
             name='saveType'
             className='h-[16px] w-[16px] md:mr-[11px] md:h-[24px] md:w-[24px]'
+            defaultChecked={true}
           />
           <label
             htmlFor='saveSVG'

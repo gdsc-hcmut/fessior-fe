@@ -27,6 +27,7 @@ export default function QRSaveBox() {
               value=''
               name='saveType'
               className='mr-[8px] h-[20px] w-[20px] hover:cursor-pointer'
+              defaultChecked={true}
             />
             <label htmlFor='saveSVG' className='text-[18px] font-bold'>
               SVG
@@ -56,7 +57,7 @@ export default function QRSaveBox() {
             />
           </div>
         </div>
-        <div className='mt-[28px] flex w-full flex-col'>
+        <div className='mt-[24px] flex w-full flex-col'>
           <button className='h-[40px] w-full rounded-[8px] bg-primary'>
             <p className='py-[10px] text-center text-[16px] font-bold text-white'>
               Save this QR Code
@@ -82,7 +83,9 @@ export default function QRSaveBox() {
           </button>
 
           <button
-            className='px-auto mr-[-1px] mt-[8px] h-[18px] self-end text-[12px] font-bold text-[#6D7EAE] underline'
+            className={`px-auto mr-[-1px]  h-[18px] self-end text-[12px] font-bold text-[#6D7EAE] underline ${
+              isViewSaveOptionExpand ? 'mt-[4px]' : 'mt-[8px]'
+            }`}
             onClick={() => {
               setIsViewSaveOptionExpand(!isViewSaveOptionExpand);
             }}
