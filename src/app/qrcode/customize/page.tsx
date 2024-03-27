@@ -11,6 +11,7 @@ import PatternPart from '@/components/qr-pattern';
 import SavePart from '@/components/qr-save';
 import QRSaveBox from '@/components/qr-save-box';
 // import ToolItem from '@/components/tool-item';
+import ShortenTools from '@/components/shorten-tools';
 
 export default function QRCustomize() {
   const [typeOfQR, setTypeOfQR] = useState('url');
@@ -43,7 +44,7 @@ export default function QRCustomize() {
         </div>
 
         <div>
-          <div className='mx-[20px] text-center md:flex md:flex-col md:items-center'>
+          <div className='text-center md:flex md:flex-col md:items-center'>
             <h2 className='text-[36px] font-[700] leading-[65px]'>
               Fessior Tools
             </h2>
@@ -52,11 +53,7 @@ export default function QRCustomize() {
               world of community-driven tools that simplify your daily tasks.
             </p>
 
-            <div className='md:flex md:flex-wrap md:justify-around'>
-              {/* {tools.map((tool) => (
-                <ToolItem key={tool.name} {...tool} />
-              ))} */}
-            </div>
+            <ShortenTools />
           </div>
         </div>
         <div className='absolute right-[-10px] top-[56px] h-[40px] w-[40px] rounded-full bg-primary'></div>

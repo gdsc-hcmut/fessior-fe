@@ -1,13 +1,5 @@
 'use client';
-
-import {
-  Link,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from 'react-scroll';
+import { animateScroll as scroll, scroller } from 'react-scroll';
 
 import Button from '../button';
 

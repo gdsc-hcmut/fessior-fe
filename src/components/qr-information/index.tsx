@@ -122,7 +122,9 @@ export default function InformationPart(props: props) {
       <div className={`${typeOfQR === 'wifi' ? '' : 'hidden'}`}>
         <div className='mt-[8px] flex w-full flex-col  md:mt-[20px] md:flex-row md:items-center'>
           <div className='flex h-[24px] flex-col justify-center md:ml-[4px]'>
-            <p className='text-[16px] font-medium md:w-[104px]'>Wifi SSID</p>
+            <p className='text-[16px] font-medium md:w-[104px] xl:text-[20px]'>
+              Wifi SSID
+            </p>
           </div>
 
           <div className='mt-[4px] h-[40px] w-full md:ml-[33px] md:mt-0 md:h-[48px] xl:h-[60px]'>
@@ -132,29 +134,59 @@ export default function InformationPart(props: props) {
             />
           </div>
         </div>
-        <div className='mt-[16px] flex flex-row items-center'>
-          <div className='flex h-[24px] w-[88px] flex-col justify-center md:ml-[4px] md:w-[104px]'>
-            <p className='text-[16px]  font-medium '>Encryption</p>
+        <div className='flex flex-col md:flex-row'>
+          <div className='mt-[16px] flex flex-row items-center'>
+            <div className='flex h-[24px] w-[100px] flex-col justify-center md:ml-[4px] md:w-[104px]'>
+              <p className='text-[16px]  font-medium xl:text-[20px]'>
+                Encryption
+              </p>
+            </div>
+            <div className='w-[136px] md:ml-[33px] md:w-[160px]'>
+              <DropDown
+                value='WPA/WPA2'
+                options={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
+                heightOfDropDown='40'
+                textSize='16'
+                paddingLeft='16'
+                mediumHeight='48'
+                mediumTextSize='20'
+                paddingRight='4'
+                mediumPaddingRight='12'
+                mediumPaddingLeft='16'
+                mediumBorder='1'
+              />
+            </div>
           </div>
-          <div className='w-[136px] md:ml-[33px] md:w-[160px]'>
-            <DropDown
-              value='WPA/WPA2'
-              options={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
-              heightOfDropDown='40'
-              textSize='16'
-              paddingLeft='16'
-              mediumHeight='48'
-              mediumTextSize='20'
-              paddingRight='4'
-              mediumPaddingRight='12'
-              mediumPaddingLeft='16'
-              mediumBorder='1'
-            />
+          <div className='hidden max-w-[80px] grow md:block xl:hidden'></div>
+          <div className=' mt-[16px] flex flex-row items-center xl:ml-[40px]'>
+            <div className='flex h-[24px] w-[100px] flex-col justify-center md:ml-[4px] md:w-[80px] xl:w-[120px]'>
+              <p className='text-[16px]  font-medium xl:text-[20px]'>
+                Organization
+              </p>
+            </div>
+            <div className='w-[136px] md:ml-[33px] md:w-[160px]'>
+              <DropDown
+                value='GDSC'
+                options={['GDSC', 'CTCT', 'OISP']}
+                heightOfDropDown='40'
+                textSize='16'
+                paddingLeft='16'
+                mediumHeight='48'
+                mediumTextSize='20'
+                paddingRight='4'
+                mediumPaddingRight='12'
+                mediumPaddingLeft='16'
+                mediumBorder='1'
+              />
+            </div>
           </div>
         </div>
+
         <div className='mt-[8px] flex w-full flex-col  md:mt-[20px] md:flex-row md:items-center'>
           <div className='flex h-[24px] flex-col justify-center md:ml-[4px]'>
-            <p className='text-[16px] font-medium md:w-[104px]'>Password</p>
+            <p className='text-[16px] font-medium md:w-[104px] xl:text-[20px]'>
+              Password
+            </p>
           </div>
 
           <div className='mt-[4px] h-[40px] w-full md:ml-[33px] md:mt-0 md:h-[48px] xl:h-[60px] '>

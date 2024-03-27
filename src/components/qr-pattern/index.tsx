@@ -33,10 +33,7 @@ export default function PatternPart() {
             dotsType === 'square'
               ? 'rounded-[8px] border-[3px] border-primary'
               : 'rounded-[8px] border-[1px] border-[6D7EAE]'
-          } 
-        
-        
-        `}
+          }`}
         >
           <Image
             src={patternSquare}
