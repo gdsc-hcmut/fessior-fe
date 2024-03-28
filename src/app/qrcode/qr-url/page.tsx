@@ -229,7 +229,7 @@ export default function QRURLScreen() {
               <Input
                 collapseIcon
                 height={inputHeight}
-                className='ms-[4px] w-[156px] md:ms-[8px] md:w-[200px]'
+                className='ms-[4px] w-[156px] md:ms-[8px] lg:w-[200px]'
                 fontSize={inputFontSize}
                 textValue={organizationValue!.shortName}
                 dropdownOptions={organizationOptions!}
@@ -247,7 +247,7 @@ export default function QRURLScreen() {
               <Input
                 collapseIcon
                 height={inputHeight}
-                className='ms-[4px] w-[156px] md:ms-[8px] md:w-[200px]'
+                className='ms-[4px] w-[156px] md:ms-[8px] lg:w-[200px]'
                 fontSize={inputFontSize}
                 textValue={domainValue!}
                 dropdownOptions={domainOptions!}
@@ -261,7 +261,7 @@ export default function QRURLScreen() {
           </div>
         )}
         {isLoggedIn && isLoaded && (
-          <div className='mb-[0px] mt-4 md:mb-[16px] md:mt-0 md:flex md:items-center md:justify-between'>
+          <div className='mb-[16px] mt-4 md:mt-0 md:flex md:items-center md:justify-between'>
             <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>
               Category
             </h6>
@@ -318,7 +318,7 @@ export default function QRURLScreen() {
             />
           </div>
         )}
-        <div className='mx-auto mt-2 flex max-w-[288px] items-center justify-between space-x-4 md:max-w-[352px] md:space-x-8'>
+        <div className='mx-auto mt-2 flex max-w-[288px] items-center justify-between space-x-4 text-[12px] md:max-w-[352px] md:space-x-8 md:text-[100%]'>
           <Button
             type='positive'
             className='h-[40px] w-[136px] md:w-[160px]'

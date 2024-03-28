@@ -37,7 +37,7 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
               <br className='md:hidden' /> QR Code Management Made Easy
             </p>
           </div>
-          <div className='mx-auto my-5 flex w-[100%] max-w-[360px] text-[16px] font-[500] md:my-6 md:max-w-[416px] md:text-[20px]'>
+          <div className='mx-auto my-5 flex w-[98%] max-w-[360px] text-[12px] font-[500] sm:w-[100%] sm:text-[16px] md:my-6 md:max-w-[416px] md:text-[20px]'>
             <Button
               onClick={() => {
                 router.push('/qrcode/qr-url');
@@ -71,7 +71,7 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
                 setIsWifi(true);
               }}
             >
-              <div className='transition-all'>
+              <div className='ml-[-8px] transition-all'>
                 <Image
                   src={getIcon(
                     '/icons/qrcode',
@@ -101,7 +101,7 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
         </div>
         <div className='absolute right-[-10px] top-[100px] hidden h-[40px] w-[40px] rounded-full bg-primary md:block'></div>
         <div className='absolute left-[40px] top-[145px] hidden h-[12px] w-[12px] rounded-full bg-primary md:left-[30px] md:h-[28px] md:w-[28px] lg:left-[100px] lg:h-[40px] lg:w-[40px]'></div>
-        <div className='absolute left-[-70px] top-[727px] h-[120px] w-[120px] rounded-full bg-primary'></div>
+        <div className='absolute left-[-70px] top-[727px] -z-10 h-[120px] w-[120px] rounded-full bg-primary'></div>
         <div className='absolute bottom-[9px] right-[-30px] h-[80px] w-[80px] rounded-full bg-primary md:hidden'></div>
         <div className='absolute bottom-[0px] right-[60px] h-[20px] w-[20px] rounded-full bg-primary md:hidden'></div>
       </div>

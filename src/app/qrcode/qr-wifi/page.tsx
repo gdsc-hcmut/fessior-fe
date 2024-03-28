@@ -240,7 +240,7 @@ export default function CreateQRWifiScreen() {
                   setInputEncryption(selectedOption);
                 }}
                 collapseIcon={true}
-                className='ms-[24px]  w-[156px] md:ms-2 md:w-[200px]'
+                className='ms-[24px]  w-[156px] md:ms-2 lg:w-[200px]'
                 height={inputHeight}
               />
             </div>
@@ -252,7 +252,7 @@ export default function CreateQRWifiScreen() {
                 <Input
                   collapseIcon
                   height={inputHeight}
-                  className='ms-[4px] w-[156px] md:ms-[8px] md:w-[200px]'
+                  className='ms-[4px] w-[156px] md:ms-[8px] lg:w-[200px]'
                   fontSize={inputFontSize}
                   textValue={organizationValue!.shortName}
                   dropdownOptions={organizationOptions!}
@@ -304,7 +304,7 @@ export default function CreateQRWifiScreen() {
           </div>
         </div>
         {isLoggedIn && isLoaded && (
-          <div className='mb-[8px] md:mb-[16px] md:flex md:items-center md:justify-between'>
+          <div className='mb-[16px] md:flex md:items-center md:justify-between'>
             <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>
               Category
             </h6>
@@ -361,7 +361,7 @@ export default function CreateQRWifiScreen() {
             />
           </div>
         )}
-        <div className='mx-auto mt-2 flex max-w-[288px] items-center justify-between space-x-4 md:max-w-[352px]'>
+        <div className='mx-auto mt-2 flex max-w-[288px] items-center justify-between space-x-4 text-[12px] md:max-w-[352px] md:text-[100%]'>
           <Button
             type='positive'
             className='h-[40px] w-[136px] md:w-[160px]'
