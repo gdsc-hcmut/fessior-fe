@@ -246,7 +246,7 @@ export default function CreateQRWifiScreen() {
             </div>
             {isLoaded && isLoggedIn && (
               <div className='mb-4 flex items-center justify-between md:mb-[8px] md:me-[20px] md:ml-8 md:inline-flex'>
-                <p className='inline text-[16px] font-[500] md:text-[20px]'>
+                <p className='inline text-[16px] font-[500] text-black md:text-[20px]'>
                   Organization
                 </p>
                 <Input
@@ -287,18 +287,18 @@ export default function CreateQRWifiScreen() {
               className='pr-8'
             />
             <button
-              className='absolute right-2 inline-block rounded-full hover:bg-gray-300'
+              className='absolute right-3 inline-block rounded-full hover:bg-gray-300'
               onClick={() => setPasswordVisible(!passwordVisible)}
             >
               <Image
                 src={getIcon(
                   '/icons/qrcode',
                   'password_visible.svg',
-                  !passwordVisible ? Icon.ACTIVE : Icon.INACTIVE,
+                  passwordVisible ? Icon.ACTIVE : Icon.INACTIVE,
                 )}
                 alt='password-visible-icon'
-                width={20}
-                height={20}
+                width={24}
+                height={24}
               />
             </button>
           </div>
