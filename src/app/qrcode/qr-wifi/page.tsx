@@ -287,7 +287,7 @@ export default function CreateQRWifiScreen() {
               className='pr-8'
             />
             <button
-              className='absolute right-3 inline-block rounded-full hover:bg-gray-300'
+              className='absolute right-3 inline-flex h-[32px] w-[32px] items-center justify-center rounded-full hover:bg-gray-300'
               onClick={() => setPasswordVisible(!passwordVisible)}
             >
               <Image
