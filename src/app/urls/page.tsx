@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 
-import '../css/index.css';
 import CategoryModal from '@/components/modal-url/category-modal';
 import DeleteLinkModal from '@/components/modal-url/delete-modal';
 import EditSlugModal from '@/components/modal-url/edit-slug';
@@ -17,6 +16,8 @@ import { useFilterOptionStore } from '@/store/filter-option';
 import { useUrlModalStore } from '@/store/url-modal';
 import SortOption from '@/types/sort-option-enum';
 import { MyUrl } from '@/types/url-type';
+
+import '@/styles/wave.css';
 
 type URLsPageProps = {
   searchParams: { [key: string]: string | string[] | undefined };

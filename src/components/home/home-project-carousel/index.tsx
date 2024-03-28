@@ -1,11 +1,11 @@
 import { clsx } from 'clsx';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
 import { Project } from '@/services/project.service';
+import styles from '@/styles/home-project-carousel.module.css';
 import ScreenSize from '@/types/screen-size-enum';
 
 import HomeAvailableToolIndicator from '../home-available-tool-indicator';
@@ -27,7 +27,7 @@ export function HomeProjectItem(props: HomeProjectItemProps) {
       href={url}
       className={clsx(
         className,
-        'relative flex h-[500px] flex-col rounded-[20px] shadow-[0px_18.83px_47.08px_0px_rgba(47,50,125,0.10)] transition-all duration-200 hover:scale-105 md:h-[450px]',
+        'relative flex h-[500px] flex-col rounded-[20px] border-[1px] shadow-[0px_18.83px_47.08px_-15px_rgba(47,50,125,0.10)] transition-all duration-200 hover:scale-105 md:h-[450px]',
       )}
     >
       <img src={imgSrc} alt={imgAlt} className='w-[100%]' />
@@ -72,13 +72,13 @@ export default function HomeProjectCarousel(props: HomeProjectCarouselProps) {
       760: { slidesPerView: 2, slidesPerGroup: 2 },
       960: { slidesPerView: 4, slidesPerGroup: 4 },
     },
-    className: 'mb-[32px] flex w-[100%]',
+    className: clsx('flex w-[100%]', styles.swiper),
     onSwiper: (swiper: SwiperClass) => {
       setSwiper(swiper);
     },
     onSlideChange: handleSlideChange,
     modules: [Autoplay],
-    autoplay: { delay: 3000 },
+    // autoplay: { delay: 3000 },
   };
 
   return (

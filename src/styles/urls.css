@@ -1,0 +1,82 @@
+#my-urls-search-bar::-webkit-input-placeholder {
+  color: #6d7eae;
+}
+#edit-slug-category::-webkit-input-placeholder {
+  color: #6d7eae;
+}
+#category-modal-search-bar::-webkit-input-placeholder {
+  color: #6d7eae;
+}
+.category-checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  /* creating a custom design */
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 0.5px solid #252641;
+  outline: none;
+  cursor: pointer;
+}
+.category-checkbox:checked {
+  background-color: #0B2878;
+  position: relative;
+}
+.category-checkbox::before {
+  content: "✔";
+  font-size: 12px;
+  color: white;
+  position: absolute;
+  right: 2px;
+  top: -1px;
+}
+.show-scrollbar::-webkit-scrollbar {
+  display: block;
+  background-color: transparent;
+  width: 4px;
+  height: 4px;
+}
+.show-scrollbar::-webkit-scrollbar-track {
+  background-color: #fff;
+  margin-bottom: 12px;
+  margin-top: 12px;
+}
+.show-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 20px;
+  border: 0;
+}
+.show-scrollbar-no-mt::-webkit-scrollbar {
+  display: block;
+  background-color: transparent;
+  width: 4px;
+}
+.show-scrollbar-no-mt::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+.show-scrollbar-no-mt::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 20px;
+  border: 0;
+}
+.number-input::-webkit-outer-spin-button,
+.number-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.slide-in {
+  animation: slideIn 0.3s ease-in-out;
+}

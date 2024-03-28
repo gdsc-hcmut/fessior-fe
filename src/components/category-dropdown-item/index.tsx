@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useState } from 'react';
 
 import Category from '@/types/category-type';
 import ShortenInputFieldType from '@/types/shorten-input-field-type';
@@ -12,7 +11,6 @@ type CategoryDropdownItemProps = {
 
 export function CategoryDropdownItem(props: CategoryDropdownItemProps) {
   const { category, isValue, onSelect } = props;
-  const [isHovering, setIsHovering] = useState(false);
 
   return (
     <div
@@ -20,19 +18,13 @@ export function CategoryDropdownItem(props: CategoryDropdownItemProps) {
         e.stopPropagation();
         onSelect(category);
       }}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
       tabIndex={1}
-      className='flex h-[40px] cursor-pointer items-center px-[16px] transition-all hover:bg-primary hover:text-white'
+      className='flex h-[40px] cursor-pointer items-center px-[16px] transition-all hover:bg-royal-300/[.1]'
     >
       {isValue && (
         <div className='me-[12px]'>
           <Image
-            src={
-              isHovering
-                ? '/icons/shorten/tick_white.svg'
-                : '/icons/shorten/tick_royal.svg'
-            }
+            src='/icons/shorten/tick_royal.svg'
             alt='tick'
             width={0}
             height={0}
@@ -71,10 +63,10 @@ export default function CategoryDropdownItems(
             onCreate();
           }}
           tabIndex={1}
-          className='group flex h-[40px] cursor-pointer items-center px-[16px] transition-all hover:bg-primary hover:text-white'
+          className='flex h-[40px] cursor-pointer items-center px-[16px] transition-all hover:bg-royal-300/[.1]'
         >
           <p className='me-[8px] truncate'>Create</p>
-          <div className='rounded-[8px] border-[1px] border-primary group-hover:border-white md:px-[12px] md:py-[4px]'>
+          <div className='rounded-[8px] border-[1px] border-primary px-[12px] py-[4px]'>
             {creatingValue}
           </div>
         </div>
