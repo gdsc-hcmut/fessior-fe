@@ -11,7 +11,7 @@ export default function Dropdown(props: DropdownProps) {
   return (
     <div
       style={{ top: `${positionTop}px` }}
-      className='absolute z-[1] w-[100%] overflow-hidden rounded-[8px] bg-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'
+      className='absolute z-[1] w-[100%] overflow-hidden rounded-[8px] border-t-[1px] bg-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'
     >
       {children}
     </div>

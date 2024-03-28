@@ -86,7 +86,7 @@ export default function NavItem(props: NavItem) {
   );
 
   const lgChildrenListClass = clsx(
-    'absolute left-0 mt-[0px] overflow-hidden whitespace-nowrap rounded-[8px] bg-white transition-all duration-500',
+    'absolute left-0 mt-[8px] overflow-hidden whitespace-nowrap rounded-[8px] bg-white transition-all duration-200',
     showingChildren ? 'border-[1px]' : 'border-white',
   );
 
