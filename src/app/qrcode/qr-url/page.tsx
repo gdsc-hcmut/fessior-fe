@@ -42,15 +42,15 @@ export default function QRURLScreen() {
 
   const authRouter = useAuthRouter();
 
-  const UrlInfo = {
-    inputQRName,
-    inputURL,
-    organizationValue,
-    domainValue,
-    categoryValues,
-  };
   const logUrlInfo = () => {
-    console.log(UrlInfo);
+    const urlInfo = {
+      inputQRName,
+      inputURL,
+      organizationValue,
+      domainValue,
+      categoryValues,
+    };
+    console.log(urlInfo);
   };
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -229,7 +229,7 @@ export default function QRURLScreen() {
               <Input
                 collapseIcon
                 height={inputHeight}
-                className='ms-[4px] w-[200px] md:ms-[8px]'
+                className='ms-[4px] w-[156px] md:ms-[8px] md:w-[200px]'
                 fontSize={inputFontSize}
                 textValue={organizationValue!.shortName}
                 dropdownOptions={organizationOptions!}
@@ -247,7 +247,7 @@ export default function QRURLScreen() {
               <Input
                 collapseIcon
                 height={inputHeight}
-                className='ms-[4px] w-[200px] md:ms-[8px]'
+                className='ms-[4px] w-[156px] md:ms-[8px] md:w-[200px]'
                 fontSize={inputFontSize}
                 textValue={domainValue!}
                 dropdownOptions={domainOptions!}
@@ -261,7 +261,7 @@ export default function QRURLScreen() {
           </div>
         )}
         {isLoggedIn && isLoaded && (
-          <div className='mb-[0px] md:mb-[16px] md:flex md:items-center md:justify-between'>
+          <div className='mb-[0px] mt-4 md:mb-[16px] md:mt-0 md:flex md:items-center md:justify-between'>
             <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>
               Category
             </h6>

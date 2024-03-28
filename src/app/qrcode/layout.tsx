@@ -11,7 +11,6 @@ import ShortenTools from '@/components/shorten-tools';
 import Icon from '@/types/icon-enum';
 import { getIcon } from '@/utils/common';
 
-
 type QrCodeLayoutProps = {
   children: React.ReactNode;
 };
@@ -43,7 +42,6 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
               onClick={() => {
                 router.push('/qrcode/qr-url');
                 setIsWifi(false);
-                // logUrlInfo();
               }}
               className='flex items-center justify-center'
               width='full'
@@ -71,7 +69,6 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
               onClick={() => {
                 router.push('/qrcode/qr-wifi');
                 setIsWifi(true);
-                // logUrlInfo();
               }}
             >
               <div className='transition-all'>

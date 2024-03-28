@@ -48,17 +48,16 @@ export default function CreateQRWifiScreen() {
   const { screenSize, loaded } = useScreenSize();
   const authRouter = useAuthRouter();
 
-  const WifiInfo = {
-    inputQRName,
-    inputSSID,
-    inputPassword,
-    inputEncryption,
-    organizationValue,
-    domainValue,
-    categoryValues,
-  };
   const logWifiInfo = () => {
-    console.log(WifiInfo);
+    const wifiInfo = {
+      inputQRName,
+      inputSSID,
+      inputPassword,
+      inputEncryption,
+      organizationValue,
+      categoryValues,
+    };
+    console.log(wifiInfo);
   };
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -241,19 +240,19 @@ export default function CreateQRWifiScreen() {
                   setInputEncryption(selectedOption);
                 }}
                 collapseIcon={true}
-                className='ms-[24px] w-[132px] md:ms-2'
+                className='ms-[24px]  w-[156px] md:ms-2 md:w-[200px]'
                 height={inputHeight}
               />
             </div>
             {isLoaded && isLoggedIn && (
-              <div className=' mb-4 ml-8 flex items-center justify-between md:mb-[8px] md:me-[20px] md:inline-flex'>
-                <p className='inline text-[12px] font-[500] text-black md:text-[16px]'>
+              <div className='mb-4 flex items-center justify-between md:mb-[8px] md:me-[20px] md:ml-8 md:inline-flex'>
+                <p className='inline text-[16px] font-[500] md:text-[20px]'>
                   Organization
                 </p>
                 <Input
                   collapseIcon
                   height={inputHeight}
-                  className='ms-[4px] w-[200px] md:ms-[8px]'
+                  className='ms-[4px] w-[156px] md:ms-[8px] md:w-[200px]'
                   fontSize={inputFontSize}
                   textValue={organizationValue!.shortName}
                   dropdownOptions={organizationOptions!}
