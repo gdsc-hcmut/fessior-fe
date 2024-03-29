@@ -19,7 +19,8 @@ export default function QRCustomize() {
   const [typeOfQR, setTypeOfQR] = useState('url');
   // Copy of BunBun
   const { isLoggedIn } = useContext(AuthContext);
-  // End of copy
+
+  // End of Copy
   return (
     <>
       {isLoggedIn && (
