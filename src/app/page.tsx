@@ -12,8 +12,9 @@ import HomeProjectCarousel from '@/components/home/home-project-carousel';
 import HomeTools from '@/components/home/home-tools';
 import useScreenSize from '@/hooks/useScreenSize';
 import { projects } from '@/services/project.service';
+
 import 'aos/dist/aos.css';
-import './css/index.css';
+import '@/styles/wave.css';
 
 export default function HomePage() {
   const { screenSize, loaded } = useScreenSize();
@@ -51,13 +52,6 @@ export default function HomePage() {
             </div>
             <HomeTools />
             <div className='absolute bottom-[0] left-[0] z-[1] w-[100%]'>
-              {/* <Image
-                src='/icons/home/decor.svg'
-                alt='decor'
-                width={0}
-                height={0}
-                className='w-[100%]'
-              /> */}
               {/* <!--Waves Container--> */}
               <div>
                 <svg
@@ -198,7 +192,7 @@ export default function HomePage() {
           <h3
             data-aos='fade-down'
             data-aos-delay='100'
-            className='mb-[40px] mt-[80px] px-[20px] text-[40px] font-[700] text-primary lg:px-0 xl:mx-[20px]'
+            className='mb-[20px] mt-[80px] px-[20px] text-[40px] font-[700] text-primary lg:px-0 xl:mx-[20px]'
           >
             Our Projects
           </h3>
