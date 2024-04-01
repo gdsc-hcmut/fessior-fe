@@ -23,11 +23,20 @@ import ShortenInputFieldType from '@/types/shorten-input-field-type';
 import Url from '@/types/url-type';
 import { getIcon } from '@/utils/common';
 
+enum EncryptionType {
+  WPA_WPA2 = 'WPA/WPA2',
+  WEP = 'WEP',
+  NONE = 'NONE',
+  RAW = 'RAW',
+}
+
 export default function CreateQRWifiScreen() {
   const [inputQRName, setInputQRName] = useState('');
   const [inputSSID, setInputSSID] = useState('');
   const [inputPassword, setInputPassword] = useState('');
-  const [inputEncryption, setInputEncryption] = useState('WPA/WPA2');
+  const [inputEncryption, setInputEncryption] = useState<EncryptionType[]>([
+    EncryptionType.WPA_WPA2,
+  ]);
   const [organizationOptions, setOrganizationOptions] = useState<
     null | Organization[]
   >(null);
@@ -169,7 +178,12 @@ export default function CreateQRWifiScreen() {
   };
   const inputFontSize = screenSize === ScreenSize.LG ? undefined : 12;
   const inputHeight = screenSize === ScreenSize.LG ? 48 : undefined;
-
+  const encryptionOptions = [
+    EncryptionType.WPA_WPA2,
+    EncryptionType.WEP,
+    EncryptionType.NONE,
+    EncryptionType.RAW,
+  ];
   const isLoaded =
     (isAuthStatusReady &&
       isLoggedIn &&
@@ -234,8 +248,8 @@ export default function CreateQRWifiScreen() {
               </p>
               <Input
                 fontSize={inputFontSize}
-                textValue={inputEncryption}
-                dropdownOptions={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
+                textValue={inputEncryption.toString()}
+                dropdownOptions={encryptionOptions}
                 onDropdownSelect={(selectedOption: any) => {
                   setInputEncryption(selectedOption);
                 }}

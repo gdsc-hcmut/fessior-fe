@@ -19,10 +19,10 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
   const { children } = props;
   const router = useRouter();
   const currentPathname = usePathname();
-  const [isWifi, setIsWifi] = useState(currentPathname === '/qrcode/qr-wifi');
-  useEffect(() => {
-    setIsWifi(currentPathname === '/qrcode/qr-wifi');
-  }, [currentPathname]);
+  const isWifi = currentPathname === '/qrcode/qr-wifi';
+  // useEffect(() => {
+  //   setIsWifi(currentPathname === '/qrcode/qr-wifi');
+  // }, [currentPathname]);
   return (
     <section>
       <Header />
@@ -41,7 +41,7 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
             <Button
               onClick={() => {
                 router.push('/qrcode/qr-url');
-                setIsWifi(false);
+                // setIsWifi(false);
               }}
               className='flex items-center justify-center'
               width='full'
@@ -68,7 +68,7 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
               className='ml-6 flex items-center justify-center'
               onClick={() => {
                 router.push('/qrcode/qr-wifi');
-                setIsWifi(true);
+                // setIsWifi(true);
               }}
             >
               <div className='ml-[-8px] transition-all'>
