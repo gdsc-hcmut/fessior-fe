@@ -47,7 +47,7 @@ const QRNavBar = () => {
             Back
           </a>
         </div>
-        <div className='w-full rounded-[8px] border border-[#7E7E7E] border-opacity-30 bg-white pb-[14px] pt-[20px] shadow-2xl'>
+        <div className='w-full rounded-[8px] border border-[#7E7E7E] border-opacity-30 bg-white pb-[14px] pt-[20px] shadow-xl'>
           <div className=' text-center text-[26px] font-bold text-primary'>
             Customize QR
           </div>

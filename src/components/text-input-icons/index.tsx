@@ -10,7 +10,7 @@ type TextInputIconProps = {
 export default function TextInputIcon(props: TextInputIconProps) {
   const { iconSrc, iconAlt, placeholder } = props;
   return (
-    <div className='relative h-full w-full rounded-[8px] border-[0.5px] border-gray-300 md:border-[1px] md:border-primary'>
+    <div className='relative h-full w-full rounded-[8px] border-[1px] border-primary md:border-[1px] '>
       <input
         type='text'
         className='h-full w-full rounded-[8px] pl-[36px] text-[12px] focus:outline-[1px] focus:outline-primary md:pl-[48px] md:text-[16px] xl:pl-[78px] xl:text-[18px] '

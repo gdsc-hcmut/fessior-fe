@@ -1,134 +1,52 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 
+import useScreenSize from '@/hooks/useScreenSize';
+import ScreenSize from '@/types/screen-size-enum';
+
 type DropDownProps = {
   value: string;
   options: string[];
-  typeOfDevice?: 'mobile' | 'tablet' | 'laptop';
-  heightOfDropDown: '28' | '24' | '40';
-  textSize: '12' | '16';
-  paddingLeft: '4' | '6' | '8' | '16';
-  mediumHeight?: '28' | '32' | '36' | '48' | '60' | '56';
-  mediumTextSize?: '16' | '20' | '18';
-  mediumPaddingLeft?: '8' | '16';
-  paddingRight: '2' | '4';
-  mediumPaddingRight?: '0' | '2' | '4' | '6' | '12' | '20';
-  largeHeight?: '24' | '32' | '36' | '60';
-  largeTextSize?: '16' | '18' | '20';
-  largeFont?: 'medium' | 'bold' | 'regular';
-  largePaddingLeft?: '4' | '8' | '16';
-  largePaddingRight?: '2' | '4' | '6' | '16' | '8';
-  border?: 'none' | '1';
-  mediumBorder?: 'none' | '1';
+  border: number;
+  largeFont?: string;
 };
 
 export default function DropDown(props: DropDownProps) {
-  const {
-    value,
-    options,
-    typeOfDevice,
-    heightOfDropDown,
-    textSize,
-    paddingLeft,
-    mediumHeight,
-    mediumPaddingLeft,
-    mediumTextSize,
-    paddingRight,
-    mediumPaddingRight,
-    largeFont,
-    largeHeight,
-    largePaddingLeft,
-    largePaddingRight,
-    largeTextSize,
-    border,
-    mediumBorder,
-  } = props;
+  const { value, options, largeFont, border } = props;
+  const { screenSize, loaded } = useScreenSize();
   const [selected, setSelected] = useState(value);
-  const currentDevice = typeOfDevice ? typeOfDevice : 'mobile';
-
+  const c_fontWeight =
+    screenSize === ScreenSize.LG
+      ? largeFont === 'bold'
+        ? 700
+        : largeFont === 'medium'
+        ? 500
+        : 400
+      : 400;
   return (
-    <div className='w-full'>
+    <div className='relative h-full w-full'>
       <Listbox value={selected} onChange={setSelected}>
-        <div className='relative w-full'>
+        <div className='relative h-full w-full'>
           <Listbox.Button
-            className={`relative w-full cursor-pointer rounded-lg border bg-white 
-            ${border === '1' ? 'border-[1px] border-primary' : ''}
-            
-            ${mediumBorder === '1' ? 'md:border-[1px] md:border-primary' : ''}
-            ${paddingLeft === '4' ? 'pl-[4px]' : ''}
-            ${paddingLeft === '6' ? 'pl-[6px]' : ''}
-            ${paddingLeft === '8' ? 'pl-[8px]' : ''}
-            ${paddingLeft === '16' ? 'pl-[16px]' : ''}
-            ${mediumPaddingLeft === '8' ? 'md:pl-[8px]' : ''}
-            ${mediumPaddingLeft === '16' ? 'md:pl-[16px]' : ''}
-            ${largePaddingLeft === '4' ? 'xl:pl-[4px]' : ''}
-            ${largePaddingLeft === '8' ? 'xl:pl-[8px]' : ''}
-            ${largePaddingLeft === '16' ? 'xl:pl-[16px]' : ''}
-
-            
-            ${paddingRight === '2' ? 'pr-[2px]' : ''}
-            ${paddingRight === '4' ? 'pr-[4px]' : ''}
-            ${mediumPaddingRight === '0' ? 'md:pr-[0px]' : ''}
-            ${mediumPaddingRight === '2' ? 'md:pr-[2px]' : ''}
-            ${mediumPaddingRight === '4' ? 'md:pr-[4px]' : ''}
-            ${mediumPaddingRight === '6' ? 'md:pr-[6px]' : ''}
-            ${mediumPaddingRight === '12' ? 'md:pr-[12px]' : ''}
-            ${mediumPaddingRight === '20' ? 'md:pr-[20px]' : ''}
-            ${largePaddingRight === '2' ? 'xl:pr-[2px]' : ''}
-            ${largePaddingRight === '4' ? 'xl:pr-[4px]' : ''}
-            ${largePaddingRight === '6' ? 'xl:pr-[6px]' : ''}
-            ${largePaddingRight === '8' ? 'xl:pr-[8px]' : ''}
-            ${largePaddingRight === '16' ? 'xl:pr-[16px]' : ''}
-             text-left ${textSize === '12' ? 'text-[12px]' : ''}
-             ${textSize === '16' ? 'text-[16px]' : ''}
-             ${mediumTextSize === '16' ? 'md:text-[16px]' : ''}
-             ${mediumTextSize === '20' ? 'md:text-[20px]' : ''}
-             ${mediumTextSize === '18' ? 'md:text-[18px]' : ''}
-             ${largeTextSize === '16' ? 'xl:text-[16px]' : ''}
-             ${largeTextSize === '18' ? 'xl:text-[18px]' : ''}
-             ${largeTextSize === '20' ? 'xl:text-[20px]' : ''}
-             focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300`}
+            style={{
+              borderWidth: `${border}px`,
+            }}
+            className={`relative h-[100%] w-full cursor-pointer rounded-lg border border-primary bg-white
+            pl-[8px] pr-[4px] text-left text-[12px] focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2
+            focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 md:text-[16px]`}
           >
             <span className='block truncate'>
               <div
-                className={`
-                ${heightOfDropDown === '28' ? 'h-[28px]' : ''} 
-                ${heightOfDropDown === '24' ? 'h-[24px]' : ''}
-                ${heightOfDropDown === '40' ? 'h-[40px]' : ''}
-                ${mediumHeight === '28' ? 'md:h-[28px]' : ''}
-                ${mediumHeight === '32' ? 'md:h-[32px]' : ''}
-                ${mediumHeight === '36' ? 'md:h-[36px]' : ''}
-                ${mediumHeight === '48' ? 'md:h-[48px]' : ''}
-                ${mediumHeight === '56' ? 'md:h-[56px]' : ''} 
-                ${mediumHeight === '60' ? 'md:h-[60px]' : ''} 
-                ${largeHeight === '24' ? 'xl:h-[24px]' : ''}
-                ${largeHeight === '32' ? 'xl:h-[32px]' : ''}
-                ${largeHeight === '36' ? 'xl:h-[36px]' : ''}
-                ${largeHeight === '60' ? 'xl:h-[60px]' : ''}
-                ${largeFont === 'medium' ? 'xl:font-medium' : ''}
-                ${largeFont === 'bold' ? 'xl:font-bold' : ''}
-                ${largeFont === 'regular' ? 'xl:font-normal' : ''}
-                flex items-center `}
+                style={{
+                  fontWeight: `${c_fontWeight}`,
+                }}
+                className={'flex items-center '}
               >
                 {selected}
               </div>
             </span>
             <span
-              className={`pointer-events-none absolute inset-y-0 right-0 flex items-center 
-            ${paddingRight === '2' ? 'pr-[2px]' : ''}
-            ${paddingRight === '4' ? 'pr-[4px]' : ''}
-            ${mediumPaddingRight === '0' ? 'md:pr-[0px]' : ''}
-            ${mediumPaddingRight === '2' ? 'md:pr-[2px]' : ''}
-            ${mediumPaddingRight === '4' ? 'md:pr-[4px]' : ''}
-            ${mediumPaddingRight === '6' ? 'md:pr-[6px]' : ''}
-            ${mediumPaddingRight === '12' ? 'md:pr-[12px]' : ''}
-            ${mediumPaddingRight === '20' ? 'md:pr-[20px]' : ''}
-            ${largePaddingRight === '2' ? 'xl:pr-[2px]' : ''}
-            ${largePaddingRight === '4' ? 'xl:pr-[4px]' : ''}
-            ${largePaddingRight === '6' ? 'xl:pr-[6px]' : ''}
-            ${largePaddingRight === '8' ? 'xl:pr-[8px]' : ''}
-            ${largePaddingRight === '16' ? 'xl:pr-[16px]' : ''}
-            `}
+              className={'pointer-events-none absolute inset-y-0 right-0 flex items-center pl-[8px] pr-[4px]'}
             >
               <svg
                 width='20'
@@ -152,37 +70,16 @@ export default function DropDown(props: DropDownProps) {
             leaveTo='opacity-0'
           >
             <Listbox.Options
-              className={`absolute z-50 mt-1 w-full overflow-auto rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none
-              ${currentDevice === 'mobile' ? 'max-h-[100px]' : ''}
-              ${currentDevice === 'tablet' ? 'max-h-[120px]' : ''} 
-              ${currentDevice === 'laptop' ? 'max-h-[150px]' : ''}
-              ${textSize === '12' ? 'text-[12px]' : ''}
-              ${textSize === '16' ? 'text-[16px]' : ''}
-              ${mediumTextSize === '16' ? 'md:text-[16px]' : ''}
-              ${mediumTextSize === '18' ? 'md:text-[18px]' : ''}
-              ${mediumTextSize === '20' ? 'md:text-[20px]' : ''}
-              ${largeTextSize === '16' ? 'xl:text-[16px]' : ''}
-              ${largeTextSize === '18' ? 'xl:text-[18px]' : ''}
-              ${largeTextSize === '20' ? 'xl:text-[20px]' : ''}
-              `}
+              className={'absolute z-50 mt-1 max-h-[100px] w-full overflow-auto rounded-md bg-white text-[12px] shadow-lg ring-1 ring-black/5 focus:outline-none md:text-[16px]'}
             >
               {options.map((option, optionIdx) => (
                 <Listbox.Option
                   key={optionIdx}
+                  style={{
+                    fontWeight: `${c_fontWeight}`,
+                  }}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-1 
-                    ${paddingLeft === '4' ? 'pl-[4px]' : ''}
-                    ${paddingLeft === '6' ? 'pl-[6px]' : ''}
-                    ${paddingLeft === '8' ? 'pl-[8px]' : ''}
-                    ${paddingLeft === '16' ? 'pl-[16px]' : ''}
-                    ${mediumPaddingLeft === '8' ? 'md:pl-[8px]' : ''}
-                    ${mediumPaddingLeft === '16' ? 'md:pl-[16px]' : ''}
-                    ${largePaddingLeft === '4' ? 'xl:pl-[4px]' : ''}
-                    ${largePaddingLeft === '8' ? 'xl:pl-[8px]' : ''}
-                    ${largePaddingLeft === '16' ? 'xl:pl-[16px]' : ''}
-                    ${largeFont === 'medium' ? 'xl:font-medium' : ''}
-                ${largeFont === 'bold' ? 'xl:font-bold' : ''}
-                ${largeFont === 'regular' ? 'xl:font-normal' : ''}
+                    `relative cursor-default select-none py-1 pl-[8px]
                     ${active ? 'text-primary' : 'text-[#252641]'}`
                   }
                   value={option}
@@ -198,21 +95,11 @@ export default function DropDown(props: DropDownProps) {
                       </span>
                       {selected ? (
                         <span
-                          className={`absolute inset-y-0 left-0 flex items-center ${
-                            paddingLeft === '4' ? 'pl-[4px]' : ''
-                          }
-                        ${paddingLeft === '6' ? 'pl-[6px]' : ''}
-                        ${paddingLeft === '8' ? 'pl-[8px]' : ''}
-                        ${paddingLeft === '16' ? 'pl-[16px]' : ''}
-                        ${mediumPaddingLeft === '8' ? 'md:pl-[8px]' : ''}
-                        ${mediumPaddingLeft === '16' ? 'md:pl-[16px]' : ''}
-                        ${largePaddingLeft === '4' ? 'xl:pl-[4px]' : ''}
-                        ${largePaddingLeft === '8' ? 'xl:pl-[8px]' : ''}
-                        ${largePaddingLeft === '16' ? 'xl:pl-[16px]' : ''}
-                        ${largeFont === 'medium' ? 'xl:font-medium' : ''}
-                        ${largeFont === 'bold' ? 'xl:font-bold' : ''}
-                        ${largeFont === 'regular' ? 'xl:font-normal' : ''}
-                        text-amber-600`}
+                          style={{
+                            fontWeight: `${c_fontWeight}`,
+                          }}
+                          className={`absolute inset-y-0 left-0 flex items-center
+                        pl-[8px] text-amber-600`}
                         ></span>
                       ) : null}
                     </>
