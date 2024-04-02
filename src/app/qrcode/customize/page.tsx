@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { DotType } from 'qr-code-styling';
-import { useState, useContext, useLayoutEffect } from 'react';
+import { useState, useContext } from 'react';
 
 import DropDown from '@/components/listbox-select';
 import QRNavBar from '@/components/qr-navbar';
