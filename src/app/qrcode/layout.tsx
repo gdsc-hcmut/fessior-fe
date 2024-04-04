@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useState, useEffect } from 'react';
 
 import Button from '@/components/button';
@@ -20,9 +20,21 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
   const router = useRouter();
   const currentPathname = usePathname();
   const isWifi = currentPathname === '/qrcode/qr-wifi';
-  // useEffect(() => {
-  //   setIsWifi(currentPathname === '/qrcode/qr-wifi');
-  // }, [currentPathname]);
+  const linkIcon = useMemo(() => {
+    return getIcon(
+      '/icons/qrcode',
+      'link_qr.svg',
+      !isWifi ? Icon.ACTIVE : Icon.INACTIVE,
+    );
+  }, [isWifi]);
+  const wifiIcon = useMemo(() => {
+    return getIcon(
+      '/icons/qrcode',
+      'wifi.svg',
+      isWifi ? Icon.ACTIVE : Icon.INACTIVE,
+    );
+  }, [isWifi]);
+
   return (
     <section>
       <Header />
@@ -41,7 +53,6 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
             <Button
               onClick={() => {
                 router.push('/qrcode/qr-url');
-                // setIsWifi(false);
               }}
               className='flex items-center justify-center'
               width='full'
@@ -49,11 +60,7 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
             >
               <div className='transition-all'>
                 <Image
-                  src={getIcon(
-                    '/icons/qrcode',
-                    'link_qr.svg',
-                    !isWifi ? Icon.ACTIVE : Icon.INACTIVE,
-                  )}
+                  src={linkIcon}
                   alt='link-icon'
                   width={40}
                   height={40}
@@ -68,16 +75,11 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
               className='ml-6 flex items-center justify-center'
               onClick={() => {
                 router.push('/qrcode/qr-wifi');
-                // setIsWifi(true);
               }}
             >
               <div className='ml-[-8px] transition-all'>
                 <Image
-                  src={getIcon(
-                    '/icons/qrcode',
-                    'wifi.svg',
-                    isWifi ? Icon.ACTIVE : Icon.INACTIVE,
-                  )}
+                  src={wifiIcon}
                   alt='wifi-icon'
                   width={40}
                   height={40}
@@ -101,7 +103,7 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
         </div>
         <div className='absolute right-[-10px] top-[100px] hidden h-[40px] w-[40px] rounded-full bg-primary md:block'></div>
         <div className='absolute left-[40px] top-[145px] hidden h-[12px] w-[12px] rounded-full bg-primary md:left-[30px] md:h-[28px] md:w-[28px] lg:left-[100px] lg:h-[40px] lg:w-[40px]'></div>
-        <div className='absolute left-[-70px] top-[727px] -z-10 h-[120px] w-[120px] rounded-full bg-primary'></div>
+        <div className='absolute left-[-70px] top-[740px] -z-10 h-[120px] w-[120px] rounded-full bg-primary'></div>
         <div className='absolute bottom-[9px] right-[-30px] h-[80px] w-[80px] rounded-full bg-primary md:hidden'></div>
         <div className='absolute bottom-[0px] right-[60px] h-[20px] w-[20px] rounded-full bg-primary md:hidden'></div>
       </div>
