@@ -129,7 +129,7 @@ export default function QRCustomize() {
           <div className='w-[90%] md:w-[85%] xl:relative'>
             <QRNavBar />
             <div className='xl:relative xl:flex xl:flex-row xl:gap-[28px] '>
-              <div className='flex flex-col gap-y-[20px] drop-shadow-[0_4px_47px_rgba(11,40,120,0.3)] xl:mt-[28px] xl:flex xl:grow xl:flex-col xl:items-center xl:gap-y-[24px] xl:rounded-[8px] xl:border-[0.5px] xl:border-[#7E7E7E] xl:border-opacity-30 xl:bg-white xl:px-[24px] xl:py-[24px]'>
+              <div className='flex flex-col gap-y-[20px] drop-shadow-[0_4px_47px_rgba(11,40,120,0.3)] xl:mt-[28px] xl:grow xl:items-center xl:gap-y-[24px] xl:rounded-[8px] xl:border-[0.5px] xl:border-[#7E7E7E] xl:border-opacity-30 xl:bg-white xl:px-[24px] xl:py-[24px]'>
                 {/* INFORMATION PART */}
                 <div
                   className='flex w-[100%] flex-col rounded-[8px] border-[3px] border-[#0B2878] bg-white px-[16px] md:pr-[32px] xl:px-[36px] xl:pb-[20px]'
@@ -195,7 +195,7 @@ export default function QRCustomize() {
                           </p>
                         </div>
 
-                        <div className='relative ml-[8px] h-[20px] max-w-[240px] grow md:ml-[33px] md:h-[32px] xl:ml-[8px] xl:block xl:w-[136px] xl:grow-0 xl:rounded-[8px]'>
+                        <div className='relative ml-[8px] h-[20px] max-w-[240px] grow md:ml-[33px] md:h-[32px] xl:ml-[8px] xl:block xl:w-[136px] xl:grow-0 xl:rounded-[8px] '>
                           <DropDown
                             border={1}
                             value='GDSC'
@@ -249,7 +249,7 @@ export default function QRCustomize() {
                             Encryption
                           </p>
                         </div>
-                        <div className='w-[136px] md:ml-[33px] md:w-[160px]'>
+                        <div className='h-[20px] w-[136px] md:ml-[33px] md:h-[32px] md:w-[160px]'>
                           <DropDown
                             value='WPA/WPA2'
                             options={['WPA/WPA2', 'WEP', 'NONE', 'RAW']}
@@ -260,11 +260,11 @@ export default function QRCustomize() {
                       <div className='hidden max-w-[80px] grow md:block xl:hidden'></div>
                       <div className=' mt-[16px] flex flex-row items-center xl:ml-[40px]'>
                         <div className='flex h-[24px] w-[100px] flex-col justify-center md:ml-[4px] md:w-[80px] xl:w-[120px]'>
-                          <p className='text-[16px]  font-medium xl:text-[20px]'>
+                          <p className='text-[16px]   font-medium xl:text-[20px]'>
                             Organization
                           </p>
                         </div>
-                        <div className='w-[136px] md:ml-[33px] md:w-[160px]'>
+                        <div className='h-[20px] w-[136px] md:ml-[33px] md:h-[32px] md:w-[160px]'>
                           <DropDown
                             value='GDSC'
                             options={['GDSC', 'CTCT', 'OISP']}
