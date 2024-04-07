@@ -1,8 +1,6 @@
 #!/bin/bash
 
-export "$(grep -vE "^(#.*|\s*)$" ./scripts/.env)"
-
-API_KEY="$TINYPNG_API_KEY"
+API_KEY="T1VMCJNMP7ykqvZpJ4HDTr50DhdCC787"
 RAW_DIR="$PWD/raw"
 OUTPUT_IMG_DIR="$PWD/src/assets/img"
 OUTPUT_SVG_DIR="$PWD/src/assets/svg"
@@ -89,7 +87,10 @@ for file in $modified_images; do
 
     echo "File \"$base_name\" has been processed."
     echo "--------------------\n"
+
+    rm -f "$file"
   fi
+
 done
 
 kebab_to_camel() {
