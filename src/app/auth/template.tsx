@@ -1,21 +1,40 @@
 'use client';
 
-import { ReactNode, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { ReactNode, useContext, useEffect, useState } from 'react';
 
+import AuthContext from '@/contexts/authContext';
+import { AuthFormContextProvider } from '@/contexts/authFormContext';
 import useAuthRouter from '@/hooks/useAuthRouter';
-import storage from '@/libs/local-storage';
+import AuthType from '@/types/auth-type-enum';
+import { detectOS } from '@/utils/common';
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
-  const [allowAuth, setAllowAuth] = useState(false);
+  const [isAuthAllowed, setIsAuthAllowed] = useState(false);
+  const { isLoggedIn, isAuthStatusReady } = useContext(AuthContext);
   const authRouter = useAuthRouter();
+  const pathname = usePathname();
+  const authType = pathname.split('/')[2] as AuthType;
 
   useEffect(() => {
-    if (storage.getItem('loggedIn')) {
-      authRouter();
-    } else setAllowAuth(true);
-  }, [authRouter]);
+    const isMobile = !['windows', 'other'].includes(detectOS());
 
-  if (!allowAuth) return null;
+    if (!isMobile) {
+      authRouter(authType, false, '/');
+      return;
+    }
 
-  return children;
+    if (isAuthStatusReady) {
+      if (isLoggedIn && authType !== AuthType.SIGN_UP) {
+        authRouter();
+        return;
+      }
+    } else return;
+
+    setIsAuthAllowed(true);
+  }, [authRouter, authType, isAuthStatusReady, isLoggedIn]);
+
+  if (!isAuthAllowed) return;
+  console.log(isAuthAllowed);
+  return <AuthFormContextProvider>{children}</AuthFormContextProvider>;
 }

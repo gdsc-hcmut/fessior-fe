@@ -5,9 +5,18 @@ const authHeaderContent = {
     {
       title: 'Log In',
       subtitle: 'Do not have an account?',
-      background: '/images/auth/background_1.svg',
-      sublinkAuthType: AuthType.SIGN_UP,
+      background: '/images/auth/background_1.png',
+      sublinkAuthType: AuthType.SIGN_UP_INFO,
       sublinkText: 'Sign up',
+    },
+  ],
+  'sign-up-info': [
+    {
+      title: 'Create your account',
+      subtitle: 'Already have an account?',
+      sublinkAuthType: AuthType.LOGIN,
+      background: '/images/auth/background_2.png',
+      sublinkText: 'Log in',
     },
   ],
   'sign-up': [
@@ -15,14 +24,7 @@ const authHeaderContent = {
       title: 'Create your account',
       subtitle: 'Already have an account?',
       sublinkAuthType: AuthType.LOGIN,
-      background: '/images/auth/background_2.svg',
-      sublinkText: 'Log in',
-    },
-    {
-      title: 'Create your account',
-      subtitle: 'Already have an account?',
-      sublinkAuthType: AuthType.LOGIN,
-      background: '/images/auth/background_2.svg',
+      background: '/images/auth/background_2.png',
       sublinkText: 'Log in',
     },
   ],
@@ -31,17 +33,18 @@ const authHeaderContent = {
       title: 'Forgot Password?',
       sublinkAuthType: AuthType.LOGIN,
       sublinkText: 'Return to Log in',
-      background: '/images/auth/background_3.svg',
+      background: '/images/auth/background_3.png',
+    },
+    {
+      title: 'Verify your email',
+      subtitle:
+        'If we find a matching account, we will send you an verification code.',
+      background: '/images/auth/background_3.png',
     },
     {
       title: 'Reset your password',
-      subtitle: 'Create a new password for your account',
-      background: '/images/auth/background_3.svg',
-    },
-    {
-      title: 'Check your email',
-      subtitle: 'Verify your account to reset password',
-      background: '/images/auth/background_3.svg',
+      subtitle: 'Create a new password for your account.',
+      background: '/images/auth/background_3.png',
     },
   ],
 };

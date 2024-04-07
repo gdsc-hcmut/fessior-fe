@@ -1,13 +1,16 @@
 'use client';
 
 import { clsx } from 'clsx';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 
+import AuthModal from '@/components/auth/auth-modal';
 import Brand from '@/components/brand';
 import Nav from '@/components/nav';
+import { AuthFormContextProvider } from '@/contexts/authFormContext';
 import useEventListener from '@/hooks/useEventListener';
 import useScreenSize from '@/hooks/useScreenSize';
+import AuthType from '@/types/auth-type-enum';
 import ScreenSize from '@/types/screen-size-enum';
 
 const TRANS_HEADER_PAGES = ['/'];
@@ -18,8 +21,9 @@ export default function Header() {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isHome, setIsHome] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const { screenSize } = useScreenSize();
+  const { screenSize, loaded } = useScreenSize();
   const pathname = usePathname();
+  const authType = useSearchParams().get('auth');
 
   useEventListener('scroll', () => setScrollY(window.scrollY));
 
@@ -44,14 +48,25 @@ export default function Header() {
       'bg-white shadow-[0px_6px_15px_rgba(64,79,104,0.05)]',
   );
 
+  if (!loaded) return;
+
   return (
-    <div className={headerClass}>
-      <Brand theme={isHome ? 'white' : 'primary'} />
-      <Nav
-        isHome={isHome}
-        isCollapsed={isCollapsed}
-        setIsCollapsed={setIsCollapsed}
-      />
-    </div>
+    <>
+      <div></div>
+      <div className={headerClass}>
+        <Brand theme={isHome ? 'white' : 'primary'} />
+        <Nav
+          isHome={isHome}
+          pathname={pathname}
+          isCollapsed={isCollapsed}
+          setIsCollapsed={setIsCollapsed}
+        />
+      </div>
+      {authType && (
+        <AuthFormContextProvider>
+          <AuthModal authType={authType as AuthType} />
+        </AuthFormContextProvider>
+      )}
+    </>
   );
 }

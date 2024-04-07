@@ -15,15 +15,13 @@ export default function Brand(props: BrandProps) {
   );
 
   const logoSrc =
-    theme === 'white'
-      ? '/images/logo_transparent_white.svg'
-      : '/images/logo_transparent_navy.svg';
+    theme === 'white' ? '/icons/fessior_white.svg' : '/icons/fessior_navy.svg';
 
   return (
     <Link href='/' className='flex items-center'>
       <Image
         src={logoSrc}
-        alt=''
+        alt='fessior-logo'
         width={0}
         height={0}
         className='me-[4px] h-[36px] w-auto md:me-[8px] md:h-[36px] lg:h-[40px]'
