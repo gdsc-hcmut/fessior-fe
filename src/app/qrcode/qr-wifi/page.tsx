@@ -63,7 +63,7 @@ export default function CreateQRWifiScreen() {
       passwordVisible ? Icon.ACTIVE : Icon.INACTIVE,
     );
   }, [passwordVisible]);
-  const logWifiInfo = () => {
+  const logWifiInfo = async () => {
     const wifiInfo = {
       inputQRName,
       inputSSID,

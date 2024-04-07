@@ -41,7 +41,7 @@ export default function QRURLScreen() {
 
   const authRouter = useAuthRouter();
 
-  const logUrlInfo = () => {
+  const logUrlInfo = async () => {
     const urlInfo = {
       inputQRName,
       inputURL,
