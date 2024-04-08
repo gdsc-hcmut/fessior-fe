@@ -1,9 +1,9 @@
 'use client';
 import { animateScroll as scroll, scroller } from 'react-scroll';
 
-import Button from '../button';
+import Button from '@/components/button';
 
-const QRNavBar = () => {
+const NavBar = () => {
   const scrollToTop = () => {
     scroll.scrollToTop();
   };
@@ -102,4 +102,4 @@ const QRNavBar = () => {
   );
 };
 
-export default QRNavBar;
+export default NavBar;

@@ -5,16 +5,18 @@ type TextInputIconProps = {
   iconSrc: string;
   iconAlt?: string;
   placeholder: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function TextInputIcon(props: TextInputIconProps) {
-  const { iconSrc, iconAlt, placeholder } = props;
+  const { iconSrc, iconAlt, placeholder, onChange } = props;
   return (
     <div className='relative h-full w-full rounded-[8px] border-[1px] border-primary md:border-[1px] '>
       <input
         type='text'
         className='h-full w-full rounded-[8px] pl-[36px] text-[12px] focus:outline-[1px] focus:outline-primary md:pl-[48px] md:text-[16px] xl:pl-[78px] xl:text-[18px] '
         placeholder={placeholder}
+        onChange={onChange}
       />
       <Image
         src={iconSrc}

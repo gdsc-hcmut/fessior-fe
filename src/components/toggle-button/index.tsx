@@ -2,17 +2,19 @@
 import clsx from 'clsx';
 import React, { useState } from 'react';
 
-interface ToggleButtonProps {
-  type: 'mobile' | 'tablet';
-}
+import useScreenSize from '@/hooks/useScreenSize';
+import ScreenSize from '@/types/screen-size-enum';
 
-const ToggleButton: React.FC<ToggleButtonProps> = ({ type }) => {
+const ToggleButton: React.FC = () => {
   const [isActive, setIsActive] = useState(false);
+  const { screenSize, loaded } = useScreenSize();
   return (
     <label
       className={clsx(
         'h-[11px] w-[22px] cursor-pointer items-center',
-        type === 'mobile' ? 'h-[11px] w-[22px]' : 'h-[20px] w-[38px]',
+        screenSize === ScreenSize.SM
+          ? 'h-[11px] w-[22px]'
+          : 'h-[20px] w-[38px]',
       )}
     >
       <input
@@ -25,7 +27,9 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({ type }) => {
       <div
         className={clsx(
           ' justify-left flex items-center rounded-full ',
-          type === 'mobile' ? 'h-[11px] w-[22px]' : 'h-[20px] w-[38px]',
+          screenSize === ScreenSize.SM
+            ? 'h-[11px] w-[22px]'
+            : 'h-[20px] w-[38px]',
           isActive ? 'bg-[#0B2878]' : 'bg-[#E6E6E6]',
         )}
       >
@@ -33,7 +37,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({ type }) => {
           className={clsx(
             ' rounded-full  duration-200',
             isActive ? 'bg-[#E6E6E6]' : 'bg-[#0B2878]',
-            type === 'mobile'
+            screenSize === ScreenSize.SM
               ? isActive
                 ? 'h-[6px] w-[6px] translate-x-[14px]'
                 : 'h-[6px] w-[6px] translate-x-[2px]'
