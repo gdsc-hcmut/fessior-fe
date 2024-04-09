@@ -1,6 +1,6 @@
 import AuthType from '@/types/auth-type-enum';
 
-const authHeaderContent = {
+export const authHeaderContent = {
   login: [
     {
       title: 'Log In',
@@ -48,5 +48,3 @@ const authHeaderContent = {
     },
   ],
 };
-
-export default authHeaderContent;

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { categoryListData } from '@/services/url.service';
+import { categoryListData } from '@/data/myUrl';
 import { useUrlModalStore } from '@/store/url-modal';
 
 export default function EditSlugModal() {

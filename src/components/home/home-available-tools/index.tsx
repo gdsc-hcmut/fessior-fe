@@ -5,7 +5,7 @@ import { ReactNode, useState } from 'react';
 import { Autoplay, Controller } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
-import { tools } from '@/services/tool.service';
+import { tools } from '@/data/tools';
 import styles from '@/styles/home-available-tools.module.css';
 
 import HomeAvailableToolIndicator from '../home-available-tool-indicator';

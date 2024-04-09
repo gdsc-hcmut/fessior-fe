@@ -11,7 +11,7 @@ import MyUrlList from '@/components/my-url-list';
 import Pagination from '@/components/pagination';
 import Sidebar from '@/components/sidebar';
 import UrlSelectionList from '@/components/url-selection-list';
-import { myUrlListData } from '@/services/url.service';
+import { myUrlListData } from '@/data/myUrl';
 import { useFilterOptionStore } from '@/store/filter-option';
 import { useUrlModalStore } from '@/store/url-modal';
 import SortOption from '@/types/sort-option-enum';

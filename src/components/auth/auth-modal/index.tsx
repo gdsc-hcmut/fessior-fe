@@ -3,9 +3,9 @@ import { useContext, useEffect, useState } from 'react';
 import CloseButton from '@/components/close-button';
 import AuthContext from '@/contexts/authContext';
 import AuthFormContext from '@/contexts/authFormContext';
+import { authHeaderContent } from '@/data/authHeaderContent';
 import useAuthRouter from '@/hooks/useAuthRouter';
 import useEventListener from '@/hooks/useEventListener';
-import authHeaderContent from '@/libs/auth-header-content';
 import AuthType from '@/types/auth-type-enum';
 import { detectOS } from '@/utils/common';
 

@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 
 import AuthHeader from '@/components/auth/auth-header';
 import SignUpCommon from '@/components/auth/sign-up-common';
-import authHeaderContent from '@/libs/auth-header-content';
+import { authHeaderContent } from '@/data/authHeaderContent';
 import AuthType from '@/types/auth-type-enum';
 
 export default function SignUp() {
