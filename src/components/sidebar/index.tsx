@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-import useScreenSize from '@/hooks/useScreenSize';
+import { useScreenSize } from '@/hooks';
 import { sidebarItems } from '@/libs/sidebar-content';
 import ScreenSize from '@/types/screen-size-enum';
 

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 
-import useEventListener from '@/hooks/useEventListener';
 import ScreenSize from '@/types/screen-size-enum';
 
-export default function useScreenSize() {
+import { useEventListener } from './useEventListener';
+
+export function useScreenSize() {
   const [screenSize, setScreenSize] = useState<ScreenSize | null>(null);
   const [loaded, setLoaded] = useState(false);
 

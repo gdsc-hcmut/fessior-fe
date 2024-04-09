@@ -3,8 +3,7 @@ import Image from 'next/image';
 import { useState, useRef, useContext } from 'react';
 
 import AuthContext from '@/contexts/authContext';
-import useOnClickOutside from '@/hooks/useOnClickOutside';
-import useScreenSize from '@/hooks/useScreenSize';
+import { useOnClickOutside, useScreenSize } from '@/hooks';
 import Icon from '@/types/icon-enum';
 import ScreenSize from '@/types/screen-size-enum';
 import { getIcon } from '@/utils/common';

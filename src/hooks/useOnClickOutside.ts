@@ -1,8 +1,8 @@
 import { RefObject } from 'react';
 
-import useEventListener from './useEventListener';
+import { useEventListener } from './useEventListener';
 
-export default function useOnClickOutside<T extends HTMLElement = HTMLElement>(
+export function useOnClickOutside<T extends HTMLElement = HTMLElement>(
   ref: RefObject<T>,
   eventHandler: (event: Event) => void,
 ) {

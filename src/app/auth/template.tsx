@@ -5,7 +5,7 @@ import { ReactNode, useContext, useEffect, useState } from 'react';
 
 import AuthContext from '@/contexts/authContext';
 import { AuthFormContextProvider } from '@/contexts/authFormContext';
-import useAuthRouter from '@/hooks/useAuthRouter';
+import { useAuthRouter } from '@/hooks';
 import AuthType from '@/types/auth-type-enum';
 import { detectOS } from '@/utils/common';
 

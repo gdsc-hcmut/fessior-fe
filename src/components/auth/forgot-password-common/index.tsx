@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import ModalAlert from '@/components/modal-alert';
-import useAuthPasswordForm from '@/hooks/useAuthPasswordForm';
-import useAuthRouter from '@/hooks/useAuthRouter';
-import useInputErrorText from '@/hooks/useInputErrorText';
+import { useAuthPasswordForm, useAuthRouter, useInputErrorText } from '@/hooks';
 import { recoverPassword } from '@/libs/api/auth';
 import AlertLevel from '@/types/alert-level-enum';
 import AuthFormFieldEnum from '@/types/auth-form-field-enum';

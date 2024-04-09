@@ -8,8 +8,7 @@ import AuthModal from '@/components/auth/auth-modal';
 import Brand from '@/components/brand';
 import Nav from '@/components/nav';
 import { AuthFormContextProvider } from '@/contexts/authFormContext';
-import useEventListener from '@/hooks/useEventListener';
-import useScreenSize from '@/hooks/useScreenSize';
+import { useEventListener, useScreenSize } from '@/hooks';
 import AuthType from '@/types/auth-type-enum';
 import ScreenSize from '@/types/screen-size-enum';
 

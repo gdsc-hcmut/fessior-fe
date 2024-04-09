@@ -10,7 +10,7 @@ import Header from '@/components/header';
 import HomeAvailableTools from '@/components/home/home-available-tools';
 import HomeProjectCarousel from '@/components/home/home-project-carousel';
 import HomeTools from '@/components/home/home-tools';
-import useScreenSize from '@/hooks/useScreenSize';
+import { useScreenSize } from '@/hooks';
 import { projects } from '@/services/project.service';
 
 import 'aos/dist/aos.css';

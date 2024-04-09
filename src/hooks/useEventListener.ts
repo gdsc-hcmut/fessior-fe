@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export default function useEventListener(
+export function useEventListener(
   eventName: string,
   handler: unknown,
   element = typeof window !== 'undefined' && window,

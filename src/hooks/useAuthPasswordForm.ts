@@ -3,9 +3,9 @@ import { useState, useContext, useEffect } from 'react';
 import AuthFormContext from '@/contexts/authFormContext';
 import { validatePassword } from '@/utils/auth';
 
-import useInputErrorText from './useInputErrorText';
+import { useInputErrorText } from './useInputErrorText';
 
-export default function useAuthPasswordForm(
+export function useAuthPasswordForm(
   formFieldNumber: number = 3,
   confirmPasswordFieldIndex: number = 2,
 ) {

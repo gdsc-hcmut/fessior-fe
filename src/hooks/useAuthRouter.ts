@@ -3,9 +3,9 @@ import { useRouter } from 'next/navigation';
 import AuthType from '@/types/auth-type-enum';
 import { detectOS } from '@/utils/common';
 
-import useQueryParams from './useQueryParams';
+import { useQueryParams } from './useQueryParams';
 
-export default function useAuthRouter() {
+export function useAuthRouter() {
   const router = useRouter();
   const queryParams = useQueryParams();
   const isMobile = !['windows', 'other'].includes(detectOS());

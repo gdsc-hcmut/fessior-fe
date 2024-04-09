@@ -2,7 +2,7 @@ import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 
-export default function useQueryParams() {
+export function useQueryParams() {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
