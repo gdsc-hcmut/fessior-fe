@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import CloseButton from '@/components/close-button';
 import AuthContext from '@/contexts/authContext';
 import { navItems } from '@/data/navItems';
-import useScreenSize from '@/hooks/useScreenSize';
+import { useScreenSize } from '@/hooks';
 import ScreenSize from '@/types/screen-size-enum';
 
 import Button from '../button';

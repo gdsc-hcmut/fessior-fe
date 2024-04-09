@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import Brand from '@/components/brand';
-import useAuthRouter from '@/hooks/useAuthRouter';
+import { useAuthRouter } from '@/hooks';
 import AuthType from '@/types/auth-type-enum';
 
 type AuthHeaderProps = {

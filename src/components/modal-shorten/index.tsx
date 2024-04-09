@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 
 import CloseButton from '@/components/close-button';
-import useEventListener from '@/hooks/useEventListener';
+import { useEventListener } from '@/hooks';
 import Url from '@/types/url-type';
 
 import CopyButton from '../button/copy-button';

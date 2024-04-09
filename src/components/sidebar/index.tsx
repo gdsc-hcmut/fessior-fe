@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 import { sidebarItems } from '@/data/sidebarItems';
-import useScreenSize from '@/hooks/useScreenSize';
+import { useScreenSize } from '@/hooks';
 import ScreenSize from '@/types/screen-size-enum';
 
 type SidebarItemProps = {

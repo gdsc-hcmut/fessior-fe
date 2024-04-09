@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 
 import DefaultDropdownItems from '@/components/default-dropdown-item';
 import Dropdown from '@/components/dropdown';
-import useOnClickOutside from '@/hooks/useOnClickOutside';
+import { useOnClickOutside } from '@/hooks';
 import Icon from '@/types/icon-enum';
 import ShortenInputFieldType from '@/types/shorten-input-field-type';
 import { getIcon } from '@/utils/common';

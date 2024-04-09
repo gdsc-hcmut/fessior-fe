@@ -5,8 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useRef, useContext, useEffect } from 'react';
 
 import AuthContext from '@/contexts/authContext';
-import useOnClickOutside from '@/hooks/useOnClickOutside';
-import useScreenSize from '@/hooks/useScreenSize';
+import { useOnClickOutside, useScreenSize } from '@/hooks';
 import { NavItem } from '@/libs/api/types/nav-item';
 import Icon from '@/types/icon-enum';
 import ScreenSize from '@/types/screen-size-enum';

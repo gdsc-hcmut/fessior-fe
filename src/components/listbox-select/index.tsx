@@ -46,7 +46,9 @@ export default function DropDown(props: DropDownProps) {
               </div>
             </span>
             <span
-              className={'pointer-events-none absolute inset-y-0 right-0 flex items-center pl-[8px] pr-[4px]'}
+              className={
+                'pointer-events-none absolute inset-y-0 right-0 flex items-center pl-[8px] pr-[4px]'
+              }
             >
               <svg
                 width='20'
@@ -70,7 +72,9 @@ export default function DropDown(props: DropDownProps) {
             leaveTo='opacity-0'
           >
             <Listbox.Options
-              className={'absolute z-50 mt-1 max-h-[100px] w-full overflow-auto rounded-md bg-white text-[12px] shadow-lg ring-1 ring-black/5 focus:outline-none md:text-[16px]'}
+              className={
+                'absolute z-50 mt-1 max-h-[100px] w-full overflow-auto rounded-md bg-white text-[12px] shadow-lg ring-1 ring-black/5 focus:outline-none md:text-[16px]'
+              }
             >
               {options.map((option, optionIdx) => (
                 <Listbox.Option

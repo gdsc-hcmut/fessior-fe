@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 
-import useAuthRouter from '@/hooks/useAuthRouter';
+import { useAuthRouter } from '@/hooks';
 import AuthType from '@/types/auth-type-enum';
 
 type AuthModalHeadingProps = {

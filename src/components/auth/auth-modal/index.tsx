@@ -4,8 +4,7 @@ import CloseButton from '@/components/close-button';
 import AuthContext from '@/contexts/authContext';
 import AuthFormContext from '@/contexts/authFormContext';
 import { authHeaderContent } from '@/data/authHeaderContent';
-import useAuthRouter from '@/hooks/useAuthRouter';
-import useEventListener from '@/hooks/useEventListener';
+import { useAuthRouter, useEventListener } from '@/hooks';
 import AuthType from '@/types/auth-type-enum';
 import { detectOS } from '@/utils/common';
 

@@ -17,7 +17,6 @@ import SavePart from './parts/SavePart';
 import PatternColorType from './types/pattern-color.enum';
 import QRType from './types/qr-type-enum';
 
-
 export default function QRCustomize() {
   const [typeOfQR, setTypeOfQR] = useState<QRType>(QRType.URL);
   const [fileExt, setFileExt] = useState<FileExtension>('svg');

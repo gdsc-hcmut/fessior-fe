@@ -11,7 +11,7 @@ import HomeAvailableTools from '@/components/home/home-available-tools';
 import HomeProjectCarousel from '@/components/home/home-project-carousel';
 import HomeTools from '@/components/home/home-tools';
 import { projects } from '@/data/projects';
-import useScreenSize from '@/hooks/useScreenSize';
+import { useScreenSize } from '@/hooks';
 
 import 'aos/dist/aos.css';
 import '@/styles/wave.css';

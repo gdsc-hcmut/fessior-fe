@@ -2,7 +2,7 @@ import { CredentialResponse } from '@react-oauth/google';
 import { useContext } from 'react';
 
 import AuthContext from '@/contexts/authContext';
-import useAuthRouter from '@/hooks/useAuthRouter';
+import { useAuthRouter } from '@/hooks';
 import AuthType from '@/types/auth-type-enum';
 
 import CustomGoogleLogin from '../custom-google-login';

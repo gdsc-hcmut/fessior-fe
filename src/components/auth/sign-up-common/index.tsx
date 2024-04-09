@@ -2,8 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 
 import ModalAlert from '@/components/modal-alert';
 import AuthContext from '@/contexts/authContext';
-import useAuthPasswordForm from '@/hooks/useAuthPasswordForm';
-import useAuthRouter from '@/hooks/useAuthRouter';
+import { useAuthPasswordForm, useAuthRouter } from '@/hooks';
 import { createPassword } from '@/libs/api/auth';
 import AlertLevel from '@/types/alert-level-enum';
 import AuthFormFieldEnum from '@/types/auth-form-field-enum';
