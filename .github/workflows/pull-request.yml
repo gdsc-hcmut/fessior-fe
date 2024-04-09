@@ -34,10 +34,11 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v41
         with:
+          negation_patterns_first: true
           files_ignore: |
-            *
+            **
             !src
-            **/*.{svg,png,jpg,jpeg,webp,mp4,otf}
+            src/**/*.{jpg,jpeg,png,pneg,svg,webp,mp4,webm,ogg,mp3,wav,flac,aac,wma,flv,avi,mov,wmv,mpg,mkv,flv,3gp,3g2,ts,mts,m2ts,vob,asf,rm,rmvb,dat,iso,zip,rar,7z,tar,gz,tgz,arj,ace,deb,apk,exe,msi,dmg,bin,iso,torrent}
 
       - name: Check changed files
         run: |
