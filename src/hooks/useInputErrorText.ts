@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-export function useInputErrorText(fieldNumber: number) {
+export default function useInputErrorText(fieldNumber: number) {
   const [inputErrorTexts, setInputErrorTexts] = useState(
     Array(fieldNumber).fill(''),
   );
