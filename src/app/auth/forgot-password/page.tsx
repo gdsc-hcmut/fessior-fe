@@ -8,7 +8,7 @@ import {
   ForgotPasswordCommon1,
   ForgotPasswordCommon2,
 } from '@/components/auth/forgot-password-common';
-import authHeaderContent from '@/libs/auth-header-content';
+import { authHeaderContent } from '@/data/authHeaderContent';
 import AuthType from '@/types/auth-type-enum';
 
 export default function ForgotPassword() {

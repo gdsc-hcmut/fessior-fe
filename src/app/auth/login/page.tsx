@@ -2,7 +2,7 @@
 
 import AuthHeader from '@/components/auth/auth-header';
 import LoginCommon from '@/components/auth/login-common';
-import authHeaderContent from '@/libs/auth-header-content';
+import { authHeaderContent } from '@/data/authHeaderContent';
 import AuthType from '@/types/auth-type-enum';
 
 export default function Login() {

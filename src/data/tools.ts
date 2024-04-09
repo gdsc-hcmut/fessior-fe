@@ -1,14 +1,4 @@
-export type Tool = {
-  name: string;
-  description: string;
-  iconFilenames: string[];
-  secondaryIconClass: string;
-  primaryIconClass?: string;
-  decorImgSrc: string;
-  imgAlt: string;
-  active: boolean;
-  url: string;
-};
+import { Tool } from '@/types/tool-type';
 
 export const tools: Tool[] = [
   {
@@ -63,7 +53,7 @@ export const tools: Tool[] = [
     iconFilenames: ['codewithme.svg', 'codewithme_1.svg'],
     secondaryIconClass: 'w-[28%] top-[4px] right-[-6px]',
     decorImgSrc: '/images/home/side_shortener.png',
-    imgAlt: 'codewithme',
+    imgAlt: 'code-with-me',
     active: false,
     url: '',
   },

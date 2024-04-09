@@ -1,4 +1,5 @@
 'use client';
+import clsx from 'clsx';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useMemo } from 'react';
@@ -20,11 +21,12 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
   const router = useRouter();
   const currentPathname = usePathname();
   const isWifi = currentPathname === '/qrcode/qr-wifi';
+  const isUrl = currentPathname === '/qrcode/qr-url';
   const linkIcon = useMemo(() => {
     return getIcon(
       '/icons/qrcode',
       'link_qr.svg',
-      !isWifi ? Icon.ACTIVE : Icon.INACTIVE,
+      isUrl ? Icon.ACTIVE : Icon.INACTIVE,
     );
   }, [isWifi]);
   const wifiIcon = useMemo(() => {
@@ -38,9 +40,14 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
   return (
     <section>
       <Header />
-      <div className='relative flex flex-col items-center overflow-hidden leading-[1.2] text-primary'>
+      <div
+        className={clsx(
+          'relative flex flex-col items-center leading-[1.2] text-primary',
+          isUrl || isWifi ? 'overflow-hidden' : '',
+        )}
+      >
         <div className='md:max-w-[1000px] lg:flex lg:flex-col lg:items-center'>
-          <div className='text-center'>
+          <div className={clsx('text-center', isUrl || isWifi ? '' : 'hidden')}>
             <h1 className='mt-[80px] text-[36px] font-[700] leading-[65px] md:mt-[168px] md:text-[48px] lg:text-[60px]'>
               <span className=' md:inline'>Fessior</span> QR Generator
             </h1>
@@ -49,7 +56,12 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
               <br className='md:hidden' /> QR Code Management Made Easy
             </p>
           </div>
-          <div className='mx-auto my-5 flex w-[98%] max-w-[360px] text-[12px] font-[500] sm:w-[100%] sm:text-[16px] md:my-6 md:max-w-[416px] md:text-[20px]'>
+          <div
+            className={clsx(
+              'mx-auto my-5 flex w-[98%] max-w-[360px] text-[12px] font-[500] sm:w-[100%] sm:text-[16px] md:my-6 md:max-w-[416px] md:text-[20px]',
+              isUrl || isWifi ? '' : 'hidden',
+            )}
+          >
             <Button
               onClick={() => {
                 router.push('/qrcode/qr-url');

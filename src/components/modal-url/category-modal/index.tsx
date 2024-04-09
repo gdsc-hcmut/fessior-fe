@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { use, useEffect, useRef, useState } from 'react';
 
-import { categoryListData, domainListData } from '@/services/url.service';
+import { categoryListData, domainListData } from '@/data/myUrl';
 import { useFilterOptionStore } from '@/store/filter-option';
 import { useUrlModalStore } from '@/store/url-modal';
 
