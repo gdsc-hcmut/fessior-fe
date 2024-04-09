@@ -10,6 +10,8 @@ on:
 
 jobs:
   verify-pull-request:
+    permissions:
+      actions: 'write'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -33,20 +35,22 @@ jobs:
         uses: tj-actions/changed-files@v41
         with:
           files_ignore: |
-            yarn.lock
-            **/*.{svg,png,jpg,jpeg,ttf}
+            *
+            !src/**
+            **/*.{svg,png,jpg,jpeg,webp,mp4,otf}
 
       - name: Check changed files
         run: |
-          if [ ${{ github.actor }} == "tomgermanyyyy" ]; then
-            echo "Bypass check changed files for tomgermanyyyy 🚀"
-            exit 0
-          fi
-
           if [ ${{ steps.changed-files.outputs.all_changed_files_count }} -gt 15 ]; then
             echo "Too many files changed. One PR should only change <= 15 files."
             exit 1
+          elif [ ${{ steps.changed-files.outputs.all_changed_files_count }} -lt 1 ]; then
+            echo "No significant files changed. Finishing the workflow... 🚀"
+            gh run cancel ${{ github.run_id }}
+            gh run watch ${{ github.run_id }}
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
 
       - name: Add quotes
@@ -70,8 +74,8 @@ jobs:
           yarn test:cov-json-summary
           exit_code=$?
           if [ $exit_code -ne 0 ]; then
-           echo "Unit tests failed with exit code $exit_code. Stopping the workflow."
-           exit $exit_code
+            echo "Unit tests failed with exit code $exit_code. Stopping the workflow."
+            exit $exit_code
           fi
 
           COVERAGE=$(cat coverage/coverage-summary.json | jq -r '.total.branches.pct')
