@@ -1,4 +1,4 @@
-import authHeaderContent from '@/libs/auth-header-content';
+import { authHeaderContent } from '@/data/authHeaderContent';
 import AuthType from '@/types/auth-type-enum';
 
 import AuthModalHeading from '../auth-modal-heading';

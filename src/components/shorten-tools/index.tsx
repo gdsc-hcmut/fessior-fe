@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { tools } from '@/services/tool.service';
+import { tools } from '@/data/tools';
 import Icon from '@/types/icon-enum';
 import { getIcon } from '@/utils/common';
 

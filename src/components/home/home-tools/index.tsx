@@ -2,8 +2,9 @@ import { clsx } from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Tool, tools } from '@/services/tool.service';
+import { tools } from '@/data/tools';
 import Icon from '@/types/icon-enum';
+import { Tool } from '@/types/tool-type';
 import { getIcon } from '@/utils/common';
 
 type HomeToolItemProps = {

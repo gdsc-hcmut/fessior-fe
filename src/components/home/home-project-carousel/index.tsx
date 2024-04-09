@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
-import { Project } from '@/services/project.service';
 import styles from '@/styles/home-project-carousel.module.css';
+import { Project } from '@/types/project-type';
 import ScreenSize from '@/types/screen-size-enum';
 
 import HomeAvailableToolIndicator from '../home-available-tool-indicator';
