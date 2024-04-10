@@ -1,6 +1,6 @@
 import { ToastContainer } from 'react-toastify';
 
-import TOASTIFY_CONFIG from '@/libs/toastify-config';
+import { TOASTIFY_CONFIG } from '@/config';
 
 import 'react-toastify/dist/ReactToastify.css';
 import '@/styles/toastify-custom.css';
