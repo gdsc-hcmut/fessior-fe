@@ -1,12 +1,10 @@
 'use client';
 
-import { clsx } from 'clsx';
 import { ReactNode, useState } from 'react';
 import { Autoplay, Controller } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
 import { tools } from '@/data/tools';
-import styles from '@/styles/home-available-tools.module.css';
 
 import HomeAvailableToolIndicator from '../home-available-tool-indicator';
 import {
@@ -27,6 +25,7 @@ import HomeAvailableToolItem from '../home-available-tool-item';
 import ToolInfoTemplate from '../tool-info-template';
 
 import 'swiper/css/bundle';
+import './index.css';
 
 export default function HomeAvailableTools() {
   const [availableToolSelecting, setAvailableToolSelecting] = useState(0);
@@ -114,7 +113,7 @@ export default function HomeAvailableTools() {
     modules: [Controller],
     slidesPerView: 1,
     onSwiper: (swiper: SwiperClass) => setToolSwiper(swiper),
-    className: clsx('max-h-[520px] w-[100%] flex-grow', styles.swiper),
+    className: 'max-h-[520px] w-[100%] flex-grow',
     controller: { control: infoSwiper },
   };
 
@@ -122,7 +121,7 @@ export default function HomeAvailableTools() {
     <div className='mb-[80px] flex w-[100%] flex-col self-center overflow-hidden px-[20px] lg:mt-[60px] lg:flex-row lg:items-stretch lg:px-[calc(160px-(1920px-100vw)/3)]'>
       {/* ----------LEFT----------- */}
       <div
-        id='home-available-tools'
+        id='home-available-tools-left'
         data-aos='fade-right'
         className='lg:me-[20px] lg:flex lg:min-w-[336px] lg:flex-col xl:items-stretch'
       >

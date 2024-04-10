@@ -7,7 +7,7 @@ import { AuthContextProvider } from '@/contexts/authContext';
 import queryClient from '@/querier/client';
 
 import type { Metadata } from 'next';
-import '@/styles/globals.css';
+import './global.css';
 
 const balooChettan2 = Baloo_Chettan_2({ subsets: ['latin'] });
 

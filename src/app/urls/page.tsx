@@ -17,7 +17,7 @@ import { useUrlModalStore } from '@/store/url-modal';
 import SortOption from '@/types/sort-option-enum';
 import { MyUrl } from '@/types/url-type';
 
-import '@/styles/wave.css';
+import './index.css';
 
 type URLsPageProps = {
   searchParams: { [key: string]: string | string[] | undefined };

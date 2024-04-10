@@ -1,5 +1,5 @@
 @media (min-width: 960px) {
-  .swiper {
+  #home-available-tools-left .swiper {
     padding: 20px 28px;
   }
 }

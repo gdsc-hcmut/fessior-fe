@@ -14,7 +14,7 @@ import { projects } from '@/data/projects';
 import { useScreenSize } from '@/hooks';
 
 import 'aos/dist/aos.css';
-import '@/styles/wave.css';
+import './index.css';
 
 export default function HomePage() {
   const { screenSize, loaded } = useScreenSize();
