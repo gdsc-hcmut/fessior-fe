@@ -76,7 +76,7 @@ export default function Shorten() {
       if (!organizationValue) return;
 
       setDomainOptions(organizationValue.domains);
-      setDomainValue(organizationValue.domains[1]);
+      setDomainValue(organizationValue.domains[0]);
       const categoryOptionsInitial = (
         await organizationService.getCategoryByOrganizationId(
           organizationValue._id,
@@ -198,6 +198,17 @@ export default function Shorten() {
 
   const inputFontSize = screenSize === ScreenSize.LG ? undefined : 12;
   const inputHeight = screenSize === ScreenSize.LG ? 48 : undefined;
+
+  console.log(
+    !!isAuthStatusReady,
+    !!isLoggedIn,
+    !!organizationValue,
+    !!organizationOptions,
+    !!categoryOptions,
+    !!domainOptions,
+    !!domainValue,
+    !!loaded,
+  );
 
   const isLoaded =
     (isAuthStatusReady &&
