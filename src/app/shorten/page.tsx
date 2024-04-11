@@ -76,7 +76,7 @@ export default function Shorten() {
       if (!organizationValue) return;
 
       setDomainOptions(organizationValue.domains);
-      setDomainValue(organizationValue.domains[1]);
+      setDomainValue(organizationValue.domains[0]);
       const categoryOptionsInitial = (
         await organizationService.getCategoryByOrganizationId(
           organizationValue._id,
