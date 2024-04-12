@@ -42,6 +42,10 @@ jobs:
           files: 'src/**/*.{js,ts,jsx,tsx,json,html,css,scss,sass,graphql}'
           files_ignore: 'src/**/*.{jpg,jpeg,png,pneg,svg,webp,mp4,webm,ogg,mp3,wav,flac,aac,wma,flv,avi,mov,wmv,mpg,mkv,flv,3gp,3g2,ts,mts,m2ts,vob,asf,rm,rmvb,dat,iso,zip,rar,7z,tar,gz,tgz,arj,ace,deb,apk,exe,msi,dmg,bin,iso,torrent}'
 
+      - name: Verify the contents of the .github/outputs/modified_files.json file
+        run: |
+          cat .github/outputs/modified_files.json
+
       - name: Check changed files
         run: |
           if [ ${{ steps.changed-files.outputs.all_modified_files_count }} -gt 15 ]; then
