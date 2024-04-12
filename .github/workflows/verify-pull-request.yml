@@ -33,14 +33,16 @@ jobs:
           yarn add @commitlint/cli @commitlint/config-conventional -D
           yarn commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
 
+      # write a step that get all files modified in the PR (only in the src folder and exclude images and videos)
+
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v41
         with:
           json: true
           write_output_files: true
-          files: 'src/**/*.{js,ts,jsx,tsx,json,html,css,scss,sass,graphql}'
-          files_ignore: 'src/**/*.{jpg,jpeg,png,pneg,svg,webp,mp4,webm,ogg,mp3,wav,flac,aac,wma,flv,avi,mov,wmv,mpg,mkv,flv,3gp,3g2,ts,mts,m2ts,vob,asf,rm,rmvb,dat,iso,zip,rar,7z,tar,gz,tgz,arj,ace,deb,apk,exe,msi,dmg,bin,iso,torrent}'
+          files: 'src/**/*'
+          files_ignore: '**/*.{jpg,jpeg,png,pneg,svg,webp,mp4,webm,ogg,mp3,wav,flac,aac,wma,flv,avi,mov,wmv,mpg,mkv,flv,3gp,3g2,ts,mts,m2ts,vob,asf,rm,rmvb,dat,iso,zip,rar,7z,tar,gz,tgz,arj,ace,deb,apk,exe,msi,dmg,bin,iso,torrent}'
 
       - name: Verify the contents of the .github/outputs/modified_files.json file
         run: |
