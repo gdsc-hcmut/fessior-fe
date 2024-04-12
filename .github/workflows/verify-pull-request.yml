@@ -11,8 +11,8 @@ on:
 jobs:
   check-changed-files-count:
     outputs:
-      count: ${{ steps.changed-files.outputs.all_changed_files_count }}
-      changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
+      count: ${{ steps.changed-files.outputs.all_modified_files_count }}
+      changed_files: ${{ steps.changed-files.outputs.all_modified_files }}
     permissions:
       actions: 'write'
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
 
       - name: Check changed files
         run: |
-          if [ ${{ steps.changed-files.outputs.all_changed_files_count }} -gt 15 ]; then
+          if [ ${{ steps.changed-files.outputs.all_modified_files_count }} -gt 15 ]; then
             echo "Too many files changed. One PR should only change <= 15 files."
             exit 1
           fi
