@@ -60,7 +60,7 @@ jobs:
       - name: Add quotes
         id: add-quotes
         run: |
-          modified_files_with_quotes=$(echo ${{ needs.check-modified-files-count.outputs.modified_files }})
+          modified_files_with_quotes=$(echo '${{ needs.check-modified-files-count.outputs.modified_files }}')
           modified_files_with_quotes=${modified_files_with_quotes// /}
           modified_files_with_quotes=${modified_files_with_quotes//,/ }
           modified_files_with_quotes=${modified_files_with_quotes##\[}
