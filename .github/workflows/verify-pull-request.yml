@@ -9,10 +9,10 @@ on:
       - dev
 
 jobs:
-  check-changed-files-count:
+  check-modified-files-count:
     outputs:
       count: ${{ steps.changed-files.outputs.all_modified_files_count }}
-      changed_files: ${{ steps.changed-files.outputs.all_modified_files }}
+      modified_files: ${{ steps.changed-files.outputs.all_modified_files }}
     permissions:
       actions: 'write'
     runs-on: ubuntu-latest
@@ -33,8 +33,6 @@ jobs:
           yarn add @commitlint/cli @commitlint/config-conventional -D
           yarn commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
 
-      # write a step that get all files modified in the PR (only in the src folder and exclude images and videos)
-
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v41
@@ -44,10 +42,6 @@ jobs:
           files: |
             src/**/*
             **/!(*.jpg|*.png|*.gif|*.svg|*.jpeg|*.pneg)
-
-      - name: Verify the contents of the .github/outputs/modified_files.json file
-        run: |
-          cat .github/outputs/modified_files.json
 
       - name: Check changed files
         run: |
@@ -60,18 +54,24 @@ jobs:
 
   lint-and-test:
     runs-on: ubuntu-latest
-    needs: check-changed-files-count
-    if: needs.check-changed-files-count.outputs.count != '0'
+    needs: check-modified-files-count
+    if: needs.check-modified-files-count.outputs.count != '0'
     steps:
       - name: Add quotes
         id: add-quotes
         run: |
-          echo changed_files_with_quotes="'${{ needs.check-changed-files-count.outputs.changed_files }}'" | sed "s/ /' '/g" >> "$GITHUB_OUTPUT"
+          modified_files_with_quotes=$(echo ${{ needs.check-modified-files-count.outputs.modified_files }})
+          modified_files_with_quotes=${modified_files_with_quotes// /}
+          modified_files_with_quotes=${modified_files_with_quotes//,/ }
+          modified_files_with_quotes=${modified_files_with_quotes##\[}
+          modified_files_with_quotes=${modified_files_with_quotes%\]}
+
+          echo modified_files=$modified_files_with_quotes | sed "s/ /' '/g" >> "$GITHUB_OUTPUT"
         shell: bash
 
       - name: Lint check
         run: |
-          yarn eslint ${{ steps.add-quotes.outputs.changed_files_with_quotes }}
+          yarn eslint ${{ steps.add-quotes.outputs.modified_files }}
 
       - name: Install dependencies
         run: yarn --frozen-lockfile
