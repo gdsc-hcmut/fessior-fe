@@ -9,10 +9,10 @@ on:
       - dev
 
 jobs:
-  check-changed-files-count:
+  check-modified-files-count:
     outputs:
-      count: ${{ steps.changed-files.outputs.all_changed_files_count }}
-      changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
+      count: ${{ steps.changed-files.outputs.all_modified_files_count }}
+      modified_files: ${{ steps.changed-files.outputs.all_modified_files }}
     permissions:
       actions: 'write'
     runs-on: ubuntu-latest
@@ -37,15 +37,15 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v41
         with:
-          negation_patterns_first: true
-          files_ignore: |
-            **
-            !src
-            src/**/*.{jpg,jpeg,png,pneg,svg,webp,mp4,webm,ogg,mp3,wav,flac,aac,wma,flv,avi,mov,wmv,mpg,mkv,flv,3gp,3g2,ts,mts,m2ts,vob,asf,rm,rmvb,dat,iso,zip,rar,7z,tar,gz,tgz,arj,ace,deb,apk,exe,msi,dmg,bin,iso,torrent}
+          json: true
+          write_output_files: true
+          files: |
+            src/**/*
+            **/!(*.jpg|*.png|*.gif|*.svg|*.jpeg|*.pneg)
 
       - name: Check changed files
         run: |
-          if [ ${{ steps.changed-files.outputs.all_changed_files_count }} -gt 15 ]; then
+          if [ ${{ steps.changed-files.outputs.all_modified_files_count }} -gt 15 ]; then
             echo "Too many files changed. One PR should only change <= 15 files."
             exit 1
           fi
@@ -54,21 +54,33 @@ jobs:
 
   lint-and-test:
     runs-on: ubuntu-latest
-    needs: check-changed-files-count
-    if: needs.check-changed-files-count.outputs.count != '0'
+    needs: check-modified-files-count
+    if: needs.check-modified-files-count.outputs.count != '0'
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'yarn'
+
       - name: Add quotes
         id: add-quotes
         run: |
-          echo changed_files_with_quotes="'${{ needs.check-changed-files-count.outputs.changed_files }}'" | sed "s/ /' '/g" >> "$GITHUB_OUTPUT"
+          modified_files_with_quotes=$(echo ${{ needs.check-modified-files-count.outputs.modified_files }})
+          echo modified_files=$modified_files_with_quotes | sed 's/ //g' | sed 's/\[//g' | sed 's/\]//g' | sed 's/,/ /g' >> "$GITHUB_OUTPUT"
         shell: bash
-
-      - name: Lint check
-        run: |
-          yarn eslint ${{ steps.add-quotes.outputs.changed_files_with_quotes }}
 
       - name: Install dependencies
         run: yarn --frozen-lockfile
+
+      - name: Lint check
+        run: |
+          yarn eslint ${{ steps.add-quotes.outputs.modified_files }}
 
       - name: Run Jest tests and check branches coverage
         run: |
