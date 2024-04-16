@@ -57,6 +57,17 @@ jobs:
     needs: check-modified-files-count
     if: needs.check-modified-files-count.outputs.count != '0'
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'yarn'
+
       - name: Add quotes
         id: add-quotes
         run: |
