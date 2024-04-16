@@ -60,13 +60,8 @@ jobs:
       - name: Add quotes
         id: add-quotes
         run: |
-          modified_files_with_quotes=$(echo '${{ needs.check-modified-files-count.outputs.modified_files }}')
-          modified_files_with_quotes=${modified_files_with_quotes// /}
-          modified_files_with_quotes=${modified_files_with_quotes//,/ }
-          modified_files_with_quotes=${modified_files_with_quotes##\[}
-          modified_files_with_quotes=${modified_files_with_quotes%\]}
-
-          echo modified_files=$modified_files_with_quotes >> "$GITHUB_OUTPUT"
+          modified_files_with_quotes=$(echo ${{ needs.check-modified-files-count.outputs.modified_files }})
+          echo modified_files=$modified_files_with_quotes | sed 's/ //g' | sed 's/\[//g' | sed 's/\]//g' | sed 's/,/ /g' >> "$GITHUB_OUTPUT"
         shell: bash
 
       - name: Lint check
