@@ -75,12 +75,12 @@ jobs:
           echo modified_files=$modified_files_with_quotes | sed 's/ //g' | sed 's/\[//g' | sed 's/\]//g' | sed 's/,/ /g' >> "$GITHUB_OUTPUT"
         shell: bash
 
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
       - name: Lint check
         run: |
           yarn eslint ${{ steps.add-quotes.outputs.modified_files }}
-
-      - name: Install dependencies
-        run: yarn --frozen-lockfile
 
       - name: Run Jest tests and check branches coverage
         run: |
