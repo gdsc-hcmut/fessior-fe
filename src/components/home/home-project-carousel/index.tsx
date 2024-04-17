@@ -1,3 +1,5 @@
+import './index.css';
+
 import { clsx } from 'clsx';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -8,8 +10,6 @@ import { Project } from '@/types/project-type';
 import ScreenSize from '@/types/screen-size-enum';
 
 import HomeAvailableToolIndicator from '../home-available-tool-indicator';
-
-import './index.css';
 
 type HomeProjectItemProps = {
   name: string;

@@ -1,5 +1,8 @@
 'use client';
 
+import 'aos/dist/aos.css';
+import './index.css';
+
 import AOS from 'aos';
 import Link from 'next/link';
 import { useEffect } from 'react';
@@ -12,9 +15,6 @@ import HomeProjectCarousel from '@/components/home/home-project-carousel';
 import HomeTools from '@/components/home/home-tools';
 import { projects } from '@/data/projects';
 import { useScreenSize } from '@/hooks';
-
-import 'aos/dist/aos.css';
-import './index.css';
 
 export default function HomePage() {
   const { screenSize, loaded } = useScreenSize();

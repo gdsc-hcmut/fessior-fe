@@ -1,5 +1,7 @@
 'use client';
 
+import './index.css';
+
 import clsx from 'clsx';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
@@ -16,8 +18,6 @@ import { useFilterOptionStore } from '@/store/filter-option';
 import { useUrlModalStore } from '@/store/url-modal';
 import SortOption from '@/types/sort-option-enum';
 import { MyUrl } from '@/types/url-type';
-
-import './index.css';
 
 type URLsPageProps = {
   searchParams: { [key: string]: string | string[] | undefined };

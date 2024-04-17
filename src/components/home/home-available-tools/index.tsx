@@ -1,5 +1,8 @@
 'use client';
 
+import 'swiper/css/bundle';
+import './index.css';
+
 import { ReactNode, useState } from 'react';
 import { Autoplay, Controller } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
@@ -23,9 +26,6 @@ import {
 } from '../home-available-tool-infos';
 import HomeAvailableToolItem from '../home-available-tool-item';
 import ToolInfoTemplate from '../tool-info-template';
-
-import 'swiper/css/bundle';
-import './index.css';
 
 export default function HomeAvailableTools() {
   const [availableToolSelecting, setAvailableToolSelecting] = useState(0);

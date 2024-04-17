@@ -1,3 +1,5 @@
+import './global.css';
+
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { clsx } from 'clsx';
@@ -7,7 +9,6 @@ import { AuthContextProvider } from '@/contexts/authContext';
 import queryClient from '@/querier/client';
 
 import type { Metadata } from 'next';
-import './global.css';
 
 const balooChettan2 = Baloo_Chettan_2({ subsets: ['latin'] });
 
