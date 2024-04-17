@@ -1,21 +1,25 @@
-import api from './shared/client';
+import api from './api';
 
-export const login = async (
+async function login(
   payload: { token: string } | { username: string; password: string },
-) => {
+) {
   return (await api.post('v1/api/auth/login', payload)).data.payload;
-};
+}
 
-export const logout = async (payload: { token: string }) => {
+async function logout(payload: { token: string }) {
   try {
     return (await api.post('v1/api/auth/logout', payload)).data.payload;
   } catch (e: any) {
     console.log(e.response.data.message);
   }
-};
+}
 
-export const createPassword = async (newPassword: string) => {
+async function createPassword(newPassword: string) {
   return (await api.post('v1/api/auth/password', { newPassword })).data.payload;
-};
+}
 
-export const recoverPassword = async () => {};
+async function recoverPassword() {}
+
+const authService = { login, logout, createPassword, recoverPassword };
+
+export default authService;

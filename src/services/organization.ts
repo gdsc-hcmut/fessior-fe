@@ -4,11 +4,11 @@ import Url from '@/types/url-type';
 
 import api from './api';
 
-const getCategoryByOrganizationId = async (
+async function getCategoryByOrganizationId(
   organizationId: Organization['_id'],
   page: number = 1,
   limit: number = 10,
-) => {
+) {
   try {
     return (
       await api.get(
@@ -18,14 +18,14 @@ const getCategoryByOrganizationId = async (
   } catch (e: any) {
     console.log(e.message);
   }
-};
+}
 
-const searchCategoryByOrganizationId = async (
+async function searchCategoryByOrganizationId(
   organizationId: Organization['_id'],
   query: string = '',
   page: number = 1,
   limit: number = 10,
-) => {
+) {
   try {
     return (
       await api.get(
@@ -35,12 +35,12 @@ const searchCategoryByOrganizationId = async (
   } catch (e: any) {
     console.log(e.message);
   }
-};
+}
 
-const addUrlToCategories = async (
+async function addUrlToCategories(
   organizationId: Organization['_id'],
   payload: { url: Url['_id']; categories: Category['_id'][] },
-) => {
+) {
   try {
     return (
       await api.patch(
@@ -51,7 +51,7 @@ const addUrlToCategories = async (
   } catch (e: any) {
     console.log(e.message);
   }
-};
+}
 
 const organizationService = {
   getCategoryByOrganizationId,

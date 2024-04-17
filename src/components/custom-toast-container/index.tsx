@@ -3,7 +3,7 @@ import './index.css';
 
 import { ToastContainer } from 'react-toastify';
 
-import TOASTIFY_CONFIG from '@/libs/toastify-config';
+import { TOASTIFY_CONFIG } from '@/config';
 
 export default function CustomToastContainer() {
   return <ToastContainer {...TOASTIFY_CONFIG} />;

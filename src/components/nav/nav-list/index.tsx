@@ -1,4 +1,4 @@
-import { NavItem as NavItemType } from '@/libs/api/types/nav-item';
+import { NavItem as NavItemType } from '@/types/nav-item-type';
 
 import NavItem from '../nav-item';
 

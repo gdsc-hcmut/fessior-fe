@@ -6,8 +6,8 @@ import { useState, useRef, useContext, useEffect } from 'react';
 
 import AuthContext from '@/contexts/authContext';
 import { useOnClickOutside, useScreenSize } from '@/hooks';
-import { NavItem } from '@/libs/api/types/nav-item';
 import Icon from '@/types/icon-enum';
+import { NavItem } from '@/types/nav-item-type';
 import ScreenSize from '@/types/screen-size-enum';
 import { getIcon } from '@/utils/common';
 

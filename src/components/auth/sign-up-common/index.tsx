@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from 'react';
 import ModalAlert from '@/components/modal-alert';
 import AuthContext from '@/contexts/authContext';
 import { useAuthPasswordForm, useAuthRouter } from '@/hooks';
-import { createPassword } from '@/libs/api/auth';
+import { authService } from '@/services';
 import AlertLevel from '@/types/alert-level-enum';
 import AuthFormFieldEnum from '@/types/auth-form-field-enum';
 
@@ -41,7 +41,7 @@ export default function SignUpCommon() {
     }
 
     try {
-      await createPassword(password);
+      await authService.createPassword(password);
       authRouter();
     } catch (e: any) {
       setModalErrorText(e.response.data.message);

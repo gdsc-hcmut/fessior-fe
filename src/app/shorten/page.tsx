@@ -12,10 +12,12 @@ import ShortenCategories from '@/components/shorten-categories';
 import ShortenTools from '@/components/shorten-tools';
 import AuthContext from '@/contexts/authContext';
 import { useAuthRouter, useScreenSize } from '@/hooks';
-import meService from '@/libs/api/me';
-import categoryService from '@/services/category.service';
-import organizationService from '@/services/organization.service';
-import urlService from '@/services/url.service';
+import {
+  meService,
+  categoryService,
+  organizationService,
+  urlService,
+} from '@/services';
 import AuthType from '@/types/auth-type-enum';
 import CategoryColor from '@/types/category-color-enum';
 import Category from '@/types/category-type';
@@ -76,7 +78,7 @@ export default function Shorten() {
       if (!organizationValue) return;
 
       setDomainOptions(organizationValue.domains);
-      setDomainValue(organizationValue.domains[1]);
+      setDomainValue(organizationValue.domains[0]);
       const categoryOptionsInitial = (
         await organizationService.getCategoryByOrganizationId(
           organizationValue._id,

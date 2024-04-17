@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import storage from '@/libs/local-storage';
+import storage from '@/utils/storage';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,

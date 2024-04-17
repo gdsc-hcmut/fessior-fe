@@ -9,13 +9,9 @@ import {
   useEffect,
 } from 'react';
 
-import {
-  login as serviceLogin,
-  logout as serviceLogout,
-} from '@/libs/api/auth';
-import meService from '@/libs/api/me';
-import storage from '@/libs/local-storage';
+import { authService, meService } from '@/services';
 import User from '@/types/user-type';
+import storage from '@/utils/storage';
 
 type AuthContextProps = {
   meProfile: User | null;
@@ -61,7 +57,7 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
     async (
       payload: { token: string } | { username: string; password: string },
     ) => {
-      const response = await serviceLogin(payload);
+      const response = await authService.login(payload);
 
       if (response.token) {
         storage.setItem('token', response.token);
@@ -78,7 +74,7 @@ export function AuthContextProvider({ children }: { children: ReactNode }) {
 
     if (token)
       try {
-        await serviceLogout({ token });
+        await authService.logout({ token });
       } catch (e: any) {
         console.log(e.response.data.message);
       }
