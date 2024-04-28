@@ -9,10 +9,11 @@
     "lint": "next lint",
     "prettier": "npx prettier --write",
     "add:img": "chmod u+x ./scripts/add-img.sh && sh ./scripts/add-img.sh",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:cov-json-summary": "jest --coverage --coverageReporters=json-summary",
+    "test": "NODE_ENV=test jest",
+    "test:watch": "yarn test --colors --watchAll",
+    "test:nowatch": "NODE_ENV=test yarn test",
+    "test:ci": "CI=true NODE_ENV=test yarn test --lastCommit",
+    "commit": "yarn test --colors --onlyChanged && git add . && ./node_modules/.bin/cz",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -38,8 +39,8 @@
     "@babel/eslint-parser": "^7.23.3",
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
-    "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/react": "^14.1.0",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^15.0.5",
     "@types/jest": "^29.5.8",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -48,6 +49,7 @@
     "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^6.9.1",
     "autoprefixer": "^10.0.1",
+    "commitizen": "^4.3.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.1",
     "eslint-config-prettier": "^9.0.0",
@@ -67,5 +69,10 @@
       "npx prettier --write",
       "npx eslint --fix"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
