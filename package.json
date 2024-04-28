@@ -11,8 +11,8 @@
     "add:img": "chmod u+x ./scripts/add-img.sh && sh ./scripts/add-img.sh",
     "test": "NODE_ENV=test jest",
     "test:watch": "yarn test --colors --watchAll",
-    "test:nowatch": "NODE_ENV=test yarn test",
-    "test:ci": "CI=true NODE_ENV=test yarn test --lastCommit",
+    "test:nowatch": "yarn test --colors",
+    "test:ci": "CI=true NODE_ENV=test yarn test",
     "commit": "yarn test --colors --onlyChanged && git add . && ./node_modules/.bin/cz",
     "prepare": "husky install"
   },
