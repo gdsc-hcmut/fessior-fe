@@ -1,5 +1,5 @@
 CODEOWNERS
-.eslintrc.json
+.eslintrc*
 /build/**
 /coverage/**
 /docs/*
