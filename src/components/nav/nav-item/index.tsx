@@ -1,19 +1,23 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable complexity */
+/* eslint-disable max-statements */
+/* eslint-disable import/no-cycle */
 import clsx from 'clsx';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState, useRef, useContext, useEffect } from 'react';
 
 import AuthContext from '@/contexts/authContext';
 import { useOnClickOutside, useScreenSize } from '@/hooks';
-import Icon from '@/types/icon-enum';
-import { NavItem } from '@/types/nav-item-type';
-import ScreenSize from '@/types/screen-size-enum';
 import { getIcon } from '@/utils/common';
 
 import NavList from '../nav-list';
 
-export default function NavItem(props: NavItem) {
+import Icon from '@/types/icon-enum';
+import { NavItem as NavItemType } from '@/types/nav-item-type';
+import ScreenSize from '@/types/screen-size-enum';
+
+export default function NavItem(props: NavItemType) {
   const { text, iconFilename, imgAlt, isLogout, path, children } = props;
 
   const [showingChildren, setShowingChildren] = useState(false);
