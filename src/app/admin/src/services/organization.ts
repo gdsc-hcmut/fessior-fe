@@ -1,7 +1,4 @@
-import User from '@/types/user-type';
-
 import SAMPLE_ORGANIZATIONS from '../data/organizations';
-import SAMPLE_USERS from '../data/users';
 import Organization, { BaseOrganization } from '../types/organization';
 
 function getAllOrganizations(): Promise<Organization[]> {
@@ -10,10 +7,10 @@ function getAllOrganizations(): Promise<Organization[]> {
   });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function deleteOrganization(organizationId: string): Promise<any> {
   return new Promise((resolve) => {
     setTimeout(() => {
-      console.log(`DELETED ${organizationId}`);
       resolve({ message: 'Delete successfully' });
     }, 500);
   });
@@ -21,7 +18,6 @@ function deleteOrganization(organizationId: string): Promise<any> {
 
 function updateOrganization(organization: Organization): Promise<Organization> {
   return new Promise((resolve) => {
-    console.log(`UPDATED ${organization._id}`);
     setTimeout(() => resolve(organization), 500);
   });
 }
@@ -30,7 +26,6 @@ function createOrganization(
   organization: BaseOrganization,
 ): Promise<Organization> {
   return new Promise((resolve) => {
-    console.log(`CREATED ${organization.longName}`);
     setTimeout(() => resolve({ ...organization, _id: '4' }), 500);
   });
 }

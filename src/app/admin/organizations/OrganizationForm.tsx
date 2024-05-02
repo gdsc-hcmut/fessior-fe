@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import Input from '@/components/input';
-import User from '@/types/user-type';
 
 import userService from '../src/services/user';
 import { BaseOrganization } from '../src/types/organization';
 
 import DomainList from './DomainList';
-import UserList from './UserList';
+import UserDropdownList from './UserDropdownList';
+
+import User from '@/types/user-type';
 
 type OrganizationFormProps = {
   editingOrganization: BaseOrganization;
@@ -18,7 +20,7 @@ type OrganizationFormProps = {
 export default function OrganizationForm(props: OrganizationFormProps) {
   const { editingOrganization, setEditingOrganization, isLongNameValid } =
     props;
-  const [members, setUsers] = useState<User[] | null>(null);
+  const [members, setMembers] = useState<User[] | null>(null);
   const longNameContainerRef = useRef<HTMLDivElement>(null);
 
   const nonManagingUsers = editingOrganization.members.filter(
@@ -39,9 +41,9 @@ export default function OrganizationForm(props: OrganizationFormProps) {
     (async () => {
       try {
         const initialUsers = await userService.getAllUsers();
-        setUsers(initialUsers);
+        setMembers(initialUsers);
       } catch (e: any) {
-        console.log(e.message);
+        toast.error(e.message);
       }
     })();
   }, []);
@@ -98,12 +100,12 @@ export default function OrganizationForm(props: OrganizationFormProps) {
           <h6 className='mb-2 ps-1 text-xl font-semibold text-primary'>
             Managers
           </h6>
-          <UserList
+          <UserDropdownList
             users={editingOrganization.managers}
-            onUsersChange={(members: User[]) => {
+            onUsersChange={(users: User[]) => {
               setEditingOrganization({
                 ...editingOrganization,
-                managers: members,
+                managers: users,
               });
             }}
             options={nonManagingUsers}
@@ -115,10 +117,13 @@ export default function OrganizationForm(props: OrganizationFormProps) {
             <h6 className='mb-2 ps-1 text-xl font-semibold text-primary'>
               Members
             </h6>
-            <UserList
+            <UserDropdownList
               users={editingOrganization.members}
-              onUsersChange={(members: User[]) => {
-                setEditingOrganization({ ...editingOrganization, members });
+              onUsersChange={(users: User[]) => {
+                setEditingOrganization({
+                  ...editingOrganization,
+                  members: users,
+                });
               }}
               options={nonParticipatingUsers}
               blockDeleteIds={editingOrganization.managers.map(

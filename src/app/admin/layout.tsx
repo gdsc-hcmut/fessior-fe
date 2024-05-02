@@ -26,7 +26,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
         setIsAllowed(true);
       }
     }
-  }, [isAuthStatusReady, isLoggedIn]);
+  }, [isAuthStatusReady, isLoggedIn, router]);
 
   if (!isAllowed) {
     return;

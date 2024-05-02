@@ -8,13 +8,14 @@ import {
 } from 'react';
 
 import Button from '@/components/button';
-import User from '@/types/user-type';
 
 import checkIcon from '../src/assets/check.svg';
 import closeIcon from '../src/assets/close.svg';
 
 import UserOption from './UserOption';
 import UserValue from './UserValue';
+
+import User from '@/types/user-type';
 
 type UserInputProps = {
   userOptions: User[];
@@ -59,38 +60,37 @@ export default function UserInput(props: UserInputProps) {
     setSearching(null);
   };
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      if (!searching || searching.length === 0) {
-        console.log(userValues);
-        onSubmit(userValues);
-        return;
-      }
-
-      if (isDropdownVisible) {
-        handleUserSelect(displayingUserOptions[focusingIndex]._id);
-        return;
-      }
-
-      const searchingEmails = searching.split(' ');
-      const invalidEmails: string[] = [];
-      const detectedUserIds: string[] = [];
-
-      searchingEmails.forEach((email) => {
-        const user = remainingUserOptions.find((user) => user.email === email);
-
-        if (user) {
-          detectedUserIds.push(user._id);
-        } else {
-          invalidEmails.push(email);
-        }
-      });
-
-      setUserValueIds([...userValueIds, ...detectedUserIds]);
-      setSearching(invalidEmails.join(' '));
+  const handleEnterKey = () => {
+    if (!searching || searching.length === 0) {
+      onSubmit(userValues);
       return;
     }
 
+    if (isDropdownVisible) {
+      handleUserSelect(displayingUserOptions[focusingIndex]._id);
+      return;
+    }
+
+    const invalidEmails: string[] = [];
+    const detectedUserIds: string[] = [];
+
+    searching.split(' ').forEach((email) => {
+      const user = remainingUserOptions.find(
+        (remainingUser) => remainingUser.email === email,
+      );
+
+      if (user) {
+        detectedUserIds.push(user._id);
+      } else {
+        invalidEmails.push(email);
+      }
+    });
+
+    setUserValueIds([...userValueIds, ...detectedUserIds]);
+    setSearching(invalidEmails.join(' '));
+  };
+
+  const handleArrowKey = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown' && isDropdownVisible) {
       setFocusingIndex(
         focusingIndex === displayingUserOptions.length - 1
@@ -110,28 +110,31 @@ export default function UserInput(props: UserInputProps) {
     }
   };
 
+  const inputMessage = `Add multiple ${
+    isManagerInput ? 'managers' : 'users'
+  } by separating them with a space.${
+    isManagerInput
+      ? ' To be a manager, they must be added as member first.'
+      : ''
+  }`;
+
   return (
     <div>
       <div className='mb-3 flex flex-col'>
         <div className='mb-2 flex items-start'>
           <div className='min-h-10 relative me-3 flex w-full flex-col rounded-lg border-[1px] border-[#7e7e7e4d] py-2 ps-3 focus-within:border-primary'>
-            <div className='flex flex-wrap items-center'>
-              {userValues.map((user) => (
-                <UserValue
-                  {...user}
-                  key={user._id}
-                  pictureSrc={user.picture}
-                  onRemove={() => {
-                    setUserValueIds(
-                      userValueIds.filter((id) => id !== user._id),
-                    );
-                  }}
-                />
-              ))}
-            </div>
+            <UserValueList
+              userValues={userValues}
+              userValueIds={userValueIds}
+              setUserValueIds={setUserValueIds}
+            />
             <div className='flex'>
               <input
-                onKeyDown={handleKeyDown}
+                onKeyDown={(e: KeyboardEvent) => {
+                  if (e.key === 'Enter') handleEnterKey();
+                  else if (e.key === 'ArrowDown' || e.key === 'ArrowUp')
+                    handleArrowKey(e);
+                }}
                 value={searching ?? ''}
                 className={
                   'h-full flex-grow outline-none placeholder:text-royal-300'
@@ -168,27 +171,64 @@ export default function UserInput(props: UserInputProps) {
         </div>
         <div className='relative'>
           {isDropdownVisible && (
-            <div className='absolute left-0 right-[65px] max-h-[328px] overflow-y-auto overflow-x-hidden rounded-lg border-[1px] bg-white shadow-2xl'>
-              {displayingUserOptions.map((user, index) => (
-                <UserOption
-                  isFocusing={focusingIndex === index}
-                  key={user._id}
-                  onSelect={() => handleUserSelect(user._id)}
-                  {...user}
-                  pictureSrc={user.picture}
-                />
-              ))}
-            </div>
+            <UserOptionList
+              displayingUserOptions={displayingUserOptions}
+              focusingIndex={focusingIndex}
+              handleUserSelect={handleUserSelect}
+            />
           )}
-          <p className='italic text-primary'>{`Add multiple ${
-            isManagerInput ? 'managers' : 'users'
-          } by separating them with a space.${
-            isManagerInput
-              ? ' To be a manager, they must be added as member first.'
-              : ''
-          }`}</p>
+          <p className='italic text-primary'>{inputMessage}</p>
         </div>
       </div>
+    </div>
+  );
+}
+
+type UserValueListProps = {
+  userValues: User[];
+  userValueIds: string[];
+  setUserValueIds: (ids: string[]) => void;
+};
+
+function UserValueList(props: UserValueListProps) {
+  const { userValues, userValueIds, setUserValueIds } = props;
+
+  return (
+    <div className='flex flex-wrap items-center'>
+      {userValues.map((user) => (
+        <UserValue
+          {...user}
+          key={user._id}
+          pictureSrc={user.picture}
+          onRemove={() => {
+            setUserValueIds(userValueIds.filter((id) => id !== user._id));
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+type UserOptionListProps = {
+  displayingUserOptions: User[];
+  focusingIndex: number;
+  handleUserSelect: (id: string) => void;
+};
+
+function UserOptionList(props: UserOptionListProps) {
+  const { displayingUserOptions, focusingIndex, handleUserSelect } = props;
+
+  return (
+    <div className='absolute left-0 right-[65px] max-h-[328px] overflow-y-auto overflow-x-hidden rounded-lg border-[1px] bg-white shadow-2xl'>
+      {displayingUserOptions.map((user, index) => (
+        <UserOption
+          isFocusing={focusingIndex === index}
+          key={user._id}
+          onSelect={() => handleUserSelect(user._id)}
+          {...user}
+          pictureSrc={user.picture}
+        />
+      ))}
     </div>
   );
 }

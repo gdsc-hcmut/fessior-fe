@@ -81,7 +81,9 @@ export default function DomainList(props: DomainListProps) {
             key={domain}
             onDelete={(deletingDomain: string) => {
               onDomainsChange(
-                domains.filter((domain) => domain !== deletingDomain),
+                domains.filter(
+                  (currentDomain) => currentDomain !== deletingDomain,
+                ),
               );
             }}
             domain={domain}

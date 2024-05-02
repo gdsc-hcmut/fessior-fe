@@ -6,21 +6,21 @@ import Position from '../src/types/position';
 
 type DeleteButtonProps = {
   onClick: () => void;
-  disabled?: boolean;
+  isDisabled?: boolean;
 };
 
 export default function DeleteButton(props: DeleteButtonProps) {
-  const { onClick, disabled } = props;
+  const { onClick, isDisabled } = props;
 
   return (
     <TooltipWrapper
       tooltipText={'This member is a manager, remove them as manager first.'}
-      disabled={!disabled}
+      isDisabled={!isDisabled}
       position={Position.LEFT}
     >
       <button
         onClick={onClick}
-        disabled={disabled}
+        disabled={isDisabled}
         className='inline-block h-full rounded-lg bg-red px-3 py-2 transition-all hover:bg-[#ca3326] disabled:cursor-not-allowed disabled:bg-[#fcc]'
       >
         <Image src={deleteIcon} alt='' width={0} height={0} className='' />

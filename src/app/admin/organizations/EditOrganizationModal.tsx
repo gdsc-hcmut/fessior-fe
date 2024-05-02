@@ -3,11 +3,12 @@ import { MouseEvent, useState } from 'react';
 import Button from '@/components/button';
 import CloseButton from '@/components/close-button';
 import ModalAlert from '@/components/modal-alert';
-import AlertLevel from '@/types/alert-level-enum';
 
 import Organization, { BaseOrganization } from '../src/types/organization';
 
 import OrganizationForm from './OrganizationForm';
+
+import AlertLevel from '@/types/alert-level-enum';
 
 type OrganizationModalProps = {
   organization: Organization;

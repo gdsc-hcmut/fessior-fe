@@ -2,12 +2,13 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import Button from '@/components/button';
-import User from '@/types/user-type';
 
 import DeleteButton from './DeleteButton';
 import UserInput from './UserInput';
 
-type UserListProps = {
+import User from '@/types/user-type';
+
+type UserDropdownListProps = {
   users: User[];
   options: User[];
   isManagerList?: boolean;
@@ -15,7 +16,7 @@ type UserListProps = {
   onUsersChange: (users: User[]) => void;
 };
 
-export default function UserList(props: UserListProps) {
+export default function UserDropdownList(props: UserDropdownListProps) {
   const { users, options, isManagerList, blockDeleteIds, onUsersChange } =
     props;
   const [isAdding, setIsAdding] = useState(false);
@@ -86,7 +87,7 @@ function UserItem(props: UserItemProps) {
           <p className='text-gray-600'>{user.email}</p>
         </div>
       </div>
-      <DeleteButton onClick={onRemove} disabled={isDeleteDisabled} />
+      <DeleteButton onClick={onRemove} isDisabled={isDeleteDisabled} />
     </div>
   );
 }

@@ -13,7 +13,7 @@ import Organization, { BaseOrganization } from '../src/types/organization';
 
 import CreateOrganizationModal from './CreateOrganizationModal';
 import EditOrganizationModal from './EditOrganizationModal';
-import OrganizationItem from './OrganizationItem';
+import OrganizationList from './OrganizationList';
 
 export default function Organizations() {
   const [organizations, setOrganizations] = useState<Organization[] | null>(
@@ -32,7 +32,7 @@ export default function Organizations() {
           await organizationService.getAllOrganizations();
         setOrganizations(organizationsInitial);
       } catch (e: any) {
-        console.log(e.message);
+        toast.error(e.message);
       }
     })();
   }, []);
@@ -93,7 +93,6 @@ export default function Organizations() {
           Manage organizations throughout Fessior Tools
         </p>
       </div>
-
       <div>
         <div className='md:mb-6 md:flex md:flex-row-reverse md:justify-between'>
           <Button
@@ -104,7 +103,6 @@ export default function Organizations() {
           >
             + Create Organization
           </Button>
-
           <Input
             height={44}
             className='md:w-2/3 xl:w-1/2'
@@ -119,39 +117,13 @@ export default function Organizations() {
             }}
           />
         </div>
-        <div>
-          <div className='mb-4 flex px-6'>
-            <div className='flex-[1] text-lg font-semibold text-primary'>
-              No.
-            </div>
-            <div className='flex-[5] text-lg font-semibold text-primary'>
-              Name
-            </div>
-            <div className='flex-[3] text-lg font-semibold text-primary'>
-              Managers
-            </div>
-            <div className='flex-[2] text-lg font-semibold text-primary'>
-              Members
-            </div>
-            <div className='flex-[3] text-lg font-semibold text-primary'>
-              Actions
-            </div>
-          </div>
-          <div>
-            {displayingOrganizations?.map((organization, index) => (
-              <OrganizationItem
-                key={organization._id}
-                organization={organization}
-                index={index + 1}
-                onEdit={() => {
-                  setEditingOrganizationIndex(index);
-                }}
-              />
-            ))}
-          </div>
-        </div>
       </div>
-
+      {displayingOrganizations && (
+        <OrganizationList
+          organizations={displayingOrganizations}
+          setEditingOrganizationIndex={setEditingOrganizationIndex}
+        />
+      )}
       {editingOrganizationIndex !== null && organizations && (
         <EditOrganizationModal
           organization={organizations[editingOrganizationIndex]}
@@ -174,7 +146,6 @@ export default function Organizations() {
           onCreate={handleOrganizationCreate}
         />
       )}
-
       <CustomToastContainer />
     </div>
   );

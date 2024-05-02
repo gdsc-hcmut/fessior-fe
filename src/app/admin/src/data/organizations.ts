@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+
 import Organization from '../types/organization';
 
 const SAMPLE_ORGANIZATIONS: Organization[] = [
