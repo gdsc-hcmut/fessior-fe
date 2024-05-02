@@ -1,10 +1,11 @@
+import './index.css';
+
 import { clsx } from 'clsx';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
-import styles from '@/styles/home-project-carousel.module.css';
 import { Project } from '@/types/project-type';
 import ScreenSize from '@/types/screen-size-enum';
 
@@ -72,7 +73,7 @@ export default function HomeProjectCarousel(props: HomeProjectCarouselProps) {
       760: { slidesPerView: 2, slidesPerGroup: 2 },
       960: { slidesPerView: 4, slidesPerGroup: 4 },
     },
-    className: clsx('flex w-[100%]', styles.swiper),
+    className: 'flex w-[100%]',
     onSwiper: (swiper: SwiperClass) => {
       setSwiper(swiper);
     },
@@ -86,6 +87,7 @@ export default function HomeProjectCarousel(props: HomeProjectCarouselProps) {
       data-aos='fade-up'
       data-aos-delay='100'
       className={clsx('flex flex-col', className)}
+      id='home-project-carousel'
     >
       <Swiper {...swiperProps}>
         {projects.map((project) => (

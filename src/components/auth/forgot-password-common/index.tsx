@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import ModalAlert from '@/components/modal-alert';
 import { useAuthPasswordForm, useAuthRouter, useInputErrorText } from '@/hooks';
-import { recoverPassword } from '@/libs/api/auth';
+import { authService } from '@/services';
 import AlertLevel from '@/types/alert-level-enum';
 import AuthFormFieldEnum from '@/types/auth-form-field-enum';
 import AuthType from '@/types/auth-type-enum';
@@ -142,7 +142,7 @@ export function ForgotPasswordCommon2(props: ForgotPasswordCommonProps) {
     }
 
     try {
-      await recoverPassword();
+      await authService.recoverPassword();
       setModalSuccessText('Your password has been successfully reset.');
     } catch (e: any) {
       setModalErrorText(e.message);

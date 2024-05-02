@@ -1,9 +1,9 @@
+import 'react-toastify/dist/ReactToastify.css';
+import './index.css';
+
 import { ToastContainer } from 'react-toastify';
 
-import TOASTIFY_CONFIG from '@/libs/toastify-config';
-
-import 'react-toastify/dist/ReactToastify.css';
-import '@/styles/toastify-custom.css';
+import { TOASTIFY_CONFIG } from '@/config';
 
 export default function CustomToastContainer() {
   return <ToastContainer {...TOASTIFY_CONFIG} />;
