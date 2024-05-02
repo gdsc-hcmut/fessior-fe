@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useRef, useState } from 'react';
 
 import Button from '@/components/button';
 import CloseButton from '@/components/close-button';
@@ -23,6 +23,7 @@ export default function EditOrganizationModal(props: OrganizationModalProps) {
     useState<BaseOrganization>(organization);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isLongNameValid, setIsLongNameValid] = useState(true);
+  const longNameContainerRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
@@ -43,6 +44,7 @@ export default function EditOrganizationModal(props: OrganizationModalProps) {
         </div>
         {/* FORM */}
         <OrganizationForm
+          ref={longNameContainerRef}
           isLongNameValid={isLongNameValid}
           editingOrganization={editingOrganization}
           setEditingOrganization={setEditingOrganization}
@@ -56,7 +58,13 @@ export default function EditOrganizationModal(props: OrganizationModalProps) {
           </button>
           <Button
             onClick={() => {
-              if (editingOrganization.longName === '') {
+              if (
+                editingOrganization.longName === '' &&
+                longNameContainerRef.current
+              ) {
+                longNameContainerRef.current.scrollIntoView({
+                  behavior: 'smooth',
+                });
                 setIsLongNameValid(false);
                 return;
               }

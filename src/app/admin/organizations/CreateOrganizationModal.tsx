@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useRef, useState } from 'react';
 
 import Button from '@/components/button';
 import CloseButton from '@/components/close-button';
@@ -23,6 +23,7 @@ export default function CreateOrganizationModal(props: OrganizationModalProps) {
       domains: [],
     });
   const [isLongNameValid, setIsLongNameValid] = useState(true);
+  const longNameContainerRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
@@ -42,6 +43,7 @@ export default function CreateOrganizationModal(props: OrganizationModalProps) {
           </div>
         </div>
         <OrganizationForm
+          ref={longNameContainerRef}
           isLongNameValid={isLongNameValid}
           editingOrganization={editingOrganization}
           setEditingOrganization={setEditingOrganization}
@@ -49,7 +51,13 @@ export default function CreateOrganizationModal(props: OrganizationModalProps) {
         <div className='relative flex w-full justify-end border-t-[1px] bg-white px-9 py-4'>
           <Button
             onClick={() => {
-              if (editingOrganization.longName === '') {
+              if (
+                editingOrganization.longName === '' &&
+                longNameContainerRef.current
+              ) {
+                longNameContainerRef.current.scrollIntoView({
+                  behavior: 'smooth',
+                });
                 setIsLongNameValid(false);
                 return;
               }
