@@ -41,7 +41,8 @@ jobs:
           write_output_files: true
           files: |
             src/**/*
-            **/!(*.jpg|*.png|*.gif|*.svg|*.jpeg|*.pneg)
+          files_ignore: |
+            **/(*.jpg|*.png|*.gif|*.svg|*.jpeg|*.pneg)
 
       - name: Check changed files
         run: |
