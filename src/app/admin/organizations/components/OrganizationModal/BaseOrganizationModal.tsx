@@ -149,7 +149,7 @@ export default function BaseOrganizationModal({
               </h6>
               <UserDropdownList
                 users={organizationDetails.managers}
-                onUsersChange={(users: User[]) => {
+                onChangeUsers={(users: User[]) => {
                   setOrganizationDetails({
                     ...organizationDetails,
                     managers: users,
@@ -166,7 +166,7 @@ export default function BaseOrganizationModal({
                 </h6>
                 <UserDropdownList
                   users={organizationDetails.members}
-                  onUsersChange={(users: User[]) => {
+                  onChangeUsers={(users: User[]) => {
                     setOrganizationDetails({
                       ...organizationDetails,
                       members: users,

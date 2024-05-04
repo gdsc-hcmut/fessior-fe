@@ -29,7 +29,9 @@ export default function TooltipWrapper(props: TooltipWrapperProps) {
     position === Position.RIGHT && 'top-[50%] left-[120%] translate-y-[-50%]',
   );
 
-  if (isDisabled) return children;
+  if (isDisabled) {
+    return children;
+  }
 
   return (
     <div className={wrapperClass}>

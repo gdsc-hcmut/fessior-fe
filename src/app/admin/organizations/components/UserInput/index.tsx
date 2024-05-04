@@ -55,7 +55,9 @@ export default function UserInput({
   const isDropdownVisible = !(displayingUserOptions.length === 0);
 
   useEffect(() => {
-    if (!isDropdownVisible) setFocusingIndex(0);
+    if (!isDropdownVisible) {
+      setFocusingIndex(0);
+    }
   }, [isDropdownVisible]);
 
   const handleUserSelect = (id: string) => {

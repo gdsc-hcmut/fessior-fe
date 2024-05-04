@@ -13,7 +13,7 @@ type UserDropdownListProps = {
   options: User[];
   isManagerList?: boolean;
   blockDeleteIds?: string[];
-  onUsersChange: (users: User[]) => void;
+  onChangeUsers: (users: User[]) => void;
 };
 
 export default function UserDropdownList({
@@ -21,7 +21,7 @@ export default function UserDropdownList({
   options,
   isManagerList,
   blockDeleteIds,
-  onUsersChange,
+  onChangeUsers,
 }: UserDropdownListProps) {
   const [isAdding, setIsAdding] = useState(false);
 
@@ -32,7 +32,7 @@ export default function UserDropdownList({
           <UserInput
             userOptions={options}
             onSubmit={(newUsers: User[]) => {
-              onUsersChange([...users, ...newUsers]);
+              onChangeUsers([...users, ...newUsers]);
               setIsAdding(false);
             }}
             onCancel={() => {
@@ -56,7 +56,7 @@ export default function UserDropdownList({
           key={user._id}
           user={user}
           onRemove={() =>
-            onUsersChange(
+            onChangeUsers(
               users.filter((originalUser) => originalUser._id !== user._id),
             )
           }

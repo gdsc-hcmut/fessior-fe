@@ -7,8 +7,7 @@ function getAllOrganizations(): Promise<Organization[]> {
   });
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function deleteOrganization(organizationId: string): Promise<any> {
+function deleteOrganization(_organizationId: string): Promise<any> {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({ message: 'Delete successfully' });
