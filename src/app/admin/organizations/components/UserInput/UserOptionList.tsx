@@ -1,6 +1,32 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 
+import User from '@/types/user-type';
+
+type UserOptionListProps = {
+  displayingUserOptions: User[];
+  focusingIndex: number;
+  handleUserSelect: (id: string) => void;
+};
+
+export default function UserOptionList(props: UserOptionListProps) {
+  const { displayingUserOptions, focusingIndex, handleUserSelect } = props;
+
+  return (
+    <div className='absolute left-0 right-[65px] max-h-[328px] overflow-y-auto overflow-x-hidden rounded-lg border-[1px] bg-white shadow-2xl'>
+      {displayingUserOptions.map((user, index) => (
+        <UserOption
+          isFocusing={focusingIndex === index}
+          key={user._id}
+          onSelect={() => handleUserSelect(user._id)}
+          {...user}
+          pictureSrc={user.picture}
+        />
+      ))}
+    </div>
+  );
+}
+
 type UserOptionProps = {
   firstName: string;
   lastName: string;
@@ -10,7 +36,7 @@ type UserOptionProps = {
   onSelect: () => void;
 };
 
-export default function UserOption({
+function UserOption({
   firstName,
   lastName,
   pictureSrc,

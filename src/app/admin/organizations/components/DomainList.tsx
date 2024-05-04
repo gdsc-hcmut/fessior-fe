@@ -20,18 +20,20 @@ export default function DomainList({
   onDomainsChange,
 }: DomainListProps) {
   const [isAdding, setIsAdding] = useState(false);
-  const [domainInput, setDomainInput] = useState<null | string>(null);
+  const [domainInput, setDomainInput] = useState('');
 
   const handleAddDomain = () => {
-    if (domainInput && domainInput !== '') {
+    if (domainInput) {
       const newDomains = removeDuplicateStrings(domainInput.split(' ')).filter(
         (domain) => !domains.find((dom) => dom === domain),
       );
 
       onDomainsChange([...domains, ...newDomains]);
-      setDomainInput(null);
+      setDomainInput('');
       setIsAdding(false);
-    } else setIsAdding(false);
+    } else {
+      setIsAdding(false);
+    }
   };
 
   return (
@@ -40,12 +42,12 @@ export default function DomainList({
         <div className='mb-3 flex flex-col'>
           <div className='mb-2 flex'>
             <Input
-              textValue={domainInput ?? ''}
+              textValue={domainInput}
               iconAlt='close'
               iconPosition='right'
               iconSrc={closeIcon}
               onIconClick={() => {
-                setDomainInput(null);
+                setDomainInput('');
                 setIsAdding(false);
               }}
               onInput={setDomainInput}

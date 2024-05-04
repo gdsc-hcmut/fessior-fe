@@ -2,17 +2,40 @@ import Image from 'next/image';
 
 import closeIcon from '../../../src/assets/close.svg';
 
+import User from '@/types/user-type';
+
+type UserValueListProps = {
+  userValues: User[];
+  userValueIds: string[];
+  setUserValueIds: (ids: string[]) => void;
+};
+
+export default function UserValueList(props: UserValueListProps) {
+  const { userValues, userValueIds, setUserValueIds } = props;
+
+  return (
+    <div className='flex flex-wrap items-center'>
+      {userValues.map((user) => (
+        <UserValue
+          {...user}
+          key={user._id}
+          pictureSrc={user.picture}
+          onRemove={() => {
+            setUserValueIds(userValueIds.filter((id) => id !== user._id));
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 type UserValueProps = {
   pictureSrc: string;
   email: string;
   onRemove: () => void;
 };
 
-export default function UserValue({
-  pictureSrc,
-  email,
-  onRemove,
-}: UserValueProps) {
+function UserValue({ pictureSrc, email, onRemove }: UserValueProps) {
   return (
     <div className='mb-1 me-2 flex items-center rounded-2xl bg-primary-white p-1'>
       <Image

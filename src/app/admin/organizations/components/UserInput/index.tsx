@@ -12,8 +12,8 @@ import Button from '@/components/button';
 import checkIcon from '../../../src/assets/check.svg';
 import closeIcon from '../../../src/assets/close.svg';
 
-import UserOption from './UserOption';
-import UserValue from './UserValue';
+import UserOptionList from './UserOptionList';
+import UserValueList from './UserValueList';
 
 import User from '@/types/user-type';
 
@@ -30,7 +30,7 @@ export default function UserInput({
   onSubmit,
   onCancel,
 }: UserInputProps) {
-  const [searching, setSearching] = useState<string | null>(null);
+  const [searching, setSearching] = useState('');
   const [userValueIds, setUserValueIds] = useState<string[]>([]);
   const [focusingIndex, setFocusingIndex] = useState(0);
 
@@ -60,7 +60,7 @@ export default function UserInput({
 
   const handleUserSelect = (id: string) => {
     setUserValueIds([...userValueIds, id]);
-    setSearching(null);
+    setSearching('');
   };
 
   const handleEnterKey = () => {
@@ -183,55 +183,6 @@ export default function UserInput({
           <p className='italic text-primary'>{inputMessage}</p>
         </div>
       </div>
-    </div>
-  );
-}
-
-type UserValueListProps = {
-  userValues: User[];
-  userValueIds: string[];
-  setUserValueIds: (ids: string[]) => void;
-};
-
-function UserValueList(props: UserValueListProps) {
-  const { userValues, userValueIds, setUserValueIds } = props;
-
-  return (
-    <div className='flex flex-wrap items-center'>
-      {userValues.map((user) => (
-        <UserValue
-          {...user}
-          key={user._id}
-          pictureSrc={user.picture}
-          onRemove={() => {
-            setUserValueIds(userValueIds.filter((id) => id !== user._id));
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-type UserOptionListProps = {
-  displayingUserOptions: User[];
-  focusingIndex: number;
-  handleUserSelect: (id: string) => void;
-};
-
-function UserOptionList(props: UserOptionListProps) {
-  const { displayingUserOptions, focusingIndex, handleUserSelect } = props;
-
-  return (
-    <div className='absolute left-0 right-[65px] max-h-[328px] overflow-y-auto overflow-x-hidden rounded-lg border-[1px] bg-white shadow-2xl'>
-      {displayingUserOptions.map((user, index) => (
-        <UserOption
-          isFocusing={focusingIndex === index}
-          key={user._id}
-          onSelect={() => handleUserSelect(user._id)}
-          {...user}
-          pictureSrc={user.picture}
-        />
-      ))}
     </div>
   );
 }
