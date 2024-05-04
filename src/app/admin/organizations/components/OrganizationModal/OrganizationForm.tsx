@@ -12,8 +12,8 @@ import UserDropdownList from './UserDropdownList';
 import User from '@/types/user-type';
 
 type OrganizationFormProps = {
-  editingOrganization: BaseOrganization;
-  setEditingOrganization: (organization: BaseOrganization) => void;
+  organizationDetails: BaseOrganization;
+  setOrganizationDetails: (organization: BaseOrganization) => void;
   isLongNameValid: boolean;
 };
 
@@ -22,20 +22,20 @@ const OrganizationForm = forwardRef(
     props: OrganizationFormProps,
     longNameContainerRef: ForwardedRef<HTMLDivElement>,
   ) => {
-    const { editingOrganization, setEditingOrganization, isLongNameValid } =
+    const { organizationDetails, setOrganizationDetails, isLongNameValid } =
       props;
     const [members, setMembers] = useState<User[] | null>(null);
 
-    const nonManagingUsers = editingOrganization.members.filter(
+    const nonManagingUsers = organizationDetails.members.filter(
       (member) =>
-        !editingOrganization.managers.find(
+        !organizationDetails.managers.find(
           (manager) => manager._id === member._id,
         ),
     );
 
     const nonParticipatingUsers = members?.filter(
       (member) =>
-        !editingOrganization.members.find(
+        !organizationDetails.members.find(
           (organizationUser) => organizationUser._id === member._id,
         ),
     );
@@ -58,9 +58,9 @@ const OrganizationForm = forwardRef(
             Long Name <i className='text-base'>(*)</i>
           </h6>
           <Input
-            textValue={editingOrganization.longName}
+            textValue={organizationDetails.longName}
             onInput={(longName: string) =>
-              setEditingOrganization({ ...editingOrganization, longName })
+              setOrganizationDetails({ ...organizationDetails, longName })
             }
           />
           {!isLongNameValid && (
@@ -75,9 +75,9 @@ const OrganizationForm = forwardRef(
             Short Name
           </h6>
           <Input
-            textValue={editingOrganization.shortName}
+            textValue={organizationDetails.shortName}
             onInput={(shortName: string) =>
-              setEditingOrganization({ ...editingOrganization, shortName })
+              setOrganizationDetails({ ...organizationDetails, shortName })
             }
           />
         </div>
@@ -87,9 +87,9 @@ const OrganizationForm = forwardRef(
           </h6>
           <DomainList
             onDomainsChange={(domains: string[]) =>
-              setEditingOrganization({ ...editingOrganization, domains })
+              setOrganizationDetails({ ...organizationDetails, domains })
             }
-            domains={editingOrganization.domains}
+            domains={organizationDetails.domains}
           />
         </div>
         <div className='flex flex-col'>
@@ -98,10 +98,10 @@ const OrganizationForm = forwardRef(
               Managers
             </h6>
             <UserDropdownList
-              users={editingOrganization.managers}
+              users={organizationDetails.managers}
               onUsersChange={(users: User[]) => {
-                setEditingOrganization({
-                  ...editingOrganization,
+                setOrganizationDetails({
+                  ...organizationDetails,
                   managers: users,
                 });
               }}
@@ -115,15 +115,15 @@ const OrganizationForm = forwardRef(
                 Members
               </h6>
               <UserDropdownList
-                users={editingOrganization.members}
+                users={organizationDetails.members}
                 onUsersChange={(users: User[]) => {
-                  setEditingOrganization({
-                    ...editingOrganization,
+                  setOrganizationDetails({
+                    ...organizationDetails,
                     members: users,
                   });
                 }}
                 options={nonParticipatingUsers}
-                blockDeleteIds={editingOrganization.managers.map(
+                blockDeleteIds={organizationDetails.managers.map(
                   (manager) => manager._id,
                 )}
               />

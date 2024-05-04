@@ -15,8 +15,10 @@ type DomainListProps = {
   onDomainsChange: (domains: string[]) => void;
 };
 
-export default function DomainList(props: DomainListProps) {
-  const { domains, onDomainsChange } = props;
+export default function DomainList({
+  domains,
+  onDomainsChange,
+}: DomainListProps) {
   const [isAdding, setIsAdding] = useState(false);
   const [domainInput, setDomainInput] = useState<null | string>(null);
 

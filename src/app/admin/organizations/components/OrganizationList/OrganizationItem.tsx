@@ -14,9 +14,11 @@ type OrganizationItemProps = {
 
 const MAX_MANAGERS_DISPLAY = 3;
 
-export default function OrganizationItem(props: OrganizationItemProps) {
-  const { organization, index, onEdit } = props;
-
+export default function OrganizationItem({
+  organization,
+  index,
+  onEdit,
+}: OrganizationItemProps) {
   const renderManagers = () => {
     const visibleManagers = organization.managers.slice(
       0,

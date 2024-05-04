@@ -8,9 +8,11 @@ type UserValueProps = {
   onRemove: () => void;
 };
 
-export default function UserValue(props: UserValueProps) {
-  const { pictureSrc, email, onRemove } = props;
-
+export default function UserValue({
+  pictureSrc,
+  email,
+  onRemove,
+}: UserValueProps) {
   return (
     <div className='mb-1 me-2 flex items-center rounded-2xl bg-primary-white p-1'>
       <Image

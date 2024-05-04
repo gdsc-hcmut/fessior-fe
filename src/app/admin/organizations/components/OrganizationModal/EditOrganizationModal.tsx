@@ -19,9 +19,13 @@ type OrganizationModalProps = {
   onDelete: () => void;
 };
 
-export default function EditOrganizationModal(props: OrganizationModalProps) {
-  const { organization, onUpdate, onCancel, onDelete } = props;
-  const [editingOrganization, setEditingOrganization] =
+export default function EditOrganizationModal({
+  organization,
+  onUpdate,
+  onCancel,
+  onDelete,
+}: OrganizationModalProps) {
+  const [organizationDetails, setOrganizationDetails] =
     useState<BaseOrganization>(organization);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isLongNameValid, setIsLongNameValid] = useState(true);
@@ -48,8 +52,8 @@ export default function EditOrganizationModal(props: OrganizationModalProps) {
         <OrganizationForm
           ref={longNameContainerRef}
           isLongNameValid={isLongNameValid}
-          editingOrganization={editingOrganization}
-          setEditingOrganization={setEditingOrganization}
+          organizationDetails={organizationDetails}
+          setOrganizationDetails={setOrganizationDetails}
         />
         <div className='relative flex w-full justify-between border-t-[1px] bg-white px-9 py-4'>
           <button
@@ -61,7 +65,7 @@ export default function EditOrganizationModal(props: OrganizationModalProps) {
           <Button
             onClick={() => {
               if (
-                editingOrganization.longName === '' &&
+                organizationDetails.longName === '' &&
                 longNameContainerRef.current
               ) {
                 longNameContainerRef.current.scrollIntoView({
@@ -71,7 +75,7 @@ export default function EditOrganizationModal(props: OrganizationModalProps) {
                 return;
               }
 
-              onUpdate({ ...editingOrganization, _id: organization._id });
+              onUpdate({ ...organizationDetails, _id: organization._id });
             }}
           >
             Save

@@ -7,9 +7,10 @@ type OrganizationListProps = {
   setEditingOrganizationIndex: (index: number) => void;
 };
 
-export default function OrganizationList(props: OrganizationListProps) {
-  const { organizations, setEditingOrganizationIndex } = props;
-
+export default function OrganizationList({
+  organizations,
+  setEditingOrganizationIndex,
+}: OrganizationListProps) {
   return (
     <div>
       <div className='mb-4 flex px-6'>

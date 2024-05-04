@@ -24,9 +24,12 @@ type UserInputProps = {
   onCancel: () => void;
 };
 
-export default function UserInput(props: UserInputProps) {
-  const { userOptions, isManagerInput, onSubmit, onCancel } = props;
-
+export default function UserInput({
+  userOptions,
+  isManagerInput,
+  onSubmit,
+  onCancel,
+}: UserInputProps) {
   const [searching, setSearching] = useState<string | null>(null);
   const [userValueIds, setUserValueIds] = useState<string[]>([]);
   const [focusingIndex, setFocusingIndex] = useState(0);

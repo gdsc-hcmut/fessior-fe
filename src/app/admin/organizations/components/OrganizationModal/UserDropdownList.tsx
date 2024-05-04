@@ -16,9 +16,13 @@ type UserDropdownListProps = {
   onUsersChange: (users: User[]) => void;
 };
 
-export default function UserDropdownList(props: UserDropdownListProps) {
-  const { users, options, isManagerList, blockDeleteIds, onUsersChange } =
-    props;
+export default function UserDropdownList({
+  users,
+  options,
+  isManagerList,
+  blockDeleteIds,
+  onUsersChange,
+}: UserDropdownListProps) {
   const [isAdding, setIsAdding] = useState(false);
 
   return (

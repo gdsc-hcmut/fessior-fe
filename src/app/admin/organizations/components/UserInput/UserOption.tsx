@@ -10,10 +10,14 @@ type UserOptionProps = {
   onSelect: () => void;
 };
 
-export default function UserOption(props: UserOptionProps) {
-  const { firstName, lastName, pictureSrc, email, isFocusing, onSelect } =
-    props;
-
+export default function UserOption({
+  firstName,
+  lastName,
+  pictureSrc,
+  email,
+  isFocusing,
+  onSelect,
+}: UserOptionProps) {
   const optionClass = clsx(
     'flex w-full items-center border-b-[1px] p-2 hover:cursor-pointer hover:bg-primary-white',
     isFocusing && 'cursor-pointer bg-primary-white',

@@ -9,9 +9,10 @@ type DeleteButtonProps = {
   isDisabled?: boolean;
 };
 
-export default function DeleteButton(props: DeleteButtonProps) {
-  const { onClick, isDisabled } = props;
-
+export default function DeleteButton({
+  onClick,
+  isDisabled,
+}: DeleteButtonProps) {
   return (
     <TooltipWrapper
       tooltipText={'This member is a manager, remove them as manager first.'}
