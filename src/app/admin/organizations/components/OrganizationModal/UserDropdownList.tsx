@@ -3,8 +3,8 @@ import { useState } from 'react';
 
 import Button from '@/components/button';
 
-import DeleteButton from './DeleteButton';
-import UserInput from './UserInput';
+import DeleteButton from '../DeleteButton';
+import UserInput from '../UserInput';
 
 import User from '@/types/user-type';
 

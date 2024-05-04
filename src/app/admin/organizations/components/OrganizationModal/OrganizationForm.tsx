@@ -3,10 +3,10 @@ import { toast } from 'react-toastify';
 
 import Input from '@/components/input';
 
-import userService from '../src/services/user';
-import { BaseOrganization } from '../src/types/organization';
+import userService from '../../../src/services/user';
+import { BaseOrganization } from '../../../src/types/organization';
+import DomainList from '../DomainList';
 
-import DomainList from './DomainList';
 import UserDropdownList from './UserDropdownList';
 
 import User from '@/types/user-type';

@@ -3,7 +3,7 @@ import { MouseEvent, useRef, useState } from 'react';
 import Button from '@/components/button';
 import CloseButton from '@/components/close-button';
 
-import { BaseOrganization } from '../src/types/organization';
+import { BaseOrganization } from '../../../src/types/organization';
 
 import OrganizationForm from './OrganizationForm';
 

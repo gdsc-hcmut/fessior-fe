@@ -11,9 +11,9 @@ import searchIcon from '../src/assets/search.svg';
 import organizationService from '../src/services/organization';
 import Organization, { BaseOrganization } from '../src/types/organization';
 
-import CreateOrganizationModal from './CreateOrganizationModal';
-import EditOrganizationModal from './EditOrganizationModal';
-import OrganizationList from './OrganizationList';
+import OrganizationList from './components/OrganizationList';
+import CreateOrganizationModal from './components/OrganizationModal/CreateOrganizationModal';
+import EditOrganizationModal from './components/OrganizationModal/EditOrganizationModal';
 
 export default function Organizations() {
   const [organizations, setOrganizations] = useState<Organization[] | null>(

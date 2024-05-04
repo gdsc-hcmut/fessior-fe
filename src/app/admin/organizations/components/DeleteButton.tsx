@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-import deleteIcon from '../src/assets/delete.svg';
-import TooltipWrapper from '../src/components/TooltipWrapper';
-import Position from '../src/types/position';
+import deleteIcon from '../../src/assets/delete.svg';
+import TooltipWrapper from '../../src/components/TooltipWrapper';
+import Position from '../../src/types/position';
 
 type DeleteButtonProps = {
   onClick: () => void;

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import closeIcon from '../src/assets/close.svg';
+import closeIcon from '../../../src/assets/close.svg';
 
 type UserValueProps = {
   pictureSrc: string;

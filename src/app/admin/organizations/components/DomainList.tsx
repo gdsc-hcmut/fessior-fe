@@ -4,9 +4,9 @@ import { useState } from 'react';
 import Button from '@/components/button';
 import Input from '@/components/input';
 
-import checkIcon from '../src/assets/check.svg';
-import closeIcon from '../src/assets/close.svg';
-import { removeDuplicateStrings } from '../src/utils/common';
+import checkIcon from '../../src/assets/check.svg';
+import closeIcon from '../../src/assets/close.svg';
+import { removeDuplicateStrings } from '../../src/utils/common';
 
 import DeleteButton from './DeleteButton';
 

@@ -1,4 +1,4 @@
-import Organization from '../src/types/organization';
+import Organization from '../../../src/types/organization';
 
 import OrganizationItem from './OrganizationItem';
 

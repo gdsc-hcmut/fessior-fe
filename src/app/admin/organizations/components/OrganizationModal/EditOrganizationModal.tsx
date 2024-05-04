@@ -4,7 +4,9 @@ import Button from '@/components/button';
 import CloseButton from '@/components/close-button';
 import ModalAlert from '@/components/modal-alert';
 
-import Organization, { BaseOrganization } from '../src/types/organization';
+import Organization, {
+  BaseOrganization,
+} from '../../../src/types/organization';
 
 import OrganizationForm from './OrganizationForm';
 

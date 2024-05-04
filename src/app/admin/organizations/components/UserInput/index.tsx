@@ -9,8 +9,8 @@ import {
 
 import Button from '@/components/button';
 
-import checkIcon from '../src/assets/check.svg';
-import closeIcon from '../src/assets/close.svg';
+import checkIcon from '../../../src/assets/check.svg';
+import closeIcon from '../../../src/assets/close.svg';
 
 import UserOption from './UserOption';
 import UserValue from './UserValue';

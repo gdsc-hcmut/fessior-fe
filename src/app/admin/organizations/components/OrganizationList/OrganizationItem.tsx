@@ -1,10 +1,10 @@
 import Image from 'next/image';
 
-import editIcon from '../src/assets/edit.svg';
-import groupIcon from '../src/assets/group.svg';
-import TooltipWrapper from '../src/components/TooltipWrapper';
-import Organization from '../src/types/organization';
-import Position from '../src/types/position';
+import editIcon from '../../../src/assets/edit.svg';
+import groupIcon from '../../../src/assets/group.svg';
+import TooltipWrapper from '../../../src/components/TooltipWrapper';
+import Organization from '../../../src/types/organization';
+import Position from '../../../src/types/position';
 
 type OrganizationItemProps = {
   organization: Organization;
