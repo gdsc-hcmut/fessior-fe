@@ -7,6 +7,8 @@ import Footer from '@/components/footer';
 import Header from '@/components/header';
 import AuthContext from '@/contexts/authContext';
 
+import LoadingPage from '../loading';
+
 type AdminLayoutProps = {
   children: React.ReactNode;
 };
@@ -29,7 +31,7 @@ export default function AdminLayout(props: AdminLayoutProps) {
   }, [isAuthStatusReady, isLoggedIn, router]);
 
   if (!isAllowed) {
-    return;
+    return <LoadingPage />;
   }
 
   return (
