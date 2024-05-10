@@ -49,7 +49,7 @@ export const tools: Tool[] = [
   {
     name: 'Code with Me',
     description:
-      'Code together in real-time on our collaborative code-sharing website.',
+      'Code together in real time on our collaborative code-sharing website.',
     iconFilenames: ['codewithme.svg', 'codewithme_1.svg'],
     secondaryIconClass: 'w-[28%] top-[4px] right-[-6px]',
     decorImgSrc: '/images/home/side_shortener.png',
