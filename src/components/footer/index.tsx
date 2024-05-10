@@ -23,7 +23,7 @@ export default function Footer() {
           <p className='mb-[20px]'>
             Fessior Community is a team of the Google Developer Student Club -
             Ho Chi Minh City University of Technology. Fessior&#39;s mission is
-            to develop technology projects which bring practical values to the
+            to develop technology projects that bring practical values to the
             society and build a community of students who are passionate about
             technology.
           </p>
