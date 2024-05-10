@@ -25,11 +25,10 @@
   },
   "include": [
     "next-env.d.ts",
+    "global.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "jest.config.mjs",
-    "jest.config.mjs"
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

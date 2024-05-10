@@ -1,5 +1,7 @@
 import nextJest from 'next/jest.js';
 
+import type { Config } from 'jest';
+
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
   dir: './',
@@ -8,8 +10,7 @@ const createJestConfig = nextJest({
 const ignorePatterns = ['.d.ts'];
 
 // Add any custom config to be passed to Jest
-/** @type {import('jest').Config} */
-const config = {
+const config: Config = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -32,13 +33,21 @@ const config = {
   coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
-  coveragePathIgnorePatterns: [...ignorePatterns, '/node_modules/'],
+  coveragePathIgnorePatterns: [
+    ...ignorePatterns,
+    '/node_modules/',
+    '<rootDir>/src/assets/',
+    '<rootDir>/src/config/',
+    '<rootDir>/src/data/',
+    '<rootDir>/src/testUtils/',
+    '<rootDir>/src/types/',
+  ],
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'v8',
 
   // A list of reporter names that Jest uses when writing coverage reports
-  coverageReporters: ['json', 'lcov', ['text', { skipEmpty: true }]],
+  coverageReporters: ['json', 'lcov', 'text'],
 
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
@@ -99,7 +108,7 @@ const config = {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  // preset: undefined,
+  preset: 'ts-jest',
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -132,7 +141,7 @@ const config = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  // setupFilesAfterEnv: [],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -170,14 +179,12 @@ const config = {
   // testRunner: "jest-circus/runner",
 
   // A map from regular expressions to paths to transformers
-  // transform: undefined,
+  transform: {
+    '^.+\\.(svg|png|jpg|jpeg)$': '<rootDir>/src/testUtils/svgTransform.js',
+  },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  transformIgnorePatterns: [
-    '/node_modules/',
-    '^.+\\.module\\.(css|sass|scss)$',
-    '\\.pnp\\.[^\\/]+$',
-  ],
+  transformIgnorePatterns: ['/node_modules/', '^.+\\.module\\.(css|sass|scss)$', '\\.pnp\\.[^\\/]+$'],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,
