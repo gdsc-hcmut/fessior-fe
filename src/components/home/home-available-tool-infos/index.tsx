@@ -141,20 +141,20 @@ export function CodeWithMeDescription() {
     <div>
       <p className='mb-[8px] leading-[28px]'>
         Break down the barriers of physical distance and unlock the power of
-        real-time collaboration with our innovative <b>Code with me</b>{' '}
+        real-time collaboration with our innovative <b>Code with Me</b>{' '}
         platform. Invite your friends, classmates, or teammates to share your
         code editor in a secure and seamless online environment.
       </p>
       <p className='mb-[8px] leading-[28px]'>
-        Ideal for <b>pair programming, group projects</b>, or even just getting
+        Ideal for <b>pair programming, group projects</b>, or just getting
         valuable insights on your code from different perspectives,{' '}
-        <b>Code with me</b> fosters effective communication, accelerates
+        <b>Code with Me</b> fosters effective communication, accelerates
         problem-solving, and injects a dose of fun into the development process.
       </p>
       <p className='font-[700] leading-[28px]'>Core features include:</p>
       <ul className='list-inside list-disc'>
         <li>Simultaneous editing the codebase</li>
-        <li>Integrated live chat functionality</li>
+        <li>Integrated live chat</li>
         <li>Whiteboard and annotation tools</li>
       </ul>
     </div>
@@ -169,13 +169,13 @@ export function QNADescription() {
     <div>
       <p className='mb-[8px] leading-[28px]'>
         Stuck on a coding problem or have a burning question about web
-        development? Don&apos;t fret! The <b>GDSC Q&A forum</b> is your one-stop
-        shop for answers and support.
+        development? Don&apos;t worry! The <b>GDSC Q&A forum</b> is your
+        one-stop shop for answers and support.
       </p>
       <p className='mb-[8px] leading-[28px]'>
         <b>Ask anything, big or small:</b> Whether you&apos;re facing a tricky
-        coding conundrum or curious about a specific GDSC program, post your
-        question and tap into the collective wisdom of the forum.
+        coding problem or curious about a specific GDSC program, ask your
+        question and get answers from a community of experts on our forum.
       </p>
       <p className='font-[700] leading-[28px]'>Core features include:</p>
       <ul className='list-inside list-disc'>
