@@ -4,10 +4,12 @@ import OrganizationItem from './OrganizationItem';
 
 type OrganizationListProps = {
   organizations: Organization[];
+  setEditingOrganizationIndex: (index: number) => void;
 };
 
 export default function OrganizationList({
   organizations,
+  setEditingOrganizationIndex,
 }: OrganizationListProps) {
   return (
     <div>
@@ -30,7 +32,9 @@ export default function OrganizationList({
             key={organization._id}
             organization={organization}
             index={index + 1}
-            onEdit={() => {}}
+            onEdit={() => {
+              setEditingOrganizationIndex(index);
+            }}
           />
         ))}
       </div>

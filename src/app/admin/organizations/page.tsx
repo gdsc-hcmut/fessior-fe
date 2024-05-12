@@ -4,19 +4,26 @@ import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import Button from '@/components/button';
+import CustomToastContainer from '@/components/custom-toast-container';
 import Input from '@/components/input';
 
 import searchIcon from '../src/assets/search.svg';
 import organizationService from '../src/services/organization';
-import Organization from '../src/types/organization';
+import Organization, { BaseOrganization } from '../src/types/organization';
 
 import OrganizationList from './components/OrganizationList';
+import CreateOrganizationModal from './components/OrganizationModal/CreateOrganizationModal';
+import EditOrganizationModal from './components/OrganizationModal/EditOrganizationModal';
 
 export default function Organizations() {
   const [organizations, setOrganizations] = useState<Organization[] | null>(
     null,
   );
+  const [editingOrganizationIndex, setEditingOrganizationIndex] = useState<
+    number | null
+  >(null);
   const [search, setSearch] = useState('');
+  const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -30,7 +37,45 @@ export default function Organizations() {
     })();
   }, []);
 
-  const filteredOrganizations = useMemo(
+  const handleOrganizationDelete = async (id: string) => {
+    try {
+      await organizationService.deleteOrganization(id);
+      setOrganizations(organizations?.filter((org) => org._id !== id) ?? null);
+      setEditingOrganizationIndex(null);
+      toast.success('Organization deleted successfully');
+    } catch (e: any) {
+      toast.error(e.message);
+    }
+  };
+
+  const handleOrganizationUpdate = async (organization: Organization) => {
+    try {
+      await organizationService.updateOrganization(organization);
+      setOrganizations(
+        organizations?.map((org) =>
+          org._id === organization._id ? organization : org,
+        ) ?? null,
+      );
+      setEditingOrganizationIndex(null);
+      toast.success('Organization updated successfully');
+    } catch (e: any) {
+      toast.error(e.message);
+    }
+  };
+
+  const handleOrganizationCreate = async (organization: BaseOrganization) => {
+    try {
+      const newOrganization =
+        await organizationService.createOrganization(organization);
+      setOrganizations(organizations?.concat(newOrganization) ?? null);
+      setIsCreating(false);
+      toast.success('Organization created successfully');
+    } catch (e: any) {
+      toast.error(e.message);
+    }
+  };
+
+  const displayingOrganizations = useMemo(
     () =>
       organizations?.filter((organization) =>
         organization.longName.toLowerCase().includes(search.toLowerCase()),
@@ -50,7 +95,12 @@ export default function Organizations() {
       </div>
       <div>
         <div className='md:mb-6 md:flex md:flex-row-reverse md:justify-between'>
-          <Button className='mb-4 h-12 self-start' onClick={() => {}}>
+          <Button
+            className='mb-4 h-12 self-start'
+            onClick={() => {
+              setIsCreating(true);
+            }}
+          >
             + Create Organization
           </Button>
           <Input
@@ -68,9 +118,35 @@ export default function Organizations() {
           />
         </div>
       </div>
-      {filteredOrganizations && (
-        <OrganizationList organizations={filteredOrganizations} />
+      {displayingOrganizations && (
+        <OrganizationList
+          organizations={displayingOrganizations}
+          setEditingOrganizationIndex={setEditingOrganizationIndex}
+        />
       )}
+      {editingOrganizationIndex !== null && organizations && (
+        <EditOrganizationModal
+          organization={organizations[editingOrganizationIndex]}
+          onCancel={() => {
+            setEditingOrganizationIndex(null);
+          }}
+          onUpdate={handleOrganizationUpdate}
+          onDelete={() =>
+            handleOrganizationDelete(
+              organizations[editingOrganizationIndex]._id,
+            )
+          }
+        />
+      )}
+      {isCreating && (
+        <CreateOrganizationModal
+          onCancel={() => {
+            setIsCreating(false);
+          }}
+          onCreate={handleOrganizationCreate}
+        />
+      )}
+      <CustomToastContainer />
     </div>
   );
 }
