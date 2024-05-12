@@ -30,7 +30,7 @@ export default function Organizations() {
     })();
   }, []);
 
-  const displayingOrganizations = useMemo(
+  const filteredOrganizations = useMemo(
     () =>
       organizations?.filter((organization) =>
         organization.longName.toLowerCase().includes(search.toLowerCase()),
@@ -68,8 +68,8 @@ export default function Organizations() {
           />
         </div>
       </div>
-      {displayingOrganizations && (
-        <OrganizationList organizations={displayingOrganizations} />
+      {filteredOrganizations && (
+        <OrganizationList organizations={filteredOrganizations} />
       )}
     </div>
   );

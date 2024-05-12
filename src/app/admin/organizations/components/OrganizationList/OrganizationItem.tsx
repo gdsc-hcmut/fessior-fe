@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useMemo } from 'react';
 
 import editIcon from '../../../src/assets/edit.svg';
 import groupIcon from '../../../src/assets/group.svg';
@@ -61,8 +62,14 @@ type ManagerListProps = {
 };
 
 function ManagerList({ managers }: ManagerListProps) {
-  const visibleManagers = managers.slice(0, MAX_MANAGERS_DISPLAY);
-  const hiddenManagers = managers.slice(MAX_MANAGERS_DISPLAY);
+  const visibleManagers = useMemo(
+    () => managers.slice(0, MAX_MANAGERS_DISPLAY),
+    [managers],
+  );
+  const hiddenManagers = useMemo(
+    () => managers.slice(MAX_MANAGERS_DISPLAY),
+    [managers],
+  );
 
   return (
     <div className='flex flex-[3] items-center'>
