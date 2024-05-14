@@ -1,0 +1,71 @@
+import clsx from 'clsx';
+import { useMemo } from 'react';
+
+import InputIcon, { TextInputIconProps } from './input-icon';
+
+type TextInputProps = {
+  value: string;
+  onInput: (value: string) => void;
+  onEnterKey?: () => void;
+  placeholder?: string;
+  fontSize?: number;
+  isDisabled?: boolean;
+  type?: string;
+  className?: string;
+  leftIconProps?: Omit<TextInputIconProps, 'position'>;
+  rightIconProps?: Omit<TextInputIconProps, 'position'>;
+  tabIndex?: number;
+  isAutoFocus?: boolean;
+};
+
+export default function TextInput({
+  value,
+  onInput,
+  onEnterKey,
+  placeholder,
+  fontSize = 16,
+  isDisabled,
+  type,
+  className,
+  leftIconProps,
+  rightIconProps,
+  tabIndex,
+  isAutoFocus,
+}: TextInputProps) {
+  const containerClass = useMemo(
+    () =>
+      clsx(
+        'flex w-[100%] relative items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border-[1px] focus-within:border-primary',
+        isDisabled && 'bg-primary/[.2] text-primary',
+        className,
+      ),
+    [isDisabled, className],
+  );
+
+  const inputClass = useMemo(
+    () => clsx('mx-[8px] flex-grow px-[4px] outline-none placeholder:text-royal-300', isDisabled && 'bg-transparent'),
+    [isDisabled],
+  );
+
+  return (
+    <div className={containerClass} style={{ height: `${fontSize * 1.5 + 26}px` }}>
+      {leftIconProps && <InputIcon {...leftIconProps} position='left' />}
+      <input
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && onEnterKey) onEnterKey();
+        }}
+        value={value}
+        onInput={(e) => onInput(e.currentTarget.value)}
+        className={inputClass}
+        style={{ fontSize: `${fontSize}px` }}
+        placeholder={placeholder}
+        type={type}
+        disabled={isDisabled}
+        size={1}
+        tabIndex={tabIndex}
+        autoFocus={isAutoFocus}
+      />
+      {rightIconProps && <InputIcon {...rightIconProps} position='right' />}
+    </div>
+  );
+}
