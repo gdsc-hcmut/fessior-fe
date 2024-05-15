@@ -1,44 +1,45 @@
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useMemo } from 'react';
 
 import { tools } from '@/data/tools';
+import { getIcon } from '@/utils/common';
+
 import Icon from '@/types/icon-enum';
 import { Tool } from '@/types/tool-type';
-import { getIcon } from '@/utils/common';
 
 type HomeToolItemProps = {
   tool: Tool;
   className?: string;
 };
 
-export function HomeToolItem(props: HomeToolItemProps) {
-  const { tool, className } = props;
-  const toolItemClass = clsx(
-    'relative mb-[12px] flex w-[48%] flex-col justify-between overflow-hidden rounded-[20px] bg-white p-[16px] pt-[24px] shadow-[0px_20px_20px_0px_rgba(11,40,120,0.20)] md:mb-[20px] md:flex-row md:items-center md:justify-start md:py-[24px] lg:flex-row lg:rounded-[40px] lg:p-[18px] xl:max-w-[400px]',
-    tool.active
-      ? 'cursor-pointer transition-all hover:scale-105'
-      : 'cursor-default',
-    className,
+export function HomeToolItem({ tool, className }: HomeToolItemProps) {
+  const toolItemClass = useMemo(
+    () =>
+      clsx(
+        'relative mb-[12px] flex w-[48%] flex-col justify-between overflow-hidden rounded-[20px] bg-white p-[16px] pt-[24px] shadow-[0px_20px_20px_0px_rgba(11,40,120,0.20)] md:mb-[20px] md:flex-row md:items-center md:justify-start md:py-[24px] lg:flex-row lg:rounded-[40px] lg:p-[18px] xl:max-w-[400px]',
+        tool.active ? 'cursor-pointer transition-all hover:scale-105' : 'cursor-default',
+        className,
+      ),
+    [tool.active, className],
   );
-  const primaryIconClass = clsx(
-    tool.primaryIconClass
-      ? tool.primaryIconClass
-      : 'relative z-[1] h-auto w-[100%]',
+
+  const primaryIconClass = useMemo(
+    () => clsx(tool.primaryIconClass ? tool.primaryIconClass : 'relative z-[1] h-auto w-[100%]'),
+    [tool.primaryIconClass],
   );
-  const toolNameClass = clsx(
-    'text-[18px] font-[700] md:text-[24px]',
-    tool.active ? 'text-primary' : 'text-royal-300',
+
+  const toolNameClass = useMemo(
+    () => clsx('text-[18px] font-[700] md:text-[24px]', tool.active ? 'text-primary' : 'text-royal-300'),
+    [tool.active],
   );
+
   return (
     <Link href={tool.url} className={toolItemClass}>
       <div className='relative me-[20px] flex aspect-square h-[36px] w-[36px] items-center lg:h-[72px] lg:w-auto'>
         <Image
-          src={getIcon(
-            '/icons/home',
-            tool.iconFilenames[0],
-            tool.active ? Icon.ACTIVE : Icon.INACTIVE,
-          )}
+          src={getIcon('/icons/home', tool.iconFilenames[0], tool.active ? Icon.ACTIVE : Icon.INACTIVE)}
           alt={tool.imgAlt}
           width={0}
           height={0}
@@ -54,9 +55,7 @@ export function HomeToolItem(props: HomeToolItemProps) {
       </div>
       <div className='xl:flex-grow'>
         <h6 className={toolNameClass}>{tool.name}</h6>
-        <p className='hidden text-[14px] leading-[24px] lg:block'>
-          {tool.description}
-        </p>
+        <p className='hidden text-[14px] leading-[24px] lg:block'>{tool.description}</p>
       </div>
       {!tool.active && (
         <div className='absolute bottom-0 left-0 right-0 top-0 z-[10] flex items-center justify-center bg-[rgba(157,169,201,0.90)] opacity-0 transition-all hover:opacity-100'>
