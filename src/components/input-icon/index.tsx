@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import Image from 'next/image';
 
-export type TextInputIconProps = {
+export type InputIconProps = {
   src: string;
   alt: string;
   hasDividerLine?: boolean;
@@ -9,7 +9,7 @@ export type TextInputIconProps = {
   onClick?: () => void;
 };
 
-export default function TextInputIcon(props: TextInputIconProps) {
+export default function InputIcon(props: InputIconProps) {
   const { src, alt, hasDividerLine, onClick, position } = props;
 
   const iconImgClass = clsx(

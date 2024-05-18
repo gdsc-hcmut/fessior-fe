@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useMemo } from 'react';
 
-import InputIcon, { TextInputIconProps } from './input-icon';
+import InputIcon, { InputIconProps } from '../input-icon';
 
 type TextInputProps = {
   value: string;
@@ -12,8 +12,8 @@ type TextInputProps = {
   isDisabled?: boolean;
   type?: string;
   className?: string;
-  leftIconProps?: Omit<TextInputIconProps, 'position'>;
-  rightIconProps?: Omit<TextInputIconProps, 'position'>;
+  leftIconProps?: Omit<InputIconProps, 'position'>;
+  rightIconProps?: Omit<InputIconProps, 'position'>;
   tabIndex?: number;
   isAutoFocus?: boolean;
 };
