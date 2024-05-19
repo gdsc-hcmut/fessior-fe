@@ -8,7 +8,6 @@ type TextInputProps = {
   onInput: (value: string) => void;
   onEnterKey?: () => void;
   placeholder?: string;
-  fontSize?: number;
   isDisabled?: boolean;
   type?: string;
   className?: string;
@@ -23,7 +22,6 @@ export default function TextInput({
   onInput,
   onEnterKey,
   placeholder,
-  fontSize = 16,
   isDisabled,
   type,
   className,
@@ -35,7 +33,7 @@ export default function TextInput({
   const containerClass = useMemo(
     () =>
       clsx(
-        'flex w-[100%] relative items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border-[1px] focus-within:border-primary',
+        'flex w-[100%] py-2 relative items-center rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border-[1px] focus-within:border-primary',
         isDisabled && 'bg-primary/[.2] text-primary',
         className,
       ),
@@ -48,7 +46,7 @@ export default function TextInput({
   );
 
   return (
-    <div className={containerClass} style={{ height: `${fontSize * 1.5 + 26}px` }}>
+    <div className={containerClass}>
       {leftIconProps && <InputIcon {...leftIconProps} position='left' />}
       <input
         onKeyDown={(e) => {
@@ -57,7 +55,6 @@ export default function TextInput({
         value={value}
         onInput={(e) => onInput(e.currentTarget.value)}
         className={inputClass}
-        style={{ fontSize: `${fontSize}px` }}
         placeholder={placeholder}
         type={type}
         disabled={isDisabled}
