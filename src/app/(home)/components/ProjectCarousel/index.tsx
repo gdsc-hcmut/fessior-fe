@@ -36,7 +36,7 @@ export default function ProjectCarousel({ className }: ProjectCarouselProps) {
         760: { slidesPerView: 2, slidesPerGroup: 2 },
         960: { slidesPerView: 4, slidesPerGroup: 4 },
       },
-      className: 'flex w-[100%]',
+      className: 'flex w-full',
       onSwiper: (swiperRef: SwiperClass) => {
         setSwiper(swiperRef);
       },
@@ -57,15 +57,15 @@ export default function ProjectCarousel({ className }: ProjectCarouselProps) {
     >
       <Swiper {...swiperProps}>
         {projects.map((project) => (
-          <SwiperSlide className='pb-[40px]' key={project.name}>
-            <ProjectCarouselItem {...project} className='mx-[20px] lg:mx-[10px]' />
+          <SwiperSlide className='pb-10' key={project.name}>
+            <ProjectCarouselItem {...project} className='mx-5 lg:mx-2.5' />
           </SwiperSlide>
         ))}
       </Swiper>
       <HomeAvailableToolIndicator
         total={projects.length / projectNumberPerPage}
         activeIndex={activeIndex}
-        className='mb-[80px] self-center'
+        className='mb-20 self-center'
         onClick={(page: number) => {
           swiper?.slideTo(page * projectNumberPerPage);
         }}

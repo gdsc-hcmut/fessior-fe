@@ -2,27 +2,21 @@ import HomeTools from './HomeTools';
 
 export default function HeroSection() {
   return (
-    <div className="xl:min-h-none mb-[80px] h-screen min-h-[800px] bg-[url('/images/home/background_1.png')] bg-cover bg-fixed xl:mb-0">
-      <div className='relative h-[100%] bg-primary/[0.7] px-[20px] pt-[160px] xl:flex xl:flex-row xl:items-center xl:justify-between xl:px-[calc(160px-(1920px-100vw)/3)] xl:pt-0'>
-        <div className='mb-[60px] text-white xl:mx-[20px] xl:mb-0 xl:max-w-[560px]'>
+    <div className="xl:min-h-none mb-20 h-screen min-h-[800px] bg-[url('/images/home/background_1.png')] bg-cover bg-fixed xl:mb-0">
+      <div className='relative h-full bg-primary/[0.7] px-5 pt-40 xl:flex xl:flex-row xl:items-center xl:justify-between xl:px-[calc(160px-(1920px-100vw)/3)] xl:pt-0'>
+        <div className='mb-14 text-white xl:mx-5 xl:mb-0 xl:max-w-[560px]'>
           <div data-aos='fade-down' data-aos-duration='1000'>
-            <h2 className='text-[32px] leading-[1.2] md:text-[28px] xl:text-[40px]'>Welcome to</h2>
-            <h1 className='mb-[20px] text-[52px] font-[700] leading-[1.2] md:mb-[20px] md:text-[48px] xl:text-[64px]'>
-              Fessior Tools
-            </h1>
+            <h2 className='text-4xl md:text-3xl xl:text-4xl'>Welcome to</h2>
+            <h1 className='mb-5 text-6xl font-[700] md:mb-5 md:text-5xl xl:text-7xl'>Fessior Tools</h1>
           </div>
-          <p
-            data-aos='fade-up'
-            data-aos-duration='1000'
-            className='leading-[24px] md:max-w-[60%] xl:mt-[20px] xl:max-w-none xl:text-[20px]'
-          >
+          <p data-aos='fade-up' data-aos-duration='1000' className='md:max-w-[60%] xl:mt-5 xl:max-w-none xl:text-lg'>
             Discover a world of community-driven tools that simplify your daily tasks. Fessior Tools is your one-stop
             destination for essential utilities. Join our community and enhance your everyday life with the power of
             innovation.
           </p>
         </div>
         <HomeTools />
-        <div className='absolute bottom-[0] left-[0] z-[1] w-[100%]'>
+        <div className='absolute bottom-0 left-0 z-[1] w-full'>
           {/* <!--Waves Container--> */}
           <div>
             <svg

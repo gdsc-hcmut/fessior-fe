@@ -32,7 +32,7 @@ export default function AvailableTools() {
     controller: { control: toolNameSwiper },
     modules: [Autoplay, Controller],
     onSlideChange: () => setFocusingToolIndex(toolInfoSwiper?.activeIndex ?? 0),
-    className: 'relative w-[100%]',
+    className: 'relative w-full',
     autoplay: { delay: 10000 },
   };
 
@@ -47,21 +47,18 @@ export default function AvailableTools() {
     modules: [Controller],
     slidesPerView: 1,
     onSwiper: (swiper: SwiperClass) => setToolNameSwiper(swiper),
-    className: 'max-h-[520px] w-[100%] flex-grow',
+    className: 'max-h-[520px] w-full flex-grow',
     controller: { control: toolInfoSwiper },
   };
 
   return (
-    <div className='mb-[80px] flex w-[100%] flex-col self-center overflow-hidden px-[20px] lg:mt-[60px] lg:flex-row lg:items-stretch lg:px-[calc(160px-(1920px-100vw)/3)]'>
+    <div className='mb-20 flex w-full flex-col self-center overflow-hidden px-5 lg:mt-16 lg:flex-row lg:items-stretch lg:px-[calc(160px-(1920px-100vw)/3)]'>
       <div
         id='home-available-tools-left'
         data-aos='fade-right'
-        className='lg:me-[20px] lg:flex lg:min-w-[336px] lg:flex-col xl:items-stretch'
+        className='lg:me-5 lg:flex lg:min-w-[336px] lg:flex-col xl:items-stretch'
       >
-        <h5
-          onClick={() => toolNameSwiper?.slideNext()}
-          className='text-[32px] font-[700] text-primary lg:ms-[28px] lg:text-[28px]'
-        >
+        <h5 onClick={() => toolNameSwiper?.slideNext()} className='text-3xl font-bold text-primary lg:ms-7'>
           Available Tools
         </h5>
         {/* ----------LEFT SWIPER----------- */}
@@ -73,7 +70,7 @@ export default function AvailableTools() {
                 iconFilenames={tool.iconFilenames[0]}
                 name={tool.name}
                 isActive={index === focusingToolIndex}
-                className='mb-[20px] w-[80%] max-w-[300px] lg:w-auto lg:max-w-none'
+                className='mb-5 w-4/5 max-w-[300px] lg:w-auto lg:max-w-none'
                 onClick={(newIndex) => handleToolChange(newIndex)}
               />
             </SwiperSlide>
@@ -82,14 +79,14 @@ export default function AvailableTools() {
         <HomeAvailableToolIndicator
           total={tools.length}
           activeIndex={focusingToolIndex}
-          className='mb-[40px] lg:hidden'
+          className='mb-10 lg:hidden'
           onClick={handleToolChange}
         />
       </div>
       {/* ----------RIGHT SWIPER----------- */}
       <Swiper data-aos='fade-left' {...toolInfoSwiperProps}>
         {tools.map((tool) => (
-          <SwiperSlide className='h-auto pb-[40px]' key={tool.name}>
+          <SwiperSlide className='h-auto pb-10' key={tool.name}>
             <ToolInfoTemplate
               {...tool}
               description={homeAvailableToolComponents[tool.name].description()}

@@ -26,22 +26,16 @@ export default function AvailableToolItem({
   const ToolItemClass = useMemo(
     () =>
       clsx(
-        'mb-[16px] h-[60px] items-center justify-between rounded-[8px] px-[16px] hover:cursor-pointer hover:shadow-[0px_4px_47.08px_0px_rgba(11,40,120,0.10)] lg:flex',
+        'mb-4 h-16 items-center justify-between rounded-lg px-4 hover:cursor-pointer hover:shadow-[0px_4px_47.08px_0px_rgba(11,40,120,0.10)] lg:flex',
         isActive ? 'flex shadow-[0px_4px_47.08px_0px_rgba(11,40,120,0.10)]' : 'hidden',
         className,
       ),
     [isActive, className],
   );
 
-  const nameClass = useMemo(
-    () => clsx('text-[20px] font-[700]', isActive ? 'text-primary' : 'text-royal-300'),
-    [isActive],
-  );
+  const nameClass = useMemo(() => clsx('text-xl font-bold', isActive ? 'text-primary' : 'text-royal-300'), [isActive]);
 
-  const activeBulletClass = useMemo(
-    () => clsx('h-[16px] w-[16px] rounded-full bg-primary', isActive || 'hidden'),
-    [isActive],
-  );
+  const activeBulletClass = useMemo(() => clsx('h-4 w-4 rounded-full bg-primary', isActive || 'hidden'), [isActive]);
 
   return (
     <div onClick={() => onClick(index)} className={ToolItemClass}>
@@ -52,7 +46,7 @@ export default function AvailableToolItem({
             alt='tool'
             width={0}
             height={0}
-            className='h-[28px] w-[54px]'
+            className='h-7 w-12'
           />
         </div>
         <p className={nameClass}>{name}</p>
