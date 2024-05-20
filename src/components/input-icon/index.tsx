@@ -20,9 +20,9 @@ export default function InputIcon(props: InputIconProps) {
 
   return (
     <div onClick={onClick} className='flex h-full items-center'>
-      {hasDividerLine && position === 'right' && <div className='h-3/5 w-px bg-[#6969694d]'></div>}
+      {hasDividerLine && position === 'right' && <div className='h-full w-px bg-[#6969694d]'></div>}
       <Image src={src} alt={alt} width={0} height={0} className={iconImgClass} />
-      {hasDividerLine && position === 'left' && <div className='h-3/5 w-px bg-[#6969694d]'></div>}
+      {hasDividerLine && position === 'left' && <div className='h-full w-px bg-[#6969694d]'></div>}
     </div>
   );
 }

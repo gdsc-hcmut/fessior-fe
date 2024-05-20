@@ -33,7 +33,7 @@ export default function TextInput({
   const containerClass = useMemo(
     () =>
       clsx(
-        'flex w-full py-2 relative items-center rounded-lg border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border focus-within:border-primary',
+        'flex h-[42px] w-full py-2 relative items-center rounded-lg border-[0.5px] border-solid border-[#7e7e7e4d] text-black focus-within:border focus-within:border-primary',
         isDisabled && 'bg-primary/[.2] text-primary',
         className,
       ),
