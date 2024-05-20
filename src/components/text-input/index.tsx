@@ -41,7 +41,7 @@ export default function TextInput({
   );
 
   const inputClass = useMemo(
-    () => clsx('mx-[8px] flex-grow px-[4px] outline-none placeholder:text-royal-300', isDisabled && 'bg-transparent'),
+    () => clsx('mx-2 flex-grow px-1 outline-none placeholder:text-royal-300', isDisabled && 'bg-transparent'),
     [isDisabled],
   );
 
