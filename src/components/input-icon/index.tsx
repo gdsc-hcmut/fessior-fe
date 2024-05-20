@@ -14,7 +14,7 @@ export default function InputIcon(props: InputIconProps) {
 
   const iconImgClass = clsx(
     'mx-2 h-auto w-auto',
-    !hasDividerLine && (position === 'left' ? 'ms-[12px]' : 'me-[12px]'),
+    !hasDividerLine && (position === 'left' ? 'ms-3' : 'me-3'),
     onClick && 'rounded-full p-1 hover:cursor-pointer hover:bg-[#ccc] active:bg-[#ccc]',
   );
 
