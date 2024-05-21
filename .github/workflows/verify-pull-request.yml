@@ -11,8 +11,8 @@ on:
 jobs:
   check-modified-files-count:
     outputs:
-      count: ${{ steps.changed-files.outputs.all_modified_files_count }}
-      modified_files: ${{ steps.changed-files.outputs.all_modified_files }}
+      count: ${{ steps.changed-files.outputs.all_changed_files_count }}
+      modified_files: ${{ steps.changed-files.outputs.all_changed_files }}
     permissions:
       actions: 'write'
     runs-on: ubuntu-latest
