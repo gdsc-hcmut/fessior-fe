@@ -7,12 +7,12 @@ import { useCallback, useState } from 'react';
 import { Autoplay, Controller } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
-import ToolInfoTemplate from '@/components/home/tool-info-template';
 import { homeAvailableToolComponents } from '@/data/homeAvailableToolComponents';
 import { tools } from '@/data/tools';
 
 import CarouselIndicator from '../CarouselIndicator';
 
+import AvailableToolInfoTemplate from './AvailableToolInfoTemplate';
 import AvailableToolItem from './AvailableToolItem';
 
 export default function AvailableTools() {
@@ -88,7 +88,7 @@ export default function AvailableTools() {
       <Swiper data-aos='fade-left' {...toolInfoSwiperProps}>
         {tools.map((tool) => (
           <SwiperSlide className='h-auto pb-10' key={tool.name}>
-            <ToolInfoTemplate
+            <AvailableToolInfoTemplate
               {...tool}
               description={homeAvailableToolComponents[tool.name].description()}
               statistics={homeAvailableToolComponents[tool.name].statistics()}
