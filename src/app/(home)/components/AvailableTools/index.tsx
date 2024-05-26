@@ -7,10 +7,11 @@ import { useCallback, useState } from 'react';
 import { Autoplay, Controller } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
-import HomeAvailableToolIndicator from '@/components/home/home-available-tool-indicator';
 import ToolInfoTemplate from '@/components/home/tool-info-template';
 import { homeAvailableToolComponents } from '@/data/homeAvailableToolComponents';
 import { tools } from '@/data/tools';
+
+import CarouselIndicator from '../CarouselIndicator';
 
 import AvailableToolItem from './AvailableToolItem';
 
@@ -76,7 +77,7 @@ export default function AvailableTools() {
             </SwiperSlide>
           ))}
         </Swiper>
-        <HomeAvailableToolIndicator
+        <CarouselIndicator
           total={tools.length}
           activeIndex={focusingToolIndex}
           className='mb-10 lg:hidden'
