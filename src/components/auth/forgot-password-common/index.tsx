@@ -34,7 +34,7 @@ export function ForgotPasswordCommon0(props: ForgotPasswordCommonProps) {
         Enter the email associated with your account and we will send an email with instructions to reset your password.
       </p>
       <AuthForm
-        actionAllowed={isNextStepAllowed}
+        isActionAllowed={isNextStepAllowed}
         actionText='Continue'
         initFields={[
           {
@@ -97,7 +97,7 @@ export function ForgotPasswordCommon1(props: ForgotPasswordCommonProps) {
         subActionText='Change your email'
         onSubAction={firstStep}
         onAction={handleVerifyCode}
-        actionAllowed={verificationCode.length === VERIFICATION_CODE_LENGTH}
+        isActionAllowed={verificationCode.length === VERIFICATION_CODE_LENGTH}
       />
       {/* ALERT MODAL */}
       {verificationCodeError && (
@@ -172,7 +172,7 @@ export function ForgotPasswordCommon2(props: ForgotPasswordCommonProps) {
         ]}
         errorTexts={inputErrorTexts}
         onAction={handleResetPassword}
-        actionAllowed={isActionAllowed}
+        isActionAllowed={isActionAllowed}
       />
       {/* ALERT MODAL */}
       {modalErrorText && (

@@ -19,7 +19,7 @@ type AuthFormProps = {
   subActionAuthType?: AuthType;
   onAction: () => void;
   errorTexts?: string[];
-  actionAllowed?: boolean;
+  isActionAllowed?: boolean;
   isLogin?: boolean;
 };
 
@@ -32,15 +32,14 @@ export default function AuthForm(props: AuthFormProps) {
     subActionText,
     onAction,
     errorTexts,
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    actionAllowed,
+    isActionAllowed,
     isLogin,
   } = props;
   const [passwordVisible, setPasswordVisible] = useState(Array(initFields.length).fill(false));
   const authRouter = useAuthRouter();
 
   useEventListener('keydown', (e: any) => {
-    if (e.key === 'Enter' && (actionAllowed ?? true)) onAction();
+    if (e.key === 'Enter' && (isActionAllowed ?? true)) onAction();
   });
 
   const renderInput = (field: AuthFormFieldType, index: number) => {
@@ -105,7 +104,7 @@ export default function AuthForm(props: AuthFormProps) {
           {subActionText}
         </p>
       )}
-      <Button disabled={!(actionAllowed ?? true)} onClick={onAction} className='mt-[4px] lg:mt-0 lg:text-[20px]'>
+      <Button disabled={!(isActionAllowed ?? true)} onClick={onAction} className='mt-[4px] lg:mt-0 lg:text-[20px]'>
         {actionText}
       </Button>
     </div>

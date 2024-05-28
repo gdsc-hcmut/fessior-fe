@@ -70,7 +70,7 @@ export default function SignUpCommon() {
         ]}
         onAction={handleSignUp}
         errorTexts={inputErrorTexts}
-        actionAllowed={isActionAllowed}
+        isActionAllowed={isActionAllowed}
       />
       {/* ALERT MODAL */}
       {modalErrorText && (

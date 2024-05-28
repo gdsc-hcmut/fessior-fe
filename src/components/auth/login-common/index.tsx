@@ -109,7 +109,7 @@ export default function LoginCommon() {
           },
         ]}
         onAction={handleLoginWithUsername}
-        actionAllowed={isLoginAllowed}
+        isActionAllowed={isLoginAllowed}
         actionText='Log In'
         errorTexts={inputErrorTexts}
       />
