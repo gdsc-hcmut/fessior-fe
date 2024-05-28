@@ -4,10 +4,11 @@ import ModalAlert from '@/components/modal-alert';
 import AuthContext from '@/contexts/authContext';
 import { useAuthPasswordForm, useAuthRouter } from '@/hooks';
 import { authService } from '@/services';
-import AlertLevel from '@/types/alert-level-enum';
-import AuthFormFieldEnum from '@/types/auth-form-field-enum';
 
 import AuthForm from '../auth-form';
+
+import { AuthFormFieldEnum } from '@/types';
+import AlertLevel from '@/types/alert-level-enum';
 
 export default function SignUpCommon() {
   const {

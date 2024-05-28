@@ -5,13 +5,14 @@ import ModalAlert from '@/components/modal-alert';
 import AuthContext from '@/contexts/authContext';
 import AuthFormContext from '@/contexts/authFormContext';
 import { useAuthRouter, useInputErrorText } from '@/hooks';
-import AlertLevel from '@/types/alert-level-enum';
-import AuthFormFieldEnum from '@/types/auth-form-field-enum';
-import AuthType from '@/types/auth-type-enum';
 import { isValidUsername } from '@/utils/auth';
 
 import AuthForm from '../auth-form';
 import CustomGoogleLogin from '../custom-google-login';
+
+import { AuthFormFieldEnum } from '@/types';
+import AlertLevel from '@/types/alert-level-enum';
+import AuthType from '@/types/auth-type-enum';
 
 export default function LoginCommon() {
   const [username, setUsername] = useState('');
@@ -54,9 +55,7 @@ export default function LoginCommon() {
     }
   };
 
-  const handleLoginWithGoogle = async (
-    credentialResponse: CredentialResponse,
-  ) => {
+  const handleLoginWithGoogle = async (credentialResponse: CredentialResponse) => {
     if (credentialResponse.credential) {
       try {
         const response = await login({

@@ -3,12 +3,13 @@ import { useState, useEffect } from 'react';
 import ModalAlert from '@/components/modal-alert';
 import { useAuthPasswordForm, useAuthRouter, useInputErrorText } from '@/hooks';
 import { authService } from '@/services';
-import AlertLevel from '@/types/alert-level-enum';
-import AuthFormFieldEnum from '@/types/auth-form-field-enum';
-import AuthType from '@/types/auth-type-enum';
 import { VERIFICATION_CODE_LENGTH, isValidUsername } from '@/utils/auth';
 
 import AuthForm from '../auth-form';
+
+import { AuthFormFieldEnum } from '@/types';
+import AlertLevel from '@/types/alert-level-enum';
+import AuthType from '@/types/auth-type-enum';
 
 type ForgotPasswordCommonProps = {
   firstStep?: () => void;
@@ -30,8 +31,7 @@ export function ForgotPasswordCommon0(props: ForgotPasswordCommonProps) {
   return (
     <>
       <p className='mb-[20px] text-[14px] lg:mb-[24px] lg:text-[16px]'>
-        Enter the email associated with your account and we will send an email
-        with instructions to reset your password.
+        Enter the email associated with your account and we will send an email with instructions to reset your password.
       </p>
       <AuthForm
         actionAllowed={isNextStepAllowed}
@@ -60,9 +60,7 @@ export function ForgotPasswordCommon0(props: ForgotPasswordCommonProps) {
 export function ForgotPasswordCommon1(props: ForgotPasswordCommonProps) {
   const { username, nextStep, firstStep } = props;
   const [verificationCode, setVerificationCode] = useState('');
-  const [verificationCodeError, setVerificationCodeError] = useState<
-    string | null
-  >(null);
+  const [verificationCodeError, setVerificationCodeError] = useState<string | null>(null);
 
   const handleVerifyCode = () => {
     const isError = false; //TODO: apply api later
