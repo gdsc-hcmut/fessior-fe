@@ -10,8 +10,7 @@ import { isValidUsername } from '@/utils/auth';
 import AuthForm from '../auth-form';
 import CustomGoogleLogin from '../custom-google-login';
 
-import { AuthFormFieldEnum } from '@/types';
-import AlertLevel from '@/types/alert-level-enum';
+import { AuthFormFieldEnum, AlertLevel } from '@/types';
 import AuthType from '@/types/auth-type-enum';
 
 export default function LoginCommon() {
