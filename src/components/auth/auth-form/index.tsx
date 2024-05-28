@@ -4,12 +4,12 @@ import Button from '@/components/button';
 import Input from '@/components/input';
 import InputCode from '@/components/input-code';
 import { useAuthRouter, useEventListener } from '@/hooks';
-import AuthFormFieldEnum from '@/types/auth-form-field-enum';
-import AuthFormFieldType from '@/types/auth-form-field-type';
-import AuthType from '@/types/auth-type-enum';
 import { VERIFICATION_CODE_LENGTH } from '@/utils/auth';
 
 import PasswordRequirements from '../password-requirements';
+
+import { AuthFormFieldEnum, AuthFormFieldType } from '@/types';
+import AuthType from '@/types/auth-type-enum';
 
 type AuthFormProps = {
   initFields: AuthFormFieldType[];
@@ -19,7 +19,7 @@ type AuthFormProps = {
   subActionAuthType?: AuthType;
   onAction: () => void;
   errorTexts?: string[];
-  actionAllowed?: boolean;
+  isActionAllowed?: boolean;
   isLogin?: boolean;
 };
 
@@ -32,16 +32,14 @@ export default function AuthForm(props: AuthFormProps) {
     subActionText,
     onAction,
     errorTexts,
-    actionAllowed,
+    isActionAllowed,
     isLogin,
   } = props;
-  const [passwordVisible, setPasswordVisible] = useState(
-    Array(initFields.length).fill(false),
-  );
+  const [passwordVisible, setPasswordVisible] = useState(Array(initFields.length).fill(false));
   const authRouter = useAuthRouter();
 
   useEventListener('keydown', (e: any) => {
-    if (e.key === 'Enter' && (actionAllowed ?? true)) onAction();
+    if (e.key === 'Enter' && (isActionAllowed ?? true)) onAction();
   });
 
   const renderInput = (field: AuthFormFieldType, index: number) => {
@@ -50,27 +48,20 @@ export default function AuthForm(props: AuthFormProps) {
         <Input
           autoFocus={index === 0}
           className='mb-[4px] font-[500]'
-          type={
-            field.type === AuthFormFieldEnum.PASSWORD && !passwordVisible[index]
-              ? 'password'
-              : 'text'
-          }
+          type={field.type === AuthFormFieldEnum.PASSWORD && !passwordVisible[index] ? 'password' : 'text'}
           placeholder=''
           textValue={field.currentValue}
           onInput={(input) => {
             field.onChange?.(input);
           }}
           iconSrc={
-            field.type === AuthFormFieldEnum.PASSWORD &&
-            field.currentValue.length > 0
+            field.type === AuthFormFieldEnum.PASSWORD && field.currentValue.length > 0
               ? passwordVisible[index]
                 ? '/icons/auth/visibility.svg'
                 : '/icons/auth/visibility_off.svg'
               : undefined
           }
-          iconPosition={
-            field.type === AuthFormFieldEnum.PASSWORD ? 'right' : undefined
-          }
+          iconPosition={field.type === AuthFormFieldEnum.PASSWORD ? 'right' : undefined}
           onIconClick={() => {
             setPasswordVisible(
               passwordVisible.map((pV, pVIndex) => {
@@ -83,13 +74,7 @@ export default function AuthForm(props: AuthFormProps) {
       );
     }
 
-    return (
-      <InputCode
-        value={field.currentValue}
-        length={VERIFICATION_CODE_LENGTH}
-        onChange={field.onChange!}
-      />
-    );
+    return <InputCode value={field.currentValue} length={VERIFICATION_CODE_LENGTH} onChange={field.onChange!} />;
   };
 
   return (
@@ -99,19 +84,10 @@ export default function AuthForm(props: AuthFormProps) {
           <h6 className='mb-[12px] font-[600] text-primary'>{field.label}</h6>
           {renderInput(field, index)}
           <div className='min-h-[26px] md:min-h-[24px]'>
-            {errorTexts && (
-              <p className='text-[12px] font-[500] text-red'>
-                {errorTexts[index]}
-              </p>
+            {errorTexts && <p className='text-[12px] font-[500] text-red'>{errorTexts[index]}</p>}
+            {field.type === AuthFormFieldEnum.PASSWORD && field.label === 'Password' && !isLogin && (
+              <PasswordRequirements className='mb-[20px] md:mb-[8px]' currentPassword={field.currentValue} />
             )}
-            {field.type === AuthFormFieldEnum.PASSWORD &&
-              field.label === 'Password' &&
-              !isLogin && (
-                <PasswordRequirements
-                  className='mb-[20px] md:mb-[8px]'
-                  currentPassword={field.currentValue}
-                />
-              )}
           </div>
         </div>
       ))}
@@ -128,11 +104,7 @@ export default function AuthForm(props: AuthFormProps) {
           {subActionText}
         </p>
       )}
-      <Button
-        disabled={!(actionAllowed ?? true)}
-        onClick={onAction}
-        className='mt-[4px] lg:mt-0 lg:text-[20px]'
-      >
+      <Button disabled={!(isActionAllowed ?? true)} onClick={onAction} className='mt-[4px] lg:mt-0 lg:text-[20px]'>
         {actionText}
       </Button>
     </div>
