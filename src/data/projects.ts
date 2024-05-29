@@ -1,4 +1,4 @@
-import { Project } from '@/types/project-type';
+import { Project } from '@/types';
 
 export const projects: Project[] = [
   {
@@ -43,8 +43,7 @@ export const projects: Project[] = [
   },
   {
     name: 'Tran Van Khe Scholarship',
-    description:
-      'Introduce and organize fundraising activities for the Tran Van Khe Scholarship and Award Fund.',
+    description: 'Introduce and organize fundraising activities for the Tran Van Khe Scholarship and Award Fund.',
     imgSrc: '/images/home/project_5.png',
     imgAlt: 'Tran Van Khe Scholarship',
     url: 'https://quytranvankhe.org/',
