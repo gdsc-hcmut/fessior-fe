@@ -5,10 +5,12 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 
 import { useEventListener } from '@/hooks';
-import AlertLevel from '@/types/alert-level-enum';
 
 import Button from '../button';
 import CloseButton from '../close-button';
+
+import { AlertLevel } from '@/types';
+
 import 'aos/dist/aos.css';
 
 type ModalAlertProps = {
@@ -66,13 +68,7 @@ export default function ModalAlert(props: ModalAlertProps) {
         className='relative mx-[12px] flex aspect-[9/10] w-[400px] flex-col overflow-hidden rounded-[8px] bg-primary leading-[1.2]'
       >
         <div className='flex h-[45%] items-center justify-center'>
-          <Image
-            src={getAlertIcon()}
-            alt='alert-icon'
-            width={0}
-            height={0}
-            className='h-auto w-[120px]'
-          />
+          <Image src={getAlertIcon()} alt='alert-icon' width={0} height={0} className='h-auto w-[120px]' />
         </div>
         <div className='flex flex-grow flex-col items-center justify-center bg-white p-[24px] text-primary'>
           <h4 className='mb-[12px] text-[32px] font-[700]'>{title}</h4>
@@ -83,10 +79,9 @@ export default function ModalAlert(props: ModalAlertProps) {
                 <p className='text-[18px]'>{primaryActionButtonText}</p>
               </Button>
             )}
-            {primaryActionButtonText &&
-              onPrimaryAction &&
-              secondaryActionButtonText &&
-              onSecondaryAction && <div className='w-[16px]'></div>}
+            {primaryActionButtonText && onPrimaryAction && secondaryActionButtonText && onSecondaryAction && (
+              <div className='w-[16px]'></div>
+            )}
             {secondaryActionButtonText && onSecondaryAction && (
               <Button onClick={onSecondaryAction} type='neutral'>
                 <p className='text-[18px]'>{secondaryActionButtonText}</p>

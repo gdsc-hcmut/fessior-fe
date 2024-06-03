@@ -61,12 +61,7 @@ const banTypes = {
       '- If you want a type meaning "empty object", you probably want `Record<string, never>` instead.',
       '- If you really want a type meaning "any non-nullish value", you probably want `NonNullable<unknown>` instead.',
     ].join('\n'),
-    suggest: [
-      'Record<string, unknown>',
-      'unknown',
-      'Record<string, never>',
-      'NonNullable<unknown>',
-    ],
+    suggest: ['Record<string, unknown>', 'unknown', 'Record<string, never>', 'NonNullable<unknown>'],
   },
 };
 
@@ -188,18 +183,13 @@ module.exports = {
           caseInsensitive: true,
           order: 'asc',
         },
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-          'object',
-          'type',
-        ],
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
         'newlines-between': 'always',
         pathGroups: [
+          {
+            pattern: '@/types',
+            group: 'type',
+          },
           {
             pattern: '@/types/**',
             group: 'type',
@@ -266,10 +256,7 @@ module.exports = {
       parserOptions: tsParserOptions,
       plugins: ['@typescript-eslint'],
       rules: {
-        '@typescript-eslint/ban-types': [
-          'error',
-          { types: banTypes, extendDefaults: false },
-        ],
+        '@typescript-eslint/ban-types': ['error', { types: banTypes, extendDefaults: false }],
         '@typescript-eslint/type-annotation-spacing': [
           'error',
           {
