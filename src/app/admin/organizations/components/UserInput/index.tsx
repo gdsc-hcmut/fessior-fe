@@ -130,13 +130,13 @@ export default function UserInput({ userOptions, isManagerInput, onSubmit, onCan
           </Button>
         </div>
         <div className='relative'>
-          {isDropdownVisible && (
+          {isDropdownVisible ? (
             <UserOptionList
               displayingUserOptions={displayingUserOptions}
               focusingIndex={focusingIndex}
               handleUserSelect={handleUserSelect}
             />
-          )}
+          ) : null}
           <p className='italic text-primary'>{inputMessage}</p>
         </div>
       </div>

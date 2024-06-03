@@ -110,13 +110,13 @@ export default function Organizations() {
           />
         </div>
       </div>
-      {filteredOrganizations && (
+      {filteredOrganizations ? (
         <OrganizationList
           organizations={filteredOrganizations}
           setEditingOrganizationIndex={setEditingOrganizationIndex}
         />
-      )}
-      {editingOrganizationIndex !== null && organizations && (
+      ) : null}
+      {editingOrganizationIndex !== null && organizations ? (
         <EditOrganizationModal
           organization={organizations[editingOrganizationIndex]}
           onCancel={() => {
@@ -125,15 +125,15 @@ export default function Organizations() {
           onUpdate={handleOrganizationUpdate}
           onDelete={() => handleOrganizationDelete(organizations[editingOrganizationIndex]._id)}
         />
-      )}
-      {isCreating && (
+      ) : null}
+      {isCreating ? (
         <CreateOrganizationModal
           onCancel={() => {
             setIsCreating(false);
           }}
           onCreate={handleOrganizationCreate}
         />
-      )}
+      ) : null}
       <CustomToastContainer />
     </div>
   );

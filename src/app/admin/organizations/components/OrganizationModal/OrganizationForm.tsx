@@ -61,7 +61,7 @@ const OrganizationForm = forwardRef(
             textValue={organizationDetails.longName}
             onInput={(longName: string) => setOrganizationDetails({ ...organizationDetails, longName })}
           />
-          {!isLongNameValid && <p className='font-light italic text-red'>This field must not be blank!</p>}
+          {!isLongNameValid ? <p className='font-light italic text-red'>This field must not be blank!</p> : null}
         </div>
 
         <div className='mb-8'>
@@ -93,7 +93,7 @@ const OrganizationForm = forwardRef(
               isManagerList
             />
           </div>
-          {nonMemberUsers && (
+          {nonMemberUsers ? (
             <div className='mb-8'>
               <h6 className='mb-2 ps-1 text-xl font-semibold text-primary'>Members</h6>
               <UserDropdownList
@@ -108,7 +108,7 @@ const OrganizationForm = forwardRef(
                 blockDeleteIds={organizationDetails.managers.map((manager) => manager._id)}
               />
             </div>
-          )}
+          ) : null}
         </div>
       </div>
     );

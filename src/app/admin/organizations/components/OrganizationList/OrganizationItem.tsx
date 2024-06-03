@@ -57,7 +57,7 @@ function ManagerList({ managers }: ManagerListProps) {
           <Image src={manager.picture} alt='avatar' width={32} height={32} className='me-2 rounded-full' />
         </TooltipWrapper>
       ))}
-      {hiddenManagers.length !== 0 && (
+      {hiddenManagers.length !== 0 ? (
         <TooltipWrapper
           position={Position.RIGHT}
           tooltipText={hiddenManagers.map((manager) => manager.firstName).join(', ')}
@@ -65,7 +65,7 @@ function ManagerList({ managers }: ManagerListProps) {
         >
           <p>{hiddenManagers.length}+</p>
         </TooltipWrapper>
-      )}
+      ) : null}
     </div>
   );
 }

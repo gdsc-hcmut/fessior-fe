@@ -61,14 +61,14 @@ export default function BaseOrganizationModal({
           ref={longNameInputRef}
         />
         <div className='relative flex w-full justify-end border-t-[1px] bg-white px-9 py-4'>
-          {onDelete && (
+          {onDelete ? (
             <button
               onClick={onDelete}
               className='me-3 rounded-lg bg-red px-4 py-2 text-white transition-all hover:bg-[#ca3326]'
             >
               Delete Organization
             </button>
-          )}
+          ) : null}
           <Button onClick={handleSaveButtonClick}>{saveButtonText}</Button>
         </div>
       </div>

@@ -34,7 +34,7 @@ export default function EditOrganizationModal({
         onCancel={onCancel}
         onDelete={() => setIsDeleting(true)}
       />
-      {isDeleting && (
+      {isDeleting ? (
         <ModalAlert
           title='Delete Organization'
           description='This action is not reversible'
@@ -45,7 +45,7 @@ export default function EditOrganizationModal({
           secondaryActionButtonText='Cancel'
           type={AlertLevel.WARNING}
         />
-      )}
+      ) : null}
     </>
   );
 }
