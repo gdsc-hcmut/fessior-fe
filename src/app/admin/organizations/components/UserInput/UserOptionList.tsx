@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
+import { useMemo } from 'react';
 
 import User from '../../../src/types/user';
 
@@ -37,9 +38,13 @@ type UserOptionProps = {
 };
 
 function UserOption({ firstName, lastName, pictureSrc, email, isFocusing, onSelect }: UserOptionProps) {
-  const optionClass = clsx(
-    'flex w-full items-center border-b-[1px] p-2 hover:cursor-pointer hover:bg-primary-white',
-    isFocusing && 'cursor-pointer bg-primary-white',
+  const optionClass = useMemo(
+    () =>
+      clsx(
+        'flex w-full items-center border-b-[1px] p-2 hover:cursor-pointer hover:bg-primary-white',
+        isFocusing && 'cursor-pointer bg-primary-white',
+      ),
+    [isFocusing],
   );
 
   return (

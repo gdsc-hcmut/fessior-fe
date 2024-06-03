@@ -25,17 +25,17 @@ const OrganizationForm = forwardRef(
 
     const isManager = useCallback(
       (member: User) => organizationDetails.managers.find((manager) => manager._id === member._id),
-      [organizationDetails],
+      [organizationDetails.managers],
     );
 
     const isMember = useCallback(
       (user: User) => organizationDetails.members.find((member) => member._id === user._id),
-      [organizationDetails],
+      [organizationDetails.members],
     );
 
     const nonManagingMembers = useMemo(
       () => organizationDetails.members.filter((member) => !isManager(member)),
-      [organizationDetails, isManager],
+      [organizationDetails.members, isManager],
     );
 
     const nonMemberUsers = useMemo(() => allUsers?.filter((user) => !isMember(user)), [allUsers, isMember]);
