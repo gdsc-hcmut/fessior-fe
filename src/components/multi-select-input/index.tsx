@@ -75,7 +75,7 @@ export default function MultiSelectInput<T>({
 
   return (
     <div className={containerClass} onFocus={() => setIsOpen(true)} ref={inputRef}>
-      {leftIconProps && <InputIcon {...leftIconProps} position='left' />}
+      {leftIconProps ? <InputIcon {...leftIconProps} position='left' /> : null}
       <input
         value={searchPhrase}
         onInput={(e) => {
@@ -89,7 +89,7 @@ export default function MultiSelectInput<T>({
         tabIndex={tabIndex}
         autoFocus={isAutoFocus}
       />
-      {isOpen && (!!filteredRemainingOptions || !!filteredSelectedValues) && (
+      {isOpen && (!!filteredRemainingOptions || !!filteredSelectedValues) ? (
         <div className='absolute top-[115%] z-[1] w-[100%] overflow-hidden rounded-[8px] border-t-[1px] bg-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'>
           {filteredSelectedValues.map((value) => (
             <div
@@ -125,8 +125,8 @@ export default function MultiSelectInput<T>({
             </div>
           ))}
         </div>
-      )}
-      {rightIconProps && <InputIcon {...rightIconProps} position='right' />}
+      ) : null}
+      {rightIconProps ? <InputIcon {...rightIconProps} position='right' /> : null}
     </div>
   );
 }

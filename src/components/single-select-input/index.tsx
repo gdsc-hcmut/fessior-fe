@@ -58,9 +58,9 @@ export default function SingleSelectInput<T>({
       }}
       ref={inputRef}
     >
-      {leftIconProps && <InputIcon {...leftIconProps} position='left' />}
+      {leftIconProps ? <InputIcon {...leftIconProps} position='left' /> : null}
       <div className='mx-2 flex-grow px-1'>{renderSelectedValue(selectedValue)}</div>
-      {isOpen && !!options.length && (
+      {isOpen && options.length > 0 ? (
         <div className='absolute top-[115%] z-[1] w-[100%] overflow-hidden rounded-[8px] border-t-[1px] bg-white shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]'>
           {options.map((option, index) => (
             <div
@@ -76,15 +76,15 @@ export default function SingleSelectInput<T>({
             </div>
           ))}
         </div>
-      )}
-      {rightIconProps && <InputIcon {...rightIconProps} position='right' />}
-      {!noCollapseIcon && (
+      ) : null}
+      {rightIconProps ? <InputIcon {...rightIconProps} position='right' /> : null}
+      {!noCollapseIcon ? (
         <InputIcon
           src={getIcon('/icons/shorten', 'collapse_grey.svg', isOpen ? Icon.ACTIVE : Icon.INACTIVE)}
           alt='collapse'
           position='right'
         />
-      )}
+      ) : null}
     </div>
   );
 }
