@@ -6,7 +6,7 @@ import Organization, { BaseOrganization } from '../../../src/types/organization'
 
 import BaseOrganizationModal from './BaseOrganizationModal';
 
-import AlertLevel from '@/types/alert-level-enum';
+import { AlertLevel } from '@/types';
 
 type EditOrganizationModalProps = {
   organization: Organization;
