@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useMemo } from 'react';
 
 import editIcon from '../../../src/assets/edit.svg';
 import groupIcon from '../../../src/assets/group.svg';
@@ -43,8 +44,8 @@ type ManagerListProps = {
 };
 
 function ManagerList({ managers }: ManagerListProps) {
-  const visibleManagers = managers.slice(0, MAX_MANAGERS_DISPLAY);
-  const hiddenManagers = managers.slice(MAX_MANAGERS_DISPLAY);
+  const visibleManagers = useMemo(() => managers.slice(0, MAX_MANAGERS_DISPLAY), [managers]);
+  const hiddenManagers = useMemo(() => managers.slice(MAX_MANAGERS_DISPLAY), [managers]);
 
   return (
     <div className='flex flex-[3] items-center'>
@@ -57,7 +58,7 @@ function ManagerList({ managers }: ManagerListProps) {
           <Image src={manager.picture} alt='avatar' width={32} height={32} className='me-2 rounded-full' />
         </TooltipWrapper>
       ))}
-      {hiddenManagers.length !== 0 ? (
+      {hiddenManagers.length !== 0 && (
         <TooltipWrapper
           position={Position.RIGHT}
           tooltipText={hiddenManagers.map((manager) => manager.firstName).join(', ')}
@@ -65,7 +66,7 @@ function ManagerList({ managers }: ManagerListProps) {
         >
           <p>{hiddenManagers.length}+</p>
         </TooltipWrapper>
-      ) : null}
+      )}
     </div>
   );
 }
