@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client';
 
 import { useState, useEffect, useContext, useMemo } from 'react';
@@ -9,7 +11,8 @@ import ShortenCategories from '@/components/shorten-categories';
 import AuthContext from '@/contexts/authContext';
 import { useAuthRouter, useScreenSize } from '@/hooks';
 import { meService, categoryService, organizationService } from '@/services';
-import CategoryColor from '@/types/category-color-enum';
+
+import { CategoryColor } from '@/types';
 import Category from '@/types/category-type';
 import Organization from '@/types/organization-type';
 import ScreenSize from '@/types/screen-size-enum';
@@ -20,16 +23,12 @@ import Url from '@/types/url-type';
 export default function QRURLScreen() {
   const [inputQRName, setInputQRName] = useState<null | string>(null);
   const [inputURL, setInputURL] = useState<null | string>(null);
-  const [organizationOptions, setOrganizationOptions] = useState<
-    null | Organization[]
-  >(null);
+  const [organizationOptions, setOrganizationOptions] = useState<null | Organization[]>(null);
   const [organization, setOrganization] = useState<null | Organization>(null);
   const [domain, setDomain] = useState('');
   const [domainOptions, setDomainOptions] = useState<null | string[]>(null);
   useState<null | Organization>(null);
-  const [categoryOptions, setCategoryOptions] = useState<null | Category[]>(
-    null,
-  );
+  const [categoryOptions, setCategoryOptions] = useState<null | Category[]>(null);
   const [categoryValues, setCategoryValues] = useState<Category[]>([]);
   const [categorySearch, setCategorySearch] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -59,9 +58,7 @@ export default function QRURLScreen() {
         setOrganization(organizationOptionsInitial[0]);
         setDomain(organizationOptionsInitial[0].domains[0]);
         const categoryOptionsInitial = (
-          await organizationService.searchCategoryByOrganizationId(
-            organizationOptionsInitial[0]._id,
-          )
+          await organizationService.searchCategoryByOrganizationId(organizationOptionsInitial[0]._id)
         ).categories; // pagination is for another day
         setCategoryOptions(categoryOptionsInitial);
       } catch (e: any) {
@@ -76,9 +73,8 @@ export default function QRURLScreen() {
 
       setDomainOptions(organization.domains);
       setDomain(organization.domains[1]);
-      const categoryOptionsInitial = (
-        await organizationService.getCategoryByOrganizationId(organization._id)
-      ).categories as Category[]; // pagination is for another day
+      const categoryOptionsInitial = (await organizationService.getCategoryByOrganizationId(organization._id))
+        .categories as Category[]; // pagination is for another day
       setCategoryOptions(categoryOptionsInitial);
       setCategoryValues([]);
     })();
@@ -89,14 +85,8 @@ export default function QRURLScreen() {
       if (!organization) return;
 
       setCategoryOptions(
-        (
-          await organizationService.searchCategoryByOrganizationId(
-            organization._id,
-            categorySearch,
-          )
-        ).categories.filter(
-          (category: Category) =>
-            !categoryValues.find((value) => value._id === category._id),
+        (await organizationService.searchCategoryByOrganizationId(organization._id, categorySearch)).categories.filter(
+          (category: Category) => !categoryValues.find((value) => value._id === category._id),
         ),
       );
     })();
@@ -114,22 +104,12 @@ export default function QRURLScreen() {
         };
       case ShortenInputFieldEnum.CATEGORY:
         return (category: Category) => {
-          if (
-            categoryValues.find(
-              (categoryValue) => categoryValue._id === category._id,
-            )
-          ) {
-            setCategoryValues(
-              categoryValues!.filter(
-                (categoryValue) => categoryValue._id !== category._id,
-              ),
-            );
+          if (categoryValues.find((categoryValue) => categoryValue._id === category._id)) {
+            setCategoryValues(categoryValues!.filter((categoryValue) => categoryValue._id !== category._id));
             setCategoryOptions(categoryOptions!.concat(category));
           } else {
             setCategoryValues(categoryValues.concat(category));
-            setCategoryOptions(
-              categoryOptions!.filter((option) => option._id !== category._id),
-            );
+            setCategoryOptions(categoryOptions!.filter((option) => option._id !== category._id));
           }
         };
       default:
@@ -221,9 +201,7 @@ export default function QRURLScreen() {
         {isLoaded && isLoggedIn && (
           <div className='inline-block md:mb-[8px] md:flex md:flex-grow lg:mb-0'>
             <div className='mb-[8px] flex items-center justify-between md:me-[20px] md:inline-flex lg:mb-5'>
-              <p className='inline  pr-[6px] text-[16px] font-[500] text-black md:text-[20px]'>
-                Organization
-              </p>
+              <p className='inline  pr-[6px] text-[16px] font-[500] text-black md:text-[20px]'>Organization</p>
               <Input
                 collapseIcon
                 height={inputHeight}
@@ -232,16 +210,12 @@ export default function QRURLScreen() {
                 textValue={organization!.shortName}
                 dropdownOptions={organizationOptions!}
                 onDropdownSelect={
-                  handleChange(ShortenInputFieldEnum.ORGANIZATION) as (
-                    value: ShortenInputFieldType,
-                  ) => void
+                  handleChange(ShortenInputFieldEnum.ORGANIZATION) as (value: ShortenInputFieldType) => void
                 }
               />
             </div>
             <div className='flex items-center justify-between md:mb-2 md:inline-flex lg:mb-5'>
-              <p className='inline text-[16px] font-[500] text-black md:text-[20px]'>
-                Domain
-              </p>
+              <p className='inline text-[16px] font-[500] text-black md:text-[20px]'>Domain</p>
               <Input
                 collapseIcon
                 height={inputHeight}
@@ -249,28 +223,20 @@ export default function QRURLScreen() {
                 fontSize={inputFontSize}
                 textValue={domain!}
                 dropdownOptions={domainOptions!}
-                onDropdownSelect={
-                  handleChange(ShortenInputFieldEnum.DOMAIN) as (
-                    value: ShortenInputFieldType,
-                  ) => void
-                }
+                onDropdownSelect={handleChange(ShortenInputFieldEnum.DOMAIN) as (value: ShortenInputFieldType) => void}
               />
             </div>
           </div>
         )}
         {isLoggedIn && isLoaded && (
           <div className='mb-[16px] mt-4 md:mt-0 md:flex md:items-center md:justify-between'>
-            <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>
-              Category
-            </h6>
+            <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>Category</h6>
             <div className='md:ml-[25px] md:inline-block md:flex-grow'>
               <Input
                 dropdownOptions={categoryOptions!}
                 dropdownValues={categoryValues}
                 onDropdownSelect={
-                  handleChange(ShortenInputFieldEnum.CATEGORY) as (
-                    value: ShortenInputFieldType,
-                  ) => void
+                  handleChange(ShortenInputFieldEnum.CATEGORY) as (value: ShortenInputFieldType) => void
                 }
                 fontSize={inputFontSize}
                 height={inputHeight}
@@ -280,12 +246,7 @@ export default function QRURLScreen() {
                 textValue={categorySearch}
                 onInput={setCategorySearch}
                 divider
-                renderCustomDropdownItems={(
-                  options,
-                  onSelect,
-                  values,
-                  creatingValue,
-                ) => (
+                renderCustomDropdownItems={(options, onSelect, values, creatingValue) => (
                   <CategoryDropdownItems
                     onSelect={onSelect}
                     options={options as Category[]}
@@ -307,11 +268,7 @@ export default function QRURLScreen() {
               Chosen categories
             </p>
             <ShortenCategories
-              handleChange={
-                handleChange(ShortenInputFieldEnum.CATEGORY) as (
-                  category: Category,
-                ) => void
-              }
+              handleChange={handleChange(ShortenInputFieldEnum.CATEGORY) as (category: Category) => void}
               categories={categoryValues}
             />
           </div>

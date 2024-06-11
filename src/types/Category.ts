@@ -1,4 +1,4 @@
-enum CategoryColor {
+export enum CategoryColor {
   RED = '#e30425',
   BLUE = '#84d2f4',
   ORANGE = '#f9aa33',
@@ -6,4 +6,4 @@ enum CategoryColor {
   PURPLE = '#aaabcd',
 }
 
-export default CategoryColor;
+// TODO: Merge category-type.ts in next PR
