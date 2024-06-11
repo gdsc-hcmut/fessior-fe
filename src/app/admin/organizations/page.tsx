@@ -32,47 +32,41 @@ export default function Organizations() {
     })();
   }, []);
 
-  const handleOrganizationDelete = useCallback(
-    async (id: string) => {
-      try {
-        await organizationService.deleteOrganization(id);
-        setOrganizations(organizations?.filter((org) => org._id !== id) ?? null);
-        setEditingOrganizationIndex(null);
-        toast.success('Organization deleted successfully');
-      } catch (e: any) {
-        toast.error(e.message);
-      }
-    },
-    [organizations],
-  );
+  const handleOrganizationDelete = useCallback(async (id: string) => {
+    try {
+      await organizationService.deleteOrganization(id);
+      setOrganizations((prevOrganizations) => prevOrganizations?.filter((org) => org._id !== id) ?? null);
+      setEditingOrganizationIndex(null);
+      toast.success('Organization deleted successfully');
+    } catch (e: any) {
+      toast.error(e.message);
+    }
+  }, []);
 
-  const handleOrganizationUpdate = useCallback(
-    async (organization: Organization) => {
-      try {
-        await organizationService.updateOrganization(organization);
-        setOrganizations(organizations?.map((org) => (org._id === organization._id ? organization : org)) ?? null);
-        setEditingOrganizationIndex(null);
-        toast.success('Organization updated successfully');
-      } catch (e: any) {
-        toast.error(e.message);
-      }
-    },
-    [organizations],
-  );
+  const handleOrganizationUpdate = useCallback(async (organization: Organization) => {
+    try {
+      await organizationService.updateOrganization(organization);
+      setOrganizations(
+        (prevOrganizations) =>
+          prevOrganizations?.map((org) => (org._id === organization._id ? organization : org)) ?? null,
+      );
+      setEditingOrganizationIndex(null);
+      toast.success('Organization updated successfully');
+    } catch (e: any) {
+      toast.error(e.message);
+    }
+  }, []);
 
-  const handleOrganizationCreate = useCallback(
-    async (organization: BaseOrganization) => {
-      try {
-        const newOrganization = await organizationService.createOrganization(organization);
-        setOrganizations(organizations?.concat(newOrganization) ?? null);
-        setIsCreating(false);
-        toast.success('Organization created successfully');
-      } catch (e: any) {
-        toast.error(e.message);
-      }
-    },
-    [organizations],
-  );
+  const handleOrganizationCreate = useCallback(async (organization: BaseOrganization) => {
+    try {
+      const newOrganization = await organizationService.createOrganization(organization);
+      setOrganizations((prevOrganizations) => prevOrganizations?.concat(newOrganization) ?? null);
+      setIsCreating(false);
+      toast.success('Organization created successfully');
+    } catch (e: any) {
+      toast.error(e.message);
+    }
+  }, []);
 
   const filteredOrganizations = useMemo(
     () => organizations?.filter((organization) => organization.longName.toLowerCase().includes(search.toLowerCase())),
