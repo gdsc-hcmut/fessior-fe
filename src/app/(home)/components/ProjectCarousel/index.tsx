@@ -5,9 +5,10 @@ import { useMemo, useState } from 'react';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 
-import HomeAvailableToolIndicator from '@/components/home/home-available-tool-indicator';
 import { projects } from '@/data/projects';
 import { useScreenSize } from '@/hooks';
+
+import CarouselIndicator from '../CarouselIndicator';
 
 import ProjectCarouselItem from './ProjectCarouselItem';
 
@@ -62,7 +63,7 @@ export default function ProjectCarousel({ className }: ProjectCarouselProps) {
           </SwiperSlide>
         ))}
       </Swiper>
-      <HomeAvailableToolIndicator
+      <CarouselIndicator
         total={projects.length / projectNumberPerPage}
         activeIndex={activeIndex}
         className='mb-20 self-center'

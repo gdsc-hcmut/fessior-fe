@@ -11,7 +11,7 @@ import {
   CodeWithMeStatistics,
   QNADescription,
   QNAStatistics,
-} from '@/components/home/home-available-tool-infos';
+} from '@/app/(home)/components/AvailableTools/AvailableToolInfos';
 
 export const homeAvailableToolComponents: {
   [key in string]: { description: () => JSX.Element; statistics: () => JSX.Element | null };
