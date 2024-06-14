@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client';
 
 import Image from 'next/image';
@@ -10,7 +12,9 @@ import ShortenCategories from '@/components/shorten-categories';
 import AuthContext from '@/contexts/authContext';
 import { useAuthRouter, useScreenSize } from '@/hooks';
 import { meService, categoryService, organizationService } from '@/services';
-import CategoryColor from '@/types/category-color-enum';
+import { getIcon } from '@/utils/common';
+
+import { CategoryColor } from '@/types';
 import Category from '@/types/category-type';
 import Icon from '@/types/icon-enum';
 import Organization from '@/types/organization-type';
@@ -18,7 +22,6 @@ import ScreenSize from '@/types/screen-size-enum';
 import ShortenInputFieldEnum from '@/types/shorten-input-field-enum';
 import ShortenInputFieldType from '@/types/shorten-input-field-type';
 import Url from '@/types/url-type';
-import { getIcon } from '@/utils/common';
 
 enum EncryptionType {
   WPA_WPA2 = 'WPA/WPA2',
@@ -31,20 +34,14 @@ export default function CreateQRWifiScreen() {
   const [inputQRName, setInputQRName] = useState<null | string>(null);
   const [inputSSID, setInputSSID] = useState<null | string>(null);
   const [inputPassword, setInputPassword] = useState<null | string>(null);
-  const [inputEncryption, setInputEncryption] = useState<EncryptionType[]>([
-    EncryptionType.WPA_WPA2,
-  ]);
-  const [organizationOptions, setOrganizationOptions] = useState<
-    null | Organization[]
-  >(null);
+  const [inputEncryption, setInputEncryption] = useState<EncryptionType[]>([EncryptionType.WPA_WPA2]);
+  const [organizationOptions, setOrganizationOptions] = useState<null | Organization[]>(null);
   const [organization, setOrganization] = useState<null | Organization>(null);
   const [domain, setDomain] = useState('');
   const [domainOptions, setDomainOptions] = useState<null | string[]>(null);
   const { isLoggedIn, isAuthStatusReady } = useContext(AuthContext);
   useState<null | Organization>(null);
-  const [categoryOptions, setCategoryOptions] = useState<null | Category[]>(
-    null,
-  );
+  const [categoryOptions, setCategoryOptions] = useState<null | Category[]>(null);
   const [categoryValues, setCategoryValues] = useState<Category[]>([]);
   const [categorySearch, setCategorySearch] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -54,11 +51,7 @@ export default function CreateQRWifiScreen() {
   const authRouter = useAuthRouter();
 
   const passwordVisileImage = useMemo(() => {
-    return getIcon(
-      '/icons/qrcode',
-      'password_visible.svg',
-      passwordVisible ? Icon.ACTIVE : Icon.INACTIVE,
-    );
+    return getIcon('/icons/qrcode', 'password_visible.svg', passwordVisible ? Icon.ACTIVE : Icon.INACTIVE);
   }, [passwordVisible]);
   const logWifiInfo = async () => {
     const wifiInfo = {
@@ -82,9 +75,7 @@ export default function CreateQRWifiScreen() {
         setOrganization(organizationOptionsInitial[0]);
         setDomain(organizationOptionsInitial[0].domains[0]);
         const categoryOptionsInitial = (
-          await organizationService.searchCategoryByOrganizationId(
-            organizationOptionsInitial[0]._id,
-          )
+          await organizationService.searchCategoryByOrganizationId(organizationOptionsInitial[0]._id)
         ).categories; // pagination is for another day
         setCategoryOptions(categoryOptionsInitial);
       } catch (e: any) {
@@ -99,9 +90,8 @@ export default function CreateQRWifiScreen() {
 
       setDomainOptions(organization.domains);
       setDomain(organization.domains[1]);
-      const categoryOptionsInitial = (
-        await organizationService.getCategoryByOrganizationId(organization._id)
-      ).categories as Category[]; // pagination is for another day
+      const categoryOptionsInitial = (await organizationService.getCategoryByOrganizationId(organization._id))
+        .categories as Category[]; // pagination is for another day
       setCategoryOptions(categoryOptionsInitial);
       setCategoryValues([]);
     })();
@@ -112,14 +102,8 @@ export default function CreateQRWifiScreen() {
       if (!organization) return;
 
       setCategoryOptions(
-        (
-          await organizationService.searchCategoryByOrganizationId(
-            organization._id,
-            categorySearch,
-          )
-        ).categories.filter(
-          (category: Category) =>
-            !categoryValues.find((value) => value._id === category._id),
+        (await organizationService.searchCategoryByOrganizationId(organization._id, categorySearch)).categories.filter(
+          (category: Category) => !categoryValues.find((value) => value._id === category._id),
         ),
       );
     })();
@@ -137,22 +121,12 @@ export default function CreateQRWifiScreen() {
         };
       case ShortenInputFieldEnum.CATEGORY:
         return (category: Category) => {
-          if (
-            categoryValues.find(
-              (categoryValue) => categoryValue._id === category._id,
-            )
-          ) {
-            setCategoryValues(
-              categoryValues!.filter(
-                (categoryValue) => categoryValue._id !== category._id,
-              ),
-            );
+          if (categoryValues.find((categoryValue) => categoryValue._id === category._id)) {
+            setCategoryValues(categoryValues!.filter((categoryValue) => categoryValue._id !== category._id));
             setCategoryOptions(categoryOptions!.concat(category));
           } else {
             setCategoryValues(categoryValues.concat(category));
-            setCategoryOptions(
-              categoryOptions!.filter((option) => option._id !== category._id),
-            );
+            setCategoryOptions(categoryOptions!.filter((option) => option._id !== category._id));
           }
         };
       default:
@@ -183,12 +157,7 @@ export default function CreateQRWifiScreen() {
   const inputHeight = useMemo(() => {
     return screenSize === ScreenSize.LG ? 48 : undefined;
   }, [screenSize]);
-  const encryptionOptions = [
-    EncryptionType.WPA_WPA2,
-    EncryptionType.WEP,
-    EncryptionType.NONE,
-    EncryptionType.RAW,
-  ];
+  const encryptionOptions = [EncryptionType.WPA_WPA2, EncryptionType.WEP, EncryptionType.NONE, EncryptionType.RAW];
   const isLoaded =
     (isAuthStatusReady &&
       isLoggedIn &&
@@ -248,9 +217,7 @@ export default function CreateQRWifiScreen() {
         <div>
           <div className='inline-block md:mb-[8px] md:flex md:flex-grow'>
             <div className='mb-4 flex items-center justify-between md:mb-[8px] md:me-[20px] md:inline-flex'>
-              <p className='inline text-[16px] font-[500] md:text-[20px]'>
-                Encryption
-              </p>
+              <p className='inline text-[16px] font-[500] md:text-[20px]'>Encryption</p>
               <Input
                 fontSize={inputFontSize}
                 textValue={inputEncryption.toString()}
@@ -265,9 +232,7 @@ export default function CreateQRWifiScreen() {
             </div>
             {isLoaded && isLoggedIn && (
               <div className='mb-4 flex items-center justify-between md:mb-[8px] md:me-[20px] md:ml-8 md:inline-flex'>
-                <p className='inline text-[16px] font-[500] text-black md:text-[20px]'>
-                  Organization
-                </p>
+                <p className='inline text-[16px] font-[500] text-black md:text-[20px]'>Organization</p>
                 <Input
                   collapseIcon
                   height={inputHeight}
@@ -276,9 +241,7 @@ export default function CreateQRWifiScreen() {
                   textValue={organization!.shortName}
                   dropdownOptions={organizationOptions!}
                   onDropdownSelect={
-                    handleChange(ShortenInputFieldEnum.ORGANIZATION) as (
-                      value: ShortenInputFieldType,
-                    ) => void
+                    handleChange(ShortenInputFieldEnum.ORGANIZATION) as (value: ShortenInputFieldType) => void
                   }
                 />
               </div>
@@ -286,9 +249,7 @@ export default function CreateQRWifiScreen() {
           </div>
         </div>
         <div className='mb-[16px] md:flex md:items-center md:justify-between'>
-          <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>
-            Password
-          </h6>
+          <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>Password</h6>
           <div className='relative flex items-center md:ml-[20px] md:flex-grow'>
             <Input
               fontSize={inputFontSize}
@@ -309,28 +270,19 @@ export default function CreateQRWifiScreen() {
               className='absolute right-3 inline-flex h-[32px] w-[32px] items-center justify-center rounded-full hover:bg-gray-300'
               onClick={() => setPasswordVisible(!passwordVisible)}
             >
-              <Image
-                src={passwordVisileImage}
-                alt='password-visible-icon'
-                width={24}
-                height={24}
-              />
+              <Image src={passwordVisileImage} alt='password-visible-icon' width={24} height={24} />
             </button>
           </div>
         </div>
         {isLoggedIn && isLoaded && (
           <div className='mb-[16px] md:flex md:items-center md:justify-between'>
-            <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>
-              Category
-            </h6>
+            <h6 className='mb-[4px] text-[16px] font-[500] md:mb-0 md:inline md:text-[20px]'>Category</h6>
             <div className='md:ml-[25px] md:inline-block md:flex-grow'>
               <Input
                 dropdownOptions={categoryOptions!}
                 dropdownValues={categoryValues}
                 onDropdownSelect={
-                  handleChange(ShortenInputFieldEnum.CATEGORY) as (
-                    value: ShortenInputFieldType,
-                  ) => void
+                  handleChange(ShortenInputFieldEnum.CATEGORY) as (value: ShortenInputFieldType) => void
                 }
                 fontSize={inputFontSize}
                 height={inputHeight}
@@ -340,12 +292,7 @@ export default function CreateQRWifiScreen() {
                 textValue={categorySearch}
                 onInput={setCategorySearch}
                 divider
-                renderCustomDropdownItems={(
-                  options,
-                  onSelect,
-                  values,
-                  creatingValue,
-                ) => (
+                renderCustomDropdownItems={(options, onSelect, values, creatingValue) => (
                   <CategoryDropdownItems
                     onSelect={onSelect}
                     options={options as Category[]}
@@ -367,11 +314,7 @@ export default function CreateQRWifiScreen() {
               Chosen categories
             </p>
             <ShortenCategories
-              handleChange={
-                handleChange(ShortenInputFieldEnum.CATEGORY) as (
-                  category: Category,
-                ) => void
-              }
+              handleChange={handleChange(ShortenInputFieldEnum.CATEGORY) as (category: Category) => void}
               categories={categoryValues}
             />
           </div>

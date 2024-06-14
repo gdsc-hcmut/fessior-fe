@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client';
 
 import { useContext, useEffect, useState } from 'react';
@@ -12,14 +14,10 @@ import ShortenCategories from '@/components/shorten-categories';
 import ShortenTools from '@/components/shorten-tools';
 import AuthContext from '@/contexts/authContext';
 import { useAuthRouter, useScreenSize } from '@/hooks';
-import {
-  meService,
-  categoryService,
-  organizationService,
-  urlService,
-} from '@/services';
+import { meService, categoryService, organizationService, urlService } from '@/services';
+
+import { CategoryColor } from '@/types';
 import AuthType from '@/types/auth-type-enum';
-import CategoryColor from '@/types/category-color-enum';
 import Category from '@/types/category-type';
 import Organization from '@/types/organization-type';
 import ScreenSize from '@/types/screen-size-enum';
@@ -28,16 +26,11 @@ import ShortenInputFieldType from '@/types/shorten-input-field-type';
 import Url from '@/types/url-type';
 
 export default function Shorten() {
-  const [organizationOptions, setOrganizationOptions] = useState<
-    null | Organization[]
-  >(null);
-  const [organizationValue, setOrganizationValue] =
-    useState<null | Organization>(null);
+  const [organizationOptions, setOrganizationOptions] = useState<null | Organization[]>(null);
+  const [organizationValue, setOrganizationValue] = useState<null | Organization>(null);
   const [domainValue, setDomainValue] = useState<null | string>(null);
   const [domainOptions, setDomainOptions] = useState<null | string[]>(null);
-  const [categoryOptions, setCategoryOptions] = useState<null | Category[]>(
-    null,
-  );
+  const [categoryOptions, setCategoryOptions] = useState<null | Category[]>(null);
   const [categoryValues, setCategoryValues] = useState<Category[]>([]);
   const [longUrl, setLongUrl] = useState('');
   const [slug, setSlug] = useState('');
@@ -62,9 +55,7 @@ export default function Shorten() {
         setOrganizationValue(organizationOptionsInitial[0]);
         setDomainValue(organizationOptionsInitial[0].domains[0]);
         const categoryOptionsInitial = (
-          await organizationService.searchCategoryByOrganizationId(
-            organizationOptionsInitial[0]._id,
-          )
+          await organizationService.searchCategoryByOrganizationId(organizationOptionsInitial[0]._id)
         ).categories; // pagination is for another day
         setCategoryOptions(categoryOptionsInitial);
       } catch (e: any) {
@@ -79,11 +70,8 @@ export default function Shorten() {
 
       setDomainOptions(organizationValue.domains);
       setDomainValue(organizationValue.domains[0]);
-      const categoryOptionsInitial = (
-        await organizationService.getCategoryByOrganizationId(
-          organizationValue._id,
-        )
-      ).categories as Category[]; // pagination is for another day
+      const categoryOptionsInitial = (await organizationService.getCategoryByOrganizationId(organizationValue._id))
+        .categories as Category[]; // pagination is for another day
       setCategoryOptions(categoryOptionsInitial);
       setCategoryValues([]);
     })();
@@ -103,14 +91,8 @@ export default function Shorten() {
 
       setCategoryOptions(
         (
-          await organizationService.searchCategoryByOrganizationId(
-            organizationValue._id,
-            categorySearch,
-          )
-        ).categories.filter(
-          (category: Category) =>
-            !categoryValues.find((value) => value._id === category._id),
-        ),
+          await organizationService.searchCategoryByOrganizationId(organizationValue._id, categorySearch)
+        ).categories.filter((category: Category) => !categoryValues.find((value) => value._id === category._id)),
       );
     })();
   }, [categorySearch, categoryValues, organizationValue]); // TODO: Use Reducer???
@@ -127,22 +109,12 @@ export default function Shorten() {
         };
       case ShortenInputFieldEnum.CATEGORY:
         return (category: Category) => {
-          if (
-            categoryValues.find(
-              (categoryValue) => categoryValue._id === category._id,
-            )
-          ) {
-            setCategoryValues(
-              categoryValues!.filter(
-                (categoryValue) => categoryValue._id !== category._id,
-              ),
-            );
+          if (categoryValues.find((categoryValue) => categoryValue._id === category._id)) {
+            setCategoryValues(categoryValues!.filter((categoryValue) => categoryValue._id !== category._id));
             setCategoryOptions(categoryOptions!.concat(category));
           } else {
             setCategoryValues(categoryValues.concat(category));
-            setCategoryOptions(
-              categoryOptions!.filter((option) => option._id !== category._id),
-            );
+            setCategoryOptions(categoryOptions!.filter((option) => option._id !== category._id));
           }
         };
       default:
@@ -193,8 +165,7 @@ export default function Shorten() {
   const clearForm = () => {
     setLongUrl('');
     setSlug('');
-    if (categoryOptions)
-      setCategoryOptions(categoryOptions.concat(categoryValues));
+    if (categoryOptions) setCategoryOptions(categoryOptions.concat(categoryValues));
     setCategoryValues([]);
   };
 
@@ -222,8 +193,7 @@ export default function Shorten() {
                 <span className='hidden md:inline'>Fessior</span> URL Shortener
               </h1>
               <p className='mb-[46px] leading-[24px] md:text-[24px] lg:text-[28px] lg:leading-[65px]'>
-                Simplify, Organize, and Share: <br className='md:hidden' /> URL
-                Management Made Easy
+                Simplify, Organize, and Share: <br className='md:hidden' /> URL Management Made Easy
               </p>
             </div>
             <div className='relative mb-[172px] items-start rounded-[8px] border-[0.5px] border-solid border-[#7e7e7e4d] bg-white p-[24px] shadow-[0px_4px_47px_0px_rgba(11,40,120,0.30)] lg:w-[100%]'>
@@ -232,9 +202,7 @@ export default function Shorten() {
                   <div className='items-start md:flex'>
                     <div className='md:flex-grow'>
                       <div>
-                        <h6 className='mb-[8px] font-[500] md:mb-[8px] md:text-[20px] lg:text-[28px]'>
-                          Your long URL
-                        </h6>
+                        <h6 className='mb-[8px] font-[500] md:mb-[8px] md:text-[20px] lg:text-[28px]'>Your long URL</h6>
                         <div className='mb-[8px] md:mb-[20px]'>
                           <Input
                             height={inputHeight}
@@ -263,9 +231,9 @@ export default function Shorten() {
                               textValue={organizationValue!.shortName}
                               dropdownOptions={organizationOptions!}
                               onDropdownSelect={
-                                handleChange(
-                                  ShortenInputFieldEnum.ORGANIZATION,
-                                ) as (value: ShortenInputFieldType) => void
+                                handleChange(ShortenInputFieldEnum.ORGANIZATION) as (
+                                  value: ShortenInputFieldType,
+                                ) => void
                               }
                             />
                           </div>
@@ -281,9 +249,7 @@ export default function Shorten() {
                               textValue={domainValue!}
                               dropdownOptions={domainOptions!}
                               onDropdownSelect={
-                                handleChange(ShortenInputFieldEnum.DOMAIN) as (
-                                  value: ShortenInputFieldType,
-                                ) => void
+                                handleChange(ShortenInputFieldEnum.DOMAIN) as (value: ShortenInputFieldType) => void
                               }
                             />
                           </div>
@@ -318,9 +284,7 @@ export default function Shorten() {
                               dropdownOptions={categoryOptions!}
                               dropdownValues={categoryValues}
                               onDropdownSelect={
-                                handleChange(
-                                  ShortenInputFieldEnum.CATEGORY,
-                                ) as (value: ShortenInputFieldType) => void
+                                handleChange(ShortenInputFieldEnum.CATEGORY) as (value: ShortenInputFieldType) => void
                               }
                               fontSize={inputFontSize}
                               height={inputHeight}
@@ -330,12 +294,7 @@ export default function Shorten() {
                               textValue={categorySearch}
                               onInput={setCategorySearch}
                               divider
-                              renderCustomDropdownItems={(
-                                options,
-                                onSelect,
-                                values,
-                                creatingValue,
-                              ) => (
+                              renderCustomDropdownItems={(options, onSelect, values, creatingValue) => (
                                 <CategoryDropdownItems
                                   onSelect={onSelect}
                                   options={options as Category[]}
@@ -358,9 +317,7 @@ export default function Shorten() {
                             </p>
                             <ShortenCategories
                               handleChange={
-                                handleChange(
-                                  ShortenInputFieldEnum.CATEGORY,
-                                ) as (category: Category) => void
+                                handleChange(ShortenInputFieldEnum.CATEGORY) as (category: Category) => void
                               }
                               categories={categoryValues}
                             />
@@ -381,13 +338,9 @@ export default function Shorten() {
                   <div className='flex items-center justify-center'>
                     <div className='flex flex-col items-center justify-center py-[16px] md:flex-row'>
                       <p className='mb-[16px] md:mb-0 md:me-[12px] md:text-[20px] lg:text-[24px]'>
-                        Let&apos;s make sharing links easier! Log in to use our
-                        URL Shortener.
+                        Let&apos;s make sharing links easier! Log in to use our URL Shortener.
                       </p>
-                      <Button
-                        className='self-start'
-                        onClick={() => authRouter(AuthType.LOGIN)}
-                      >
+                      <Button className='self-start' onClick={() => authRouter(AuthType.LOGIN)}>
                         <span className='px-[4px] text-[20px]'>Log in</span>
                       </Button>
                     </div>
@@ -401,12 +354,10 @@ export default function Shorten() {
             </div>
           </div>
           <div className='text-center md:flex md:flex-col md:items-center'>
-            <h2 className='text-[36px] font-[700] leading-[65px]'>
-              Fessior Tools
-            </h2>
+            <h2 className='text-[36px] font-[700] leading-[65px]'>Fessior Tools</h2>
             <p className='text-center leading-[24px] md:max-w-[640px]'>
-              Your one-stop destination for essential utilities. Discover a
-              world of community-driven tools that simplify your daily tasks.
+              Your one-stop destination for essential utilities. Discover a world of community-driven tools that
+              simplify your daily tasks.
             </p>
 
             <ShortenTools />

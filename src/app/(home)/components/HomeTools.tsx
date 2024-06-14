@@ -6,8 +6,8 @@ import { useMemo } from 'react';
 import { tools } from '@/data/tools';
 import { getIcon } from '@/utils/common';
 
+import { Tool } from '@/types';
 import Icon from '@/types/icon-enum';
-import { Tool } from '@/types/tool-type';
 
 type HomeToolItemProps = {
   tool: Tool;

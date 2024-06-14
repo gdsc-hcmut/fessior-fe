@@ -1,8 +1,8 @@
-import CategoryColor from '@/types/category-color-enum';
+import api from './api';
+
+import { CategoryColor } from '@/types';
 import Organization from '@/types/organization-type';
 import Url from '@/types/url-type';
-
-import api from './api';
 
 async function createCategory(payload: {
   name: string;
@@ -13,7 +13,7 @@ async function createCategory(payload: {
   try {
     return (await api.post('/v1/api/categories', payload)).data.payload;
   } catch (e: any) {
-    console.log(e.message);
+    console.error(e.message);
   }
 }
 

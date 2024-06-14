@@ -1,3 +1,5 @@
+/* eslint-disable  */
+
 'use client';
 
 import './index.css';
@@ -16,7 +18,8 @@ import UrlSelectionList from '@/components/url-selection-list';
 import { myUrlListData } from '@/data/myUrl';
 import { useFilterOptionStore } from '@/store/filter-option';
 import { useUrlModalStore } from '@/store/url-modal';
-import SortOption from '@/types/sort-option-enum';
+
+import { SortOption } from '@/types';
 import { MyUrl } from '@/types/url-type';
 
 type URLsPageProps = {
@@ -26,14 +29,9 @@ type URLsPageProps = {
 function URLsPage(props: URLsPageProps) {
   const { searchParams } = props;
   const [isSortCollapsed, setIsSortCollapsed] = useState<boolean>(true);
-  const [currentSortOption, setCurrentSortOption] = useState<SortOption>(
-    SortOption.LASTEST,
-  );
+  const [currentSortOption, setCurrentSortOption] = useState<SortOption>(SortOption.LATEST);
   const sortOption = Object.values(SortOption);
-  const switchSortOption = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    option: SortOption,
-  ) => {
+  const switchSortOption = (e: React.MouseEvent<HTMLButtonElement>, option: SortOption) => {
     e.stopPropagation();
     setIsSortCollapsed(true);
     setCurrentSortOption(option);
@@ -42,20 +40,15 @@ function URLsPage(props: URLsPageProps) {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
   const [urlList, setUrlList] = useState<MyUrl[]>([...myUrlListData]);
   const [filterUrlList, setFilterUrlList] = useState<MyUrl[]>([...urlList]);
-  const [displayUrlList, setDisplayUrlList] = useState<MyUrl[]>(
-    filterUrlList.slice((page - 1) * 7, 7 * page),
-  );
+  const [displayUrlList, setDisplayUrlList] = useState<MyUrl[]>(filterUrlList.slice((page - 1) * 7, 7 * page));
 
   const { isShow, setShowCategoryModal } = useUrlModalStore();
-  const { filterCategory, filterDomain, setFilterDomain, setFilterCategory } =
-    useFilterOptionStore();
+  const { filterCategory, filterDomain, setFilterDomain, setFilterCategory } = useFilterOptionStore();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
     const newfilterUrlList = myUrlListData.filter(
-      (url) =>
-        `https://${url.domain}/${url.slug}`.includes(searchText) ||
-        url.originalUrl.includes(searchText),
+      (url) => `https://${url.domain}/${url.slug}`.includes(searchText) || url.originalUrl.includes(searchText),
     );
     setFilterUrlList(newfilterUrlList);
     setDisplayUrlList(newfilterUrlList.slice(0, 7));
@@ -63,9 +56,7 @@ function URLsPage(props: URLsPageProps) {
 
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
-    setDisplayUrlList(
-      filterUrlList.slice((pageNumber - 1) * 7, 7 * pageNumber),
-    );
+    setDisplayUrlList(filterUrlList.slice((pageNumber - 1) * 7, 7 * pageNumber));
   };
 
   return (
@@ -74,10 +65,7 @@ function URLsPage(props: URLsPageProps) {
         if (!isSortCollapsed) setIsSortCollapsed(true);
       }}
     >
-      <Sidebar
-        isCollapsed={isCollapsed}
-        hideSidebar={() => setIsCollapsed(true)}
-      />
+      <Sidebar isCollapsed={isCollapsed} hideSidebar={() => setIsCollapsed(true)} />
       {isShow.edit && <EditSlugModal />}
       {isShow.delete && <DeleteLinkModal />}
       {isShow.category && <CategoryModal />}
@@ -106,19 +94,11 @@ function URLsPage(props: URLsPageProps) {
             </div>
             <div className='hidden items-center space-x-2 rounded-lg bg-primary/20 px-3 py-1 xl:flex 2xl:px-5 2xl:py-2'>
               <div className='flex h-10 w-10 items-center justify-center rounded-full bg-white'>
-                <Image
-                  src='/icons/click.svg'
-                  alt='Click icon'
-                  width={0}
-                  height={0}
-                  className='h-6 w-auto'
-                />
+                <Image src='/icons/click.svg' alt='Click icon' width={0} height={0} className='h-6 w-auto' />
               </div>
               <div className='flex flex-col'>
                 <p className='font-semibold text-primary 2xl:text-xl'>1120</p>
-                <p className='text-[14px] text-primary 2xl:text-base'>
-                  clicks on your links today
-                </p>
+                <p className='text-[14px] text-primary 2xl:text-base'>clicks on your links today</p>
               </div>
             </div>
             <button
@@ -175,13 +155,7 @@ function URLsPage(props: URLsPageProps) {
                     onClick={() => setShowCategoryModal(true)}
                     className='flex items-center space-x-1 rounded-lg bg-primary px-3 py-2'
                   >
-                    <Image
-                      src='/icons/filter_list.svg'
-                      alt='Filter icon'
-                      width={0}
-                      height={0}
-                      className='h-5 w-auto'
-                    />
+                    <Image src='/icons/filter_list.svg' alt='Filter icon' width={0} height={0} className='h-5 w-auto' />
                     <p className='font-semibold text-white'>Filter</p>
                   </button>
                   {(filterDomain.length > 0 || filterCategory.length > 0) && (
@@ -202,22 +176,14 @@ function URLsPage(props: URLsPageProps) {
                         <li
                           key={idx}
                           className={clsx(
-                            (idx == 0 ||
-                              (idx == 1 &&
-                                currentSortOption === SortOption.LASTEST)) &&
-                              'pt-2',
+                            (idx == 0 || (idx == 1 && currentSortOption === SortOption.LATEST)) && 'pt-2',
                             (idx === sortOption.length - 1 ||
-                              (idx == sortOption.length - 2 &&
-                                currentSortOption ===
-                                  SortOption.LEAST_CLICKED)) &&
+                              (idx == sortOption.length - 2 && currentSortOption === SortOption.LEAST_CLICKED)) &&
                               'pb-2',
                             'w-full',
                           )}
                         >
-                          <button
-                            onClick={(e) => switchSortOption(e, option)}
-                            className='w-full text-start'
-                          >
+                          <button onClick={(e) => switchSortOption(e, option)} className='w-full text-start'>
                             {option}
                           </button>
                         </li>
@@ -249,13 +215,7 @@ function URLsPage(props: URLsPageProps) {
                   onClick={() => setShowCategoryModal(true)}
                   className='flex items-center space-x-1 rounded-lg bg-primary px-3 py-2'
                 >
-                  <Image
-                    src='/icons/filter_list.svg'
-                    alt='Filter icon'
-                    width={0}
-                    height={0}
-                    className='h-5 w-auto'
-                  />
+                  <Image src='/icons/filter_list.svg' alt='Filter icon' width={0} height={0} className='h-5 w-auto' />
                   <p className='font-semibold text-white'>Filter</p>
                 </button>
                 {(filterDomain.length > 0 || filterCategory.length > 0) && (
@@ -276,22 +236,14 @@ function URLsPage(props: URLsPageProps) {
                       <li
                         key={idx}
                         className={clsx(
-                          (idx == 0 ||
-                            (idx == 1 &&
-                              currentSortOption === SortOption.LASTEST)) &&
-                            'pt-2',
+                          (idx == 0 || (idx == 1 && currentSortOption === SortOption.LATEST)) && 'pt-2',
                           (idx === sortOption.length - 1 ||
-                            (idx == sortOption.length - 2 &&
-                              currentSortOption ===
-                                SortOption.LEAST_CLICKED)) &&
+                            (idx == sortOption.length - 2 && currentSortOption === SortOption.LEAST_CLICKED)) &&
                             'pb-2',
                           'w-full',
                         )}
                       >
-                        <button
-                          onClick={(e) => switchSortOption(e, option)}
-                          className='w-full text-start'
-                        >
+                        <button onClick={(e) => switchSortOption(e, option)} className='w-full text-start'>
                           {option}
                         </button>
                       </li>
@@ -300,9 +252,7 @@ function URLsPage(props: URLsPageProps) {
               </ul>
             </div>
             <div className='mt-4 flex h-[42px] items-center'>
-              <p className='whitespace-nowrap font-semibold text-primary'>
-                {filterUrlList.length} Results
-              </p>
+              <p className='whitespace-nowrap font-semibold text-primary'>{filterUrlList.length} Results</p>
               <div className='hidden xl:flex'>
                 <UrlSelectionList isDomain />
                 <UrlSelectionList isDomain={false} />
@@ -318,10 +268,7 @@ function URLsPage(props: URLsPageProps) {
               </button>
             </div>
           </div>
-          <MyUrlList
-            myUrlList={displayUrlList}
-            isAlreadyShorten={myUrlListData.length !== 0}
-          />
+          <MyUrlList myUrlList={displayUrlList} isAlreadyShorten={myUrlListData.length !== 0} />
           {filterUrlList.length > 0 && (
             <Pagination
               totalCount={filterUrlList.length}
