@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import Category from '@/types/category-type';
+import { Category } from '@/types';
 import ShortenInputFieldType from '@/types/shorten-input-field-type';
 
 type CategoryDropdownItemProps = {
@@ -23,19 +23,10 @@ export function CategoryDropdownItem(props: CategoryDropdownItemProps) {
     >
       {isValue && (
         <div className='me-[12px]'>
-          <Image
-            src='/icons/shorten/tick_royal.svg'
-            alt='tick'
-            width={0}
-            height={0}
-            className='h-[100%] w-auto'
-          />
+          <Image src='/icons/shorten/tick_royal.svg' alt='tick' width={0} height={0} className='h-[100%] w-auto' />
         </div>
       )}
-      <div
-        style={{ backgroundColor: category.color }}
-        className='me-[8px] aspect-square w-[12px] rounded-full'
-      ></div>
+      <div style={{ backgroundColor: category.color }} className='me-[8px] aspect-square w-[12px] rounded-full'></div>
       <p className='truncate'>{category.name}</p>
     </div>
   );
@@ -49,9 +40,7 @@ type CategoryDropdownItemsProps = {
   onCreate?: () => void;
 };
 
-export default function CategoryDropdownItems(
-  props: CategoryDropdownItemsProps,
-) {
+export default function CategoryDropdownItems(props: CategoryDropdownItemsProps) {
   const { options, values, onSelect, creatingValue, onCreate } = props;
 
   return (
@@ -66,9 +55,7 @@ export default function CategoryDropdownItems(
           className='flex h-[40px] cursor-pointer items-center px-[16px] transition-all hover:bg-royal-300/[.1]'
         >
           <p className='me-[8px] truncate'>Create</p>
-          <div className='rounded-[8px] border-[1px] border-primary px-[12px] py-[4px]'>
-            {creatingValue}
-          </div>
+          <div className='rounded-[8px] border-[1px] border-primary px-[12px] py-[4px]'>{creatingValue}</div>
         </div>
       )}
       {values.concat(options).map((category) => (

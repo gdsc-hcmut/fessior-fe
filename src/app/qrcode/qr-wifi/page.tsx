@@ -14,8 +14,7 @@ import { useAuthRouter, useScreenSize } from '@/hooks';
 import { meService, categoryService, organizationService } from '@/services';
 import { getIcon } from '@/utils/common';
 
-import { CategoryColor } from '@/types';
-import Category from '@/types/category-type';
+import { CategoryColor, Category } from '@/types';
 import Icon from '@/types/icon-enum';
 import Organization from '@/types/organization-type';
 import ScreenSize from '@/types/screen-size-enum';

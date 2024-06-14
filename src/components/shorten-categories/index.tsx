@@ -1,5 +1,6 @@
 import CategoryItem from '@/components/category-item';
-import Category from '@/types/category-type';
+
+import { Category } from '@/types';
 
 type ShortenCategoriesProps = {
   categories: Category[];
@@ -25,11 +26,7 @@ export default function ShortenCategories(props: ShortenCategoriesProps) {
   return (
     <div className='inline'>
       {visibleCategory.map((category) => (
-        <CategoryItem
-          key={category._id}
-          onClick={() => handleChange(category)}
-          category={category}
-        />
+        <CategoryItem key={category._id} onClick={() => handleChange(category)} category={category} />
       ))}
       {hiddenCategory && (
         <div className='group relative mx-[2px] inline-flex items-center rounded-[8px] border-[1px] border-primary px-[8px] py-[4px] align-middle text-[12px] text-primary hover:cursor-pointer hover:bg-primary hover:text-white md:mx-[4px] md:px-[12px] md:py-[8px] lg:text-[16px]'>
