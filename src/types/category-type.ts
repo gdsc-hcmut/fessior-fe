@@ -1,5 +1,5 @@
-import Organization from './organization-type';
-import Url from './url-type';
+import { Organization } from '@/types';
+import Url from '@/types/url-type';
 
 type Category = {
   _id: string;
