@@ -1,16 +1,12 @@
+import { ShortenInputFieldType } from '@/types';
 import Category from '@/types/category-type';
 import Organization from '@/types/organization-type';
-import ShortenInputFieldType from '@/types/shorten-input-field-type';
 
-export const isOrganization = (
-  option: ShortenInputFieldType,
-): option is Organization => {
+export const isOrganization = (option: ShortenInputFieldType): option is Organization => {
   return (option as Organization).shortName !== undefined;
 };
 
-export const isCategory = (
-  option: ShortenInputFieldType,
-): option is Category => {
+export const isCategory = (option: ShortenInputFieldType): option is Category => {
   return (option as Category).name !== undefined;
 };
 

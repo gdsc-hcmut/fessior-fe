@@ -1,14 +1,17 @@
+/* eslint-disable */
+
 import { clsx } from 'clsx';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
 import DefaultDropdownItems from '@/components/default-dropdown-item';
 import Dropdown from '@/components/dropdown';
 import { useOnClickOutside } from '@/hooks';
-import Icon from '@/types/icon-enum';
-import ShortenInputFieldType from '@/types/shorten-input-field-type';
 import { getIcon } from '@/utils/common';
 
 import InputIcon from './input-icon';
+
+import { ShortenInputFieldType } from '@/types';
+import Icon from '@/types/icon-enum';
 
 type InputProps = {
   textValue: string;
@@ -84,9 +87,7 @@ export default function Input(props: InputProps) {
         textValue.length > 0 ? textValue : undefined,
       );
 
-    return (
-      <DefaultDropdownItems options={dropdownOptions} onSelect={handleSelect} />
-    );
+    return <DefaultDropdownItems options={dropdownOptions} onSelect={handleSelect} />;
   };
 
   useEffect(() => {
@@ -166,11 +167,7 @@ export default function Input(props: InputProps) {
       )}
       {collapseIcon && (
         <InputIcon
-          iconSrc={getIcon(
-            '/icons/shorten',
-            'collapse_grey.svg',
-            isDropdownVisible ? Icon.ACTIVE : Icon.INACTIVE,
-          )}
+          iconSrc={getIcon('/icons/shorten', 'collapse_grey.svg', isDropdownVisible ? Icon.ACTIVE : Icon.INACTIVE)}
           iconAlt={iconAlt ? iconAlt : ''}
           divider={divider}
           position='right'

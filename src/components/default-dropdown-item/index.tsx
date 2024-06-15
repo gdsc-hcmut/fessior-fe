@@ -1,5 +1,6 @@
-import ShortenInputFieldType from '@/types/shorten-input-field-type';
 import { getOptionText } from '@/utils/input';
+
+import { ShortenInputFieldType } from '@/types';
 
 type DefaultDropdownItemsProps = {
   options: ShortenInputFieldType[];

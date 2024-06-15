@@ -12,12 +12,10 @@ import AuthContext from '@/contexts/authContext';
 import { useAuthRouter, useScreenSize } from '@/hooks';
 import { meService, categoryService, organizationService } from '@/services';
 
-import { CategoryColor } from '@/types';
+import { CategoryColor, ShortenInputFieldEnum, ShortenInputFieldType } from '@/types';
 import Category from '@/types/category-type';
 import Organization from '@/types/organization-type';
 import ScreenSize from '@/types/screen-size-enum';
-import ShortenInputFieldEnum from '@/types/shorten-input-field-enum';
-import ShortenInputFieldType from '@/types/shorten-input-field-type';
 import Url from '@/types/url-type';
 
 export default function QRURLScreen() {
