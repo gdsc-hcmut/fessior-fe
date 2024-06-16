@@ -1,7 +1,6 @@
 import api from './api';
 
-import { CategoryColor } from '@/types';
-import Organization from '@/types/organization-type';
+import { CategoryColor, Organization } from '@/types';
 import Url from '@/types/url-type';
 
 async function createCategory(payload: {

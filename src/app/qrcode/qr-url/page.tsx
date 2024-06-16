@@ -12,9 +12,7 @@ import AuthContext from '@/contexts/authContext';
 import { useAuthRouter, useScreenSize } from '@/hooks';
 import { meService, categoryService, organizationService } from '@/services';
 
-import { CategoryColor, ShortenInputFieldEnum, ShortenInputFieldType } from '@/types';
-import Category from '@/types/category-type';
-import Organization from '@/types/organization-type';
+import { CategoryColor, ShortenInputFieldEnum, ShortenInputFieldType, Category, Organization } from '@/types';
 import ScreenSize from '@/types/screen-size-enum';
 import Url from '@/types/url-type';
 
