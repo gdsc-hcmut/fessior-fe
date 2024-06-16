@@ -1,5 +1,5 @@
-import { Organization } from '@/types';
-import Category from '@/types/category-type';
+import { Category } from './Category';
+import { Organization } from './Organization';
 
 type ShortenInputFieldType = string | Organization | Category;
 

@@ -1,4 +1,4 @@
-import { Organization } from '@/types';
+import { Organization } from './Organization';
 
 type Url = {
   _id: string;
