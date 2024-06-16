@@ -1,7 +1,6 @@
 import api from './api';
 
-import { Category } from '@/types';
-import Organization from '@/types/organization-type';
+import { Organization, Category } from '@/types';
 import Url from '@/types/url-type';
 
 async function getCategoryByOrganizationId(organizationId: Organization['_id'], page: number = 1, limit: number = 10) {

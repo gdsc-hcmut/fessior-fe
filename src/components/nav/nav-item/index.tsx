@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable complexity */
-/* eslint-disable max-statements */
-/* eslint-disable import/no-cycle */
+/* eslint-disable */
 import clsx from 'clsx';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
@@ -14,17 +11,15 @@ import { getIcon } from '@/utils/common';
 import NavList from '../nav-list';
 
 import Icon from '@/types/icon-enum';
-import { NavItem as NavItemType } from '@/types/nav-item-type';
+import { NavItem as NavItemType } from '@/types';
 import ScreenSize from '@/types/screen-size-enum';
 
 export default function NavItem(props: NavItemType) {
   const { text, iconFilename, imgAlt, isLogout, path, children } = props;
 
   const [showingChildren, setShowingChildren] = useState(false);
-  const [smChildrenContainerHeight, setSmChildrenContainerHeight] =
-    useState('0px');
-  const [lgChildrenContainerHeight, setLgChildrenContainerHeight] =
-    useState('0px');
+  const [smChildrenContainerHeight, setSmChildrenContainerHeight] = useState('0px');
+  const [lgChildrenContainerHeight, setLgChildrenContainerHeight] = useState('0px');
   const { screenSize, loaded } = useScreenSize();
   const childrenRef = useRef(null);
   const pathname = usePathname();
@@ -46,12 +41,8 @@ export default function NavItem(props: NavItemType) {
 
   useEffect(() => {
     if (!children) return;
-    setSmChildrenContainerHeight(
-      showingChildren ? `${56 * children.length}px` : '0px',
-    );
-    setLgChildrenContainerHeight(
-      showingChildren ? `${40 * children.length}px` : '0px',
-    );
+    setSmChildrenContainerHeight(showingChildren ? `${56 * children.length}px` : '0px');
+    setLgChildrenContainerHeight(showingChildren ? `${40 * children.length}px` : '0px');
   }, [showingChildren, children]);
 
   useOnClickOutside(childrenRef, () => setShowingChildren(false));
@@ -73,9 +64,7 @@ export default function NavItem(props: NavItemType) {
     (active || childrenActive) && 'text-primary underline',
   );
 
-  const smItemClass = clsx(
-    'relative flex flex-col md:max-w-[250px] md:w-[100%] md:me-[20px]',
-  );
+  const smItemClass = clsx('relative flex flex-col md:max-w-[250px] md:w-[100%] md:me-[20px]');
 
   const smItemTitleClass = clsx(
     'flex items-center justify-between rounded-[8px] px-[20px] py-[16px] transition-all hover:cursor-pointer',
@@ -99,11 +88,7 @@ export default function NavItem(props: NavItemType) {
     isLogout ? null : active || childrenActive ? Icon.ACTIVE : Icon.INACTIVE,
   );
 
-  const collapseIcon = getIcon(
-    '/icons/header',
-    'collapse.svg',
-    showingChildren ? Icon.ACTIVE : Icon.INACTIVE,
-  );
+  const collapseIcon = getIcon('/icons/header', 'collapse.svg', showingChildren ? Icon.ACTIVE : Icon.INACTIVE);
 
   if (!loaded) return;
 
@@ -120,10 +105,7 @@ export default function NavItem(props: NavItemType) {
             {text}
           </li>
           {children && (
-            <ul
-              style={{ height: lgChildrenContainerHeight }}
-              className={lgChildrenListClass}
-            >
+            <ul style={{ height: lgChildrenContainerHeight }} className={lgChildrenListClass}>
               {children?.map((item) => (
                 <li
                   key={item.text}
@@ -145,24 +127,10 @@ export default function NavItem(props: NavItemType) {
       <li onClick={handleClick} className={smItemClass}>
         <div className={smItemTitleClass}>
           <div className='flex items-center'>
-            <Image
-              src={itemIcon}
-              alt={imgAlt}
-              width={0}
-              height={0}
-              className='h-[100%] w-auto'
-            />
+            <Image src={itemIcon} alt={imgAlt} width={0} height={0} className='h-[100%] w-auto' />
             <h6 className={itemTitleClass}>{text}</h6>
           </div>
-          {children && (
-            <Image
-              src={collapseIcon}
-              alt=''
-              width={0}
-              height={0}
-              className='h-auto w-auto md:hidden'
-            />
-          )}
+          {children && <Image src={collapseIcon} alt='' width={0} height={0} className='h-auto w-auto md:hidden' />}
         </div>
         <div className='relative'>
           {children && (

@@ -1,4 +1,6 @@
-import { NavItem as NavItemType } from '@/types/nav-item-type';
+/* eslint-disable */
+
+import { NavItem as NavItemType } from '@/types';
 
 import NavItem from '../nav-item';
 
