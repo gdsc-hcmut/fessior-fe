@@ -3,33 +3,25 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 
 import useScreenSize from '@/hooks/useScreenSize';
-import ScreenSize from '@/types/screen-size-enum';
+
+import { ScreenSize } from '@/types';
 
 const ToggleButton: React.FC = () => {
   const [isActive, setIsActive] = useState(false);
+  /* eslint-disable-next-line */
   const { screenSize, loaded } = useScreenSize();
   return (
     <label
       className={clsx(
         'h-[11px] w-[22px] cursor-pointer items-center',
-        screenSize === ScreenSize.SM
-          ? 'h-[11px] w-[22px]'
-          : 'h-[20px] w-[38px]',
+        screenSize === ScreenSize.SM ? 'h-[11px] w-[22px]' : 'h-[20px] w-[38px]',
       )}
     >
-      <input
-        type='checkbox'
-        value=''
-        className='sr-only'
-        checked={isActive}
-        onChange={() => setIsActive(!isActive)}
-      />
+      <input type='checkbox' value='' className='sr-only' checked={isActive} onChange={() => setIsActive(!isActive)} />
       <div
         className={clsx(
           ' justify-left flex items-center rounded-full ',
-          screenSize === ScreenSize.SM
-            ? 'h-[11px] w-[22px]'
-            : 'h-[20px] w-[38px]',
+          screenSize === ScreenSize.SM ? 'h-[11px] w-[22px]' : 'h-[20px] w-[38px]',
           isActive ? 'bg-[#0B2878]' : 'bg-[#E6E6E6]',
         )}
       >

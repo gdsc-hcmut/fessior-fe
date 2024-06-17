@@ -12,7 +12,7 @@ import CarouselIndicator from '../CarouselIndicator';
 
 import ProjectCarouselItem from './ProjectCarouselItem';
 
-import ScreenSize from '@/types/screen-size-enum';
+import { ScreenSize } from '@/types';
 
 type ProjectCarouselProps = {
   className?: string;
