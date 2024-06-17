@@ -6,7 +6,7 @@ import { getIcon } from '@/utils/common';
 
 import InputIcon, { InputIconProps } from '../input-icon';
 
-import Icon from '@/types/icon-enum';
+import { Icon } from '@/types';
 
 type SingleSelectInputProps<T> = {
   options: T[];

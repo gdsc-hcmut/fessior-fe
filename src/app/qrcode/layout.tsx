@@ -3,14 +3,14 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useMemo } from 'react';
-import { useState, useEffect } from 'react';
 
 import Button from '@/components/button';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import ShortenTools from '@/components/shorten-tools';
-import Icon from '@/types/icon-enum';
 import { getIcon } from '@/utils/common';
+
+import { Icon } from '@/types';
 
 type QrCodeLayoutProps = {
   children: React.ReactNode;
@@ -23,18 +23,10 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
   const isWifi = currentPathname === '/qrcode/qr-wifi';
   const isUrl = currentPathname === '/qrcode/qr-url';
   const linkIcon = useMemo(() => {
-    return getIcon(
-      '/icons/qrcode',
-      'link_qr.svg',
-      isUrl ? Icon.ACTIVE : Icon.INACTIVE,
-    );
-  }, [isWifi]);
+    return getIcon('/icons/qrcode', 'link_qr.svg', isUrl ? Icon.ACTIVE : Icon.INACTIVE);
+  }, [isUrl]);
   const wifiIcon = useMemo(() => {
-    return getIcon(
-      '/icons/qrcode',
-      'wifi.svg',
-      isWifi ? Icon.ACTIVE : Icon.INACTIVE,
-    );
+    return getIcon('/icons/qrcode', 'wifi.svg', isWifi ? Icon.ACTIVE : Icon.INACTIVE);
   }, [isWifi]);
 
   return (
@@ -52,8 +44,7 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
               <span className=' md:inline'>Fessior</span> QR Generator
             </h1>
             <p className='hidden leading-[24px] md:block md:text-[20px] lg:mb-0 lg:mt-3 lg:text-[24px]'>
-              Convenience, efficiency, and versatility:{' '}
-              <br className='md:hidden' /> QR Code Management Made Easy
+              Convenience, efficiency, and versatility: <br className='md:hidden' /> QR Code Management Made Easy
             </p>
           </div>
           <div
@@ -71,13 +62,7 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
               type={!isWifi ? 'positive' : 'neutral'}
             >
               <div className='transition-all'>
-                <Image
-                  src={linkIcon}
-                  alt='link-icon'
-                  width={40}
-                  height={40}
-                  className='pr-2'
-                />
+                <Image src={linkIcon} alt='link-icon' width={40} height={40} className='pr-2' />
               </div>
               Website URL
             </Button>
@@ -90,25 +75,17 @@ export default function QrCodeLayout(props: QrCodeLayoutProps) {
               }}
             >
               <div className='ml-[-8px] transition-all'>
-                <Image
-                  src={wifiIcon}
-                  alt='wifi-icon'
-                  width={40}
-                  height={40}
-                  className='pr-2'
-                />
+                <Image src={wifiIcon} alt='wifi-icon' width={40} height={40} className='pr-2' />
               </div>
               Wi-fi
             </Button>
           </div>
           {children}
           <div className='mx-[20px] text-center md:flex md:flex-col md:items-center'>
-            <h2 className='text-[36px] font-[700] leading-[65px]'>
-              Fessior Tools
-            </h2>
+            <h2 className='text-[36px] font-[700] leading-[65px]'>Fessior Tools</h2>
             <p className='text-center leading-[24px] md:max-w-[640px]'>
-              Your one-stop destination for essential utilities. Discover a
-              world of community-driven tools that simplify your daily tasks.
+              Your one-stop destination for essential utilities. Discover a world of community-driven tools that
+              simplify your daily tasks.
             </p>
             <ShortenTools />
           </div>

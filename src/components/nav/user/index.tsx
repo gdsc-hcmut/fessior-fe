@@ -1,12 +1,15 @@
+/* eslint-disable */
+
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useState, useRef, useContext } from 'react';
 
 import AuthContext from '@/contexts/authContext';
 import { useOnClickOutside, useScreenSize } from '@/hooks';
-import Icon from '@/types/icon-enum';
-import ScreenSize from '@/types/screen-size-enum';
 import { getIcon } from '@/utils/common';
+
+import { Icon } from '@/types';
+import ScreenSize from '@/types/screen-size-enum';
 
 type UserProps = {
   border?: boolean;
@@ -31,10 +34,7 @@ export default function User(props: UserProps) {
   };
 
   const userClass = clsx(
-    border &&
-      (whiteTheme
-        ? 'border-[1px] border-white'
-        : 'border-[1px] border-primary'),
+    border && (whiteTheme ? 'border-[1px] border-white' : 'border-[1px] border-primary'),
     'relative flex items-center rounded-full hover:cursor-pointer lg:min-w-[170px] md:min-w-[145px]',
     className,
   );
@@ -63,13 +63,7 @@ export default function User(props: UserProps) {
   );
 
   const avatarSize =
-    screenSize === ScreenSize.SM
-      ? 52
-      : screenSize === ScreenSize.MD
-      ? 42
-      : screenSize === ScreenSize.LG
-      ? 52
-      : 0;
+    screenSize === ScreenSize.SM ? 52 : screenSize === ScreenSize.MD ? 42 : screenSize === ScreenSize.LG ? 52 : 0;
 
   return (
     <div ref={optionRef} onClick={handleUserClick} className={userClass}>
@@ -89,13 +83,7 @@ export default function User(props: UserProps) {
       <div className='flex-grow'></div>
       {isOptionDropdown && (
         <>
-          <Image
-            src={collapseIcon}
-            alt=''
-            width={0}
-            height={0}
-            className='me-[12px] h-[100%] w-auto'
-          />
+          <Image src={collapseIcon} alt='' width={0} height={0} className='me-[12px] h-[100%] w-auto' />
 
           <ul className={optionClass}>
             <li
@@ -115,13 +103,7 @@ export default function User(props: UserProps) {
               onClick={logout}
               className='flex h-[44px] cursor-pointer items-center px-[12px] text-red transition-all hover:bg-red/[.1] focus:bg-primary'
             >
-              <Image
-                src='/icons/header/logout.svg'
-                alt=''
-                width={0}
-                height={0}
-                className='me-[16px] h-[24px] w-auto'
-              />
+              <Image src='/icons/header/logout.svg' alt='' width={0} height={0} className='me-[16px] h-[24px] w-auto' />
               <p className='font-[500]'>Log out</p>
             </li>
           </ul>
