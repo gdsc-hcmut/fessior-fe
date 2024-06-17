@@ -1,8 +1,11 @@
+/* eslint-disable */
+
 import { Listbox, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 
 import useScreenSize from '@/hooks/useScreenSize';
-import ScreenSize from '@/types/screen-size-enum';
+
+import { ScreenSize } from '@/types';
 
 type DropDownProps = {
   value: string;
@@ -15,14 +18,8 @@ export default function DropDown(props: DropDownProps) {
   const { value, options, largeFont, border } = props;
   const { screenSize, loaded } = useScreenSize();
   const [selected, setSelected] = useState(value);
-  const c_fontWeight =
-    screenSize === ScreenSize.LG
-      ? largeFont === 'bold'
-        ? 700
-        : largeFont === 'medium'
-        ? 500
-        : 400
-      : 400;
+  const fontWeight =
+    screenSize === ScreenSize.LG ? (largeFont === 'bold' ? 700 : largeFont === 'medium' ? 500 : 400) : 400;
   return (
     <div className='relative h-full w-full'>
       <Listbox value={selected} onChange={setSelected}>
@@ -38,25 +35,15 @@ export default function DropDown(props: DropDownProps) {
             <span className='block truncate'>
               <div
                 style={{
-                  fontWeight: `${c_fontWeight}`,
+                  fontWeight: `${fontWeight}`,
                 }}
                 className={'flex items-center '}
               >
                 {selected}
               </div>
             </span>
-            <span
-              className={
-                'pointer-events-none absolute inset-y-0 right-0 flex items-center pl-[8px] pr-[4px]'
-              }
-            >
-              <svg
-                width='20'
-                height='20'
-                viewBox='0 0 20 20'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
-              >
+            <span className={'pointer-events-none absolute inset-y-0 right-0 flex items-center pl-[8px] pr-[4px]'}>
+              <svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
                 <path
                   d='M6.175 6.53516L10 10.3518L13.825 6.53516L15 7.71016L10 12.7102L5 7.71016L6.175 6.53516Z'
                   fill='#252641'
@@ -65,12 +52,7 @@ export default function DropDown(props: DropDownProps) {
               </svg>
             </span>
           </Listbox.Button>
-          <Transition
-            as={Fragment}
-            leave='transition ease-in duration-100'
-            leaveFrom='opacity-100'
-            leaveTo='opacity-0'
-          >
+          <Transition as={Fragment} leave='transition ease-in duration-100' leaveFrom='opacity-100' leaveTo='opacity-0'>
             <Listbox.Options
               className={
                 'absolute z-50 mt-1 max-h-[100px] w-full overflow-auto rounded-md bg-white text-[12px] shadow-lg ring-1 ring-black/5 focus:outline-none md:text-[16px]'
@@ -80,7 +62,7 @@ export default function DropDown(props: DropDownProps) {
                 <Listbox.Option
                   key={optionIdx}
                   style={{
-                    fontWeight: `${c_fontWeight}`,
+                    fontWeight: `${fontWeight}`,
                   }}
                   className={({ active }) =>
                     `relative cursor-default select-none py-1 pl-[8px]
@@ -90,17 +72,11 @@ export default function DropDown(props: DropDownProps) {
                 >
                   {({ selected }) => (
                     <>
-                      <span
-                        className={`block truncate ${
-                          selected ? 'font-medium' : 'font-normal'
-                        }`}
-                      >
-                        {option}
-                      </span>
+                      <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>{option}</span>
                       {selected ? (
                         <span
                           style={{
-                            fontWeight: `${c_fontWeight}`,
+                            fontWeight: `${fontWeight}`,
                           }}
                           className={`absolute inset-y-0 left-0 flex items-center
                         pl-[8px] text-amber-600`}

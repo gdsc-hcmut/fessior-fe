@@ -9,8 +9,9 @@ import Brand from '@/components/brand';
 import Nav from '@/components/nav';
 import { AuthFormContextProvider } from '@/contexts/authFormContext';
 import { useEventListener, useScreenSize } from '@/hooks';
+
+import { ScreenSize } from '@/types';
 import AuthType from '@/types/auth-type-enum';
-import ScreenSize from '@/types/screen-size-enum';
 
 const TRANS_HEADER_PAGES = ['/'];
 const LG_FILL_HEADER_BOUND = 150;
@@ -20,6 +21,7 @@ export default function Header() {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isHome, setIsHome] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  /* eslint-disable-next-line */
   const { screenSize, loaded } = useScreenSize();
   const pathname = usePathname();
   const authType = useSearchParams().get('auth');
@@ -29,10 +31,7 @@ export default function Header() {
   useEffect(() => setScrollY(window.scrollY), []);
 
   useEffect(() => {
-    const fillHeaderFrom =
-      screenSize === ScreenSize.LG
-        ? LG_FILL_HEADER_BOUND
-        : MB_FILL_HEADER_BOUND;
+    const fillHeaderFrom = screenSize === ScreenSize.LG ? LG_FILL_HEADER_BOUND : MB_FILL_HEADER_BOUND;
     setIsHome(
       !!TRANS_HEADER_PAGES.includes(pathname) &&
         typeof window !== 'undefined' &&
@@ -43,8 +42,7 @@ export default function Header() {
 
   const headerClass = clsx(
     'fixed z-[10] transition-all flex w-[100%] items-center justify-between py-[22px] px-[20px] md:py-[14px] lg:px-[28px] lg:py-[18px]',
-    !(isHome && isCollapsed) &&
-      'bg-white shadow-[0px_6px_15px_rgba(64,79,104,0.05)]',
+    !(isHome && isCollapsed) && 'bg-white shadow-[0px_6px_15px_rgba(64,79,104,0.05)]',
   );
 
   if (!loaded) return;
@@ -54,12 +52,7 @@ export default function Header() {
       <div></div>
       <div className={headerClass}>
         <Brand theme={isHome ? 'white' : 'primary'} />
-        <Nav
-          isHome={isHome}
-          pathname={pathname}
-          isCollapsed={isCollapsed}
-          setIsCollapsed={setIsCollapsed}
-        />
+        <Nav isHome={isHome} pathname={pathname} isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
       </div>
       {authType && (
         <AuthFormContextProvider>

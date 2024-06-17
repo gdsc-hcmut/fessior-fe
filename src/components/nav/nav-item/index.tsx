@@ -11,8 +11,7 @@ import { getIcon } from '@/utils/common';
 import NavList from '../nav-list';
 
 import Icon from '@/types/icon-enum';
-import { NavItem as NavItemType } from '@/types';
-import ScreenSize from '@/types/screen-size-enum';
+import { NavItem as NavItemType, ScreenSize } from '@/types';
 
 export default function NavItem(props: NavItemType) {
   const { text, iconFilename, imgAlt, isLogout, path, children } = props;

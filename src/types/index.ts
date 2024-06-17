@@ -7,3 +7,4 @@ export * from './SortOption';
 export * from './Tool';
 export * from './NavItem';
 export * from './Organization';
+export * from './ScreenSize';

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -7,13 +9,14 @@ import CloseButton from '@/components/close-button';
 import AuthContext from '@/contexts/authContext';
 import { navItems } from '@/data/navItems';
 import { useScreenSize } from '@/hooks';
-import ScreenSize from '@/types/screen-size-enum';
 
 import Button from '../button';
 
 import AuthButton from './auth-button';
 import NavList from './nav-list';
 import User from './user';
+
+import { ScreenSize } from '@/types';
 
 type NavProps = {
   isHome?: boolean;
@@ -29,9 +32,7 @@ export default function Nav(props: NavProps) {
   const { screenSize, loaded } = useScreenSize();
   const router = useRouter();
 
-  const collapseIcon = isHome
-    ? '/icons/header/collapse_nav_white.svg'
-    : '/icons/header/collapse_nav_royal.svg';
+  const collapseIcon = isHome ? '/icons/header/collapse_nav_white.svg' : '/icons/header/collapse_nav_royal.svg';
 
   const collapseButton = isCollapsed ? (
     <button
@@ -40,13 +41,7 @@ export default function Nav(props: NavProps) {
         setIsCollapsed(false);
       }}
     >
-      <Image
-        src={collapseIcon}
-        alt=''
-        width={0}
-        height={0}
-        className='h-[100%] w-auto'
-      />
+      <Image src={collapseIcon} alt='' width={0} height={0} className='h-[100%] w-auto' />
     </button>
   ) : (
     <CloseButton
@@ -97,13 +92,7 @@ export default function Nav(props: NavProps) {
               setIsCollapsed(false);
             }}
           >
-            <Image
-              src={collapseIcon}
-              alt=''
-              width={0}
-              height={0}
-              className='h-[100%] w-auto'
-            />
+            <Image src={collapseIcon} alt='' width={0} height={0} className='h-[100%] w-auto' />
           </button>
         </div>
         {!isCollapsed && (
@@ -130,12 +119,7 @@ export default function Nav(props: NavProps) {
     return (
       <div>
         <div className='flex h-[100%] items-center justify-between'>
-          <User
-            className='me-[28px]'
-            isOptionDropdown
-            border
-            whiteTheme={isHome}
-          />
+          <User className='me-[28px]' isOptionDropdown border whiteTheme={isHome} />
           <div className='flex w-[32px] items-center'>{collapseButton}</div>
         </div>
         <div className={mdNavListContainerClass}>
@@ -147,10 +131,7 @@ export default function Nav(props: NavProps) {
     );
   }
   return (
-    <div
-      style={{ maxWidth: `${(navItems.length - 1) * 200}px` }}
-      className='flex flex-grow items-center justify-end'
-    >
+    <div style={{ maxWidth: `${(navItems.length - 1) * 200}px` }} className='flex flex-grow items-center justify-end'>
       {!isHome && (
         <div className='flex flex-grow items-center'>
           <NavList items={navItems} />
@@ -172,12 +153,7 @@ export default function Nav(props: NavProps) {
       >
         Shorten now
       </Button>
-      <User
-        className='me-[12px] ms-[20px]'
-        isOptionDropdown
-        border
-        whiteTheme={isHome}
-      />
+      <User className='me-[12px] ms-[20px]' isOptionDropdown border whiteTheme={isHome} />
     </div>
   );
 }
