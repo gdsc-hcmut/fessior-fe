@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 import { getIcon } from '@/utils/common';
 
-import Icon from '@/types/icon-enum';
+import { Icon } from '@/types';
 
 type AvailableToolItemProps = {
   index: number;

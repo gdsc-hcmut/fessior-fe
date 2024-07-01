@@ -1,4 +1,4 @@
-import Icon from '@/types/icon-enum';
+import { Icon } from '@/types';
 
 export const detectOS = (): string => {
   let osDetected;
@@ -13,10 +13,7 @@ export const detectOS = (): string => {
     osDetected = 'ios';
   } else if (navigator.userAgent.match(/Opera Mini/i)) {
     osDetected = 'opera';
-  } else if (
-    navigator.userAgent.match(/IEMobile/i) ||
-    navigator.userAgent.match(/WPDesktop/i)
-  ) {
+  } else if (navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i)) {
     osDetected = 'windows';
   } else {
     osDetected = 'other';
@@ -26,17 +23,10 @@ export const detectOS = (): string => {
 export const getCurrentYear = () => {
   return new Date().getFullYear();
 };
-export const getIcon = (
-  iconLocation: string,
-  filename: string,
-  mode: Icon | null,
-) => {
+export const getIcon = (iconLocation: string, filename: string, mode: Icon | null) => {
   let iconPath = '';
 
-  iconPath +=
-    iconLocation[iconLocation.length - 1] === '/'
-      ? iconLocation
-      : iconLocation + '/';
+  iconPath += iconLocation[iconLocation.length - 1] === '/' ? iconLocation : iconLocation + '/';
   iconPath += mode === null ? '' : mode + '/';
   iconPath += filename;
 

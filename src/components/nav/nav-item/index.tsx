@@ -10,8 +10,7 @@ import { getIcon } from '@/utils/common';
 
 import NavList from '../nav-list';
 
-import Icon from '@/types/icon-enum';
-import { NavItem as NavItemType } from '@/types';
+import { NavItem as NavItemType, Icon } from '@/types';
 import ScreenSize from '@/types/screen-size-enum';
 
 export default function NavItem(props: NavItemType) {

@@ -8,3 +8,4 @@ export * from './Tool';
 export * from './ShortenInputField';
 export * from './NavItem';
 export * from './Organization';
+export * from './Icon';
