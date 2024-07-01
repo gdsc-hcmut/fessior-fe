@@ -10,8 +10,7 @@ import { getIcon } from '@/utils/common';
 
 import InputIcon from './input-icon';
 
-import { Icon } from '@/types';
-import ShortenInputFieldType from '@/types/shorten-input-field-type';
+import { Icon, ShortenInputFieldType } from '@/types';
 
 type InputProps = {
   textValue: string;

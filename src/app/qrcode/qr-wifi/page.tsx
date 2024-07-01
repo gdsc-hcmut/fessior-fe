@@ -14,10 +14,8 @@ import { useAuthRouter, useScreenSize } from '@/hooks';
 import { meService, categoryService, organizationService } from '@/services';
 import { getIcon } from '@/utils/common';
 
-import { CategoryColor, Organization, Category, Icon } from '@/types';
+import { CategoryColor, ShortenInputFieldEnum, ShortenInputFieldType, Organization, Category, Icon } from '@/types';
 import ScreenSize from '@/types/screen-size-enum';
-import ShortenInputFieldEnum from '@/types/shorten-input-field-enum';
-import ShortenInputFieldType from '@/types/shorten-input-field-type';
 import Url from '@/types/url-type';
 
 enum EncryptionType {

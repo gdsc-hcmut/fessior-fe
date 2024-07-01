@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
-import { Category } from '@/types';
-import ShortenInputFieldType from '@/types/shorten-input-field-type';
+import { ShortenInputFieldType, Category } from '@/types';
 
 type CategoryDropdownItemProps = {
   category: Category;
