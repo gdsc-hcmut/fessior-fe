@@ -18,3 +18,10 @@ export type RenderWithContextOptions = {
   router?: Partial<AppRouterInstance>;
   searchParams?: URLSearchParams;
 } & RenderOptions;
+
+
+
+declare module '*.svg' {
+  const content: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
+  export default content;
+}
